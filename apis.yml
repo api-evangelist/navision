@@ -1,0 +1,117 @@
+name: Microsoft Dynamics NAV (Navision) APIs
+description: API collection for Microsoft Dynamics NAV (formerly Navision), an enterprise resource planning (ERP) solution for small and medium-sized businesses
+image: https://example.com/navision-logo.png
+created: '2024-01-20'
+modified: '2024-01-20'
+url: https://dynamics.microsoft.com/nav-overview/
+specificationVersion: '0.16'
+tags:
+- ERP
+- Business Management
+- Finance
+- Inventory
+- Microsoft
+- Dynamics NAV
+- Navision
+apis:
+- name: Dynamics NAV Web Services API
+  description: SOAP and OData web services for interacting with Dynamics NAV business data
+  image: https://example.com/nav-webservices-icon.png
+  humanUrl: https://docs.microsoft.com/en-us/dynamics-nav/web-services
+  baseUrl: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - SOAP
+  - OData
+  - Web Services
+  - ERP
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/en-us/dynamics-nav/web-services-overview
+  - type: OpenAPI
+    url: https://example.com/openapi/nav-webservices.yaml
+  - type: Authentication
+    url: https://docs.microsoft.com/en-us/dynamics-nav/authenticating-users-with-web-services
+  contact:
+  - FN: Microsoft Support
+    email: support@microsoft.com
+    url: https://support.microsoft.com/dynamics
+- name: Dynamics NAV OData API
+  description: RESTful OData v4 API for querying and manipulating NAV business entities
+  image: https://example.com/odata-icon.png
+  humanUrl: https://docs.microsoft.com/en-us/dynamics-nav/using-odata-web-services
+  baseUrl: https://{server}:{port}/{instance}/OData/Company('{company}')
+  tags:
+  - OData
+  - REST
+  - Business Data
+  - Queries
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: OpenAPI
+    url: https://example.com/openapi/nav-odata.yaml
+  - type: Examples
+    url: https://docs.microsoft.com/en-us/dynamics-nav/walkthrough-creating-and-using-an-odata-web-service
+  contact:
+  - FN: Microsoft Support
+    email: support@microsoft.com
+- name: Dynamics NAV SOAP Web Services
+  description: SOAP-based web services for legacy integrations and complex business logic operations
+  image: https://example.com/soap-icon.png
+  humanUrl: https://docs.microsoft.com/en-us/dynamics-nav/soap-web-services
+  baseUrl: https://{server}:{port}/{instance}/WS/{company}/
+  tags:
+  - SOAP
+  - Legacy
+  - Integration
+  - Business Logic
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/en-us/dynamics-nav/soap-web-service-uris
+  - type: WSDL
+    url: https://{server}:{port}/{instance}/WS/Services?wsdl
+  - type: Examples
+    url: https://docs.microsoft.com/en-us/dynamics-nav/walkthrough-creating-and-using-a-page-web-service-soap
+- name: Business Central API (NAV Evolution)
+  description: Modern RESTful API for Dynamics 365 Business Central (the cloud evolution of NAV)
+  image: https://example.com/bc-api-icon.png
+  humanUrl: https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  baseUrl: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+  tags:
+  - REST
+  - Business Central
+  - Cloud
+  - Modern API
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: OpenAPI
+    url: https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: Authentication
+    url: https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps#authentication
+  - type: Rate Limits
+    url: https://docs.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/dynamics-rate-limits
+  contact:
+  - FN: Microsoft Dynamics Support
+    email: bcsupport@microsoft.com
+    url: https://dynamics.microsoft.com/support/
+maintainers:
+- FN: Microsoft Dynamics Team
+  email: dynamics@microsoft.com
+  url: https://dynamics.microsoft.com
+common:
+- type: Portal
+  url: https://dynamics.microsoft.com
+- type: Developer Portal
+  url: https://docs.microsoft.com/en-us/dynamics-nav/
+- type: Authentication
+  url: https://docs.microsoft.com/en-us/dynamics-nav/users-credential-types
+- type: Support
+  url: https://support.microsoft.com/dynamics
+- type: Terms of Service
+  url: https://www.microsoft.com/licensing/terms
+- type: Privacy Policy
+  url: https://privacy.microsoft.com
+include:
+- name: Dynamics 365 APIs
+  url: https://example.com/apis/dynamics365-apis.yaml
