@@ -1,0 +1,1286 @@
+openapi: 3.1.0
+info:
+  title: Business Central Automation API v2.0
+  description: >-
+    API for automating company setup and tenant management in Dynamics 365
+    Business Central. Supports creating companies, installing and managing
+    extensions, assigning permission sets to users, uploading and applying
+    RapidStart packages, managing user groups and security groups, and
+    activating features programmatically.
+  version: '2.0'
+  contact:
+    name: Microsoft Dynamics Support
+    email: bcsupport@microsoft.com
+    url: https://dynamics.microsoft.com/support/
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+externalDocs:
+  description: Automation API Documentation
+  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+servers:
+  - url: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+    description: Business Central Online Automation API
+    variables:
+      environment:
+        default: production
+        description: The name of the Business Central environment
+  - url: https://{server}:{port}/{instance}/api/microsoft/automation/v2.0
+    description: Business Central On-Premises Automation API
+    variables:
+      server:
+        default: localhost
+        description: The on-premises server hostname
+      port:
+        default: '7048'
+        description: The OData services port
+      instance:
+        default: BC
+        description: The Business Central server instance name
+security:
+  - oauth2: []
+  - bearerAuth: []
+tags:
+  - name: Companies
+    description: Manage automation companies
+  - name: Extensions
+    description: Manage installed extensions
+  - name: Extension Upload
+    description: Upload and install per-tenant extensions
+  - name: Extension Deployment Status
+    description: Monitor extension installation progress
+  - name: Users
+    description: Manage Business Central users
+  - name: User Groups
+    description: Manage user groups (deprecated in v25, use security groups)
+  - name: Security Groups
+    description: Manage security groups
+  - name: Permission Sets
+    description: Manage permission sets and user permissions
+  - name: Configuration Packages
+    description: Manage RapidStart configuration packages
+  - name: Features
+    description: Manage feature flags
+  - name: Profiles
+    description: Manage user profiles
+  - name: Scheduled Jobs
+    description: View scheduled background jobs
+paths:
+  /companies:
+    get:
+      summary: List companies
+      description: Returns a list of companies available for automation.
+      operationId: listCompanies
+      tags:
+        - Companies
+      responses:
+        '200':
+          description: Successfully retrieved companies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/automationCompanies:
+    get:
+      summary: List automation companies
+      description: Returns a list of automation company objects.
+      operationId: listAutomationCompanies
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      responses:
+        '200':
+          description: Successfully retrieved automation companies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AutomationCompany'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Create a company
+      description: Creates a new company in the Business Central tenant.
+      operationId: createAutomationCompany
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationCompanyCreate'
+      responses:
+        '201':
+          description: Company created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationCompany'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/automationCompanies({automationCompany_id}):
+    get:
+      summary: Get an automation company
+      description: Retrieves a specific automation company by ID.
+      operationId: getAutomationCompany
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - name: automationCompany_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successfully retrieved automation company
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationCompany'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update an automation company
+      description: Updates properties of an automation company (e.g., rename).
+      operationId: updateAutomationCompany
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - name: automationCompany_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationCompanyUpdate'
+      responses:
+        '200':
+          description: Company updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationCompany'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      summary: Delete an automation company
+      description: Deletes a company from the tenant.
+      operationId: deleteAutomationCompany
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - name: automationCompany_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Company deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /companies({company_id})/extensions:
+    get:
+      summary: List extensions
+      description: Returns a list of extensions published to the tenant.
+      operationId: listExtensions
+      tags:
+        - Extensions
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      responses:
+        '200':
+          description: Successfully retrieved extensions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Extension'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/extensions({extension_id})/Microsoft.NAV.install:
+    post:
+      summary: Install an extension
+      description: Installs a published extension on the tenant.
+      operationId: installExtension
+      tags:
+        - Extensions
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/extension_id'
+      responses:
+        '204':
+          description: Extension installation initiated
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/extensions({extension_id})/Microsoft.NAV.uninstall:
+    post:
+      summary: Uninstall an extension
+      description: Uninstalls an extension from the tenant.
+      operationId: uninstallExtension
+      tags:
+        - Extensions
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/extension_id'
+      responses:
+        '204':
+          description: Extension uninstallation initiated
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/extensions({extension_id})/Microsoft.NAV.uninstallAndDeleteExtensionData:
+    post:
+      summary: Uninstall and delete extension data
+      description: Uninstalls an extension and deletes all data owned by the extension. This action cannot be undone.
+      operationId: uninstallAndDeleteExtensionData
+      tags:
+        - Extensions
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/extension_id'
+      responses:
+        '204':
+          description: Extension uninstallation and data deletion initiated
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/extensions({extension_id})/Microsoft.NAV.unpublish:
+    post:
+      summary: Unpublish an extension
+      description: Unpublishes an uninstalled extension from the tenant.
+      operationId: unpublishExtension
+      tags:
+        - Extensions
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/extension_id'
+      responses:
+        '204':
+          description: Extension unpublished
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/extensionUpload:
+    post:
+      summary: Create extension upload record
+      description: Creates an extension upload record for uploading a per-tenant extension.
+      operationId: createExtensionUpload
+      tags:
+        - Extension Upload
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtensionUploadCreate'
+      responses:
+        '201':
+          description: Extension upload record created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtensionUpload'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/extensionUpload({extensionUpload_id})/extensionContent:
+    patch:
+      summary: Upload extension file
+      description: Uploads the extension file content to the extension upload record.
+      operationId: uploadExtensionFile
+      tags:
+        - Extension Upload
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - name: extensionUpload_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Extension file uploaded
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/extensionUpload({extensionUpload_id})/Microsoft.NAV.upload:
+    post:
+      summary: Install uploaded extension
+      description: Triggers the installation of a previously uploaded per-tenant extension.
+      operationId: installUploadedExtension
+      tags:
+        - Extension Upload
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - name: extensionUpload_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Extension installation initiated
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/extensionDeploymentStatus:
+    get:
+      summary: List extension deployment statuses
+      description: Returns a list of ongoing extension deployment statuses.
+      operationId: listExtensionDeploymentStatuses
+      tags:
+        - Extension Deployment Status
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      responses:
+        '200':
+          description: Successfully retrieved deployment statuses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ExtensionDeploymentStatus'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/users:
+    get:
+      summary: List users
+      description: Returns a list of Business Central users.
+      operationId: listUsers
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      responses:
+        '200':
+          description: Successfully retrieved users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/users({user_id}):
+    get:
+      summary: Get a user
+      description: Retrieves a specific user by user security ID.
+      operationId: getUser
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/user_id'
+      responses:
+        '200':
+          description: Successfully retrieved user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update a user
+      description: Updates properties of a Business Central user.
+      operationId: updateUser
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/user_id'
+        - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/users/Microsoft.NAV.getNewUsersFromOffice365:
+    post:
+      summary: Get new users from Office 365
+      description: >-
+        Retrieves new users or updated user information from Office 365.
+        Runs synchronously. Not supported with S2S authentication.
+      operationId: getNewUsersFromOffice365
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      responses:
+        '200':
+          description: Users retrieved successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/users/Microsoft.NAV.getNewUsersFromOffice365Async:
+    post:
+      summary: Get new users from Office 365 (async)
+      description: >-
+        Schedules a background job to retrieve new users from Office 365.
+        Returns a link to the scheduled job for tracking progress. Not
+        supported with S2S authentication.
+      operationId: getNewUsersFromOffice365Async
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      responses:
+        '202':
+          description: Background job scheduled
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/users({user_id})/userPermissions:
+    get:
+      summary: List user permissions
+      description: Returns permission sets assigned to the user.
+      operationId: listUserPermissions
+      tags:
+        - Permission Sets
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/user_id'
+      responses:
+        '200':
+          description: Successfully retrieved user permissions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserPermission'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Assign a permission set to a user
+      description: Assigns a permission set to the specified user.
+      operationId: createUserPermission
+      tags:
+        - Permission Sets
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/user_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - roleId
+              properties:
+                roleId:
+                  type: string
+                  description: The permission set role ID
+      responses:
+        '201':
+          description: Permission set assigned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPermission'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/permissionSets:
+    get:
+      summary: List permission sets
+      description: Returns a list of available permission sets.
+      operationId: listPermissionSets
+      tags:
+        - Permission Sets
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      responses:
+        '200':
+          description: Successfully retrieved permission sets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PermissionSet'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/securityGroups:
+    get:
+      summary: List security groups
+      description: Returns a list of security groups.
+      operationId: listSecurityGroups
+      tags:
+        - Security Groups
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      responses:
+        '200':
+          description: Successfully retrieved security groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SecurityGroup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/configurationPackages:
+    get:
+      summary: List configuration packages
+      description: Returns a list of RapidStart configuration packages.
+      operationId: listConfigurationPackages
+      tags:
+        - Configuration Packages
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      responses:
+        '200':
+          description: Successfully retrieved configuration packages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConfigurationPackage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Create a configuration package
+      description: Creates a new RapidStart configuration package record.
+      operationId: createConfigurationPackage
+      tags:
+        - Configuration Packages
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - code
+                - packageName
+              properties:
+                code:
+                  type: string
+                  description: The configuration package code
+                packageName:
+                  type: string
+                  description: The configuration package name
+      responses:
+        '201':
+          description: Configuration package created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigurationPackage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/configurationPackages({package_id})/file('{code}')/content:
+    patch:
+      summary: Upload RapidStart package file
+      description: Uploads the RapidStart package file content.
+      operationId: uploadConfigurationPackageFile
+      tags:
+        - Configuration Packages
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - name: package_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Package file uploaded
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/configurationPackages({package_id})/Microsoft.NAV.import:
+    post:
+      summary: Import a configuration package
+      description: Imports the uploaded RapidStart configuration package.
+      operationId: importConfigurationPackage
+      tags:
+        - Configuration Packages
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - name: package_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Import initiated
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/configurationPackages({package_id})/Microsoft.NAV.apply:
+    post:
+      summary: Apply a configuration package
+      description: Applies the imported RapidStart configuration package.
+      operationId: applyConfigurationPackage
+      tags:
+        - Configuration Packages
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - name: package_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Apply initiated
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/features:
+    get:
+      summary: List features
+      description: Returns a list of features available in feature management.
+      operationId: listFeatures
+      tags:
+        - Features
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      responses:
+        '200':
+          description: Successfully retrieved features
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Feature'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/features({feature_id})/Microsoft.NAV.activate:
+    post:
+      summary: Activate a feature
+      description: Activates the specified feature.
+      operationId: activateFeature
+      tags:
+        - Features
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - name: feature_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                updateInBackground:
+                  type: boolean
+                  default: false
+                startDateTime:
+                  type: string
+                  format: date-time
+      responses:
+        '200':
+          description: Feature activated
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/features({feature_id})/Microsoft.NAV.deactivate:
+    post:
+      summary: Deactivate a feature
+      description: Deactivates the specified feature.
+      operationId: deactivateFeature
+      tags:
+        - Features
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - name: feature_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Feature deactivated
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/profiles:
+    get:
+      summary: List profiles
+      description: Returns a list of user profiles.
+      operationId: listProfiles
+      tags:
+        - Profiles
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      responses:
+        '200':
+          description: Successfully retrieved profiles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Profile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/scheduledJobs:
+    get:
+      summary: List scheduled jobs
+      description: Returns a list of scheduled background jobs.
+      operationId: listScheduledJobs
+      tags:
+        - Scheduled Jobs
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      responses:
+        '200':
+          description: Successfully retrieved scheduled jobs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ScheduledJob'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Microsoft Entra ID
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Automation APIs
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Automation APIs
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    extension_id:
+      name: extension_id
+      in: path
+      required: true
+      description: The package ID of the extension
+      schema:
+        type: string
+        format: uuid
+    user_id:
+      name: user_id
+      in: path
+      required: true
+      description: The user security ID
+      schema:
+        type: string
+        format: uuid
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        displayName:
+          type: string
+        businessProfileId:
+          type: string
+    AutomationCompany:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: The company name
+        displayName:
+          type: string
+          description: The company display name
+        businessProfileId:
+          type: string
+          description: The business profile ID
+        evaluationCompany:
+          type: boolean
+          description: Whether this is an evaluation company
+    AutomationCompanyCreate:
+      type: object
+      required:
+        - name
+        - displayName
+      properties:
+        name:
+          type: string
+          description: The name of the new company
+        displayName:
+          type: string
+          description: The display name of the new company
+        businessProfileId:
+          type: string
+    AutomationCompanyUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+    Extension:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The extension ID
+        packageId:
+          type: string
+          format: uuid
+          description: The package ID used for install/uninstall operations
+        displayName:
+          type: string
+          description: The extension display name
+        publisher:
+          type: string
+          description: The extension publisher
+        versionMajor:
+          type: integer
+          description: Major version number
+        versionMinor:
+          type: integer
+          description: Minor version number
+        versionBuild:
+          type: integer
+          description: Build version number
+        versionRevision:
+          type: integer
+          description: Revision version number
+        isInstalled:
+          type: boolean
+          description: Whether the extension is currently installed
+        publishedAs:
+          type: string
+          description: How the extension was published
+          enum:
+            - Global
+            - Dev
+            - PTE
+    ExtensionUpload:
+      type: object
+      properties:
+        systemId:
+          type: string
+          format: uuid
+        schedule:
+          type: string
+          description: When to schedule the installation
+          enum:
+            - Current version
+            - Next minor version
+            - Next major version
+        schemaSyncMode:
+          type: string
+          description: Schema synchronization mode
+          enum:
+            - Add
+            - Force Sync
+        status:
+          type: string
+          readOnly: true
+    ExtensionUploadCreate:
+      type: object
+      required:
+        - schedule
+        - schemaSyncMode
+      properties:
+        schedule:
+          type: string
+          enum:
+            - Current version
+            - Next minor version
+            - Next major version
+        schemaSyncMode:
+          type: string
+          enum:
+            - Add
+            - Force Sync
+    ExtensionDeploymentStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: Extension name
+        publisher:
+          type: string
+          description: Extension publisher
+        operationType:
+          type: string
+          description: Type of deployment operation
+        status:
+          type: string
+          description: Deployment status
+          enum:
+            - Unknown
+            - InProgress
+            - Completed
+            - Failed
+        appVersion:
+          type: string
+          description: Extension version
+        startedOn:
+          type: string
+          format: date-time
+    User:
+      type: object
+      properties:
+        userSecurityId:
+          type: string
+          format: uuid
+          description: The user security ID
+        userName:
+          type: string
+          description: The user name
+        displayName:
+          type: string
+          description: The user display name
+        state:
+          type: string
+          description: The user state
+          enum:
+            - Enabled
+            - Disabled
+        expiryDate:
+          type: string
+          format: date-time
+          description: The user expiry date
+    UserUpdate:
+      type: object
+      properties:
+        state:
+          type: string
+          enum:
+            - Enabled
+            - Disabled
+        expiryDate:
+          type: string
+          format: date-time
+    UserPermission:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        roleId:
+          type: string
+          description: The permission set role ID
+        displayName:
+          type: string
+          description: The permission set display name
+        company:
+          type: string
+          description: The company name scope
+        scope:
+          type: string
+          enum:
+            - System
+            - Tenant
+        appId:
+          type: string
+          format: uuid
+    PermissionSet:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        roleId:
+          type: string
+          description: The permission set role ID
+        displayName:
+          type: string
+          description: The permission set display name
+        scope:
+          type: string
+          enum:
+            - System
+            - Tenant
+        appId:
+          type: string
+          format: uuid
+        extensionName:
+          type: string
+    SecurityGroup:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        groupId:
+          type: string
+          format: uuid
+          description: The Microsoft Entra security group ID
+        code:
+          type: string
+          description: The security group code
+        displayName:
+          type: string
+          description: The security group display name
+    ConfigurationPackage:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          description: The package code
+        packageName:
+          type: string
+          description: The package name
+        languageId:
+          type: integer
+        productVersion:
+          type: string
+        processingOrder:
+          type: integer
+        excludeConfigurationTables:
+          type: boolean
+        numberOfTables:
+          type: integer
+          readOnly: true
+        numberOfRecords:
+          type: integer
+          readOnly: true
+        numberOfErrors:
+          type: integer
+          readOnly: true
+        importStatus:
+          type: string
+          readOnly: true
+          enum:
+            - ' '
+            - InProgress
+            - Completed
+            - Error
+        applyStatus:
+          type: string
+          readOnly: true
+          enum:
+            - ' '
+            - InProgress
+            - Completed
+            - Error
+    Feature:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The feature ID
+        displayName:
+          type: string
+          description: The feature display name
+        description:
+          type: string
+          description: The feature description
+        enabled:
+          type: boolean
+          description: Whether the feature is enabled
+        learnMoreUrl:
+          type: string
+          format: uri
+          description: URL to documentation about the feature
+    Profile:
+      type: object
+      properties:
+        profileId:
+          type: string
+          description: The profile ID
+        scope:
+          type: string
+          enum:
+            - System
+            - Tenant
+        caption:
+          type: string
+          description: The profile caption
+        description:
+          type: string
+        applicationId:
+          type: string
+          format: uuid
+        enabled:
+          type: boolean
+    ScheduledJob:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        category:
+          type: string
+          description: The job category
+        status:
+          type: string
+          description: The job status
+        description:
+          type: string
+          description: The job description
+        errorMessage:
+          type: string
+          description: Error message if the job failed
+        startDateTime:
+          type: string
+          format: date-time
+        endDateTime:
+          type: string
+          format: date-time

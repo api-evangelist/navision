@@ -1,0 +1,471 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "bc": "https://api.businesscentral.dynamics.com/v2.0/schema/",
+    "nav": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/resources/",
+    "odata": "http://www.odata.org/vocabulary/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Company": {
+      "@id": "bc:Company",
+      "@context": {
+        "id": {
+          "@id": "bc:companyId",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:legalName",
+          "@type": "xsd:string"
+        },
+        "displayName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "businessProfileId": {
+          "@id": "bc:businessProfileId",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "Customer": {
+      "@id": "bc:Customer",
+      "@context": {
+        "id": {
+          "@id": "bc:customerId",
+          "@type": "xsd:string"
+        },
+        "number": {
+          "@id": "bc:customerNumber",
+          "@type": "xsd:string"
+        },
+        "displayName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "bc:customerType",
+          "@type": "xsd:string"
+        },
+        "addressLine1": {
+          "@id": "schema:streetAddress",
+          "@type": "xsd:string"
+        },
+        "city": {
+          "@id": "schema:addressLocality",
+          "@type": "xsd:string"
+        },
+        "state": {
+          "@id": "schema:addressRegion",
+          "@type": "xsd:string"
+        },
+        "country": {
+          "@id": "schema:addressCountry",
+          "@type": "xsd:string"
+        },
+        "postalCode": {
+          "@id": "schema:postalCode",
+          "@type": "xsd:string"
+        },
+        "phoneNumber": {
+          "@id": "schema:telephone",
+          "@type": "xsd:string"
+        },
+        "email": {
+          "@id": "schema:email",
+          "@type": "xsd:string"
+        },
+        "website": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "balanceDue": {
+          "@id": "bc:balanceDue",
+          "@type": "xsd:decimal"
+        },
+        "creditLimit": {
+          "@id": "bc:creditLimit",
+          "@type": "xsd:decimal"
+        },
+        "taxLiable": {
+          "@id": "bc:taxLiable",
+          "@type": "xsd:boolean"
+        },
+        "taxRegistrationNumber": {
+          "@id": "schema:taxID",
+          "@type": "xsd:string"
+        },
+        "currencyCode": {
+          "@id": "schema:priceCurrency",
+          "@type": "xsd:string"
+        },
+        "lastModifiedDateTime": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Vendor": {
+      "@id": "bc:Vendor",
+      "@context": {
+        "id": {
+          "@id": "bc:vendorId",
+          "@type": "xsd:string"
+        },
+        "number": {
+          "@id": "bc:vendorNumber",
+          "@type": "xsd:string"
+        },
+        "displayName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "addressLine1": {
+          "@id": "schema:streetAddress",
+          "@type": "xsd:string"
+        },
+        "city": {
+          "@id": "schema:addressLocality",
+          "@type": "xsd:string"
+        },
+        "state": {
+          "@id": "schema:addressRegion",
+          "@type": "xsd:string"
+        },
+        "country": {
+          "@id": "schema:addressCountry",
+          "@type": "xsd:string"
+        },
+        "postalCode": {
+          "@id": "schema:postalCode",
+          "@type": "xsd:string"
+        },
+        "phoneNumber": {
+          "@id": "schema:telephone",
+          "@type": "xsd:string"
+        },
+        "email": {
+          "@id": "schema:email",
+          "@type": "xsd:string"
+        },
+        "website": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "taxRegistrationNumber": {
+          "@id": "schema:taxID",
+          "@type": "xsd:string"
+        },
+        "currencyCode": {
+          "@id": "schema:priceCurrency",
+          "@type": "xsd:string"
+        },
+        "balance": {
+          "@id": "bc:vendorBalance",
+          "@type": "xsd:decimal"
+        },
+        "lastModifiedDateTime": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Item": {
+      "@id": "bc:Item",
+      "@context": {
+        "id": {
+          "@id": "bc:itemId",
+          "@type": "xsd:string"
+        },
+        "number": {
+          "@id": "schema:sku",
+          "@type": "xsd:string"
+        },
+        "displayName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "bc:itemType",
+          "@type": "xsd:string"
+        },
+        "gtin": {
+          "@id": "schema:gtin",
+          "@type": "xsd:string"
+        },
+        "inventory": {
+          "@id": "bc:inventoryQuantity",
+          "@type": "xsd:decimal"
+        },
+        "unitPrice": {
+          "@id": "schema:price",
+          "@type": "xsd:decimal"
+        },
+        "unitCost": {
+          "@id": "bc:unitCost",
+          "@type": "xsd:decimal"
+        },
+        "baseUnitOfMeasureCode": {
+          "@id": "bc:unitOfMeasure",
+          "@type": "xsd:string"
+        },
+        "itemCategoryCode": {
+          "@id": "schema:category",
+          "@type": "xsd:string"
+        },
+        "blocked": {
+          "@id": "bc:blocked",
+          "@type": "xsd:boolean"
+        },
+        "lastModifiedDateTime": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "SalesOrder": {
+      "@id": "bc:SalesOrder",
+      "@context": {
+        "id": {
+          "@id": "bc:salesOrderId",
+          "@type": "xsd:string"
+        },
+        "number": {
+          "@id": "schema:orderNumber",
+          "@type": "xsd:string"
+        },
+        "orderDate": {
+          "@id": "schema:orderDate",
+          "@type": "xsd:date"
+        },
+        "customerId": {
+          "@id": "bc:customerId",
+          "@type": "xsd:string"
+        },
+        "customerName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "currencyCode": {
+          "@id": "schema:priceCurrency",
+          "@type": "xsd:string"
+        },
+        "totalAmountExcludingTax": {
+          "@id": "bc:totalAmountExcludingTax",
+          "@type": "xsd:decimal"
+        },
+        "totalTaxAmount": {
+          "@id": "bc:totalTaxAmount",
+          "@type": "xsd:decimal"
+        },
+        "totalAmountIncludingTax": {
+          "@id": "schema:totalPrice",
+          "@type": "xsd:decimal"
+        },
+        "status": {
+          "@id": "schema:orderStatus",
+          "@type": "xsd:string"
+        },
+        "requestedDeliveryDate": {
+          "@id": "schema:deliveryDate",
+          "@type": "xsd:date"
+        },
+        "salesOrderLines": {
+          "@id": "schema:orderedItem",
+          "@container": "@list"
+        },
+        "lastModifiedDateTime": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "PurchaseOrder": {
+      "@id": "bc:PurchaseOrder",
+      "@context": {
+        "id": {
+          "@id": "bc:purchaseOrderId",
+          "@type": "xsd:string"
+        },
+        "number": {
+          "@id": "schema:orderNumber",
+          "@type": "xsd:string"
+        },
+        "orderDate": {
+          "@id": "schema:orderDate",
+          "@type": "xsd:date"
+        },
+        "vendorId": {
+          "@id": "bc:vendorId",
+          "@type": "xsd:string"
+        },
+        "vendorName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "currencyCode": {
+          "@id": "schema:priceCurrency",
+          "@type": "xsd:string"
+        },
+        "totalAmountExcludingTax": {
+          "@id": "bc:totalAmountExcludingTax",
+          "@type": "xsd:decimal"
+        },
+        "totalTaxAmount": {
+          "@id": "bc:totalTaxAmount",
+          "@type": "xsd:decimal"
+        },
+        "totalAmountIncludingTax": {
+          "@id": "schema:totalPrice",
+          "@type": "xsd:decimal"
+        },
+        "status": {
+          "@id": "schema:orderStatus",
+          "@type": "xsd:string"
+        },
+        "requestedReceiptDate": {
+          "@id": "bc:requestedReceiptDate",
+          "@type": "xsd:date"
+        },
+        "purchaseOrderLines": {
+          "@id": "schema:orderedItem",
+          "@container": "@list"
+        },
+        "lastModifiedDateTime": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Account": {
+      "@id": "bc:Account",
+      "@context": {
+        "id": {
+          "@id": "bc:accountId",
+          "@type": "xsd:string"
+        },
+        "number": {
+          "@id": "bc:accountNumber",
+          "@type": "xsd:string"
+        },
+        "displayName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "category": {
+          "@id": "bc:accountCategory",
+          "@type": "xsd:string"
+        },
+        "accountType": {
+          "@id": "bc:accountType",
+          "@type": "xsd:string"
+        },
+        "blocked": {
+          "@id": "bc:blocked",
+          "@type": "xsd:boolean"
+        },
+        "netChange": {
+          "@id": "bc:netChange",
+          "@type": "xsd:decimal"
+        },
+        "lastModifiedDateTime": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Employee": {
+      "@id": "bc:Employee",
+      "@context": {
+        "id": {
+          "@id": "bc:employeeId",
+          "@type": "xsd:string"
+        },
+        "number": {
+          "@id": "bc:employeeNumber",
+          "@type": "xsd:string"
+        },
+        "displayName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "givenName": {
+          "@id": "schema:givenName",
+          "@type": "xsd:string"
+        },
+        "surname": {
+          "@id": "schema:familyName",
+          "@type": "xsd:string"
+        },
+        "jobTitle": {
+          "@id": "schema:jobTitle",
+          "@type": "xsd:string"
+        },
+        "email": {
+          "@id": "schema:email",
+          "@type": "xsd:string"
+        },
+        "phoneNumber": {
+          "@id": "schema:telephone",
+          "@type": "xsd:string"
+        },
+        "employmentDate": {
+          "@id": "bc:employmentDate",
+          "@type": "xsd:date"
+        },
+        "status": {
+          "@id": "bc:employeeStatus",
+          "@type": "xsd:string"
+        },
+        "birthDate": {
+          "@id": "schema:birthDate",
+          "@type": "xsd:date"
+        },
+        "lastModifiedDateTime": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Environment": {
+      "@id": "bc:Environment",
+      "@context": {
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "friendlyName": {
+          "@id": "schema:alternateName",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "bc:environmentType",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "bc:environmentStatus",
+          "@type": "xsd:string"
+        },
+        "countryCode": {
+          "@id": "schema:addressCountry",
+          "@type": "xsd:string"
+        },
+        "webClientLoginUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "webServiceUrl": {
+          "@id": "bc:webServiceUrl",
+          "@type": "@id"
+        }
+      }
+    }
+  }
+}

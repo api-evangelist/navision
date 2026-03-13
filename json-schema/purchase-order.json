@@ -1,0 +1,323 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/navision/purchase-order.json",
+  "title": "Purchase Order",
+  "description": "Represents a purchase order entity in Dynamics 365 Business Central. Purchase orders are documents used to record the purchase of goods or services from vendors. They include header information (vendor, dates, payment terms) and line items specifying the products or services being purchased.",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "description": "ETag for optimistic concurrency control"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier (GUID) of the purchase order"
+    },
+    "number": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The purchase order number assigned from a number series"
+    },
+    "orderDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The date when the purchase order was created"
+    },
+    "postingDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The date used for posting the purchase order to the general ledger"
+    },
+    "vendorId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the buy-from vendor"
+    },
+    "vendorNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The vendor number of the buy-from vendor"
+    },
+    "vendorName": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "The name of the buy-from vendor"
+    },
+    "payToName": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "The name of the pay-to party"
+    },
+    "payToVendorId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the pay-to vendor"
+    },
+    "payToVendorNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The vendor number of the pay-to vendor"
+    },
+    "shipToName": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "The name for the ship-to (receiving) address"
+    },
+    "shipToContact": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "The contact person at the ship-to address"
+    },
+    "buyFromAddressLine1": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "First line of the buy-from vendor address"
+    },
+    "buyFromAddressLine2": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "Second line of the buy-from vendor address"
+    },
+    "buyFromCity": {
+      "type": "string",
+      "maxLength": 30,
+      "description": "The city of the buy-from vendor address"
+    },
+    "buyFromCountry": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "The country/region code of the buy-from vendor address"
+    },
+    "buyFromState": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The state or province code of the buy-from vendor address"
+    },
+    "buyFromPostCode": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The postal code of the buy-from vendor address"
+    },
+    "currencyId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the currency"
+    },
+    "currencyCode": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "The currency code (e.g., USD, EUR) for the purchase order"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean",
+      "description": "Indicates whether the prices on the order include tax"
+    },
+    "paymentTermsId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the payment terms"
+    },
+    "shipmentMethodId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the shipment method"
+    },
+    "purchaser": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The purchaser/buyer code assigned to the order"
+    },
+    "requestedReceiptDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The date the goods are requested to be received"
+    },
+    "discountAmount": {
+      "type": "number",
+      "description": "The total invoice discount amount applied to the order"
+    },
+    "discountAppliedBeforeTax": {
+      "type": "boolean",
+      "description": "Indicates whether discounts are applied before tax calculation"
+    },
+    "totalAmountExcludingTax": {
+      "type": "number",
+      "description": "The total amount of the order excluding tax (read-only)",
+      "readOnly": true
+    },
+    "totalTaxAmount": {
+      "type": "number",
+      "description": "The total tax amount on the order (read-only)",
+      "readOnly": true
+    },
+    "totalAmountIncludingTax": {
+      "type": "number",
+      "description": "The total amount of the order including tax (read-only)",
+      "readOnly": true
+    },
+    "fullyReceived": {
+      "type": "boolean",
+      "description": "Indicates whether all lines on the order have been fully received (read-only)",
+      "readOnly": true
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Draft", "In Review", "Open", "Released"],
+      "description": "The current status of the purchase order (read-only)",
+      "readOnly": true
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the purchase order was last modified (read-only)",
+      "readOnly": true
+    },
+    "purchaseOrderLines": {
+      "type": "array",
+      "description": "The line items on the purchase order",
+      "items": {
+        "$ref": "purchase-order-line.json"
+      }
+    }
+  },
+  "required": ["id"],
+  "additionalProperties": false,
+  "$defs": {
+    "PurchaseOrderLine": {
+      "$id": "purchase-order-line.json",
+      "title": "Purchase Order Line",
+      "description": "Represents a line item on a purchase order, specifying the item, quantity, cost, and receipt details.",
+      "type": "object",
+      "properties": {
+        "@odata.etag": {
+          "type": "string",
+          "description": "ETag for concurrency control"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique identifier of the purchase order line"
+        },
+        "documentId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The ID of the parent purchase order document"
+        },
+        "sequence": {
+          "type": "integer",
+          "description": "The sequence number determining line order"
+        },
+        "itemId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique identifier of the item on this line"
+        },
+        "accountId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique identifier of the G/L account (for account-type lines)"
+        },
+        "lineType": {
+          "type": "string",
+          "enum": ["Comment", "Account", "Item", "Fixed Asset", "Charge"],
+          "description": "The type of the purchase order line"
+        },
+        "lineObjectNumber": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "The number of the item, account, or asset on the line"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "The description of the line item"
+        },
+        "description2": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Additional description for the line item"
+        },
+        "unitOfMeasureId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique identifier of the unit of measure"
+        },
+        "unitOfMeasureCode": {
+          "type": "string",
+          "maxLength": 10,
+          "description": "The unit of measure code (e.g., PCS, KG)"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "The quantity ordered"
+        },
+        "directUnitCost": {
+          "type": "number",
+          "description": "The direct unit cost from the vendor"
+        },
+        "discountAmount": {
+          "type": "number",
+          "description": "The line discount amount"
+        },
+        "discountPercent": {
+          "type": "number",
+          "description": "The line discount percentage"
+        },
+        "discountAppliedBeforeTax": {
+          "type": "boolean",
+          "description": "Indicates whether the discount is applied before tax"
+        },
+        "amountExcludingTax": {
+          "type": "number",
+          "description": "The line amount excluding tax (read-only)",
+          "readOnly": true
+        },
+        "taxCode": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "The tax code applied to the line"
+        },
+        "taxPercent": {
+          "type": "number",
+          "description": "The tax percentage (read-only)",
+          "readOnly": true
+        },
+        "totalTaxAmount": {
+          "type": "number",
+          "description": "The total tax amount for the line (read-only)",
+          "readOnly": true
+        },
+        "amountIncludingTax": {
+          "type": "number",
+          "description": "The line amount including tax (read-only)",
+          "readOnly": true
+        },
+        "expectedReceiptDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The expected date of receipt for the line"
+        },
+        "receivedQuantity": {
+          "type": "number",
+          "description": "The quantity already received (read-only)",
+          "readOnly": true
+        },
+        "invoicedQuantity": {
+          "type": "number",
+          "description": "The quantity already invoiced (read-only)",
+          "readOnly": true
+        },
+        "invoiceQuantity": {
+          "type": "number",
+          "description": "The quantity to invoice"
+        },
+        "receiveQuantity": {
+          "type": "number",
+          "description": "The quantity to receive"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+}

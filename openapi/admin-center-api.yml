@@ -1,0 +1,1227 @@
+openapi: 3.1.0
+info:
+  title: Business Central Administration Center API
+  description: >-
+    REST API for programmatic administration of Dynamics 365 Business Central
+    environments. Enables querying and managing production and sandbox
+    environments, setting up administrative notifications, viewing tenant
+    telemetry, managing apps, scheduling updates, and performing environment
+    operations such as copy, rename, restore, and delete.
+  version: '2.28'
+  contact:
+    name: Microsoft Dynamics Support
+    email: bcsupport@microsoft.com
+    url: https://dynamics.microsoft.com/support/
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+externalDocs:
+  description: Administration Center API Documentation
+  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+servers:
+  - url: https://api.businesscentral.dynamics.com/admin/v2.28
+    description: Business Central Administration Center
+security:
+  - oauth2: []
+  - bearerAuth: []
+tags:
+  - name: Environments
+    description: Manage Business Central environments
+  - name: Environment Settings
+    description: Manage environment settings and configuration
+  - name: Environment Operations
+    description: View and track environment operations
+  - name: Notifications
+    description: Manage administrative notifications
+  - name: Telemetry
+    description: View tenant telemetry data
+  - name: App Management
+    description: Manage installed applications
+  - name: Update Management
+    description: Manage environment updates
+  - name: Available Applications
+    description: Query available application versions and countries
+  - name: Storage
+    description: View storage usage and quotas
+  - name: Support Settings
+    description: Manage support settings
+paths:
+  /applications/environments:
+    get:
+      summary: List all environments
+      description: Returns a list of all environments across all application families for the tenant.
+      operationId: listAllEnvironments
+      tags:
+        - Environments
+      responses:
+        '200':
+          description: Successfully retrieved environments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Environment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments:
+    get:
+      summary: List environments by application family
+      description: Returns a list of environments for the specified application family.
+      operationId: listEnvironments
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+      responses:
+        '200':
+          description: Successfully retrieved environments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Environment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Application family not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /applications/{applicationFamily}/environments/{environmentName}:
+    get:
+      summary: Get an environment
+      description: Returns the properties for the specified environment.
+      operationId: getEnvironment
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      responses:
+        '200':
+          description: Successfully retrieved environment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Environment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      summary: Create a new environment
+      description: >-
+        Creates a new environment with sample data. The operation is
+        asynchronous; poll the environment operations endpoint to track status.
+      operationId: createEnvironment
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEnvironmentRequest'
+      responses:
+        '201':
+          description: Environment creation initiated (API v2.8 and earlier)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+        '202':
+          description: Environment creation scheduled (API v2.9 and later)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentOperation'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Environment already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: Delete an environment
+      description: >-
+        Soft deletes the specified environment. The environment is retained for
+        14 days during which it can be recovered. Environments with status
+        Creating Failed or Removing Failed are permanently deleted immediately.
+      operationId: deleteEnvironment
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      responses:
+        '202':
+          description: Delete operation scheduled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentOperation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Environment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /applications/{applicationFamily}/environments/{environmentName}/copy:
+    post:
+      summary: Copy an environment
+      description: Creates a new environment as a copy of an existing environment's data.
+      operationId: copyEnvironment
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyEnvironmentRequest'
+      responses:
+        '201':
+          description: Copy initiated (API v2.8 and earlier)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Environment'
+        '202':
+          description: Copy operation scheduled (API v2.9 and later)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentOperation'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/rename:
+    post:
+      summary: Rename an environment
+      description: Schedules a rename operation on an environment.
+      operationId: renameEnvironment
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - NewEnvironmentName
+              properties:
+                NewEnvironmentName:
+                  type: string
+                  description: The new name for the environment
+      responses:
+        '202':
+          description: Rename operation scheduled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentOperation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/restore:
+    post:
+      summary: Restore an environment
+      description: Restores an existing environment from a point in time in the past.
+      operationId: restoreEnvironment
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreEnvironmentRequest'
+      responses:
+        '202':
+          description: Restore operation scheduled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentOperation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/recover:
+    post:
+      summary: Recover a deleted environment
+      description: Recovers a soft-deleted environment.
+      operationId: recoverEnvironment
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      responses:
+        '202':
+          description: Recovery operation scheduled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentOperation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/availableRestorePeriods:
+    get:
+      summary: Get available restore periods
+      description: Returns an ordered list of available restore periods for the environment.
+      operationId: getAvailableRestorePeriods
+      tags:
+        - Environments
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      responses:
+        '200':
+          description: Successfully retrieved restore periods
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RestorePeriod'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /environments/{environmentName}/operations:
+    get:
+      summary: List environment operations
+      description: Returns a list of operations that have been performed on the environment.
+      operationId: listEnvironmentOperations
+      tags:
+        - Environment Operations
+      parameters:
+        - $ref: '#/components/parameters/environmentName'
+      responses:
+        '200':
+          description: Successfully retrieved operations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EnvironmentOperation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/operations:
+    get:
+      summary: List operations on all environments
+      description: Returns operations that have occurred on all environments for the application family.
+      operationId: listAllEnvironmentOperations
+      tags:
+        - Environment Operations
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+      responses:
+        '200':
+          description: Successfully retrieved operations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EnvironmentOperation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/settings:
+    get:
+      summary: Get environment settings
+      description: Returns settings for the specified environment.
+      operationId: getEnvironmentSettings
+      tags:
+        - Environment Settings
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      responses:
+        '200':
+          description: Successfully retrieved environment settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentSettings'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/settings/upgrade:
+    put:
+      summary: Set update settings
+      description: Sets the update window and other update-related settings for the environment.
+      operationId: setUpdateSettings
+      tags:
+        - Update Management
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSettings'
+      responses:
+        '200':
+          description: Update settings applied
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/settings/appInsightsKey:
+    post:
+      summary: Set Application Insights key
+      description: Sets the Azure Application Insights instrumentation key for the environment.
+      operationId: setAppInsightsKey
+      tags:
+        - Environment Settings
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: The Application Insights instrumentation key
+      responses:
+        '200':
+          description: Key set successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/apps:
+    get:
+      summary: List installed apps
+      description: Returns a list of apps installed in the specified environment.
+      operationId: listInstalledApps
+      tags:
+        - App Management
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      responses:
+        '200':
+          description: Successfully retrieved installed apps
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AppInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/apps/{appId}/update:
+    post:
+      summary: Update an app
+      description: Schedules an update of the specified app to a newer version.
+      operationId: updateApp
+      tags:
+        - App Management
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+        - name: appId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppUpdateRequest'
+      responses:
+        '202':
+          description: App update scheduled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentOperation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/apps/{appId}/install:
+    post:
+      summary: Install an app
+      description: Installs the specified app in the environment.
+      operationId: installApp
+      tags:
+        - App Management
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+        - name: appId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppInstallRequest'
+      responses:
+        '202':
+          description: App installation scheduled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentOperation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/apps/{appId}/uninstall:
+    post:
+      summary: Uninstall an app
+      description: Uninstalls the specified app from the environment.
+      operationId: uninstallApp
+      tags:
+        - App Management
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+        - name: appId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deleteData:
+                  type: boolean
+                  description: Whether to delete data associated with the extension
+      responses:
+        '202':
+          description: App uninstallation scheduled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentOperation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/usedstorage:
+    get:
+      summary: Get environment storage usage
+      description: Returns used storage information for the specified environment.
+      operationId: getEnvironmentStorage
+      tags:
+        - Storage
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      responses:
+        '200':
+          description: Successfully retrieved storage usage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsedStorage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /environments/usedstorage:
+    get:
+      summary: Get storage usage for all environments
+      description: Returns storage usage information for all environments.
+      operationId: getAllEnvironmentsStorage
+      tags:
+        - Storage
+      responses:
+        '200':
+          description: Successfully retrieved storage usage
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UsedStorage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /environments/quotas:
+    get:
+      summary: Get allowed quotas
+      description: Returns the different types of quotas and their limits.
+      operationId: getQuotas
+      tags:
+        - Storage
+      responses:
+        '200':
+          description: Successfully retrieved quotas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quotas'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/notifications:
+    get:
+      summary: List notification recipients
+      description: Returns a list of notification recipients for the environment.
+      operationId: listNotificationRecipients
+      tags:
+        - Notifications
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      responses:
+        '200':
+          description: Successfully retrieved notification recipients
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/NotificationRecipient'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Add a notification recipient
+      description: Adds a new notification recipient for the environment.
+      operationId: addNotificationRecipient
+      tags:
+        - Notifications
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificationRecipient'
+      responses:
+        '201':
+          description: Notification recipient added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificationRecipient'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/scheduledUpgrade:
+    get:
+      summary: Get scheduled upgrade
+      description: Returns information about any pending scheduled upgrade for the environment.
+      operationId: getScheduledUpgrade
+      tags:
+        - Update Management
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      responses:
+        '200':
+          description: Successfully retrieved scheduled upgrade information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduledUpgrade'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/environments/{environmentName}/supportSettings:
+    get:
+      summary: Get support settings
+      description: Returns the support contact settings for the specified environment.
+      operationId: getSupportSettings
+      tags:
+        - Support Settings
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+        - $ref: '#/components/parameters/environmentName'
+      responses:
+        '200':
+          description: Successfully retrieved support settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportSettings'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/availableCountries:
+    get:
+      summary: List available countries
+      description: Returns a list of countries where environments can be created.
+      operationId: listAvailableCountries
+      tags:
+        - Available Applications
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+      responses:
+        '200':
+          description: Successfully retrieved available countries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        countryCode:
+                          type: string
+                        name:
+                          type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /applications/{applicationFamily}/availableApplicationVersions:
+    get:
+      summary: List available application versions
+      description: Returns a list of available application versions for the specified application family.
+      operationId: listAvailableVersions
+      tags:
+        - Available Applications
+      parameters:
+        - $ref: '#/components/parameters/applicationFamily'
+      responses:
+        '200':
+          description: Successfully retrieved available versions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        applicationVersion:
+                          type: string
+                        platformVersion:
+                          type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Microsoft Entra ID
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    applicationFamily:
+      name: applicationFamily
+      in: path
+      required: true
+      description: The application family (e.g., BusinessCentral)
+      schema:
+        type: string
+        default: BusinessCentral
+    environmentName:
+      name: environmentName
+      in: path
+      required: true
+      description: The name of the environment
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: A stable error code describing the type and nature of the error
+        message:
+          type: string
+          description: A readable description of the error and cause
+        target:
+          type: string
+          description: Information about what part of the request caused the error
+        extensionData:
+          type: object
+          description: Additional key/value information about the error
+          additionalProperties: true
+        clientError:
+          type: array
+          description: Nested list of error objects with more details
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    Environment:
+      type: object
+      properties:
+        friendlyName:
+          type: string
+          description: Display name of the environment
+        type:
+          type: string
+          description: Environment type
+          enum:
+            - Production
+            - Sandbox
+        name:
+          type: string
+          description: Environment name, unique within an application family
+        countryCode:
+          type: string
+          description: Country/region code where the environment is deployed
+        applicationFamily:
+          type: string
+          description: Family of the environment application
+        aadTenantId:
+          type: string
+          format: uuid
+          description: Microsoft Entra tenant ID that owns the environment
+        status:
+          type: string
+          description: Current status of the environment
+          enum:
+            - NotReady
+            - Removing
+            - Preparing
+            - Active
+            - Upgrading
+            - CreatingFailed
+            - RemovingFailed
+            - SoftDeleting
+            - SoftDeletingFailed
+            - SoftDeleted
+            - Recovering
+            - RecoveringFailed
+        webClientLoginUrl:
+          type: string
+          format: uri
+          description: URL to log into the environment
+        webServiceUrl:
+          type: string
+          format: uri
+          description: URL to access the environment service API
+        locationName:
+          type: string
+          description: Azure region where the database is stored
+        geoName:
+          type: string
+          description: Azure geo where the database is stored
+        ringName:
+          type: string
+          description: Logical ring group name (e.g., Prod, Preview)
+        appInsightsKey:
+          type: string
+          description: Application Insights instrumentation key
+        softDeletedOn:
+          type: string
+          format: date-time
+          description: When the environment was soft deleted
+        hardDeletePendingOn:
+          type: string
+          format: date-time
+          description: When the environment will be permanently deleted
+        deleteReason:
+          type: string
+          description: Reason the environment was deleted
+        appSourceAppsUpdateCadence:
+          type: string
+          description: Update cadence for installed AppSource apps
+        versionDetails:
+          type: object
+          properties:
+            version:
+              type: string
+              description: Current version number
+            gracePeriodStartDate:
+              type: string
+              format: date-time
+              description: When the grace period starts for the current major version
+            enforcedUpdatePeriodStartDate:
+              type: string
+              format: date-time
+              description: When the enforced update period starts
+    EnvironmentOperation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Operation ID used for tracking
+        type:
+          type: string
+          description: Type of operation
+          enum:
+            - create
+            - copy
+            - delete
+            - softDelete
+            - recover
+            - environmentRename
+            - pitRestore
+            - environmentAppInstall
+            - environmentAppUninstall
+            - environmentAppUpdate
+            - environmentAppHotfix
+            - modify
+            - update
+            - restart
+            - moveToAnotherAadTenant
+        status:
+          type: string
+          description: Status of the operation
+          enum:
+            - Queued
+            - Scheduled
+            - Running
+            - Succeeded
+            - Failed
+            - Canceled
+            - Skipped
+        aadTenantId:
+          type: string
+          format: uuid
+          description: Microsoft Entra tenant ID
+        createdOn:
+          type: string
+          format: date-time
+          description: When the operation was created
+        startedOn:
+          type: string
+          format: date-time
+          description: When the operation started executing
+        completedOn:
+          type: string
+          format: date-time
+          description: When the operation completed
+        createdBy:
+          type: string
+          description: Who created the operation
+        errorMessage:
+          type: string
+          description: Error message for failed operations
+        parameters:
+          type: object
+          description: Operation-specific parameters
+          additionalProperties: true
+        environmentName:
+          type: string
+          description: Name of the affected environment
+        environmentType:
+          type: string
+          description: Type of the affected environment
+        productFamily:
+          type: string
+          description: Product family of the affected environment
+    CreateEnvironmentRequest:
+      type: object
+      required:
+        - environmentType
+        - countryCode
+      properties:
+        environmentType:
+          type: string
+          description: Type of environment to create
+          enum:
+            - Production
+            - Sandbox
+        countryCode:
+          type: string
+          description: Country to create the environment within
+        ringName:
+          type: string
+          description: Logical ring group (only Sandbox may be created in Preview ring)
+        applicationVersion:
+          type: string
+          description: Application version (e.g., 26.0.0.0)
+    CopyEnvironmentRequest:
+      type: object
+      required:
+        - environmentName
+        - type
+      properties:
+        environmentName:
+          type: string
+          description: Name for the new environment
+        type:
+          type: string
+          description: Type of environment to create
+          enum:
+            - Production
+            - Sandbox
+    RestoreEnvironmentRequest:
+      type: object
+      required:
+        - EnvironmentName
+        - EnvironmentType
+        - PointInTime
+      properties:
+        EnvironmentName:
+          type: string
+          description: Name of the new restored environment
+        EnvironmentType:
+          type: string
+          description: Type of the new environment
+          enum:
+            - Production
+            - Sandbox
+        PointInTime:
+          type: string
+          format: date-time
+          description: Point in time to restore to (ISO 8601 UTC)
+        SkipInstallingPTEs:
+          type: boolean
+          description: Whether to uninstall per-tenant extensions
+          default: false
+        SkipInstallingThirdPartyGlobalApps:
+          type: boolean
+          description: Whether to uninstall third-party AppSource apps
+          default: false
+        SkipEnvironmentCleanup:
+          type: boolean
+          description: Whether to skip execution of cleanup codeunits
+          default: false
+    RestorePeriod:
+      type: object
+      properties:
+        from:
+          type: string
+          format: date-time
+        to:
+          type: string
+          format: date-time
+        correspondingApplicationPackageVersion:
+          type: string
+    EnvironmentSettings:
+      type: object
+      properties:
+        appInsightsKey:
+          type: string
+          description: Application Insights instrumentation key
+        updateWindow:
+          type: object
+          properties:
+            preferredStartTimeUtc:
+              type: string
+              format: time
+            preferredEndTimeUtc:
+              type: string
+              format: time
+        securityGroupId:
+          type: string
+          format: uuid
+          description: Security group assigned to the environment
+    UpdateSettings:
+      type: object
+      properties:
+        preferredStartTimeUtc:
+          type: string
+          format: time
+          description: Preferred start time for the update window (UTC)
+        preferredEndTimeUtc:
+          type: string
+          format: time
+          description: Preferred end time for the update window (UTC)
+    AppInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        publisher:
+          type: string
+        version:
+          type: string
+        state:
+          type: string
+        lastOperationId:
+          type: string
+          format: uuid
+        lastUpdateAttemptResult:
+          type: string
+    AppUpdateRequest:
+      type: object
+      properties:
+        targetVersion:
+          type: string
+          description: Target version to update to
+        allowPreviewVersion:
+          type: boolean
+          description: Whether to allow preview versions
+        ignoreUpgradeWindow:
+          type: boolean
+          description: Whether to ignore the update window
+        allowDependencyUpdate:
+          type: boolean
+          description: Whether to also update dependent apps
+    AppInstallRequest:
+      type: object
+      properties:
+        targetVersion:
+          type: string
+          description: Version to install
+        allowPreviewVersion:
+          type: boolean
+          description: Whether to allow preview versions
+        acceptIsvEula:
+          type: boolean
+          description: Whether the ISV EULA is accepted
+        allowDependencyUpdate:
+          type: boolean
+          description: Whether to also update dependent apps
+    UsedStorage:
+      type: object
+      properties:
+        environmentType:
+          type: string
+        environmentName:
+          type: string
+        applicationFamily:
+          type: string
+        databaseStorageInKilobytes:
+          type: integer
+          format: int64
+          description: Used database storage in kilobytes
+    Quotas:
+      type: object
+      properties:
+        environmentsCount:
+          type: object
+          properties:
+            production:
+              type: integer
+              description: Maximum number of production environments
+            sandbox:
+              type: integer
+              description: Maximum number of sandbox environments
+        storageInKilobytes:
+          type: object
+          properties:
+            default:
+              type: integer
+              description: Default storage allowance
+            userLicenses:
+              type: integer
+              description: Storage based on user licenses
+            additionalCapacity:
+              type: integer
+              description: Storage from purchased add-ons
+            total:
+              type: integer
+              description: Total allowed storage
+    NotificationRecipient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+    ScheduledUpgrade:
+      type: object
+      properties:
+        environmentName:
+          type: string
+        upgradeIsScheduled:
+          type: boolean
+        scheduledDate:
+          type: string
+          format: date-time
+        registeredDate:
+          type: string
+          format: date-time
+        targetVersion:
+          type: string
+        canTenantSelectDate:
+          type: boolean
+        ignoreUpgradeWindow:
+          type: boolean
+    SupportSettings:
+      type: object
+      properties:
+        appId:
+          type: string
+          format: uuid
+        supportUrl:
+          type: string
+          format: uri
+        supportEmail:
+          type: string
+          format: email
+        supportPhone:
+          type: string

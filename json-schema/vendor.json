@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/navision/vendor.json",
+  "title": "Vendor",
+  "description": "Represents a vendor (supplier) entity in Dynamics 365 Business Central. Vendors are the parties from whom the company purchases goods or services. Each vendor record contains contact information, financial settings, and payment terms.",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "description": "ETag for optimistic concurrency control"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier (GUID) of the vendor record"
+    },
+    "number": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The vendor number, a unique business identifier assigned automatically or manually"
+    },
+    "displayName": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "The display name of the vendor"
+    },
+    "addressLine1": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "The first line of the vendor's street address"
+    },
+    "addressLine2": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "The second line of the vendor's street address"
+    },
+    "city": {
+      "type": "string",
+      "maxLength": 30,
+      "description": "The city of the vendor's address"
+    },
+    "state": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The state or province code of the vendor's address"
+    },
+    "country": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "The country/region code of the vendor's address"
+    },
+    "postalCode": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The postal or ZIP code of the vendor's address"
+    },
+    "phoneNumber": {
+      "type": "string",
+      "maxLength": 30,
+      "description": "The vendor's primary phone number"
+    },
+    "email": {
+      "type": "string",
+      "maxLength": 80,
+      "format": "email",
+      "description": "The vendor's email address"
+    },
+    "website": {
+      "type": "string",
+      "maxLength": 80,
+      "format": "uri",
+      "description": "The vendor's website URL"
+    },
+    "taxRegistrationNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The vendor's tax registration number (VAT number or similar)"
+    },
+    "currencyId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the currency used for this vendor"
+    },
+    "currencyCode": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "The currency code (e.g., USD, EUR) used for transactions with this vendor"
+    },
+    "paymentTermsId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the payment terms assigned to the vendor"
+    },
+    "paymentMethodId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the payment method used for the vendor"
+    },
+    "taxLiable": {
+      "type": "boolean",
+      "description": "Indicates whether the vendor is liable for sales tax"
+    },
+    "blocked": {
+      "type": "string",
+      "enum": [" ", "Payment", "All"],
+      "description": "Specifies which transactions are blocked for the vendor: blank (none), Payment, or All"
+    },
+    "balance": {
+      "type": "number",
+      "description": "The current balance owed to the vendor (read-only, computed)",
+      "readOnly": true
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the vendor record was last modified (read-only)",
+      "readOnly": true
+    }
+  },
+  "required": ["id", "displayName"],
+  "additionalProperties": false
+}

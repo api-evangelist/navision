@@ -1,0 +1,3164 @@
+openapi: 3.1.0
+info:
+  title: Dynamics 365 Business Central API v2.0
+  description: >-
+    Modern RESTful API for Microsoft Dynamics 365 Business Central, the cloud
+    evolution of Dynamics NAV. Provides a comprehensive set of endpoints for
+    managing customers, vendors, items, sales orders, purchase orders, accounts,
+    journals, and other business entities. Supports OData query parameters for
+    filtering, sorting, and pagination.
+  version: '2.0'
+  contact:
+    name: Microsoft Dynamics Support
+    email: bcsupport@microsoft.com
+    url: https://dynamics.microsoft.com/support/
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+externalDocs:
+  description: Business Central API v2.0 Documentation
+  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+servers:
+  - url: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+    description: Business Central Online (Common Endpoint)
+    variables:
+      environment:
+        default: production
+        description: The name of the Business Central environment
+  - url: https://{server}:{port}/{instance}/api/v2.0
+    description: Business Central On-Premises
+    variables:
+      server:
+        default: localhost
+        description: The on-premises server hostname
+      port:
+        default: '7048'
+        description: The OData services port
+      instance:
+        default: BC
+        description: The Business Central server instance name
+security:
+  - oauth2: []
+  - bearerAuth: []
+tags:
+  - name: Customers
+    description: Manage customer records
+  - name: Vendors
+    description: Manage vendor records
+  - name: Items
+    description: Manage inventory items
+  - name: Sales Orders
+    description: Manage sales orders and lines
+  - name: Purchase Orders
+    description: Manage purchase orders and lines
+  - name: Accounts
+    description: Manage general ledger accounts
+  - name: Journals
+    description: Manage general journals and journal lines
+  - name: Companies
+    description: Retrieve company information
+  - name: Employees
+    description: Manage employee records
+  - name: Sales Invoices
+    description: Manage sales invoices and lines
+  - name: Purchase Invoices
+    description: Manage purchase invoices and lines
+  - name: Sales Quotes
+    description: Manage sales quotes and lines
+  - name: Sales Credit Memos
+    description: Manage sales credit memos
+  - name: Purchase Credit Memos
+    description: Manage purchase credit memos
+  - name: Dimensions
+    description: Manage dimensions and dimension values
+  - name: Currency
+    description: Manage currencies and exchange rates
+  - name: Payment Terms
+    description: Manage payment terms
+  - name: Payment Methods
+    description: Manage payment methods
+  - name: Countries/Regions
+    description: Manage country and region codes
+  - name: Item Categories
+    description: Manage item categories
+  - name: Customer Payments
+    description: Manage customer payment journals
+  - name: Vendor Payments
+    description: Manage vendor payment journals
+paths:
+  /companies:
+    get:
+      summary: List companies
+      description: Returns a list of companies available in the Business Central tenant.
+      operationId: listCompanies
+      tags:
+        - Companies
+      parameters:
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved companies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/customers:
+    get:
+      summary: List customers
+      description: Returns a list of customer objects from the specified company.
+      operationId: listCustomers
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/orderby'
+        - $ref: '#/components/parameters/select'
+        - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: Successfully retrieved customers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Customer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Create a customer
+      description: Creates a new customer object in the specified company.
+      operationId: createCustomer
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCreate'
+      responses:
+        '201':
+          description: Customer created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/customers({customer_id}):
+    get:
+      summary: Get a customer
+      description: Retrieves a specific customer by ID.
+      operationId: getCustomer
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/customer_id'
+        - $ref: '#/components/parameters/select'
+        - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: Successfully retrieved customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update a customer
+      description: Updates an existing customer object.
+      operationId: updateCustomer
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/customer_id'
+        - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerUpdate'
+      responses:
+        '200':
+          description: Customer updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Delete a customer
+      description: Deletes a customer by ID.
+      operationId: deleteCustomer
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/customer_id'
+      responses:
+        '204':
+          description: Customer deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /companies({company_id})/vendors:
+    get:
+      summary: List vendors
+      description: Returns a list of vendor objects from the specified company.
+      operationId: listVendors
+      tags:
+        - Vendors
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/orderby'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved vendors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Vendor'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Create a vendor
+      description: Creates a new vendor object in the specified company.
+      operationId: createVendor
+      tags:
+        - Vendors
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendorCreate'
+      responses:
+        '201':
+          description: Vendor created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/vendors({vendor_id}):
+    get:
+      summary: Get a vendor
+      description: Retrieves a specific vendor by ID.
+      operationId: getVendor
+      tags:
+        - Vendors
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/vendor_id'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved vendor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update a vendor
+      description: Updates an existing vendor object.
+      operationId: updateVendor
+      tags:
+        - Vendors
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/vendor_id'
+        - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendorUpdate'
+      responses:
+        '200':
+          description: Vendor updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Delete a vendor
+      description: Deletes a vendor by ID.
+      operationId: deleteVendor
+      tags:
+        - Vendors
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/vendor_id'
+      responses:
+        '204':
+          description: Vendor deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /companies({company_id})/items:
+    get:
+      summary: List items
+      description: Returns a list of item objects from the specified company.
+      operationId: listItems
+      tags:
+        - Items
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/orderby'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved items
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Item'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Create an item
+      description: Creates a new item object in the specified company.
+      operationId: createItem
+      tags:
+        - Items
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemCreate'
+      responses:
+        '201':
+          description: Item created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/items({item_id}):
+    get:
+      summary: Get an item
+      description: Retrieves a specific item by ID.
+      operationId: getItem
+      tags:
+        - Items
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/item_id'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update an item
+      description: Updates an existing item object.
+      operationId: updateItem
+      tags:
+        - Items
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/item_id'
+        - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemUpdate'
+      responses:
+        '200':
+          description: Item updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Delete an item
+      description: Deletes an item by ID.
+      operationId: deleteItem
+      tags:
+        - Items
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/item_id'
+      responses:
+        '204':
+          description: Item deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /companies({company_id})/salesOrders:
+    get:
+      summary: List sales orders
+      description: Returns a list of sales order objects from the specified company.
+      operationId: listSalesOrders
+      tags:
+        - Sales Orders
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/orderby'
+        - $ref: '#/components/parameters/select'
+        - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: Successfully retrieved sales orders
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SalesOrder'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Create a sales order
+      description: Creates a new sales order in the specified company.
+      operationId: createSalesOrder
+      tags:
+        - Sales Orders
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesOrderCreate'
+      responses:
+        '201':
+          description: Sales order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/salesOrders({salesOrder_id}):
+    get:
+      summary: Get a sales order
+      description: Retrieves a specific sales order by ID.
+      operationId: getSalesOrder
+      tags:
+        - Sales Orders
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/salesOrder_id'
+        - $ref: '#/components/parameters/select'
+        - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: Successfully retrieved sales order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update a sales order
+      description: Updates an existing sales order.
+      operationId: updateSalesOrder
+      tags:
+        - Sales Orders
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/salesOrder_id'
+        - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesOrderUpdate'
+      responses:
+        '200':
+          description: Sales order updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Delete a sales order
+      description: Deletes a sales order by ID.
+      operationId: deleteSalesOrder
+      tags:
+        - Sales Orders
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/salesOrder_id'
+      responses:
+        '204':
+          description: Sales order deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /companies({company_id})/salesOrders({salesOrder_id})/salesOrderLines:
+    get:
+      summary: List sales order lines
+      description: Returns a list of sales order line items.
+      operationId: listSalesOrderLines
+      tags:
+        - Sales Orders
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/salesOrder_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved sales order lines
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SalesOrderLine'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/purchaseOrders:
+    get:
+      summary: List purchase orders
+      description: Returns a list of purchase order objects from the specified company.
+      operationId: listPurchaseOrders
+      tags:
+        - Purchase Orders
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/orderby'
+        - $ref: '#/components/parameters/select'
+        - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: Successfully retrieved purchase orders
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PurchaseOrder'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Create a purchase order
+      description: Creates a new purchase order in the specified company.
+      operationId: createPurchaseOrder
+      tags:
+        - Purchase Orders
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrderCreate'
+      responses:
+        '201':
+          description: Purchase order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/purchaseOrders({purchaseOrder_id}):
+    get:
+      summary: Get a purchase order
+      description: Retrieves a specific purchase order by ID.
+      operationId: getPurchaseOrder
+      tags:
+        - Purchase Orders
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/purchaseOrder_id'
+        - $ref: '#/components/parameters/select'
+        - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: Successfully retrieved purchase order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      summary: Update a purchase order
+      description: Updates an existing purchase order.
+      operationId: updatePurchaseOrder
+      tags:
+        - Purchase Orders
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/purchaseOrder_id'
+        - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrderUpdate'
+      responses:
+        '200':
+          description: Purchase order updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      summary: Delete a purchase order
+      description: Deletes a purchase order by ID.
+      operationId: deletePurchaseOrder
+      tags:
+        - Purchase Orders
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/purchaseOrder_id'
+      responses:
+        '204':
+          description: Purchase order deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /companies({company_id})/purchaseOrders({purchaseOrder_id})/purchaseOrderLines:
+    get:
+      summary: List purchase order lines
+      description: Returns a list of purchase order line items.
+      operationId: listPurchaseOrderLines
+      tags:
+        - Purchase Orders
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/purchaseOrder_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved purchase order lines
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PurchaseOrderLine'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/accounts:
+    get:
+      summary: List accounts
+      description: Returns a list of general ledger account objects.
+      operationId: listAccounts
+      tags:
+        - Accounts
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/orderby'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved accounts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/accounts({account_id}):
+    get:
+      summary: Get an account
+      description: Retrieves a specific account by ID.
+      operationId: getAccount
+      tags:
+        - Accounts
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successfully retrieved account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /companies({company_id})/generalLedgerEntries:
+    get:
+      summary: List general ledger entries
+      description: Returns a list of general ledger entries.
+      operationId: listGeneralLedgerEntries
+      tags:
+        - Accounts
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/orderby'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved general ledger entries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GeneralLedgerEntry'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/journals:
+    get:
+      summary: List journals
+      description: Returns a list of journal objects.
+      operationId: listJournals
+      tags:
+        - Journals
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved journals
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Journal'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Create a journal
+      description: Creates a new journal in the specified company.
+      operationId: createJournal
+      tags:
+        - Journals
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JournalCreate'
+      responses:
+        '201':
+          description: Journal created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Journal'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/journals({journal_id})/journalLines:
+    get:
+      summary: List journal lines
+      description: Returns a list of journal line objects for a specific journal.
+      operationId: listJournalLines
+      tags:
+        - Journals
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - name: journal_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved journal lines
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/JournalLine'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/salesInvoices:
+    get:
+      summary: List sales invoices
+      description: Returns a list of sales invoice objects.
+      operationId: listSalesInvoices
+      tags:
+        - Sales Invoices
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/orderby'
+        - $ref: '#/components/parameters/select'
+        - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: Successfully retrieved sales invoices
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SalesInvoice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Create a sales invoice
+      description: Creates a new sales invoice in the specified company.
+      operationId: createSalesInvoice
+      tags:
+        - Sales Invoices
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesInvoiceCreate'
+      responses:
+        '201':
+          description: Sales invoice created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesInvoice'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/purchaseInvoices:
+    get:
+      summary: List purchase invoices
+      description: Returns a list of purchase invoice objects.
+      operationId: listPurchaseInvoices
+      tags:
+        - Purchase Invoices
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/orderby'
+        - $ref: '#/components/parameters/select'
+        - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: Successfully retrieved purchase invoices
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PurchaseInvoice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Create a purchase invoice
+      description: Creates a new purchase invoice in the specified company.
+      operationId: createPurchaseInvoice
+      tags:
+        - Purchase Invoices
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseInvoiceCreate'
+      responses:
+        '201':
+          description: Purchase invoice created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseInvoice'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/employees:
+    get:
+      summary: List employees
+      description: Returns a list of employee objects.
+      operationId: listEmployees
+      tags:
+        - Employees
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/orderby'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved employees
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Employee'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/dimensions:
+    get:
+      summary: List dimensions
+      description: Returns a list of dimension objects.
+      operationId: listDimensions
+      tags:
+        - Dimensions
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved dimensions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Dimension'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/currencies:
+    get:
+      summary: List currencies
+      description: Returns a list of currency objects.
+      operationId: listCurrencies
+      tags:
+        - Currency
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved currencies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Currency'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/paymentTerms:
+    get:
+      summary: List payment terms
+      description: Returns a list of payment terms objects.
+      operationId: listPaymentTerms
+      tags:
+        - Payment Terms
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved payment terms
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PaymentTerm'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/paymentMethods:
+    get:
+      summary: List payment methods
+      description: Returns a list of payment method objects.
+      operationId: listPaymentMethods
+      tags:
+        - Payment Methods
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved payment methods
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PaymentMethod'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/countriesRegions:
+    get:
+      summary: List countries/regions
+      description: Returns a list of country/region objects.
+      operationId: listCountriesRegions
+      tags:
+        - Countries/Regions
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved countries/regions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CountryRegion'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/itemCategories:
+    get:
+      summary: List item categories
+      description: Returns a list of item category objects.
+      operationId: listItemCategories
+      tags:
+        - Item Categories
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved item categories
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ItemCategory'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/customerPaymentJournals:
+    get:
+      summary: List customer payment journals
+      description: Returns a list of customer payment journal objects.
+      operationId: listCustomerPaymentJournals
+      tags:
+        - Customer Payments
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved customer payment journals
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CustomerPaymentJournal'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /companies({company_id})/vendorPaymentJournals:
+    get:
+      summary: List vendor payment journals
+      description: Returns a list of vendor payment journal objects.
+      operationId: listVendorPaymentJournals
+      tags:
+        - Vendor Payments
+      parameters:
+        - $ref: '#/components/parameters/company_id'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved vendor payment journals
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/VendorPaymentJournal'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Microsoft Entra ID
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central APIs
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central APIs
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token obtained from Microsoft Entra ID
+  parameters:
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    customer_id:
+      name: customer_id
+      in: path
+      required: true
+      description: The unique identifier of the customer
+      schema:
+        type: string
+        format: uuid
+    vendor_id:
+      name: vendor_id
+      in: path
+      required: true
+      description: The unique identifier of the vendor
+      schema:
+        type: string
+        format: uuid
+    item_id:
+      name: item_id
+      in: path
+      required: true
+      description: The unique identifier of the item
+      schema:
+        type: string
+        format: uuid
+    salesOrder_id:
+      name: salesOrder_id
+      in: path
+      required: true
+      description: The unique identifier of the sales order
+      schema:
+        type: string
+        format: uuid
+    purchaseOrder_id:
+      name: purchaseOrder_id
+      in: path
+      required: true
+      description: The unique identifier of the purchase order
+      schema:
+        type: string
+        format: uuid
+    top:
+      name: $top
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        minimum: 0
+    skip:
+      name: $skip
+      in: query
+      description: Number of items to skip
+      schema:
+        type: integer
+        minimum: 0
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    orderby:
+      name: $orderby
+      in: query
+      description: OData order by expression
+      schema:
+        type: string
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    expand:
+      name: $expand
+      in: query
+      description: Related entities to expand inline
+      schema:
+        type: string
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the company
+        systemVersion:
+          type: string
+          description: The system version
+        name:
+          type: string
+          description: The name of the company
+        displayName:
+          type: string
+          description: The display name of the company
+        businessProfileId:
+          type: string
+          description: The business profile ID
+    Customer:
+      type: object
+      properties:
+        '@odata.etag':
+          type: string
+          description: ETag for concurrency control
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the customer
+        number:
+          type: string
+          description: The customer number
+          maxLength: 20
+        displayName:
+          type: string
+          description: The customer display name
+          maxLength: 100
+        type:
+          type: string
+          description: The customer type
+          enum:
+            - Person
+            - Company
+        addressLine1:
+          type: string
+          description: First line of the address
+          maxLength: 100
+        addressLine2:
+          type: string
+          description: Second line of the address
+          maxLength: 50
+        city:
+          type: string
+          description: The city
+          maxLength: 30
+        state:
+          type: string
+          description: The state or province code
+          maxLength: 20
+        country:
+          type: string
+          description: The country/region code
+          maxLength: 10
+        postalCode:
+          type: string
+          description: The postal code
+          maxLength: 20
+        phoneNumber:
+          type: string
+          description: The phone number
+          maxLength: 30
+        email:
+          type: string
+          description: The email address
+          maxLength: 80
+        website:
+          type: string
+          description: The website URL
+          maxLength: 80
+        salespersonCode:
+          type: string
+          description: The salesperson code
+          maxLength: 20
+        balanceDue:
+          type: number
+          format: decimal
+          description: The balance due from the customer
+          readOnly: true
+        creditLimit:
+          type: number
+          format: decimal
+          description: The credit limit
+        taxLiable:
+          type: boolean
+          description: Whether the customer is tax liable
+        taxAreaId:
+          type: string
+          format: uuid
+          description: The tax area ID
+        taxAreaDisplayName:
+          type: string
+          description: The tax area display name
+          readOnly: true
+        taxRegistrationNumber:
+          type: string
+          description: The tax registration number
+          maxLength: 20
+        currencyId:
+          type: string
+          format: uuid
+          description: The currency ID
+        currencyCode:
+          type: string
+          description: The currency code
+          maxLength: 10
+        paymentTermsId:
+          type: string
+          format: uuid
+          description: The payment terms ID
+        shipmentMethodId:
+          type: string
+          format: uuid
+          description: The shipment method ID
+        paymentMethodId:
+          type: string
+          format: uuid
+          description: The payment method ID
+        blocked:
+          type: string
+          description: Whether the customer is blocked
+          enum:
+            - ' '
+            - Ship
+            - Invoice
+            - All
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          description: The date and time when the customer was last modified
+          readOnly: true
+    CustomerCreate:
+      type: object
+      required:
+        - displayName
+      properties:
+        number:
+          type: string
+          maxLength: 20
+        displayName:
+          type: string
+          maxLength: 100
+        type:
+          type: string
+          enum:
+            - Person
+            - Company
+        addressLine1:
+          type: string
+          maxLength: 100
+        addressLine2:
+          type: string
+          maxLength: 50
+        city:
+          type: string
+          maxLength: 30
+        state:
+          type: string
+          maxLength: 20
+        country:
+          type: string
+          maxLength: 10
+        postalCode:
+          type: string
+          maxLength: 20
+        phoneNumber:
+          type: string
+          maxLength: 30
+        email:
+          type: string
+          maxLength: 80
+        website:
+          type: string
+          maxLength: 80
+        taxLiable:
+          type: boolean
+        taxRegistrationNumber:
+          type: string
+          maxLength: 20
+        currencyCode:
+          type: string
+          maxLength: 10
+        blocked:
+          type: string
+          enum:
+            - ' '
+            - Ship
+            - Invoice
+            - All
+    CustomerUpdate:
+      type: object
+      properties:
+        displayName:
+          type: string
+          maxLength: 100
+        type:
+          type: string
+          enum:
+            - Person
+            - Company
+        addressLine1:
+          type: string
+          maxLength: 100
+        addressLine2:
+          type: string
+          maxLength: 50
+        city:
+          type: string
+          maxLength: 30
+        state:
+          type: string
+          maxLength: 20
+        country:
+          type: string
+          maxLength: 10
+        postalCode:
+          type: string
+          maxLength: 20
+        phoneNumber:
+          type: string
+          maxLength: 30
+        email:
+          type: string
+          maxLength: 80
+        website:
+          type: string
+          maxLength: 80
+        taxLiable:
+          type: boolean
+        creditLimit:
+          type: number
+          format: decimal
+        blocked:
+          type: string
+          enum:
+            - ' '
+            - Ship
+            - Invoice
+            - All
+    Vendor:
+      type: object
+      properties:
+        '@odata.etag':
+          type: string
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the vendor
+        number:
+          type: string
+          description: The vendor number
+          maxLength: 20
+        displayName:
+          type: string
+          description: The vendor display name
+          maxLength: 100
+        addressLine1:
+          type: string
+          description: First line of the address
+          maxLength: 100
+        addressLine2:
+          type: string
+          description: Second line of the address
+          maxLength: 50
+        city:
+          type: string
+          description: The city
+          maxLength: 30
+        state:
+          type: string
+          description: The state or province code
+          maxLength: 20
+        country:
+          type: string
+          description: The country/region code
+          maxLength: 10
+        postalCode:
+          type: string
+          description: The postal code
+          maxLength: 20
+        phoneNumber:
+          type: string
+          description: The phone number
+          maxLength: 30
+        email:
+          type: string
+          description: The email address
+          maxLength: 80
+        website:
+          type: string
+          description: The website URL
+          maxLength: 80
+        taxRegistrationNumber:
+          type: string
+          description: The tax registration number
+          maxLength: 20
+        currencyId:
+          type: string
+          format: uuid
+          description: The currency ID
+        currencyCode:
+          type: string
+          description: The currency code
+          maxLength: 10
+        paymentTermsId:
+          type: string
+          format: uuid
+          description: The payment terms ID
+        paymentMethodId:
+          type: string
+          format: uuid
+          description: The payment method ID
+        taxLiable:
+          type: boolean
+          description: Whether the vendor is tax liable
+        blocked:
+          type: string
+          description: Whether the vendor is blocked
+          enum:
+            - ' '
+            - Payment
+            - All
+        balance:
+          type: number
+          format: decimal
+          description: The vendor balance
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    VendorCreate:
+      type: object
+      required:
+        - displayName
+      properties:
+        number:
+          type: string
+          maxLength: 20
+        displayName:
+          type: string
+          maxLength: 100
+        addressLine1:
+          type: string
+          maxLength: 100
+        addressLine2:
+          type: string
+          maxLength: 50
+        city:
+          type: string
+          maxLength: 30
+        state:
+          type: string
+          maxLength: 20
+        country:
+          type: string
+          maxLength: 10
+        postalCode:
+          type: string
+          maxLength: 20
+        phoneNumber:
+          type: string
+          maxLength: 30
+        email:
+          type: string
+          maxLength: 80
+        website:
+          type: string
+          maxLength: 80
+        taxRegistrationNumber:
+          type: string
+          maxLength: 20
+        currencyCode:
+          type: string
+          maxLength: 10
+        taxLiable:
+          type: boolean
+        blocked:
+          type: string
+          enum:
+            - ' '
+            - Payment
+            - All
+    VendorUpdate:
+      type: object
+      properties:
+        displayName:
+          type: string
+          maxLength: 100
+        addressLine1:
+          type: string
+          maxLength: 100
+        addressLine2:
+          type: string
+          maxLength: 50
+        city:
+          type: string
+          maxLength: 30
+        state:
+          type: string
+          maxLength: 20
+        country:
+          type: string
+          maxLength: 10
+        postalCode:
+          type: string
+          maxLength: 20
+        phoneNumber:
+          type: string
+          maxLength: 30
+        email:
+          type: string
+          maxLength: 80
+        website:
+          type: string
+          maxLength: 80
+        taxLiable:
+          type: boolean
+        blocked:
+          type: string
+          enum:
+            - ' '
+            - Payment
+            - All
+    Item:
+      type: object
+      properties:
+        '@odata.etag':
+          type: string
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the item
+        number:
+          type: string
+          description: The item number
+          maxLength: 20
+        displayName:
+          type: string
+          description: The item display name
+          maxLength: 100
+        displayName2:
+          type: string
+          description: The item display name 2
+          maxLength: 50
+        type:
+          type: string
+          description: The item type
+          enum:
+            - Inventory
+            - Service
+            - Non-Inventory
+        itemCategoryId:
+          type: string
+          format: uuid
+          description: The item category ID
+        itemCategoryCode:
+          type: string
+          description: The item category code
+          maxLength: 20
+        blocked:
+          type: boolean
+          description: Whether the item is blocked
+        gtin:
+          type: string
+          description: The Global Trade Item Number
+          maxLength: 14
+        inventory:
+          type: number
+          format: decimal
+          description: The current inventory quantity
+          readOnly: true
+        unitPrice:
+          type: number
+          format: decimal
+          description: The unit price
+        priceIncludesTax:
+          type: boolean
+          description: Whether the price includes tax
+        unitCost:
+          type: number
+          format: decimal
+          description: The unit cost
+        taxGroupId:
+          type: string
+          format: uuid
+          description: The tax group ID
+        taxGroupCode:
+          type: string
+          description: The tax group code
+          maxLength: 20
+        baseUnitOfMeasureId:
+          type: string
+          format: uuid
+          description: The base unit of measure ID
+        baseUnitOfMeasureCode:
+          type: string
+          description: The base unit of measure code
+          maxLength: 10
+        generalProductPostingGroupId:
+          type: string
+          format: uuid
+        generalProductPostingGroupCode:
+          type: string
+          maxLength: 20
+        inventoryPostingGroupId:
+          type: string
+          format: uuid
+        inventoryPostingGroupCode:
+          type: string
+          maxLength: 20
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    ItemCreate:
+      type: object
+      required:
+        - displayName
+      properties:
+        number:
+          type: string
+          maxLength: 20
+        displayName:
+          type: string
+          maxLength: 100
+        type:
+          type: string
+          enum:
+            - Inventory
+            - Service
+            - Non-Inventory
+        itemCategoryCode:
+          type: string
+          maxLength: 20
+        blocked:
+          type: boolean
+        gtin:
+          type: string
+          maxLength: 14
+        unitPrice:
+          type: number
+          format: decimal
+        unitCost:
+          type: number
+          format: decimal
+        taxGroupCode:
+          type: string
+          maxLength: 20
+        baseUnitOfMeasureCode:
+          type: string
+          maxLength: 10
+    ItemUpdate:
+      type: object
+      properties:
+        displayName:
+          type: string
+          maxLength: 100
+        type:
+          type: string
+          enum:
+            - Inventory
+            - Service
+            - Non-Inventory
+        itemCategoryCode:
+          type: string
+          maxLength: 20
+        blocked:
+          type: boolean
+        gtin:
+          type: string
+          maxLength: 14
+        unitPrice:
+          type: number
+          format: decimal
+        unitCost:
+          type: number
+          format: decimal
+        taxGroupCode:
+          type: string
+          maxLength: 20
+        baseUnitOfMeasureCode:
+          type: string
+          maxLength: 10
+    SalesOrder:
+      type: object
+      properties:
+        '@odata.etag':
+          type: string
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the sales order
+        number:
+          type: string
+          description: The sales order number
+          maxLength: 20
+        externalDocumentNumber:
+          type: string
+          description: The external document number
+          maxLength: 35
+        orderDate:
+          type: string
+          format: date
+          description: The order date
+        postingDate:
+          type: string
+          format: date
+          description: The posting date
+        customerId:
+          type: string
+          format: uuid
+          description: The customer ID
+        customerNumber:
+          type: string
+          description: The customer number
+          maxLength: 20
+        customerName:
+          type: string
+          description: The customer name
+          maxLength: 100
+        billToName:
+          type: string
+          description: The bill-to name
+          maxLength: 100
+        billToCustomerId:
+          type: string
+          format: uuid
+          description: The bill-to customer ID
+        billToCustomerNumber:
+          type: string
+          description: The bill-to customer number
+          maxLength: 20
+        shipToName:
+          type: string
+          description: The ship-to name
+          maxLength: 100
+        shipToContact:
+          type: string
+          description: The ship-to contact
+          maxLength: 100
+        sellToAddressLine1:
+          type: string
+          maxLength: 100
+        sellToAddressLine2:
+          type: string
+          maxLength: 50
+        sellToCity:
+          type: string
+          maxLength: 30
+        sellToCountry:
+          type: string
+          maxLength: 10
+        sellToState:
+          type: string
+          maxLength: 20
+        sellToPostCode:
+          type: string
+          maxLength: 20
+        currencyId:
+          type: string
+          format: uuid
+        currencyCode:
+          type: string
+          maxLength: 10
+        pricesIncludeTax:
+          type: boolean
+        paymentTermsId:
+          type: string
+          format: uuid
+        shipmentMethodId:
+          type: string
+          format: uuid
+        salesperson:
+          type: string
+          maxLength: 20
+        requestedDeliveryDate:
+          type: string
+          format: date
+        discountAmount:
+          type: number
+          format: decimal
+          description: The total discount amount
+        discountAppliedBeforeTax:
+          type: boolean
+        totalAmountExcludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+        totalTaxAmount:
+          type: number
+          format: decimal
+          readOnly: true
+        totalAmountIncludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+        fullyShipped:
+          type: boolean
+          readOnly: true
+        status:
+          type: string
+          description: The order status
+          enum:
+            - Draft
+            - In Review
+            - Open
+            - Released
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+        phoneNumber:
+          type: string
+          maxLength: 30
+        email:
+          type: string
+          maxLength: 80
+        salesOrderLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/SalesOrderLine'
+    SalesOrderCreate:
+      type: object
+      properties:
+        externalDocumentNumber:
+          type: string
+          maxLength: 35
+        orderDate:
+          type: string
+          format: date
+        customerId:
+          type: string
+          format: uuid
+        customerNumber:
+          type: string
+          maxLength: 20
+        currencyCode:
+          type: string
+          maxLength: 10
+        pricesIncludeTax:
+          type: boolean
+        requestedDeliveryDate:
+          type: string
+          format: date
+    SalesOrderUpdate:
+      type: object
+      properties:
+        externalDocumentNumber:
+          type: string
+          maxLength: 35
+        orderDate:
+          type: string
+          format: date
+        customerId:
+          type: string
+          format: uuid
+        customerNumber:
+          type: string
+          maxLength: 20
+        currencyCode:
+          type: string
+          maxLength: 10
+        pricesIncludeTax:
+          type: boolean
+        requestedDeliveryDate:
+          type: string
+          format: date
+    SalesOrderLine:
+      type: object
+      properties:
+        '@odata.etag':
+          type: string
+        id:
+          type: string
+          format: uuid
+        documentId:
+          type: string
+          format: uuid
+        sequence:
+          type: integer
+        itemId:
+          type: string
+          format: uuid
+        accountId:
+          type: string
+          format: uuid
+        lineType:
+          type: string
+          enum:
+            - Comment
+            - Account
+            - Item
+            - Resource
+            - Fixed Asset
+            - Charge
+        lineObjectNumber:
+          type: string
+          maxLength: 20
+        description:
+          type: string
+          maxLength: 100
+        description2:
+          type: string
+          maxLength: 50
+        unitOfMeasureId:
+          type: string
+          format: uuid
+        unitOfMeasureCode:
+          type: string
+          maxLength: 10
+        quantity:
+          type: number
+          format: decimal
+        unitPrice:
+          type: number
+          format: decimal
+        discountAmount:
+          type: number
+          format: decimal
+        discountPercent:
+          type: number
+          format: decimal
+        discountAppliedBeforeTax:
+          type: boolean
+        amountExcludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+        taxCode:
+          type: string
+          maxLength: 20
+        taxPercent:
+          type: number
+          format: decimal
+          readOnly: true
+        totalTaxAmount:
+          type: number
+          format: decimal
+          readOnly: true
+        amountIncludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+        netAmount:
+          type: number
+          format: decimal
+          readOnly: true
+        netTaxAmount:
+          type: number
+          format: decimal
+          readOnly: true
+        netAmountIncludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+        shipmentDate:
+          type: string
+          format: date
+        shippedQuantity:
+          type: number
+          format: decimal
+          readOnly: true
+        invoicedQuantity:
+          type: number
+          format: decimal
+          readOnly: true
+        invoiceQuantity:
+          type: number
+          format: decimal
+        shipQuantity:
+          type: number
+          format: decimal
+    PurchaseOrder:
+      type: object
+      properties:
+        '@odata.etag':
+          type: string
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the purchase order
+        number:
+          type: string
+          description: The purchase order number
+          maxLength: 20
+        orderDate:
+          type: string
+          format: date
+          description: The order date
+        postingDate:
+          type: string
+          format: date
+          description: The posting date
+        vendorId:
+          type: string
+          format: uuid
+          description: The vendor ID
+        vendorNumber:
+          type: string
+          description: The vendor number
+          maxLength: 20
+        vendorName:
+          type: string
+          description: The vendor name
+          maxLength: 100
+        payToName:
+          type: string
+          maxLength: 100
+        payToVendorId:
+          type: string
+          format: uuid
+        payToVendorNumber:
+          type: string
+          maxLength: 20
+        shipToName:
+          type: string
+          maxLength: 100
+        shipToContact:
+          type: string
+          maxLength: 100
+        buyFromAddressLine1:
+          type: string
+          maxLength: 100
+        buyFromAddressLine2:
+          type: string
+          maxLength: 50
+        buyFromCity:
+          type: string
+          maxLength: 30
+        buyFromCountry:
+          type: string
+          maxLength: 10
+        buyFromState:
+          type: string
+          maxLength: 20
+        buyFromPostCode:
+          type: string
+          maxLength: 20
+        currencyId:
+          type: string
+          format: uuid
+        currencyCode:
+          type: string
+          maxLength: 10
+        pricesIncludeTax:
+          type: boolean
+        paymentTermsId:
+          type: string
+          format: uuid
+        shipmentMethodId:
+          type: string
+          format: uuid
+        purchaser:
+          type: string
+          maxLength: 20
+        requestedReceiptDate:
+          type: string
+          format: date
+        discountAmount:
+          type: number
+          format: decimal
+        discountAppliedBeforeTax:
+          type: boolean
+        totalAmountExcludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+        totalTaxAmount:
+          type: number
+          format: decimal
+          readOnly: true
+        totalAmountIncludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+        fullyReceived:
+          type: boolean
+          readOnly: true
+        status:
+          type: string
+          enum:
+            - Draft
+            - In Review
+            - Open
+            - Released
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+        purchaseOrderLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/PurchaseOrderLine'
+    PurchaseOrderCreate:
+      type: object
+      properties:
+        orderDate:
+          type: string
+          format: date
+        vendorId:
+          type: string
+          format: uuid
+        vendorNumber:
+          type: string
+          maxLength: 20
+        currencyCode:
+          type: string
+          maxLength: 10
+        pricesIncludeTax:
+          type: boolean
+        requestedReceiptDate:
+          type: string
+          format: date
+    PurchaseOrderUpdate:
+      type: object
+      properties:
+        orderDate:
+          type: string
+          format: date
+        vendorId:
+          type: string
+          format: uuid
+        vendorNumber:
+          type: string
+          maxLength: 20
+        currencyCode:
+          type: string
+          maxLength: 10
+        pricesIncludeTax:
+          type: boolean
+        requestedReceiptDate:
+          type: string
+          format: date
+    PurchaseOrderLine:
+      type: object
+      properties:
+        '@odata.etag':
+          type: string
+        id:
+          type: string
+          format: uuid
+        documentId:
+          type: string
+          format: uuid
+        sequence:
+          type: integer
+        itemId:
+          type: string
+          format: uuid
+        accountId:
+          type: string
+          format: uuid
+        lineType:
+          type: string
+          enum:
+            - Comment
+            - Account
+            - Item
+            - Fixed Asset
+            - Charge
+        lineObjectNumber:
+          type: string
+          maxLength: 20
+        description:
+          type: string
+          maxLength: 100
+        description2:
+          type: string
+          maxLength: 50
+        unitOfMeasureId:
+          type: string
+          format: uuid
+        unitOfMeasureCode:
+          type: string
+          maxLength: 10
+        quantity:
+          type: number
+          format: decimal
+        directUnitCost:
+          type: number
+          format: decimal
+        discountAmount:
+          type: number
+          format: decimal
+        discountPercent:
+          type: number
+          format: decimal
+        discountAppliedBeforeTax:
+          type: boolean
+        amountExcludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+        taxCode:
+          type: string
+          maxLength: 20
+        taxPercent:
+          type: number
+          format: decimal
+          readOnly: true
+        totalTaxAmount:
+          type: number
+          format: decimal
+          readOnly: true
+        amountIncludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+        expectedReceiptDate:
+          type: string
+          format: date
+        receivedQuantity:
+          type: number
+          format: decimal
+          readOnly: true
+        invoicedQuantity:
+          type: number
+          format: decimal
+          readOnly: true
+        invoiceQuantity:
+          type: number
+          format: decimal
+        receiveQuantity:
+          type: number
+          format: decimal
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        number:
+          type: string
+          description: The account number
+          maxLength: 20
+        displayName:
+          type: string
+          description: The account display name
+          maxLength: 100
+        category:
+          type: string
+          description: The account category
+          enum:
+            - ' '
+            - Assets
+            - Liabilities
+            - Equity
+            - Income
+            - Cost of Goods Sold
+            - Expense
+        subCategory:
+          type: string
+          description: The account subcategory
+          maxLength: 80
+        blocked:
+          type: boolean
+          description: Whether the account is blocked
+        accountType:
+          type: string
+          description: The account type
+          enum:
+            - Posting
+            - Heading
+            - Total
+            - Begin-Total
+            - End-Total
+        directPosting:
+          type: boolean
+          description: Whether direct posting is allowed
+        netChange:
+          type: number
+          format: decimal
+          description: The net change
+          readOnly: true
+        consolidationTranslationMethod:
+          type: string
+        consolidationDebitAccount:
+          type: string
+        consolidationCreditAccount:
+          type: string
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    GeneralLedgerEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        entryNumber:
+          type: integer
+          readOnly: true
+        postingDate:
+          type: string
+          format: date
+        documentNumber:
+          type: string
+          maxLength: 20
+        documentType:
+          type: string
+        accountId:
+          type: string
+          format: uuid
+        accountNumber:
+          type: string
+          maxLength: 20
+        description:
+          type: string
+          maxLength: 100
+        debitAmount:
+          type: number
+          format: decimal
+        creditAmount:
+          type: number
+          format: decimal
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    Journal:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          maxLength: 10
+        displayName:
+          type: string
+          maxLength: 100
+        templateDisplayName:
+          type: string
+          maxLength: 100
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+        balancingAccountId:
+          type: string
+          format: uuid
+        balancingAccountNumber:
+          type: string
+          maxLength: 20
+    JournalCreate:
+      type: object
+      required:
+        - code
+        - displayName
+      properties:
+        code:
+          type: string
+          maxLength: 10
+        displayName:
+          type: string
+          maxLength: 100
+        templateDisplayName:
+          type: string
+          maxLength: 100
+    JournalLine:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        journalId:
+          type: string
+          format: uuid
+        journalDisplayName:
+          type: string
+          maxLength: 100
+        lineNumber:
+          type: integer
+        accountType:
+          type: string
+          enum:
+            - G/L Account
+            - Customer
+            - Vendor
+            - Bank Account
+            - Fixed Asset
+            - Employee
+        accountId:
+          type: string
+          format: uuid
+        accountNumber:
+          type: string
+          maxLength: 20
+        postingDate:
+          type: string
+          format: date
+        documentNumber:
+          type: string
+          maxLength: 20
+        externalDocumentNumber:
+          type: string
+          maxLength: 35
+        amount:
+          type: number
+          format: decimal
+        description:
+          type: string
+          maxLength: 100
+        comment:
+          type: string
+        taxCode:
+          type: string
+          maxLength: 20
+        balanceAccountType:
+          type: string
+        balanceAccountNumber:
+          type: string
+          maxLength: 20
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    SalesInvoice:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        number:
+          type: string
+          maxLength: 20
+        externalDocumentNumber:
+          type: string
+          maxLength: 35
+        invoiceDate:
+          type: string
+          format: date
+        postingDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        customerId:
+          type: string
+          format: uuid
+        customerNumber:
+          type: string
+          maxLength: 20
+        customerName:
+          type: string
+          maxLength: 100
+        currencyCode:
+          type: string
+          maxLength: 10
+        pricesIncludeTax:
+          type: boolean
+        totalAmountExcludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+        totalTaxAmount:
+          type: number
+          format: decimal
+          readOnly: true
+        totalAmountIncludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+        status:
+          type: string
+          enum:
+            - Draft
+            - In Review
+            - Open
+            - Paid
+            - Canceled
+            - Corrective
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    SalesInvoiceCreate:
+      type: object
+      properties:
+        externalDocumentNumber:
+          type: string
+          maxLength: 35
+        invoiceDate:
+          type: string
+          format: date
+        customerId:
+          type: string
+          format: uuid
+        customerNumber:
+          type: string
+          maxLength: 20
+        currencyCode:
+          type: string
+          maxLength: 10
+        pricesIncludeTax:
+          type: boolean
+    PurchaseInvoice:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        number:
+          type: string
+          maxLength: 20
+        invoiceDate:
+          type: string
+          format: date
+        postingDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        vendorId:
+          type: string
+          format: uuid
+        vendorNumber:
+          type: string
+          maxLength: 20
+        vendorName:
+          type: string
+          maxLength: 100
+        currencyCode:
+          type: string
+          maxLength: 10
+        pricesIncludeTax:
+          type: boolean
+        totalAmountExcludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+        totalTaxAmount:
+          type: number
+          format: decimal
+          readOnly: true
+        totalAmountIncludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+        status:
+          type: string
+          enum:
+            - Draft
+            - In Review
+            - Open
+            - Paid
+            - Canceled
+            - Corrective
+          readOnly: true
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    PurchaseInvoiceCreate:
+      type: object
+      properties:
+        invoiceDate:
+          type: string
+          format: date
+        vendorId:
+          type: string
+          format: uuid
+        vendorNumber:
+          type: string
+          maxLength: 20
+        currencyCode:
+          type: string
+          maxLength: 10
+        pricesIncludeTax:
+          type: boolean
+    Employee:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        number:
+          type: string
+          maxLength: 20
+        displayName:
+          type: string
+          maxLength: 100
+        givenName:
+          type: string
+          maxLength: 30
+        middleName:
+          type: string
+          maxLength: 30
+        surname:
+          type: string
+          maxLength: 30
+        jobTitle:
+          type: string
+          maxLength: 30
+        addressLine1:
+          type: string
+          maxLength: 100
+        addressLine2:
+          type: string
+          maxLength: 50
+        city:
+          type: string
+          maxLength: 30
+        state:
+          type: string
+          maxLength: 20
+        country:
+          type: string
+          maxLength: 10
+        postalCode:
+          type: string
+          maxLength: 20
+        phoneNumber:
+          type: string
+          maxLength: 30
+        mobilePhone:
+          type: string
+          maxLength: 30
+        email:
+          type: string
+          maxLength: 80
+        personalEmail:
+          type: string
+          maxLength: 80
+        employmentDate:
+          type: string
+          format: date
+        terminationDate:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+            - Active
+            - Inactive
+        birthDate:
+          type: string
+          format: date
+        statisticsGroupCode:
+          type: string
+          maxLength: 10
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    Dimension:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          maxLength: 20
+        displayName:
+          type: string
+          maxLength: 100
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    Currency:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          maxLength: 10
+        displayName:
+          type: string
+          maxLength: 100
+        symbol:
+          type: string
+          maxLength: 10
+        amountDecimalPlaces:
+          type: string
+        amountRoundingPrecision:
+          type: number
+          format: decimal
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    PaymentTerm:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          maxLength: 10
+        displayName:
+          type: string
+          maxLength: 100
+        dueDateCalculation:
+          type: string
+          description: The date formula for due date calculation
+        discountDateCalculation:
+          type: string
+          description: The date formula for discount date calculation
+        discountPercent:
+          type: number
+          format: decimal
+        calculateDiscountOnCreditMemos:
+          type: boolean
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          maxLength: 10
+        displayName:
+          type: string
+          maxLength: 100
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    CountryRegion:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          maxLength: 10
+        displayName:
+          type: string
+          maxLength: 100
+        addressFormat:
+          type: string
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    ItemCategory:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          maxLength: 20
+        displayName:
+          type: string
+          maxLength: 100
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+    CustomerPaymentJournal:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          maxLength: 10
+        displayName:
+          type: string
+          maxLength: 100
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+        balancingAccountId:
+          type: string
+          format: uuid
+        balancingAccountNumber:
+          type: string
+          maxLength: 20
+    VendorPaymentJournal:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        code:
+          type: string
+          maxLength: 10
+        displayName:
+          type: string
+          maxLength: 100
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+        balancingAccountId:
+          type: string
+          format: uuid
+        balancingAccountNumber:
+          type: string
+          maxLength: 20

@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/navision/item.json",
+  "title": "Item",
+  "description": "Represents an inventory item entity in Dynamics 365 Business Central. Items are the goods or services that the company buys, sells, or holds in inventory. Each item record contains pricing, categorization, unit of measure, tax, and posting group information.",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "description": "ETag for optimistic concurrency control"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier (GUID) of the item record"
+    },
+    "number": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The item number, a unique business identifier assigned automatically or manually"
+    },
+    "displayName": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "The primary display name or description of the item"
+    },
+    "displayName2": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "A secondary display name or additional description for the item"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["Inventory", "Service", "Non-Inventory"],
+      "description": "The type of item: Inventory (physical goods tracked in stock), Service (labor or services), or Non-Inventory (physical goods not tracked in stock)"
+    },
+    "itemCategoryId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the item category"
+    },
+    "itemCategoryCode": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The code of the item category used for grouping and reporting"
+    },
+    "blocked": {
+      "type": "boolean",
+      "description": "Indicates whether the item is blocked from being used in transactions"
+    },
+    "gtin": {
+      "type": "string",
+      "maxLength": 14,
+      "description": "The Global Trade Item Number (barcode) for the item"
+    },
+    "inventory": {
+      "type": "number",
+      "description": "The current quantity in inventory (read-only, computed from item ledger entries)",
+      "readOnly": true
+    },
+    "unitPrice": {
+      "type": "number",
+      "description": "The default selling unit price of the item"
+    },
+    "priceIncludesTax": {
+      "type": "boolean",
+      "description": "Indicates whether the unit price includes tax"
+    },
+    "unitCost": {
+      "type": "number",
+      "description": "The unit cost of the item used for inventory valuation"
+    },
+    "taxGroupId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the tax group for the item"
+    },
+    "taxGroupCode": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The tax group code that determines how the item is taxed"
+    },
+    "baseUnitOfMeasureId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the base unit of measure"
+    },
+    "baseUnitOfMeasureCode": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "The base unit of measure code (e.g., PCS, KG, EA)"
+    },
+    "generalProductPostingGroupId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the general product posting group"
+    },
+    "generalProductPostingGroupCode": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The general product posting group code used for G/L account mapping"
+    },
+    "inventoryPostingGroupId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the inventory posting group"
+    },
+    "inventoryPostingGroupCode": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The inventory posting group code used for inventory valuation posting"
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the item record was last modified (read-only)",
+      "readOnly": true
+    }
+  },
+  "required": ["id", "displayName"],
+  "additionalProperties": false
+}

@@ -1,0 +1,354 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/navision/sales-order.json",
+  "title": "Sales Order",
+  "description": "Represents a sales order entity in Dynamics 365 Business Central. Sales orders are documents used to record the sale of goods or services to customers. They include header information (customer, dates, payment terms) and line items specifying the products or services being sold.",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "description": "ETag for optimistic concurrency control"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier (GUID) of the sales order"
+    },
+    "number": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The sales order number assigned from a number series"
+    },
+    "externalDocumentNumber": {
+      "type": "string",
+      "maxLength": 35,
+      "description": "An external reference number (e.g., a customer PO number)"
+    },
+    "orderDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The date when the sales order was created"
+    },
+    "postingDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The date used for posting the sales order to the general ledger"
+    },
+    "customerId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the sell-to customer"
+    },
+    "customerNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The customer number of the sell-to customer"
+    },
+    "customerName": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "The name of the sell-to customer"
+    },
+    "billToName": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "The name of the bill-to party"
+    },
+    "billToCustomerId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the bill-to customer"
+    },
+    "billToCustomerNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The customer number of the bill-to customer"
+    },
+    "shipToName": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "The name for the ship-to address"
+    },
+    "shipToContact": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "The contact person at the ship-to address"
+    },
+    "sellToAddressLine1": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "First line of the sell-to address"
+    },
+    "sellToAddressLine2": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "Second line of the sell-to address"
+    },
+    "sellToCity": {
+      "type": "string",
+      "maxLength": 30,
+      "description": "The city of the sell-to address"
+    },
+    "sellToCountry": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "The country/region code of the sell-to address"
+    },
+    "sellToState": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The state or province code of the sell-to address"
+    },
+    "sellToPostCode": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The postal code of the sell-to address"
+    },
+    "currencyId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the currency"
+    },
+    "currencyCode": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "The currency code (e.g., USD, EUR) for the sales order"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean",
+      "description": "Indicates whether the prices on the order include tax"
+    },
+    "paymentTermsId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the payment terms"
+    },
+    "shipmentMethodId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the shipment method"
+    },
+    "salesperson": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The salesperson code assigned to the order"
+    },
+    "requestedDeliveryDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The date the customer has requested delivery"
+    },
+    "discountAmount": {
+      "type": "number",
+      "description": "The total invoice discount amount applied to the order"
+    },
+    "discountAppliedBeforeTax": {
+      "type": "boolean",
+      "description": "Indicates whether discounts are applied before tax calculation"
+    },
+    "totalAmountExcludingTax": {
+      "type": "number",
+      "description": "The total amount of the order excluding tax (read-only)",
+      "readOnly": true
+    },
+    "totalTaxAmount": {
+      "type": "number",
+      "description": "The total tax amount on the order (read-only)",
+      "readOnly": true
+    },
+    "totalAmountIncludingTax": {
+      "type": "number",
+      "description": "The total amount of the order including tax (read-only)",
+      "readOnly": true
+    },
+    "fullyShipped": {
+      "type": "boolean",
+      "description": "Indicates whether all lines on the order have been fully shipped (read-only)",
+      "readOnly": true
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Draft", "In Review", "Open", "Released"],
+      "description": "The current status of the sales order (read-only)",
+      "readOnly": true
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the sales order was last modified (read-only)",
+      "readOnly": true
+    },
+    "phoneNumber": {
+      "type": "string",
+      "maxLength": 30,
+      "description": "The phone number associated with the order"
+    },
+    "email": {
+      "type": "string",
+      "maxLength": 80,
+      "format": "email",
+      "description": "The email address associated with the order"
+    },
+    "salesOrderLines": {
+      "type": "array",
+      "description": "The line items on the sales order",
+      "items": {
+        "$ref": "sales-order-line.json"
+      }
+    }
+  },
+  "required": ["id"],
+  "additionalProperties": false,
+  "$defs": {
+    "SalesOrderLine": {
+      "$id": "sales-order-line.json",
+      "title": "Sales Order Line",
+      "description": "Represents a line item on a sales order, specifying the item, quantity, pricing, and shipping details.",
+      "type": "object",
+      "properties": {
+        "@odata.etag": {
+          "type": "string",
+          "description": "ETag for concurrency control"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique identifier of the sales order line"
+        },
+        "documentId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The ID of the parent sales order document"
+        },
+        "sequence": {
+          "type": "integer",
+          "description": "The sequence number determining line order"
+        },
+        "itemId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique identifier of the item on this line"
+        },
+        "accountId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique identifier of the G/L account (for account-type lines)"
+        },
+        "lineType": {
+          "type": "string",
+          "enum": ["Comment", "Account", "Item", "Resource", "Fixed Asset", "Charge"],
+          "description": "The type of the sales order line"
+        },
+        "lineObjectNumber": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "The number of the item, account, resource, or asset on the line"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "The description of the line item"
+        },
+        "description2": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Additional description for the line item"
+        },
+        "unitOfMeasureId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The unique identifier of the unit of measure"
+        },
+        "unitOfMeasureCode": {
+          "type": "string",
+          "maxLength": 10,
+          "description": "The unit of measure code (e.g., PCS, KG)"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "The quantity ordered"
+        },
+        "unitPrice": {
+          "type": "number",
+          "description": "The unit selling price"
+        },
+        "discountAmount": {
+          "type": "number",
+          "description": "The line discount amount"
+        },
+        "discountPercent": {
+          "type": "number",
+          "description": "The line discount percentage"
+        },
+        "discountAppliedBeforeTax": {
+          "type": "boolean",
+          "description": "Indicates whether the discount is applied before tax"
+        },
+        "amountExcludingTax": {
+          "type": "number",
+          "description": "The line amount excluding tax (read-only)",
+          "readOnly": true
+        },
+        "taxCode": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "The tax code applied to the line"
+        },
+        "taxPercent": {
+          "type": "number",
+          "description": "The tax percentage (read-only)",
+          "readOnly": true
+        },
+        "totalTaxAmount": {
+          "type": "number",
+          "description": "The total tax amount for the line (read-only)",
+          "readOnly": true
+        },
+        "amountIncludingTax": {
+          "type": "number",
+          "description": "The line amount including tax (read-only)",
+          "readOnly": true
+        },
+        "netAmount": {
+          "type": "number",
+          "description": "The net amount (read-only)",
+          "readOnly": true
+        },
+        "netTaxAmount": {
+          "type": "number",
+          "description": "The net tax amount (read-only)",
+          "readOnly": true
+        },
+        "netAmountIncludingTax": {
+          "type": "number",
+          "description": "The net amount including tax (read-only)",
+          "readOnly": true
+        },
+        "shipmentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The planned shipment date for the line"
+        },
+        "shippedQuantity": {
+          "type": "number",
+          "description": "The quantity already shipped (read-only)",
+          "readOnly": true
+        },
+        "invoicedQuantity": {
+          "type": "number",
+          "description": "The quantity already invoiced (read-only)",
+          "readOnly": true
+        },
+        "invoiceQuantity": {
+          "type": "number",
+          "description": "The quantity to invoice"
+        },
+        "shipQuantity": {
+          "type": "number",
+          "description": "The quantity to ship"
+        }
+      },
+      "required": ["id"]
+    }
+  }
+}
