@@ -1,0 +1,9 @@
+{
+  "id": "abc123",
+  "code": "example_value",
+  "displayName": "example_value",
+  "symbol": "example_value",
+  "amountDecimalPlaces": "example_value",
+  "amountRoundingPrecision": 42.5,
+  "lastModifiedDateTime": "example_value"
+}

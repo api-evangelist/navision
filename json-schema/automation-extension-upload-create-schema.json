@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExtensionUploadCreate",
+  "type": "object",
+  "properties": {
+    "schedule": {
+      "type": "string"
+    },
+    "schemaSyncMode": {
+      "type": "string"
+    }
+  }
+}

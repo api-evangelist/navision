@@ -1,0 +1,472 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Business Central Automation API v2.0"
+  description: "API for automating company setup, extension management, user administration, permission sets, configuration packages, and feature management in Business Central."
+  tags:
+    - Business Central
+    - Automation
+    - Extension Management
+    - User Management
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      BC_OAUTH_TOKEN: BC_OAUTH_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: automation
+      baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+      description: "Business Central Automation API for tenant setup and management."
+      authentication:
+        type: bearer
+        token: "{{BC_OAUTH_TOKEN}}"
+      resources:
+        - name: companies
+          path: /companies
+          description: "Company management."
+          operations:
+            - name: list-companies
+              method: GET
+              description: "List companies available for automation."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: list-automation-companies
+              method: GET
+              description: "List automation company objects."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: create-automation-company
+              method: POST
+              description: "Create a new company."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  displayName: "{{tools.displayName}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: delete-automation-company
+              method: DELETE
+              description: "Delete a company."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+                - name: automationCompany_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Automation company ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: extensions
+          path: /companies({company_id})/extensions
+          description: "Extension management."
+          operations:
+            - name: list-extensions
+              method: GET
+              description: "List extensions published to the tenant."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: install-extension
+              method: POST
+              description: "Install a published extension."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+                - name: extension_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Extension package ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: uninstall-extension
+              method: POST
+              description: "Uninstall an extension."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+                - name: extension_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Extension package ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: users
+          path: /companies({company_id})/users
+          description: "User management."
+          operations:
+            - name: list-users
+              method: GET
+              description: "List Business Central users."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-user
+              method: GET
+              description: "Get a user by ID."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+                - name: user_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "User security ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: update-user
+              method: PATCH
+              description: "Update user properties."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+                - name: user_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "User security ID"
+              body:
+                type: json
+                data:
+                  state: "{{tools.state}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: permission-sets
+          path: /companies({company_id})/permissionSets
+          description: "Permission set management."
+          operations:
+            - name: list-permission-sets
+              method: GET
+              description: "List available permission sets."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: features
+          path: /companies({company_id})/features
+          description: "Feature management."
+          operations:
+            - name: list-features
+              method: GET
+              description: "List features in feature management."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: configuration-packages
+          path: /companies({company_id})/configurationPackages
+          description: "RapidStart configuration packages."
+          operations:
+            - name: list-configuration-packages
+              method: GET
+              description: "List RapidStart configuration packages."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: security-groups
+          path: /companies({company_id})/securityGroups
+          description: "Security group management."
+          operations:
+            - name: list-security-groups
+              method: GET
+              description: "List security groups."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: scheduled-jobs
+          path: /companies({company_id})/scheduledJobs
+          description: "Scheduled background jobs."
+          operations:
+            - name: list-scheduled-jobs
+              method: GET
+              description: "List scheduled background jobs."
+              inputParameters:
+                - name: company_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Company ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: automation-api
+      resources:
+        - path: /v1/companies
+          name: companies
+          description: "Companies"
+          operations:
+            - method: GET
+              name: list-companies
+              description: "List companies"
+              call: "automation.list-companies"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: automation-mcp
+      transport: http
+      tools:
+        - name: list-companies
+          description: "List companies"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "automation.list-companies"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-automation-company
+          description: "Create a new company"
+          hints:
+            readOnly: false
+          call: "automation.create-automation-company"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: delete-automation-company
+          description: "Delete a company"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "automation.delete-automation-company"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-extensions
+          description: "List published extensions"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "automation.list-extensions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: install-extension
+          description: "Install an extension"
+          hints:
+            readOnly: false
+          call: "automation.install-extension"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: uninstall-extension
+          description: "Uninstall an extension"
+          hints:
+            readOnly: false
+            destructive: true
+          call: "automation.uninstall-extension"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-users
+          description: "List Business Central users"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "automation.list-users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-user
+          description: "Get a user by ID"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "automation.get-user"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: update-user
+          description: "Update user properties"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "automation.update-user"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-permission-sets
+          description: "List permission sets"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "automation.list-permission-sets"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-features
+          description: "List features"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "automation.list-features"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-security-groups
+          description: "List security groups"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "automation.list-security-groups"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-configuration-packages
+          description: "List RapidStart configuration packages"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "automation.list-configuration-packages"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-scheduled-jobs
+          description: "List scheduled background jobs"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "automation.list-scheduled-jobs"
+          outputParameters:
+            - type: object
+              mapping: "$."

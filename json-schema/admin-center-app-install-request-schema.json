@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AppInstallRequest",
+  "type": "object",
+  "properties": {
+    "targetVersion": {
+      "type": "string",
+      "description": "Version to install"
+    },
+    "allowPreviewVersion": {
+      "type": "boolean",
+      "description": "Whether to allow preview versions"
+    },
+    "acceptIsvEula": {
+      "type": "boolean",
+      "description": "Whether the ISV EULA is accepted"
+    },
+    "allowDependencyUpdate": {
+      "type": "boolean",
+      "description": "Whether to also update dependent apps"
+    }
+  }
+}

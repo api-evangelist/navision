@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SalesOrderUpdate",
+  "type": "object",
+  "properties": {
+    "externalDocumentNumber": {
+      "type": "string"
+    },
+    "orderDate": {
+      "type": "string"
+    },
+    "customerId": {
+      "type": "string"
+    },
+    "customerNumber": {
+      "type": "string"
+    },
+    "currencyCode": {
+      "type": "string"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean"
+    },
+    "requestedDeliveryDate": {
+      "type": "string"
+    }
+  }
+}

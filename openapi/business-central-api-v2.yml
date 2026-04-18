@@ -20,85 +20,85 @@ externalDocs:
   description: Business Central API v2.0 Documentation
   url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
 servers:
-  - url: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
-    description: Business Central Online (Common Endpoint)
-    variables:
-      environment:
-        default: production
-        description: The name of the Business Central environment
-  - url: https://{server}:{port}/{instance}/api/v2.0
-    description: Business Central On-Premises
-    variables:
-      server:
-        default: localhost
-        description: The on-premises server hostname
-      port:
-        default: '7048'
-        description: The OData services port
-      instance:
-        default: BC
-        description: The Business Central server instance name
+- url: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+  description: Business Central Online (Common Endpoint)
+  variables:
+    environment:
+      default: production
+      description: The name of the Business Central environment
+- url: https://{server}:{port}/{instance}/api/v2.0
+  description: Business Central On-Premises
+  variables:
+    server:
+      default: localhost
+      description: The on-premises server hostname
+    port:
+      default: '7048'
+      description: The OData services port
+    instance:
+      default: BC
+      description: The Business Central server instance name
 security:
-  - oauth2: []
-  - bearerAuth: []
+- oauth2: []
+- bearerAuth: []
 tags:
-  - name: Customers
-    description: Manage customer records
-  - name: Vendors
-    description: Manage vendor records
-  - name: Items
-    description: Manage inventory items
-  - name: Sales Orders
-    description: Manage sales orders and lines
-  - name: Purchase Orders
-    description: Manage purchase orders and lines
-  - name: Accounts
-    description: Manage general ledger accounts
-  - name: Journals
-    description: Manage general journals and journal lines
-  - name: Companies
-    description: Retrieve company information
-  - name: Employees
-    description: Manage employee records
-  - name: Sales Invoices
-    description: Manage sales invoices and lines
-  - name: Purchase Invoices
-    description: Manage purchase invoices and lines
-  - name: Sales Quotes
-    description: Manage sales quotes and lines
-  - name: Sales Credit Memos
-    description: Manage sales credit memos
-  - name: Purchase Credit Memos
-    description: Manage purchase credit memos
-  - name: Dimensions
-    description: Manage dimensions and dimension values
-  - name: Currency
-    description: Manage currencies and exchange rates
-  - name: Payment Terms
-    description: Manage payment terms
-  - name: Payment Methods
-    description: Manage payment methods
-  - name: Countries/Regions
-    description: Manage country and region codes
-  - name: Item Categories
-    description: Manage item categories
-  - name: Customer Payments
-    description: Manage customer payment journals
-  - name: Vendor Payments
-    description: Manage vendor payment journals
+- name: Customers
+  description: Manage customer records
+- name: Vendors
+  description: Manage vendor records
+- name: Items
+  description: Manage inventory items
+- name: Sales Orders
+  description: Manage sales orders and lines
+- name: Purchase Orders
+  description: Manage purchase orders and lines
+- name: Accounts
+  description: Manage general ledger accounts
+- name: Journals
+  description: Manage general journals and journal lines
+- name: Companies
+  description: Retrieve company information
+- name: Employees
+  description: Manage employee records
+- name: Sales Invoices
+  description: Manage sales invoices and lines
+- name: Purchase Invoices
+  description: Manage purchase invoices and lines
+- name: Sales Quotes
+  description: Manage sales quotes and lines
+- name: Sales Credit Memos
+  description: Manage sales credit memos
+- name: Purchase Credit Memos
+  description: Manage purchase credit memos
+- name: Dimensions
+  description: Manage dimensions and dimension values
+- name: Currency
+  description: Manage currencies and exchange rates
+- name: Payment Terms
+  description: Manage payment terms
+- name: Payment Methods
+  description: Manage payment methods
+- name: Countries/Regions
+  description: Manage country and region codes
+- name: Item Categories
+  description: Manage item categories
+- name: Customer Payments
+  description: Manage customer payment journals
+- name: Vendor Payments
+  description: Manage vendor payment journals
 paths:
   /companies:
     get:
-      summary: List companies
+      summary: List Companies
       description: Returns a list of companies available in the Business Central tenant.
       operationId: listCompanies
       tags:
-        - Companies
+      - Companies
       parameters:
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved companies
@@ -111,23 +111,37 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Company'
+              examples:
+                Listcompanies200Example:
+                  summary: Default listCompanies 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      systemVersion: example_value
+                      name: Example Title
+                      displayName: example_value
+                      businessProfileId: '500123'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/customers:
     get:
-      summary: List customers
+      summary: List Customers
       description: Returns a list of customer objects from the specified company.
       operationId: listCustomers
       tags:
-        - Customers
+      - Customers
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/orderby'
-        - $ref: '#/components/parameters/select'
-        - $ref: '#/components/parameters/expand'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
       responses:
         '200':
           description: Successfully retrieved customers
@@ -140,22 +154,80 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Customer'
+              examples:
+                Listcustomers200Example:
+                  summary: Default listCustomers 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      number: example_value
+                      displayName: example_value
+                      type: Person
+                      addressLine1: example_value
+                      addressLine2: example_value
+                      city: example_value
+                      state: example_value
+                      country: example_value
+                      postalCode: example_value
+                      phoneNumber: example_value
+                      email: user@example.com
+                      website: example_value
+                      salespersonCode: example_value
+                      balanceDue: 42.5
+                      creditLimit: 42.5
+                      taxLiable: true
+                      taxAreaId: '500123'
+                      taxAreaDisplayName: example_value
+                      taxRegistrationNumber: example_value
+                      currencyId: '500123'
+                      currencyCode: example_value
+                      paymentTermsId: '500123'
+                      shipmentMethodId: '500123'
+                      paymentMethodId: '500123'
+                      blocked: ' '
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Create a customer
+      summary: Create a Customer
       description: Creates a new customer object in the specified company.
       operationId: createCustomer
       tags:
-        - Customers
+      - Customers
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CustomerCreate'
+            examples:
+              CreatecustomerRequestExample:
+                summary: Default createCustomer request
+                x-microcks-default: true
+                value:
+                  number: example_value
+                  displayName: example_value
+                  type: Person
+                  addressLine1: example_value
+                  addressLine2: example_value
+                  city: example_value
+                  state: example_value
+                  country: example_value
+                  postalCode: example_value
+                  phoneNumber: example_value
+                  email: user@example.com
+                  website: example_value
+                  taxLiable: true
+                  taxRegistrationNumber: example_value
+                  currencyCode: example_value
+                  blocked: ' '
       responses:
         '201':
           description: Customer created successfully
@@ -163,22 +235,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer'
+              examples:
+                Createcustomer201Example:
+                  summary: Default createCustomer 201 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    type: Person
+                    addressLine1: example_value
+                    addressLine2: example_value
+                    city: example_value
+                    state: example_value
+                    country: example_value
+                    postalCode: example_value
+                    phoneNumber: example_value
+                    email: user@example.com
+                    website: example_value
+                    salespersonCode: example_value
+                    balanceDue: 42.5
+                    creditLimit: 42.5
+                    taxLiable: true
+                    taxAreaId: '500123'
+                    taxAreaDisplayName: example_value
+                    taxRegistrationNumber: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    paymentTermsId: '500123'
+                    shipmentMethodId: '500123'
+                    paymentMethodId: '500123'
+                    blocked: ' '
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/customers({customer_id}):
     get:
-      summary: Get a customer
+      summary: Get a Customer
       description: Retrieves a specific customer by ID.
       operationId: getCustomer
       tags:
-        - Customers
+      - Customers
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/customer_id'
-        - $ref: '#/components/parameters/select'
-        - $ref: '#/components/parameters/expand'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/customer_id'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
       responses:
         '200':
           description: Successfully retrieved customer
@@ -186,26 +294,81 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer'
+              examples:
+                Getcustomer200Example:
+                  summary: Default getCustomer 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    type: Person
+                    addressLine1: example_value
+                    addressLine2: example_value
+                    city: example_value
+                    state: example_value
+                    country: example_value
+                    postalCode: example_value
+                    phoneNumber: example_value
+                    email: user@example.com
+                    website: example_value
+                    salespersonCode: example_value
+                    balanceDue: 42.5
+                    creditLimit: 42.5
+                    taxLiable: true
+                    taxAreaId: '500123'
+                    taxAreaDisplayName: example_value
+                    taxRegistrationNumber: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    paymentTermsId: '500123'
+                    shipmentMethodId: '500123'
+                    paymentMethodId: '500123'
+                    blocked: ' '
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
-      summary: Update a customer
+      summary: Update a Customer
       description: Updates an existing customer object.
       operationId: updateCustomer
       tags:
-        - Customers
+      - Customers
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/customer_id'
-        - $ref: '#/components/parameters/ifMatch'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/customer_id'
+      - $ref: '#/components/parameters/ifMatch'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CustomerUpdate'
+            examples:
+              UpdatecustomerRequestExample:
+                summary: Default updateCustomer request
+                x-microcks-default: true
+                value:
+                  displayName: example_value
+                  type: Person
+                  addressLine1: example_value
+                  addressLine2: example_value
+                  city: example_value
+                  state: example_value
+                  country: example_value
+                  postalCode: example_value
+                  phoneNumber: example_value
+                  email: user@example.com
+                  website: example_value
+                  taxLiable: true
+                  creditLimit: 42.5
+                  blocked: ' '
       responses:
         '200':
           description: Customer updated successfully
@@ -213,21 +376,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer'
+              examples:
+                Updatecustomer200Example:
+                  summary: Default updateCustomer 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    type: Person
+                    addressLine1: example_value
+                    addressLine2: example_value
+                    city: example_value
+                    state: example_value
+                    country: example_value
+                    postalCode: example_value
+                    phoneNumber: example_value
+                    email: user@example.com
+                    website: example_value
+                    salespersonCode: example_value
+                    balanceDue: 42.5
+                    creditLimit: 42.5
+                    taxLiable: true
+                    taxAreaId: '500123'
+                    taxAreaDisplayName: example_value
+                    taxRegistrationNumber: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    paymentTermsId: '500123'
+                    shipmentMethodId: '500123'
+                    paymentMethodId: '500123'
+                    blocked: ' '
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
-      summary: Delete a customer
+      summary: Delete a Customer
       description: Deletes a customer by ID.
       operationId: deleteCustomer
       tags:
-        - Customers
+      - Customers
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/customer_id'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/customer_id'
       responses:
         '204':
           description: Customer deleted successfully
@@ -235,20 +434,23 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/vendors:
     get:
-      summary: List vendors
+      summary: List Vendors
       description: Returns a list of vendor objects from the specified company.
       operationId: listVendors
       tags:
-        - Vendors
+      - Vendors
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/orderby'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved vendors
@@ -261,22 +463,73 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Vendor'
+              examples:
+                Listvendors200Example:
+                  summary: Default listVendors 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      number: example_value
+                      displayName: example_value
+                      addressLine1: example_value
+                      addressLine2: example_value
+                      city: example_value
+                      state: example_value
+                      country: example_value
+                      postalCode: example_value
+                      phoneNumber: example_value
+                      email: user@example.com
+                      website: example_value
+                      taxRegistrationNumber: example_value
+                      currencyId: '500123'
+                      currencyCode: example_value
+                      paymentTermsId: '500123'
+                      paymentMethodId: '500123'
+                      taxLiable: true
+                      blocked: ' '
+                      balance: 42.5
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Create a vendor
+      summary: Create a Vendor
       description: Creates a new vendor object in the specified company.
       operationId: createVendor
       tags:
-        - Vendors
+      - Vendors
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/VendorCreate'
+            examples:
+              CreatevendorRequestExample:
+                summary: Default createVendor request
+                x-microcks-default: true
+                value:
+                  number: example_value
+                  displayName: example_value
+                  addressLine1: example_value
+                  addressLine2: example_value
+                  city: example_value
+                  state: example_value
+                  country: example_value
+                  postalCode: example_value
+                  phoneNumber: example_value
+                  email: user@example.com
+                  website: example_value
+                  taxRegistrationNumber: example_value
+                  currencyCode: example_value
+                  taxLiable: true
+                  blocked: ' '
       responses:
         '201':
           description: Vendor created successfully
@@ -284,21 +537,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Vendor'
+              examples:
+                Createvendor201Example:
+                  summary: Default createVendor 201 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    addressLine1: example_value
+                    addressLine2: example_value
+                    city: example_value
+                    state: example_value
+                    country: example_value
+                    postalCode: example_value
+                    phoneNumber: example_value
+                    email: user@example.com
+                    website: example_value
+                    taxRegistrationNumber: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    paymentTermsId: '500123'
+                    paymentMethodId: '500123'
+                    taxLiable: true
+                    blocked: ' '
+                    balance: 42.5
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/vendors({vendor_id}):
     get:
-      summary: Get a vendor
+      summary: Get a Vendor
       description: Retrieves a specific vendor by ID.
       operationId: getVendor
       tags:
-        - Vendors
+      - Vendors
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/vendor_id'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/vendor_id'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved vendor
@@ -306,26 +589,73 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Vendor'
+              examples:
+                Getvendor200Example:
+                  summary: Default getVendor 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    addressLine1: example_value
+                    addressLine2: example_value
+                    city: example_value
+                    state: example_value
+                    country: example_value
+                    postalCode: example_value
+                    phoneNumber: example_value
+                    email: user@example.com
+                    website: example_value
+                    taxRegistrationNumber: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    paymentTermsId: '500123'
+                    paymentMethodId: '500123'
+                    taxLiable: true
+                    blocked: ' '
+                    balance: 42.5
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
-      summary: Update a vendor
+      summary: Update a Vendor
       description: Updates an existing vendor object.
       operationId: updateVendor
       tags:
-        - Vendors
+      - Vendors
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/vendor_id'
-        - $ref: '#/components/parameters/ifMatch'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/vendor_id'
+      - $ref: '#/components/parameters/ifMatch'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/VendorUpdate'
+            examples:
+              UpdatevendorRequestExample:
+                summary: Default updateVendor request
+                x-microcks-default: true
+                value:
+                  displayName: example_value
+                  addressLine1: example_value
+                  addressLine2: example_value
+                  city: example_value
+                  state: example_value
+                  country: example_value
+                  postalCode: example_value
+                  phoneNumber: example_value
+                  email: user@example.com
+                  website: example_value
+                  taxLiable: true
+                  blocked: ' '
       responses:
         '200':
           description: Vendor updated successfully
@@ -333,21 +663,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Vendor'
+              examples:
+                Updatevendor200Example:
+                  summary: Default updateVendor 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    addressLine1: example_value
+                    addressLine2: example_value
+                    city: example_value
+                    state: example_value
+                    country: example_value
+                    postalCode: example_value
+                    phoneNumber: example_value
+                    email: user@example.com
+                    website: example_value
+                    taxRegistrationNumber: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    paymentTermsId: '500123'
+                    paymentMethodId: '500123'
+                    taxLiable: true
+                    blocked: ' '
+                    balance: 42.5
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
-      summary: Delete a vendor
+      summary: Delete a Vendor
       description: Deletes a vendor by ID.
       operationId: deleteVendor
       tags:
-        - Vendors
+      - Vendors
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/vendor_id'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/vendor_id'
       responses:
         '204':
           description: Vendor deleted successfully
@@ -355,20 +715,23 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/items:
     get:
-      summary: List items
+      summary: List Items
       description: Returns a list of item objects from the specified company.
       operationId: listItems
       tags:
-        - Items
+      - Items
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/orderby'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved items
@@ -381,22 +744,69 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Item'
+              examples:
+                Listitems200Example:
+                  summary: Default listItems 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      number: example_value
+                      displayName: example_value
+                      displayName2: example_value
+                      type: Inventory
+                      itemCategoryId: '500123'
+                      itemCategoryCode: example_value
+                      blocked: true
+                      gtin: example_value
+                      inventory: 42.5
+                      unitPrice: 42.5
+                      priceIncludesTax: true
+                      unitCost: 42.5
+                      taxGroupId: '500123'
+                      taxGroupCode: example_value
+                      baseUnitOfMeasureId: '500123'
+                      baseUnitOfMeasureCode: example_value
+                      generalProductPostingGroupId: '500123'
+                      generalProductPostingGroupCode: example_value
+                      inventoryPostingGroupId: '500123'
+                      inventoryPostingGroupCode: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Create an item
+      summary: Create an Item
       description: Creates a new item object in the specified company.
       operationId: createItem
       tags:
-        - Items
+      - Items
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ItemCreate'
+            examples:
+              CreateitemRequestExample:
+                summary: Default createItem request
+                x-microcks-default: true
+                value:
+                  number: example_value
+                  displayName: example_value
+                  type: Inventory
+                  itemCategoryCode: example_value
+                  blocked: true
+                  gtin: example_value
+                  unitPrice: 42.5
+                  unitCost: 42.5
+                  taxGroupCode: example_value
+                  baseUnitOfMeasureCode: example_value
       responses:
         '201':
           description: Item created successfully
@@ -404,21 +814,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Item'
+              examples:
+                Createitem201Example:
+                  summary: Default createItem 201 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    displayName2: example_value
+                    type: Inventory
+                    itemCategoryId: '500123'
+                    itemCategoryCode: example_value
+                    blocked: true
+                    gtin: example_value
+                    inventory: 42.5
+                    unitPrice: 42.5
+                    priceIncludesTax: true
+                    unitCost: 42.5
+                    taxGroupId: '500123'
+                    taxGroupCode: example_value
+                    baseUnitOfMeasureId: '500123'
+                    baseUnitOfMeasureCode: example_value
+                    generalProductPostingGroupId: '500123'
+                    generalProductPostingGroupCode: example_value
+                    inventoryPostingGroupId: '500123'
+                    inventoryPostingGroupCode: example_value
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/items({item_id}):
     get:
-      summary: Get an item
+      summary: Get an Item
       description: Retrieves a specific item by ID.
       operationId: getItem
       tags:
-        - Items
+      - Items
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/item_id'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/item_id'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved item
@@ -426,26 +867,71 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Item'
+              examples:
+                Getitem200Example:
+                  summary: Default getItem 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    displayName2: example_value
+                    type: Inventory
+                    itemCategoryId: '500123'
+                    itemCategoryCode: example_value
+                    blocked: true
+                    gtin: example_value
+                    inventory: 42.5
+                    unitPrice: 42.5
+                    priceIncludesTax: true
+                    unitCost: 42.5
+                    taxGroupId: '500123'
+                    taxGroupCode: example_value
+                    baseUnitOfMeasureId: '500123'
+                    baseUnitOfMeasureCode: example_value
+                    generalProductPostingGroupId: '500123'
+                    generalProductPostingGroupCode: example_value
+                    inventoryPostingGroupId: '500123'
+                    inventoryPostingGroupCode: example_value
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
-      summary: Update an item
+      summary: Update an Item
       description: Updates an existing item object.
       operationId: updateItem
       tags:
-        - Items
+      - Items
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/item_id'
-        - $ref: '#/components/parameters/ifMatch'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/item_id'
+      - $ref: '#/components/parameters/ifMatch'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ItemUpdate'
+            examples:
+              UpdateitemRequestExample:
+                summary: Default updateItem request
+                x-microcks-default: true
+                value:
+                  displayName: example_value
+                  type: Inventory
+                  itemCategoryCode: example_value
+                  blocked: true
+                  gtin: example_value
+                  unitPrice: 42.5
+                  unitCost: 42.5
+                  taxGroupCode: example_value
+                  baseUnitOfMeasureCode: example_value
       responses:
         '200':
           description: Item updated successfully
@@ -453,21 +939,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Item'
+              examples:
+                Updateitem200Example:
+                  summary: Default updateItem 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    displayName2: example_value
+                    type: Inventory
+                    itemCategoryId: '500123'
+                    itemCategoryCode: example_value
+                    blocked: true
+                    gtin: example_value
+                    inventory: 42.5
+                    unitPrice: 42.5
+                    priceIncludesTax: true
+                    unitCost: 42.5
+                    taxGroupId: '500123'
+                    taxGroupCode: example_value
+                    baseUnitOfMeasureId: '500123'
+                    baseUnitOfMeasureCode: example_value
+                    generalProductPostingGroupId: '500123'
+                    generalProductPostingGroupCode: example_value
+                    inventoryPostingGroupId: '500123'
+                    inventoryPostingGroupCode: example_value
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
-      summary: Delete an item
+      summary: Delete an Item
       description: Deletes an item by ID.
       operationId: deleteItem
       tags:
-        - Items
+      - Items
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/item_id'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/item_id'
       responses:
         '204':
           description: Item deleted successfully
@@ -475,21 +992,24 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/salesOrders:
     get:
-      summary: List sales orders
+      summary: List Sales Orders
       description: Returns a list of sales order objects from the specified company.
       operationId: listSalesOrders
       tags:
-        - Sales Orders
+      - Sales Orders
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/orderby'
-        - $ref: '#/components/parameters/select'
-        - $ref: '#/components/parameters/expand'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
       responses:
         '200':
           description: Successfully retrieved sales orders
@@ -502,22 +1022,82 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/SalesOrder'
+              examples:
+                Listsalesorders200Example:
+                  summary: Default listSalesOrders 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      number: example_value
+                      externalDocumentNumber: example_value
+                      orderDate: '2026-01-15'
+                      postingDate: '2026-01-15'
+                      customerId: '500123'
+                      customerNumber: example_value
+                      customerName: example_value
+                      billToName: example_value
+                      billToCustomerId: '500123'
+                      billToCustomerNumber: example_value
+                      shipToName: example_value
+                      shipToContact: example_value
+                      sellToAddressLine1: example_value
+                      sellToAddressLine2: example_value
+                      sellToCity: example_value
+                      sellToCountry: example_value
+                      sellToState: example_value
+                      sellToPostCode: example_value
+                      currencyId: '500123'
+                      currencyCode: example_value
+                      pricesIncludeTax: true
+                      paymentTermsId: '500123'
+                      shipmentMethodId: '500123'
+                      salesperson: example_value
+                      requestedDeliveryDate: '2026-01-15'
+                      discountAmount: 42.5
+                      discountAppliedBeforeTax: true
+                      totalAmountExcludingTax: 42.5
+                      totalTaxAmount: 42.5
+                      totalAmountIncludingTax: 42.5
+                      fullyShipped: true
+                      status: Draft
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                      phoneNumber: example_value
+                      email: user@example.com
+                      salesOrderLines:
+                      - {}
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Create a sales order
+      summary: Create a Sales Order
       description: Creates a new sales order in the specified company.
       operationId: createSalesOrder
       tags:
-        - Sales Orders
+      - Sales Orders
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/SalesOrderCreate'
+            examples:
+              CreatesalesorderRequestExample:
+                summary: Default createSalesOrder request
+                x-microcks-default: true
+                value:
+                  externalDocumentNumber: example_value
+                  orderDate: '2026-01-15'
+                  customerId: '500123'
+                  customerNumber: example_value
+                  currencyCode: example_value
+                  pricesIncludeTax: true
+                  requestedDeliveryDate: '2026-01-15'
       responses:
         '201':
           description: Sales order created successfully
@@ -525,22 +1105,98 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SalesOrder'
+              examples:
+                Createsalesorder201Example:
+                  summary: Default createSalesOrder 201 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    externalDocumentNumber: example_value
+                    orderDate: '2026-01-15'
+                    postingDate: '2026-01-15'
+                    customerId: '500123'
+                    customerNumber: example_value
+                    customerName: example_value
+                    billToName: example_value
+                    billToCustomerId: '500123'
+                    billToCustomerNumber: example_value
+                    shipToName: example_value
+                    shipToContact: example_value
+                    sellToAddressLine1: example_value
+                    sellToAddressLine2: example_value
+                    sellToCity: example_value
+                    sellToCountry: example_value
+                    sellToState: example_value
+                    sellToPostCode: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    pricesIncludeTax: true
+                    paymentTermsId: '500123'
+                    shipmentMethodId: '500123'
+                    salesperson: example_value
+                    requestedDeliveryDate: '2026-01-15'
+                    discountAmount: 42.5
+                    discountAppliedBeforeTax: true
+                    totalAmountExcludingTax: 42.5
+                    totalTaxAmount: 42.5
+                    totalAmountIncludingTax: 42.5
+                    fullyShipped: true
+                    status: Draft
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                    phoneNumber: example_value
+                    email: user@example.com
+                    salesOrderLines:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      documentId: '500123'
+                      sequence: 10
+                      itemId: '500123'
+                      accountId: '500123'
+                      lineType: Comment
+                      lineObjectNumber: example_value
+                      description: A sample description.
+                      description2: example_value
+                      unitOfMeasureId: '500123'
+                      unitOfMeasureCode: example_value
+                      quantity: 42.5
+                      unitPrice: 42.5
+                      discountAmount: 42.5
+                      discountPercent: 42.5
+                      discountAppliedBeforeTax: true
+                      amountExcludingTax: 42.5
+                      taxCode: example_value
+                      taxPercent: 42.5
+                      totalTaxAmount: 42.5
+                      amountIncludingTax: 42.5
+                      netAmount: 42.5
+                      netTaxAmount: 42.5
+                      netAmountIncludingTax: 42.5
+                      shipmentDate: '2026-01-15'
+                      shippedQuantity: 42.5
+                      invoicedQuantity: 42.5
+                      invoiceQuantity: 42.5
+                      shipQuantity: 42.5
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/salesOrders({salesOrder_id}):
     get:
-      summary: Get a sales order
+      summary: Get a Sales Order
       description: Retrieves a specific sales order by ID.
       operationId: getSalesOrder
       tags:
-        - Sales Orders
+      - Sales Orders
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/salesOrder_id'
-        - $ref: '#/components/parameters/select'
-        - $ref: '#/components/parameters/expand'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/salesOrder_id'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
       responses:
         '200':
           description: Successfully retrieved sales order
@@ -548,26 +1204,114 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SalesOrder'
+              examples:
+                Getsalesorder200Example:
+                  summary: Default getSalesOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    externalDocumentNumber: example_value
+                    orderDate: '2026-01-15'
+                    postingDate: '2026-01-15'
+                    customerId: '500123'
+                    customerNumber: example_value
+                    customerName: example_value
+                    billToName: example_value
+                    billToCustomerId: '500123'
+                    billToCustomerNumber: example_value
+                    shipToName: example_value
+                    shipToContact: example_value
+                    sellToAddressLine1: example_value
+                    sellToAddressLine2: example_value
+                    sellToCity: example_value
+                    sellToCountry: example_value
+                    sellToState: example_value
+                    sellToPostCode: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    pricesIncludeTax: true
+                    paymentTermsId: '500123'
+                    shipmentMethodId: '500123'
+                    salesperson: example_value
+                    requestedDeliveryDate: '2026-01-15'
+                    discountAmount: 42.5
+                    discountAppliedBeforeTax: true
+                    totalAmountExcludingTax: 42.5
+                    totalTaxAmount: 42.5
+                    totalAmountIncludingTax: 42.5
+                    fullyShipped: true
+                    status: Draft
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                    phoneNumber: example_value
+                    email: user@example.com
+                    salesOrderLines:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      documentId: '500123'
+                      sequence: 10
+                      itemId: '500123'
+                      accountId: '500123'
+                      lineType: Comment
+                      lineObjectNumber: example_value
+                      description: A sample description.
+                      description2: example_value
+                      unitOfMeasureId: '500123'
+                      unitOfMeasureCode: example_value
+                      quantity: 42.5
+                      unitPrice: 42.5
+                      discountAmount: 42.5
+                      discountPercent: 42.5
+                      discountAppliedBeforeTax: true
+                      amountExcludingTax: 42.5
+                      taxCode: example_value
+                      taxPercent: 42.5
+                      totalTaxAmount: 42.5
+                      amountIncludingTax: 42.5
+                      netAmount: 42.5
+                      netTaxAmount: 42.5
+                      netAmountIncludingTax: 42.5
+                      shipmentDate: '2026-01-15'
+                      shippedQuantity: 42.5
+                      invoicedQuantity: 42.5
+                      invoiceQuantity: 42.5
+                      shipQuantity: 42.5
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
-      summary: Update a sales order
+      summary: Update a Sales Order
       description: Updates an existing sales order.
       operationId: updateSalesOrder
       tags:
-        - Sales Orders
+      - Sales Orders
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/salesOrder_id'
-        - $ref: '#/components/parameters/ifMatch'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/salesOrder_id'
+      - $ref: '#/components/parameters/ifMatch'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/SalesOrderUpdate'
+            examples:
+              UpdatesalesorderRequestExample:
+                summary: Default updateSalesOrder request
+                x-microcks-default: true
+                value:
+                  externalDocumentNumber: example_value
+                  orderDate: '2026-01-15'
+                  customerId: '500123'
+                  customerNumber: example_value
+                  currencyCode: example_value
+                  pricesIncludeTax: true
+                  requestedDeliveryDate: '2026-01-15'
       responses:
         '200':
           description: Sales order updated successfully
@@ -575,21 +1319,97 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SalesOrder'
+              examples:
+                Updatesalesorder200Example:
+                  summary: Default updateSalesOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    externalDocumentNumber: example_value
+                    orderDate: '2026-01-15'
+                    postingDate: '2026-01-15'
+                    customerId: '500123'
+                    customerNumber: example_value
+                    customerName: example_value
+                    billToName: example_value
+                    billToCustomerId: '500123'
+                    billToCustomerNumber: example_value
+                    shipToName: example_value
+                    shipToContact: example_value
+                    sellToAddressLine1: example_value
+                    sellToAddressLine2: example_value
+                    sellToCity: example_value
+                    sellToCountry: example_value
+                    sellToState: example_value
+                    sellToPostCode: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    pricesIncludeTax: true
+                    paymentTermsId: '500123'
+                    shipmentMethodId: '500123'
+                    salesperson: example_value
+                    requestedDeliveryDate: '2026-01-15'
+                    discountAmount: 42.5
+                    discountAppliedBeforeTax: true
+                    totalAmountExcludingTax: 42.5
+                    totalTaxAmount: 42.5
+                    totalAmountIncludingTax: 42.5
+                    fullyShipped: true
+                    status: Draft
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                    phoneNumber: example_value
+                    email: user@example.com
+                    salesOrderLines:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      documentId: '500123'
+                      sequence: 10
+                      itemId: '500123'
+                      accountId: '500123'
+                      lineType: Comment
+                      lineObjectNumber: example_value
+                      description: A sample description.
+                      description2: example_value
+                      unitOfMeasureId: '500123'
+                      unitOfMeasureCode: example_value
+                      quantity: 42.5
+                      unitPrice: 42.5
+                      discountAmount: 42.5
+                      discountPercent: 42.5
+                      discountAppliedBeforeTax: true
+                      amountExcludingTax: 42.5
+                      taxCode: example_value
+                      taxPercent: 42.5
+                      totalTaxAmount: 42.5
+                      amountIncludingTax: 42.5
+                      netAmount: 42.5
+                      netTaxAmount: 42.5
+                      netAmountIncludingTax: 42.5
+                      shipmentDate: '2026-01-15'
+                      shippedQuantity: 42.5
+                      invoicedQuantity: 42.5
+                      invoiceQuantity: 42.5
+                      shipQuantity: 42.5
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
-      summary: Delete a sales order
+      summary: Delete a Sales Order
       description: Deletes a sales order by ID.
       operationId: deleteSalesOrder
       tags:
-        - Sales Orders
+      - Sales Orders
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/salesOrder_id'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/salesOrder_id'
       responses:
         '204':
           description: Sales order deleted successfully
@@ -597,20 +1417,23 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/salesOrders({salesOrder_id})/salesOrderLines:
     get:
-      summary: List sales order lines
+      summary: List Sales Order Lines
       description: Returns a list of sales order line items.
       operationId: listSalesOrderLines
       tags:
-        - Sales Orders
+      - Sales Orders
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/salesOrder_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/salesOrder_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved sales order lines
@@ -623,23 +1446,62 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/SalesOrderLine'
+              examples:
+                Listsalesorderlines200Example:
+                  summary: Default listSalesOrderLines 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      documentId: '500123'
+                      sequence: 10
+                      itemId: '500123'
+                      accountId: '500123'
+                      lineType: Comment
+                      lineObjectNumber: example_value
+                      description: A sample description.
+                      description2: example_value
+                      unitOfMeasureId: '500123'
+                      unitOfMeasureCode: example_value
+                      quantity: 42.5
+                      unitPrice: 42.5
+                      discountAmount: 42.5
+                      discountPercent: 42.5
+                      discountAppliedBeforeTax: true
+                      amountExcludingTax: 42.5
+                      taxCode: example_value
+                      taxPercent: 42.5
+                      totalTaxAmount: 42.5
+                      amountIncludingTax: 42.5
+                      netAmount: 42.5
+                      netTaxAmount: 42.5
+                      netAmountIncludingTax: 42.5
+                      shipmentDate: '2026-01-15'
+                      shippedQuantity: 42.5
+                      invoicedQuantity: 42.5
+                      invoiceQuantity: 42.5
+                      shipQuantity: 42.5
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/purchaseOrders:
     get:
-      summary: List purchase orders
+      summary: List Purchase Orders
       description: Returns a list of purchase order objects from the specified company.
       operationId: listPurchaseOrders
       tags:
-        - Purchase Orders
+      - Purchase Orders
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/orderby'
-        - $ref: '#/components/parameters/select'
-        - $ref: '#/components/parameters/expand'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
       responses:
         '200':
           description: Successfully retrieved purchase orders
@@ -652,22 +1514,78 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/PurchaseOrder'
+              examples:
+                Listpurchaseorders200Example:
+                  summary: Default listPurchaseOrders 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      number: example_value
+                      orderDate: '2026-01-15'
+                      postingDate: '2026-01-15'
+                      vendorId: '500123'
+                      vendorNumber: example_value
+                      vendorName: example_value
+                      payToName: example_value
+                      payToVendorId: '500123'
+                      payToVendorNumber: example_value
+                      shipToName: example_value
+                      shipToContact: example_value
+                      buyFromAddressLine1: example_value
+                      buyFromAddressLine2: example_value
+                      buyFromCity: example_value
+                      buyFromCountry: example_value
+                      buyFromState: example_value
+                      buyFromPostCode: example_value
+                      currencyId: '500123'
+                      currencyCode: example_value
+                      pricesIncludeTax: true
+                      paymentTermsId: '500123'
+                      shipmentMethodId: '500123'
+                      purchaser: example_value
+                      requestedReceiptDate: '2026-01-15'
+                      discountAmount: 42.5
+                      discountAppliedBeforeTax: true
+                      totalAmountExcludingTax: 42.5
+                      totalTaxAmount: 42.5
+                      totalAmountIncludingTax: 42.5
+                      fullyReceived: true
+                      status: Draft
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                      purchaseOrderLines:
+                      - {}
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Create a purchase order
+      summary: Create a Purchase Order
       description: Creates a new purchase order in the specified company.
       operationId: createPurchaseOrder
       tags:
-        - Purchase Orders
+      - Purchase Orders
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PurchaseOrderCreate'
+            examples:
+              CreatepurchaseorderRequestExample:
+                summary: Default createPurchaseOrder request
+                x-microcks-default: true
+                value:
+                  orderDate: '2026-01-15'
+                  vendorId: '500123'
+                  vendorNumber: example_value
+                  currencyCode: example_value
+                  pricesIncludeTax: true
+                  requestedReceiptDate: '2026-01-15'
       responses:
         '201':
           description: Purchase order created successfully
@@ -675,22 +1593,92 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PurchaseOrder'
+              examples:
+                Createpurchaseorder201Example:
+                  summary: Default createPurchaseOrder 201 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    orderDate: '2026-01-15'
+                    postingDate: '2026-01-15'
+                    vendorId: '500123'
+                    vendorNumber: example_value
+                    vendorName: example_value
+                    payToName: example_value
+                    payToVendorId: '500123'
+                    payToVendorNumber: example_value
+                    shipToName: example_value
+                    shipToContact: example_value
+                    buyFromAddressLine1: example_value
+                    buyFromAddressLine2: example_value
+                    buyFromCity: example_value
+                    buyFromCountry: example_value
+                    buyFromState: example_value
+                    buyFromPostCode: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    pricesIncludeTax: true
+                    paymentTermsId: '500123'
+                    shipmentMethodId: '500123'
+                    purchaser: example_value
+                    requestedReceiptDate: '2026-01-15'
+                    discountAmount: 42.5
+                    discountAppliedBeforeTax: true
+                    totalAmountExcludingTax: 42.5
+                    totalTaxAmount: 42.5
+                    totalAmountIncludingTax: 42.5
+                    fullyReceived: true
+                    status: Draft
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                    purchaseOrderLines:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      documentId: '500123'
+                      sequence: 10
+                      itemId: '500123'
+                      accountId: '500123'
+                      lineType: Comment
+                      lineObjectNumber: example_value
+                      description: A sample description.
+                      description2: example_value
+                      unitOfMeasureId: '500123'
+                      unitOfMeasureCode: example_value
+                      quantity: 42.5
+                      directUnitCost: 42.5
+                      discountAmount: 42.5
+                      discountPercent: 42.5
+                      discountAppliedBeforeTax: true
+                      amountExcludingTax: 42.5
+                      taxCode: example_value
+                      taxPercent: 42.5
+                      totalTaxAmount: 42.5
+                      amountIncludingTax: 42.5
+                      expectedReceiptDate: '2026-01-15'
+                      receivedQuantity: 42.5
+                      invoicedQuantity: 42.5
+                      invoiceQuantity: 42.5
+                      receiveQuantity: 42.5
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/purchaseOrders({purchaseOrder_id}):
     get:
-      summary: Get a purchase order
+      summary: Get a Purchase Order
       description: Retrieves a specific purchase order by ID.
       operationId: getPurchaseOrder
       tags:
-        - Purchase Orders
+      - Purchase Orders
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/purchaseOrder_id'
-        - $ref: '#/components/parameters/select'
-        - $ref: '#/components/parameters/expand'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/purchaseOrder_id'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
       responses:
         '200':
           description: Successfully retrieved purchase order
@@ -698,26 +1686,107 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PurchaseOrder'
+              examples:
+                Getpurchaseorder200Example:
+                  summary: Default getPurchaseOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    orderDate: '2026-01-15'
+                    postingDate: '2026-01-15'
+                    vendorId: '500123'
+                    vendorNumber: example_value
+                    vendorName: example_value
+                    payToName: example_value
+                    payToVendorId: '500123'
+                    payToVendorNumber: example_value
+                    shipToName: example_value
+                    shipToContact: example_value
+                    buyFromAddressLine1: example_value
+                    buyFromAddressLine2: example_value
+                    buyFromCity: example_value
+                    buyFromCountry: example_value
+                    buyFromState: example_value
+                    buyFromPostCode: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    pricesIncludeTax: true
+                    paymentTermsId: '500123'
+                    shipmentMethodId: '500123'
+                    purchaser: example_value
+                    requestedReceiptDate: '2026-01-15'
+                    discountAmount: 42.5
+                    discountAppliedBeforeTax: true
+                    totalAmountExcludingTax: 42.5
+                    totalTaxAmount: 42.5
+                    totalAmountIncludingTax: 42.5
+                    fullyReceived: true
+                    status: Draft
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                    purchaseOrderLines:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      documentId: '500123'
+                      sequence: 10
+                      itemId: '500123'
+                      accountId: '500123'
+                      lineType: Comment
+                      lineObjectNumber: example_value
+                      description: A sample description.
+                      description2: example_value
+                      unitOfMeasureId: '500123'
+                      unitOfMeasureCode: example_value
+                      quantity: 42.5
+                      directUnitCost: 42.5
+                      discountAmount: 42.5
+                      discountPercent: 42.5
+                      discountAppliedBeforeTax: true
+                      amountExcludingTax: 42.5
+                      taxCode: example_value
+                      taxPercent: 42.5
+                      totalTaxAmount: 42.5
+                      amountIncludingTax: 42.5
+                      expectedReceiptDate: '2026-01-15'
+                      receivedQuantity: 42.5
+                      invoicedQuantity: 42.5
+                      invoiceQuantity: 42.5
+                      receiveQuantity: 42.5
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
-      summary: Update a purchase order
+      summary: Update a Purchase Order
       description: Updates an existing purchase order.
       operationId: updatePurchaseOrder
       tags:
-        - Purchase Orders
+      - Purchase Orders
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/purchaseOrder_id'
-        - $ref: '#/components/parameters/ifMatch'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/purchaseOrder_id'
+      - $ref: '#/components/parameters/ifMatch'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PurchaseOrderUpdate'
+            examples:
+              UpdatepurchaseorderRequestExample:
+                summary: Default updatePurchaseOrder request
+                x-microcks-default: true
+                value:
+                  orderDate: '2026-01-15'
+                  vendorId: '500123'
+                  vendorNumber: example_value
+                  currencyCode: example_value
+                  pricesIncludeTax: true
+                  requestedReceiptDate: '2026-01-15'
       responses:
         '200':
           description: Purchase order updated successfully
@@ -725,21 +1794,91 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PurchaseOrder'
+              examples:
+                Updatepurchaseorder200Example:
+                  summary: Default updatePurchaseOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    orderDate: '2026-01-15'
+                    postingDate: '2026-01-15'
+                    vendorId: '500123'
+                    vendorNumber: example_value
+                    vendorName: example_value
+                    payToName: example_value
+                    payToVendorId: '500123'
+                    payToVendorNumber: example_value
+                    shipToName: example_value
+                    shipToContact: example_value
+                    buyFromAddressLine1: example_value
+                    buyFromAddressLine2: example_value
+                    buyFromCity: example_value
+                    buyFromCountry: example_value
+                    buyFromState: example_value
+                    buyFromPostCode: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    pricesIncludeTax: true
+                    paymentTermsId: '500123'
+                    shipmentMethodId: '500123'
+                    purchaser: example_value
+                    requestedReceiptDate: '2026-01-15'
+                    discountAmount: 42.5
+                    discountAppliedBeforeTax: true
+                    totalAmountExcludingTax: 42.5
+                    totalTaxAmount: 42.5
+                    totalAmountIncludingTax: 42.5
+                    fullyReceived: true
+                    status: Draft
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                    purchaseOrderLines:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      documentId: '500123'
+                      sequence: 10
+                      itemId: '500123'
+                      accountId: '500123'
+                      lineType: Comment
+                      lineObjectNumber: example_value
+                      description: A sample description.
+                      description2: example_value
+                      unitOfMeasureId: '500123'
+                      unitOfMeasureCode: example_value
+                      quantity: 42.5
+                      directUnitCost: 42.5
+                      discountAmount: 42.5
+                      discountPercent: 42.5
+                      discountAppliedBeforeTax: true
+                      amountExcludingTax: 42.5
+                      taxCode: example_value
+                      taxPercent: 42.5
+                      totalTaxAmount: 42.5
+                      amountIncludingTax: 42.5
+                      expectedReceiptDate: '2026-01-15'
+                      receivedQuantity: 42.5
+                      invoicedQuantity: 42.5
+                      invoiceQuantity: 42.5
+                      receiveQuantity: 42.5
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
-      summary: Delete a purchase order
+      summary: Delete a Purchase Order
       description: Deletes a purchase order by ID.
       operationId: deletePurchaseOrder
       tags:
-        - Purchase Orders
+      - Purchase Orders
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/purchaseOrder_id'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/purchaseOrder_id'
       responses:
         '204':
           description: Purchase order deleted successfully
@@ -747,20 +1886,23 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/purchaseOrders({purchaseOrder_id})/purchaseOrderLines:
     get:
-      summary: List purchase order lines
+      summary: List Purchase Order Lines
       description: Returns a list of purchase order line items.
       operationId: listPurchaseOrderLines
       tags:
-        - Purchase Orders
+      - Purchase Orders
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/purchaseOrder_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/purchaseOrder_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved purchase order lines
@@ -773,22 +1915,58 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/PurchaseOrderLine'
+              examples:
+                Listpurchaseorderlines200Example:
+                  summary: Default listPurchaseOrderLines 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      documentId: '500123'
+                      sequence: 10
+                      itemId: '500123'
+                      accountId: '500123'
+                      lineType: Comment
+                      lineObjectNumber: example_value
+                      description: A sample description.
+                      description2: example_value
+                      unitOfMeasureId: '500123'
+                      unitOfMeasureCode: example_value
+                      quantity: 42.5
+                      directUnitCost: 42.5
+                      discountAmount: 42.5
+                      discountPercent: 42.5
+                      discountAppliedBeforeTax: true
+                      amountExcludingTax: 42.5
+                      taxCode: example_value
+                      taxPercent: 42.5
+                      totalTaxAmount: 42.5
+                      amountIncludingTax: 42.5
+                      expectedReceiptDate: '2026-01-15'
+                      receivedQuantity: 42.5
+                      invoicedQuantity: 42.5
+                      invoiceQuantity: 42.5
+                      receiveQuantity: 42.5
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/accounts:
     get:
-      summary: List accounts
+      summary: List Accounts
       description: Returns a list of general ledger account objects.
       operationId: listAccounts
       tags:
-        - Accounts
+      - Accounts
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/orderby'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved accounts
@@ -801,23 +1979,46 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Account'
+              examples:
+                Listaccounts200Example:
+                  summary: Default listAccounts 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      number: example_value
+                      displayName: example_value
+                      category: ' '
+                      subCategory: example_value
+                      blocked: true
+                      accountType: Posting
+                      directPosting: true
+                      netChange: 42.5
+                      consolidationTranslationMethod: example_value
+                      consolidationDebitAccount: example_value
+                      consolidationCreditAccount: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/accounts({account_id}):
     get:
-      summary: Get an account
+      summary: Get an Account
       description: Retrieves a specific account by ID.
       operationId: getAccount
       tags:
-        - Accounts
+      - Accounts
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - name: account_id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - $ref: '#/components/parameters/company_id'
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
       responses:
         '200':
           description: Successfully retrieved account
@@ -825,24 +2026,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Account'
+              examples:
+                Getaccount200Example:
+                  summary: Default getAccount 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    category: ' '
+                    subCategory: example_value
+                    blocked: true
+                    accountType: Posting
+                    directPosting: true
+                    netChange: 42.5
+                    consolidationTranslationMethod: example_value
+                    consolidationDebitAccount: example_value
+                    consolidationCreditAccount: example_value
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/generalLedgerEntries:
     get:
-      summary: List general ledger entries
+      summary: List General Ledger Entries
       description: Returns a list of general ledger entries.
       operationId: listGeneralLedgerEntries
       tags:
-        - Accounts
+      - Accounts
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/orderby'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved general ledger entries
@@ -855,21 +2077,41 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/GeneralLedgerEntry'
+              examples:
+                Listgeneralledgerentries200Example:
+                  summary: Default listGeneralLedgerEntries 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      entryNumber: 10
+                      postingDate: '2026-01-15'
+                      documentNumber: example_value
+                      documentType: example_value
+                      accountId: '500123'
+                      accountNumber: example_value
+                      description: A sample description.
+                      debitAmount: 42.5
+                      creditAmount: 42.5
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/journals:
     get:
-      summary: List journals
+      summary: List Journals
       description: Returns a list of journal objects.
       operationId: listJournals
       tags:
-        - Journals
+      - Journals
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved journals
@@ -882,22 +2124,46 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Journal'
+              examples:
+                Listjournals200Example:
+                  summary: Default listJournals 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      code: example_value
+                      displayName: example_value
+                      templateDisplayName: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                      balancingAccountId: '500123'
+                      balancingAccountNumber: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Create a journal
+      summary: Create a Journal
       description: Creates a new journal in the specified company.
       operationId: createJournal
       tags:
-        - Journals
+      - Journals
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/JournalCreate'
+            examples:
+              CreatejournalRequestExample:
+                summary: Default createJournal request
+                x-microcks-default: true
+                value:
+                  code: example_value
+                  displayName: example_value
+                  templateDisplayName: example_value
       responses:
         '201':
           description: Journal created successfully
@@ -905,29 +2171,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Journal'
+              examples:
+                Createjournal201Example:
+                  summary: Default createJournal 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    code: example_value
+                    displayName: example_value
+                    templateDisplayName: example_value
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                    balancingAccountId: '500123'
+                    balancingAccountNumber: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/journals({journal_id})/journalLines:
     get:
-      summary: List journal lines
+      summary: List Journal Lines
       description: Returns a list of journal line objects for a specific journal.
       operationId: listJournalLines
       tags:
-        - Journals
+      - Journals
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - name: journal_id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - name: journal_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved journal lines
@@ -940,23 +2222,49 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/JournalLine'
+              examples:
+                Listjournallines200Example:
+                  summary: Default listJournalLines 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      journalId: '500123'
+                      journalDisplayName: example_value
+                      lineNumber: 10
+                      accountType: G/L Account
+                      accountId: '500123'
+                      accountNumber: example_value
+                      postingDate: '2026-01-15'
+                      documentNumber: example_value
+                      externalDocumentNumber: example_value
+                      amount: 42.5
+                      description: A sample description.
+                      comment: example_value
+                      taxCode: example_value
+                      balanceAccountType: example_value
+                      balanceAccountNumber: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/salesInvoices:
     get:
-      summary: List sales invoices
+      summary: List Sales Invoices
       description: Returns a list of sales invoice objects.
       operationId: listSalesInvoices
       tags:
-        - Sales Invoices
+      - Sales Invoices
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/orderby'
-        - $ref: '#/components/parameters/select'
-        - $ref: '#/components/parameters/expand'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
       responses:
         '200':
           description: Successfully retrieved sales invoices
@@ -969,22 +2277,58 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/SalesInvoice'
+              examples:
+                Listsalesinvoices200Example:
+                  summary: Default listSalesInvoices 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      number: example_value
+                      externalDocumentNumber: example_value
+                      invoiceDate: '2026-01-15'
+                      postingDate: '2026-01-15'
+                      dueDate: '2026-01-15'
+                      customerId: '500123'
+                      customerNumber: example_value
+                      customerName: example_value
+                      currencyCode: example_value
+                      pricesIncludeTax: true
+                      totalAmountExcludingTax: 42.5
+                      totalTaxAmount: 42.5
+                      totalAmountIncludingTax: 42.5
+                      status: Draft
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Create a sales invoice
+      summary: Create a Sales Invoice
       description: Creates a new sales invoice in the specified company.
       operationId: createSalesInvoice
       tags:
-        - Sales Invoices
+      - Sales Invoices
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/SalesInvoiceCreate'
+            examples:
+              CreatesalesinvoiceRequestExample:
+                summary: Default createSalesInvoice request
+                x-microcks-default: true
+                value:
+                  externalDocumentNumber: example_value
+                  invoiceDate: '2026-01-15'
+                  customerId: '500123'
+                  customerNumber: example_value
+                  currencyCode: example_value
+                  pricesIncludeTax: true
       responses:
         '201':
           description: Sales invoice created successfully
@@ -992,25 +2336,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SalesInvoice'
+              examples:
+                Createsalesinvoice201Example:
+                  summary: Default createSalesInvoice 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    number: example_value
+                    externalDocumentNumber: example_value
+                    invoiceDate: '2026-01-15'
+                    postingDate: '2026-01-15'
+                    dueDate: '2026-01-15'
+                    customerId: '500123'
+                    customerNumber: example_value
+                    customerName: example_value
+                    currencyCode: example_value
+                    pricesIncludeTax: true
+                    totalAmountExcludingTax: 42.5
+                    totalTaxAmount: 42.5
+                    totalAmountIncludingTax: 42.5
+                    status: Draft
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/purchaseInvoices:
     get:
-      summary: List purchase invoices
+      summary: List Purchase Invoices
       description: Returns a list of purchase invoice objects.
       operationId: listPurchaseInvoices
       tags:
-        - Purchase Invoices
+      - Purchase Invoices
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/orderby'
-        - $ref: '#/components/parameters/select'
-        - $ref: '#/components/parameters/expand'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
       responses:
         '200':
           description: Successfully retrieved purchase invoices
@@ -1023,22 +2391,56 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/PurchaseInvoice'
+              examples:
+                Listpurchaseinvoices200Example:
+                  summary: Default listPurchaseInvoices 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      number: example_value
+                      invoiceDate: '2026-01-15'
+                      postingDate: '2026-01-15'
+                      dueDate: '2026-01-15'
+                      vendorId: '500123'
+                      vendorNumber: example_value
+                      vendorName: example_value
+                      currencyCode: example_value
+                      pricesIncludeTax: true
+                      totalAmountExcludingTax: 42.5
+                      totalTaxAmount: 42.5
+                      totalAmountIncludingTax: 42.5
+                      status: Draft
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Create a purchase invoice
+      summary: Create a Purchase Invoice
       description: Creates a new purchase invoice in the specified company.
       operationId: createPurchaseInvoice
       tags:
-        - Purchase Invoices
+      - Purchase Invoices
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PurchaseInvoiceCreate'
+            examples:
+              CreatepurchaseinvoiceRequestExample:
+                summary: Default createPurchaseInvoice request
+                x-microcks-default: true
+                value:
+                  invoiceDate: '2026-01-15'
+                  vendorId: '500123'
+                  vendorNumber: example_value
+                  currencyCode: example_value
+                  pricesIncludeTax: true
       responses:
         '201':
           description: Purchase invoice created successfully
@@ -1046,24 +2448,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PurchaseInvoice'
+              examples:
+                Createpurchaseinvoice201Example:
+                  summary: Default createPurchaseInvoice 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    number: example_value
+                    invoiceDate: '2026-01-15'
+                    postingDate: '2026-01-15'
+                    dueDate: '2026-01-15'
+                    vendorId: '500123'
+                    vendorNumber: example_value
+                    vendorName: example_value
+                    currencyCode: example_value
+                    pricesIncludeTax: true
+                    totalAmountExcludingTax: 42.5
+                    totalTaxAmount: 42.5
+                    totalAmountIncludingTax: 42.5
+                    status: Draft
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/employees:
     get:
-      summary: List employees
+      summary: List Employees
       description: Returns a list of employee objects.
       operationId: listEmployees
       tags:
-        - Employees
+      - Employees
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/orderby'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved employees
@@ -1076,21 +2501,53 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Employee'
+              examples:
+                Listemployees200Example:
+                  summary: Default listEmployees 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      number: example_value
+                      displayName: example_value
+                      givenName: example_value
+                      middleName: example_value
+                      surname: example_value
+                      jobTitle: example_value
+                      addressLine1: example_value
+                      addressLine2: example_value
+                      city: example_value
+                      state: example_value
+                      country: example_value
+                      postalCode: example_value
+                      phoneNumber: example_value
+                      mobilePhone: example_value
+                      email: user@example.com
+                      personalEmail: user@example.com
+                      employmentDate: '2026-01-15'
+                      terminationDate: '2026-01-15'
+                      status: Active
+                      birthDate: '2026-01-15'
+                      statisticsGroupCode: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/dimensions:
     get:
-      summary: List dimensions
+      summary: List Dimensions
       description: Returns a list of dimension objects.
       operationId: listDimensions
       tags:
-        - Dimensions
+      - Dimensions
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved dimensions
@@ -1103,21 +2560,34 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Dimension'
+              examples:
+                Listdimensions200Example:
+                  summary: Default listDimensions 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      code: example_value
+                      displayName: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/currencies:
     get:
-      summary: List currencies
+      summary: List Currencies
       description: Returns a list of currency objects.
       operationId: listCurrencies
       tags:
-        - Currency
+      - Currency
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved currencies
@@ -1130,21 +2600,37 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Currency'
+              examples:
+                Listcurrencies200Example:
+                  summary: Default listCurrencies 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      code: example_value
+                      displayName: example_value
+                      symbol: example_value
+                      amountDecimalPlaces: example_value
+                      amountRoundingPrecision: 42.5
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/paymentTerms:
     get:
-      summary: List payment terms
+      summary: List Payment Terms
       description: Returns a list of payment terms objects.
       operationId: listPaymentTerms
       tags:
-        - Payment Terms
+      - Payment Terms
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved payment terms
@@ -1157,21 +2643,38 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/PaymentTerm'
+              examples:
+                Listpaymentterms200Example:
+                  summary: Default listPaymentTerms 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      code: example_value
+                      displayName: example_value
+                      dueDateCalculation: example_value
+                      discountDateCalculation: example_value
+                      discountPercent: 42.5
+                      calculateDiscountOnCreditMemos: true
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/paymentMethods:
     get:
-      summary: List payment methods
+      summary: List Payment Methods
       description: Returns a list of payment method objects.
       operationId: listPaymentMethods
       tags:
-        - Payment Methods
+      - Payment Methods
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved payment methods
@@ -1184,21 +2687,34 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/PaymentMethod'
+              examples:
+                Listpaymentmethods200Example:
+                  summary: Default listPaymentMethods 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      code: example_value
+                      displayName: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/countriesRegions:
     get:
-      summary: List countries/regions
+      summary: List Countries/regions
       description: Returns a list of country/region objects.
       operationId: listCountriesRegions
       tags:
-        - Countries/Regions
+      - Countries/Regions
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved countries/regions
@@ -1211,21 +2727,35 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/CountryRegion'
+              examples:
+                Listcountriesregions200Example:
+                  summary: Default listCountriesRegions 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      code: example_value
+                      displayName: example_value
+                      addressFormat: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/itemCategories:
     get:
-      summary: List item categories
+      summary: List Item Categories
       description: Returns a list of item category objects.
       operationId: listItemCategories
       tags:
-        - Item Categories
+      - Item Categories
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved item categories
@@ -1238,21 +2768,34 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ItemCategory'
+              examples:
+                Listitemcategories200Example:
+                  summary: Default listItemCategories 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      code: example_value
+                      displayName: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/customerPaymentJournals:
     get:
-      summary: List customer payment journals
+      summary: List Customer Payment Journals
       description: Returns a list of customer payment journal objects.
       operationId: listCustomerPaymentJournals
       tags:
-        - Customer Payments
+      - Customer Payments
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved customer payment journals
@@ -1265,21 +2808,36 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/CustomerPaymentJournal'
+              examples:
+                Listcustomerpaymentjournals200Example:
+                  summary: Default listCustomerPaymentJournals 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      code: example_value
+                      displayName: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                      balancingAccountId: '500123'
+                      balancingAccountNumber: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/vendorPaymentJournals:
     get:
-      summary: List vendor payment journals
+      summary: List Vendor Payment Journals
       description: Returns a list of vendor payment journal objects.
       operationId: listVendorPaymentJournals
       tags:
-        - Vendor Payments
+      - Vendor Payments
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/top'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/filter'
-        - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
       responses:
         '200':
           description: Successfully retrieved vendor payment journals
@@ -1292,8 +2850,23 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/VendorPaymentJournal'
+              examples:
+                Listvendorpaymentjournals200Example:
+                  summary: Default listVendorPaymentJournals 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      code: example_value
+                      displayName: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                      balancingAccountId: '500123'
+                      balancingAccountNumber: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     oauth2:
@@ -1440,6 +3013,7 @@ components:
             message:
               type: string
               description: A human-readable error message
+          example: example_value
     Company:
       type: object
       properties:
@@ -1447,1718 +3021,2188 @@ components:
           type: string
           format: uuid
           description: The unique identifier of the company
+          example: abc123
         systemVersion:
           type: string
           description: The system version
+          example: example_value
         name:
           type: string
           description: The name of the company
+          example: Example Title
         displayName:
           type: string
           description: The display name of the company
+          example: example_value
         businessProfileId:
           type: string
           description: The business profile ID
+          example: '500123'
     Customer:
       type: object
       properties:
         '@odata.etag':
           type: string
           description: ETag for concurrency control
+          example: example_value
         id:
           type: string
           format: uuid
           description: The unique identifier of the customer
+          example: abc123
         number:
           type: string
           description: The customer number
           maxLength: 20
+          example: example_value
         displayName:
           type: string
           description: The customer display name
           maxLength: 100
+          example: example_value
         type:
           type: string
           description: The customer type
           enum:
-            - Person
-            - Company
+          - Person
+          - Company
+          example: Person
         addressLine1:
           type: string
           description: First line of the address
           maxLength: 100
+          example: example_value
         addressLine2:
           type: string
           description: Second line of the address
           maxLength: 50
+          example: example_value
         city:
           type: string
           description: The city
           maxLength: 30
+          example: example_value
         state:
           type: string
           description: The state or province code
           maxLength: 20
+          example: example_value
         country:
           type: string
           description: The country/region code
           maxLength: 10
+          example: example_value
         postalCode:
           type: string
           description: The postal code
           maxLength: 20
+          example: example_value
         phoneNumber:
           type: string
           description: The phone number
           maxLength: 30
+          example: example_value
         email:
           type: string
           description: The email address
           maxLength: 80
+          example: user@example.com
         website:
           type: string
           description: The website URL
           maxLength: 80
+          example: example_value
         salespersonCode:
           type: string
           description: The salesperson code
           maxLength: 20
+          example: example_value
         balanceDue:
           type: number
           format: decimal
           description: The balance due from the customer
           readOnly: true
+          example: 42.5
         creditLimit:
           type: number
           format: decimal
           description: The credit limit
+          example: 42.5
         taxLiable:
           type: boolean
           description: Whether the customer is tax liable
+          example: true
         taxAreaId:
           type: string
           format: uuid
           description: The tax area ID
+          example: '500123'
         taxAreaDisplayName:
           type: string
           description: The tax area display name
           readOnly: true
+          example: example_value
         taxRegistrationNumber:
           type: string
           description: The tax registration number
           maxLength: 20
+          example: example_value
         currencyId:
           type: string
           format: uuid
           description: The currency ID
+          example: '500123'
         currencyCode:
           type: string
           description: The currency code
           maxLength: 10
+          example: example_value
         paymentTermsId:
           type: string
           format: uuid
           description: The payment terms ID
+          example: '500123'
         shipmentMethodId:
           type: string
           format: uuid
           description: The shipment method ID
+          example: '500123'
         paymentMethodId:
           type: string
           format: uuid
           description: The payment method ID
+          example: '500123'
         blocked:
           type: string
           description: Whether the customer is blocked
           enum:
-            - ' '
-            - Ship
-            - Invoice
-            - All
+          - ' '
+          - Ship
+          - Invoice
+          - All
+          example: ' '
         lastModifiedDateTime:
           type: string
           format: date-time
           description: The date and time when the customer was last modified
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     CustomerCreate:
       type: object
       required:
-        - displayName
+      - displayName
       properties:
         number:
           type: string
           maxLength: 20
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         type:
           type: string
           enum:
-            - Person
-            - Company
+          - Person
+          - Company
+          example: Person
         addressLine1:
           type: string
           maxLength: 100
+          example: example_value
         addressLine2:
           type: string
           maxLength: 50
+          example: example_value
         city:
           type: string
           maxLength: 30
+          example: example_value
         state:
           type: string
           maxLength: 20
+          example: example_value
         country:
           type: string
           maxLength: 10
+          example: example_value
         postalCode:
           type: string
           maxLength: 20
+          example: example_value
         phoneNumber:
           type: string
           maxLength: 30
+          example: example_value
         email:
           type: string
           maxLength: 80
+          example: user@example.com
         website:
           type: string
           maxLength: 80
+          example: example_value
         taxLiable:
           type: boolean
+          example: true
         taxRegistrationNumber:
           type: string
           maxLength: 20
+          example: example_value
         currencyCode:
           type: string
           maxLength: 10
+          example: example_value
         blocked:
           type: string
           enum:
-            - ' '
-            - Ship
-            - Invoice
-            - All
+          - ' '
+          - Ship
+          - Invoice
+          - All
+          example: ' '
     CustomerUpdate:
       type: object
       properties:
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         type:
           type: string
           enum:
-            - Person
-            - Company
+          - Person
+          - Company
+          example: Person
         addressLine1:
           type: string
           maxLength: 100
+          example: example_value
         addressLine2:
           type: string
           maxLength: 50
+          example: example_value
         city:
           type: string
           maxLength: 30
+          example: example_value
         state:
           type: string
           maxLength: 20
+          example: example_value
         country:
           type: string
           maxLength: 10
+          example: example_value
         postalCode:
           type: string
           maxLength: 20
+          example: example_value
         phoneNumber:
           type: string
           maxLength: 30
+          example: example_value
         email:
           type: string
           maxLength: 80
+          example: user@example.com
         website:
           type: string
           maxLength: 80
+          example: example_value
         taxLiable:
           type: boolean
+          example: true
         creditLimit:
           type: number
           format: decimal
+          example: 42.5
         blocked:
           type: string
           enum:
-            - ' '
-            - Ship
-            - Invoice
-            - All
+          - ' '
+          - Ship
+          - Invoice
+          - All
+          example: ' '
     Vendor:
       type: object
       properties:
         '@odata.etag':
           type: string
+          example: example_value
         id:
           type: string
           format: uuid
           description: The unique identifier of the vendor
+          example: abc123
         number:
           type: string
           description: The vendor number
           maxLength: 20
+          example: example_value
         displayName:
           type: string
           description: The vendor display name
           maxLength: 100
+          example: example_value
         addressLine1:
           type: string
           description: First line of the address
           maxLength: 100
+          example: example_value
         addressLine2:
           type: string
           description: Second line of the address
           maxLength: 50
+          example: example_value
         city:
           type: string
           description: The city
           maxLength: 30
+          example: example_value
         state:
           type: string
           description: The state or province code
           maxLength: 20
+          example: example_value
         country:
           type: string
           description: The country/region code
           maxLength: 10
+          example: example_value
         postalCode:
           type: string
           description: The postal code
           maxLength: 20
+          example: example_value
         phoneNumber:
           type: string
           description: The phone number
           maxLength: 30
+          example: example_value
         email:
           type: string
           description: The email address
           maxLength: 80
+          example: user@example.com
         website:
           type: string
           description: The website URL
           maxLength: 80
+          example: example_value
         taxRegistrationNumber:
           type: string
           description: The tax registration number
           maxLength: 20
+          example: example_value
         currencyId:
           type: string
           format: uuid
           description: The currency ID
+          example: '500123'
         currencyCode:
           type: string
           description: The currency code
           maxLength: 10
+          example: example_value
         paymentTermsId:
           type: string
           format: uuid
           description: The payment terms ID
+          example: '500123'
         paymentMethodId:
           type: string
           format: uuid
           description: The payment method ID
+          example: '500123'
         taxLiable:
           type: boolean
           description: Whether the vendor is tax liable
+          example: true
         blocked:
           type: string
           description: Whether the vendor is blocked
           enum:
-            - ' '
-            - Payment
-            - All
+          - ' '
+          - Payment
+          - All
+          example: ' '
         balance:
           type: number
           format: decimal
           description: The vendor balance
           readOnly: true
+          example: 42.5
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     VendorCreate:
       type: object
       required:
-        - displayName
+      - displayName
       properties:
         number:
           type: string
           maxLength: 20
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         addressLine1:
           type: string
           maxLength: 100
+          example: example_value
         addressLine2:
           type: string
           maxLength: 50
+          example: example_value
         city:
           type: string
           maxLength: 30
+          example: example_value
         state:
           type: string
           maxLength: 20
+          example: example_value
         country:
           type: string
           maxLength: 10
+          example: example_value
         postalCode:
           type: string
           maxLength: 20
+          example: example_value
         phoneNumber:
           type: string
           maxLength: 30
+          example: example_value
         email:
           type: string
           maxLength: 80
+          example: user@example.com
         website:
           type: string
           maxLength: 80
+          example: example_value
         taxRegistrationNumber:
           type: string
           maxLength: 20
+          example: example_value
         currencyCode:
           type: string
           maxLength: 10
+          example: example_value
         taxLiable:
           type: boolean
+          example: true
         blocked:
           type: string
           enum:
-            - ' '
-            - Payment
-            - All
+          - ' '
+          - Payment
+          - All
+          example: ' '
     VendorUpdate:
       type: object
       properties:
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         addressLine1:
           type: string
           maxLength: 100
+          example: example_value
         addressLine2:
           type: string
           maxLength: 50
+          example: example_value
         city:
           type: string
           maxLength: 30
+          example: example_value
         state:
           type: string
           maxLength: 20
+          example: example_value
         country:
           type: string
           maxLength: 10
+          example: example_value
         postalCode:
           type: string
           maxLength: 20
+          example: example_value
         phoneNumber:
           type: string
           maxLength: 30
+          example: example_value
         email:
           type: string
           maxLength: 80
+          example: user@example.com
         website:
           type: string
           maxLength: 80
+          example: example_value
         taxLiable:
           type: boolean
+          example: true
         blocked:
           type: string
           enum:
-            - ' '
-            - Payment
-            - All
+          - ' '
+          - Payment
+          - All
+          example: ' '
     Item:
       type: object
       properties:
         '@odata.etag':
           type: string
+          example: example_value
         id:
           type: string
           format: uuid
           description: The unique identifier of the item
+          example: abc123
         number:
           type: string
           description: The item number
           maxLength: 20
+          example: example_value
         displayName:
           type: string
           description: The item display name
           maxLength: 100
+          example: example_value
         displayName2:
           type: string
           description: The item display name 2
           maxLength: 50
+          example: example_value
         type:
           type: string
           description: The item type
           enum:
-            - Inventory
-            - Service
-            - Non-Inventory
+          - Inventory
+          - Service
+          - Non-Inventory
+          example: Inventory
         itemCategoryId:
           type: string
           format: uuid
           description: The item category ID
+          example: '500123'
         itemCategoryCode:
           type: string
           description: The item category code
           maxLength: 20
+          example: example_value
         blocked:
           type: boolean
           description: Whether the item is blocked
+          example: true
         gtin:
           type: string
           description: The Global Trade Item Number
           maxLength: 14
+          example: example_value
         inventory:
           type: number
           format: decimal
           description: The current inventory quantity
           readOnly: true
+          example: 42.5
         unitPrice:
           type: number
           format: decimal
           description: The unit price
+          example: 42.5
         priceIncludesTax:
           type: boolean
           description: Whether the price includes tax
+          example: true
         unitCost:
           type: number
           format: decimal
           description: The unit cost
+          example: 42.5
         taxGroupId:
           type: string
           format: uuid
           description: The tax group ID
+          example: '500123'
         taxGroupCode:
           type: string
           description: The tax group code
           maxLength: 20
+          example: example_value
         baseUnitOfMeasureId:
           type: string
           format: uuid
           description: The base unit of measure ID
+          example: '500123'
         baseUnitOfMeasureCode:
           type: string
           description: The base unit of measure code
           maxLength: 10
+          example: example_value
         generalProductPostingGroupId:
           type: string
           format: uuid
+          example: '500123'
         generalProductPostingGroupCode:
           type: string
           maxLength: 20
+          example: example_value
         inventoryPostingGroupId:
           type: string
           format: uuid
+          example: '500123'
         inventoryPostingGroupCode:
           type: string
           maxLength: 20
+          example: example_value
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     ItemCreate:
       type: object
       required:
-        - displayName
+      - displayName
       properties:
         number:
           type: string
           maxLength: 20
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         type:
           type: string
           enum:
-            - Inventory
-            - Service
-            - Non-Inventory
+          - Inventory
+          - Service
+          - Non-Inventory
+          example: Inventory
         itemCategoryCode:
           type: string
           maxLength: 20
+          example: example_value
         blocked:
           type: boolean
+          example: true
         gtin:
           type: string
           maxLength: 14
+          example: example_value
         unitPrice:
           type: number
           format: decimal
+          example: 42.5
         unitCost:
           type: number
           format: decimal
+          example: 42.5
         taxGroupCode:
           type: string
           maxLength: 20
+          example: example_value
         baseUnitOfMeasureCode:
           type: string
           maxLength: 10
+          example: example_value
     ItemUpdate:
       type: object
       properties:
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         type:
           type: string
           enum:
-            - Inventory
-            - Service
-            - Non-Inventory
+          - Inventory
+          - Service
+          - Non-Inventory
+          example: Inventory
         itemCategoryCode:
           type: string
           maxLength: 20
+          example: example_value
         blocked:
           type: boolean
+          example: true
         gtin:
           type: string
           maxLength: 14
+          example: example_value
         unitPrice:
           type: number
           format: decimal
+          example: 42.5
         unitCost:
           type: number
           format: decimal
+          example: 42.5
         taxGroupCode:
           type: string
           maxLength: 20
+          example: example_value
         baseUnitOfMeasureCode:
           type: string
           maxLength: 10
+          example: example_value
     SalesOrder:
       type: object
       properties:
         '@odata.etag':
           type: string
+          example: example_value
         id:
           type: string
           format: uuid
           description: The unique identifier of the sales order
+          example: abc123
         number:
           type: string
           description: The sales order number
           maxLength: 20
+          example: example_value
         externalDocumentNumber:
           type: string
           description: The external document number
           maxLength: 35
+          example: example_value
         orderDate:
           type: string
           format: date
           description: The order date
+          example: '2026-01-15'
         postingDate:
           type: string
           format: date
           description: The posting date
+          example: '2026-01-15'
         customerId:
           type: string
           format: uuid
           description: The customer ID
+          example: '500123'
         customerNumber:
           type: string
           description: The customer number
           maxLength: 20
+          example: example_value
         customerName:
           type: string
           description: The customer name
           maxLength: 100
+          example: example_value
         billToName:
           type: string
           description: The bill-to name
           maxLength: 100
+          example: example_value
         billToCustomerId:
           type: string
           format: uuid
           description: The bill-to customer ID
+          example: '500123'
         billToCustomerNumber:
           type: string
           description: The bill-to customer number
           maxLength: 20
+          example: example_value
         shipToName:
           type: string
           description: The ship-to name
           maxLength: 100
+          example: example_value
         shipToContact:
           type: string
           description: The ship-to contact
           maxLength: 100
+          example: example_value
         sellToAddressLine1:
           type: string
           maxLength: 100
+          example: example_value
         sellToAddressLine2:
           type: string
           maxLength: 50
+          example: example_value
         sellToCity:
           type: string
           maxLength: 30
+          example: example_value
         sellToCountry:
           type: string
           maxLength: 10
+          example: example_value
         sellToState:
           type: string
           maxLength: 20
+          example: example_value
         sellToPostCode:
           type: string
           maxLength: 20
+          example: example_value
         currencyId:
           type: string
           format: uuid
+          example: '500123'
         currencyCode:
           type: string
           maxLength: 10
+          example: example_value
         pricesIncludeTax:
           type: boolean
+          example: true
         paymentTermsId:
           type: string
           format: uuid
+          example: '500123'
         shipmentMethodId:
           type: string
           format: uuid
+          example: '500123'
         salesperson:
           type: string
           maxLength: 20
+          example: example_value
         requestedDeliveryDate:
           type: string
           format: date
+          example: '2026-01-15'
         discountAmount:
           type: number
           format: decimal
           description: The total discount amount
+          example: 42.5
         discountAppliedBeforeTax:
           type: boolean
+          example: true
         totalAmountExcludingTax:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         totalTaxAmount:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         totalAmountIncludingTax:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         fullyShipped:
           type: boolean
           readOnly: true
+          example: true
         status:
           type: string
           description: The order status
           enum:
-            - Draft
-            - In Review
-            - Open
-            - Released
+          - Draft
+          - In Review
+          - Open
+          - Released
           readOnly: true
+          example: Draft
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
         phoneNumber:
           type: string
           maxLength: 30
+          example: example_value
         email:
           type: string
           maxLength: 80
+          example: user@example.com
         salesOrderLines:
           type: array
           items:
             $ref: '#/components/schemas/SalesOrderLine'
+          example: []
     SalesOrderCreate:
       type: object
       properties:
         externalDocumentNumber:
           type: string
           maxLength: 35
+          example: example_value
         orderDate:
           type: string
           format: date
+          example: '2026-01-15'
         customerId:
           type: string
           format: uuid
+          example: '500123'
         customerNumber:
           type: string
           maxLength: 20
+          example: example_value
         currencyCode:
           type: string
           maxLength: 10
+          example: example_value
         pricesIncludeTax:
           type: boolean
+          example: true
         requestedDeliveryDate:
           type: string
           format: date
+          example: '2026-01-15'
     SalesOrderUpdate:
       type: object
       properties:
         externalDocumentNumber:
           type: string
           maxLength: 35
+          example: example_value
         orderDate:
           type: string
           format: date
+          example: '2026-01-15'
         customerId:
           type: string
           format: uuid
+          example: '500123'
         customerNumber:
           type: string
           maxLength: 20
+          example: example_value
         currencyCode:
           type: string
           maxLength: 10
+          example: example_value
         pricesIncludeTax:
           type: boolean
+          example: true
         requestedDeliveryDate:
           type: string
           format: date
+          example: '2026-01-15'
     SalesOrderLine:
       type: object
       properties:
         '@odata.etag':
           type: string
+          example: example_value
         id:
           type: string
           format: uuid
+          example: abc123
         documentId:
           type: string
           format: uuid
+          example: '500123'
         sequence:
           type: integer
+          example: 10
         itemId:
           type: string
           format: uuid
+          example: '500123'
         accountId:
           type: string
           format: uuid
+          example: '500123'
         lineType:
           type: string
           enum:
-            - Comment
-            - Account
-            - Item
-            - Resource
-            - Fixed Asset
-            - Charge
+          - Comment
+          - Account
+          - Item
+          - Resource
+          - Fixed Asset
+          - Charge
+          example: Comment
         lineObjectNumber:
           type: string
           maxLength: 20
+          example: example_value
         description:
           type: string
           maxLength: 100
+          example: A sample description.
         description2:
           type: string
           maxLength: 50
+          example: example_value
         unitOfMeasureId:
           type: string
           format: uuid
+          example: '500123'
         unitOfMeasureCode:
           type: string
           maxLength: 10
+          example: example_value
         quantity:
           type: number
           format: decimal
+          example: 42.5
         unitPrice:
           type: number
           format: decimal
+          example: 42.5
         discountAmount:
           type: number
           format: decimal
+          example: 42.5
         discountPercent:
           type: number
           format: decimal
+          example: 42.5
         discountAppliedBeforeTax:
           type: boolean
+          example: true
         amountExcludingTax:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         taxCode:
           type: string
           maxLength: 20
+          example: example_value
         taxPercent:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         totalTaxAmount:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         amountIncludingTax:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         netAmount:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         netTaxAmount:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         netAmountIncludingTax:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         shipmentDate:
           type: string
           format: date
+          example: '2026-01-15'
         shippedQuantity:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         invoicedQuantity:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         invoiceQuantity:
           type: number
           format: decimal
+          example: 42.5
         shipQuantity:
           type: number
           format: decimal
+          example: 42.5
     PurchaseOrder:
       type: object
       properties:
         '@odata.etag':
           type: string
+          example: example_value
         id:
           type: string
           format: uuid
           description: The unique identifier of the purchase order
+          example: abc123
         number:
           type: string
           description: The purchase order number
           maxLength: 20
+          example: example_value
         orderDate:
           type: string
           format: date
           description: The order date
+          example: '2026-01-15'
         postingDate:
           type: string
           format: date
           description: The posting date
+          example: '2026-01-15'
         vendorId:
           type: string
           format: uuid
           description: The vendor ID
+          example: '500123'
         vendorNumber:
           type: string
           description: The vendor number
           maxLength: 20
+          example: example_value
         vendorName:
           type: string
           description: The vendor name
           maxLength: 100
+          example: example_value
         payToName:
           type: string
           maxLength: 100
+          example: example_value
         payToVendorId:
           type: string
           format: uuid
+          example: '500123'
         payToVendorNumber:
           type: string
           maxLength: 20
+          example: example_value
         shipToName:
           type: string
           maxLength: 100
+          example: example_value
         shipToContact:
           type: string
           maxLength: 100
+          example: example_value
         buyFromAddressLine1:
           type: string
           maxLength: 100
+          example: example_value
         buyFromAddressLine2:
           type: string
           maxLength: 50
+          example: example_value
         buyFromCity:
           type: string
           maxLength: 30
+          example: example_value
         buyFromCountry:
           type: string
           maxLength: 10
+          example: example_value
         buyFromState:
           type: string
           maxLength: 20
+          example: example_value
         buyFromPostCode:
           type: string
           maxLength: 20
+          example: example_value
         currencyId:
           type: string
           format: uuid
+          example: '500123'
         currencyCode:
           type: string
           maxLength: 10
+          example: example_value
         pricesIncludeTax:
           type: boolean
+          example: true
         paymentTermsId:
           type: string
           format: uuid
+          example: '500123'
         shipmentMethodId:
           type: string
           format: uuid
+          example: '500123'
         purchaser:
           type: string
           maxLength: 20
+          example: example_value
         requestedReceiptDate:
           type: string
           format: date
+          example: '2026-01-15'
         discountAmount:
           type: number
           format: decimal
+          example: 42.5
         discountAppliedBeforeTax:
           type: boolean
+          example: true
         totalAmountExcludingTax:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         totalTaxAmount:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         totalAmountIncludingTax:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         fullyReceived:
           type: boolean
           readOnly: true
+          example: true
         status:
           type: string
           enum:
-            - Draft
-            - In Review
-            - Open
-            - Released
+          - Draft
+          - In Review
+          - Open
+          - Released
           readOnly: true
+          example: Draft
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
         purchaseOrderLines:
           type: array
           items:
             $ref: '#/components/schemas/PurchaseOrderLine'
+          example: []
     PurchaseOrderCreate:
       type: object
       properties:
         orderDate:
           type: string
           format: date
+          example: '2026-01-15'
         vendorId:
           type: string
           format: uuid
+          example: '500123'
         vendorNumber:
           type: string
           maxLength: 20
+          example: example_value
         currencyCode:
           type: string
           maxLength: 10
+          example: example_value
         pricesIncludeTax:
           type: boolean
+          example: true
         requestedReceiptDate:
           type: string
           format: date
+          example: '2026-01-15'
     PurchaseOrderUpdate:
       type: object
       properties:
         orderDate:
           type: string
           format: date
+          example: '2026-01-15'
         vendorId:
           type: string
           format: uuid
+          example: '500123'
         vendorNumber:
           type: string
           maxLength: 20
+          example: example_value
         currencyCode:
           type: string
           maxLength: 10
+          example: example_value
         pricesIncludeTax:
           type: boolean
+          example: true
         requestedReceiptDate:
           type: string
           format: date
+          example: '2026-01-15'
     PurchaseOrderLine:
       type: object
       properties:
         '@odata.etag':
           type: string
+          example: example_value
         id:
           type: string
           format: uuid
+          example: abc123
         documentId:
           type: string
           format: uuid
+          example: '500123'
         sequence:
           type: integer
+          example: 10
         itemId:
           type: string
           format: uuid
+          example: '500123'
         accountId:
           type: string
           format: uuid
+          example: '500123'
         lineType:
           type: string
           enum:
-            - Comment
-            - Account
-            - Item
-            - Fixed Asset
-            - Charge
+          - Comment
+          - Account
+          - Item
+          - Fixed Asset
+          - Charge
+          example: Comment
         lineObjectNumber:
           type: string
           maxLength: 20
+          example: example_value
         description:
           type: string
           maxLength: 100
+          example: A sample description.
         description2:
           type: string
           maxLength: 50
+          example: example_value
         unitOfMeasureId:
           type: string
           format: uuid
+          example: '500123'
         unitOfMeasureCode:
           type: string
           maxLength: 10
+          example: example_value
         quantity:
           type: number
           format: decimal
+          example: 42.5
         directUnitCost:
           type: number
           format: decimal
+          example: 42.5
         discountAmount:
           type: number
           format: decimal
+          example: 42.5
         discountPercent:
           type: number
           format: decimal
+          example: 42.5
         discountAppliedBeforeTax:
           type: boolean
+          example: true
         amountExcludingTax:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         taxCode:
           type: string
           maxLength: 20
+          example: example_value
         taxPercent:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         totalTaxAmount:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         amountIncludingTax:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         expectedReceiptDate:
           type: string
           format: date
+          example: '2026-01-15'
         receivedQuantity:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         invoicedQuantity:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         invoiceQuantity:
           type: number
           format: decimal
+          example: 42.5
         receiveQuantity:
           type: number
           format: decimal
+          example: 42.5
     Account:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         number:
           type: string
           description: The account number
           maxLength: 20
+          example: example_value
         displayName:
           type: string
           description: The account display name
           maxLength: 100
+          example: example_value
         category:
           type: string
           description: The account category
           enum:
-            - ' '
-            - Assets
-            - Liabilities
-            - Equity
-            - Income
-            - Cost of Goods Sold
-            - Expense
+          - ' '
+          - Assets
+          - Liabilities
+          - Equity
+          - Income
+          - Cost of Goods Sold
+          - Expense
+          example: ' '
         subCategory:
           type: string
           description: The account subcategory
           maxLength: 80
+          example: example_value
         blocked:
           type: boolean
           description: Whether the account is blocked
+          example: true
         accountType:
           type: string
           description: The account type
           enum:
-            - Posting
-            - Heading
-            - Total
-            - Begin-Total
-            - End-Total
+          - Posting
+          - Heading
+          - Total
+          - Begin-Total
+          - End-Total
+          example: Posting
         directPosting:
           type: boolean
           description: Whether direct posting is allowed
+          example: true
         netChange:
           type: number
           format: decimal
           description: The net change
           readOnly: true
+          example: 42.5
         consolidationTranslationMethod:
           type: string
+          example: example_value
         consolidationDebitAccount:
           type: string
+          example: example_value
         consolidationCreditAccount:
           type: string
+          example: example_value
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     GeneralLedgerEntry:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         entryNumber:
           type: integer
           readOnly: true
+          example: 10
         postingDate:
           type: string
           format: date
+          example: '2026-01-15'
         documentNumber:
           type: string
           maxLength: 20
+          example: example_value
         documentType:
           type: string
+          example: example_value
         accountId:
           type: string
           format: uuid
+          example: '500123'
         accountNumber:
           type: string
           maxLength: 20
+          example: example_value
         description:
           type: string
           maxLength: 100
+          example: A sample description.
         debitAmount:
           type: number
           format: decimal
+          example: 42.5
         creditAmount:
           type: number
           format: decimal
+          example: 42.5
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     Journal:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         code:
           type: string
           maxLength: 10
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         templateDisplayName:
           type: string
           maxLength: 100
+          example: example_value
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
         balancingAccountId:
           type: string
           format: uuid
+          example: '500123'
         balancingAccountNumber:
           type: string
           maxLength: 20
+          example: example_value
     JournalCreate:
       type: object
       required:
-        - code
-        - displayName
+      - code
+      - displayName
       properties:
         code:
           type: string
           maxLength: 10
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         templateDisplayName:
           type: string
           maxLength: 100
+          example: example_value
     JournalLine:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         journalId:
           type: string
           format: uuid
+          example: '500123'
         journalDisplayName:
           type: string
           maxLength: 100
+          example: example_value
         lineNumber:
           type: integer
+          example: 10
         accountType:
           type: string
           enum:
-            - G/L Account
-            - Customer
-            - Vendor
-            - Bank Account
-            - Fixed Asset
-            - Employee
+          - G/L Account
+          - Customer
+          - Vendor
+          - Bank Account
+          - Fixed Asset
+          - Employee
+          example: G/L Account
         accountId:
           type: string
           format: uuid
+          example: '500123'
         accountNumber:
           type: string
           maxLength: 20
+          example: example_value
         postingDate:
           type: string
           format: date
+          example: '2026-01-15'
         documentNumber:
           type: string
           maxLength: 20
+          example: example_value
         externalDocumentNumber:
           type: string
           maxLength: 35
+          example: example_value
         amount:
           type: number
           format: decimal
+          example: 42.5
         description:
           type: string
           maxLength: 100
+          example: A sample description.
         comment:
           type: string
+          example: example_value
         taxCode:
           type: string
           maxLength: 20
+          example: example_value
         balanceAccountType:
           type: string
+          example: example_value
         balanceAccountNumber:
           type: string
           maxLength: 20
+          example: example_value
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     SalesInvoice:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         number:
           type: string
           maxLength: 20
+          example: example_value
         externalDocumentNumber:
           type: string
           maxLength: 35
+          example: example_value
         invoiceDate:
           type: string
           format: date
+          example: '2026-01-15'
         postingDate:
           type: string
           format: date
+          example: '2026-01-15'
         dueDate:
           type: string
           format: date
+          example: '2026-01-15'
         customerId:
           type: string
           format: uuid
+          example: '500123'
         customerNumber:
           type: string
           maxLength: 20
+          example: example_value
         customerName:
           type: string
           maxLength: 100
+          example: example_value
         currencyCode:
           type: string
           maxLength: 10
+          example: example_value
         pricesIncludeTax:
           type: boolean
+          example: true
         totalAmountExcludingTax:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         totalTaxAmount:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         totalAmountIncludingTax:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         status:
           type: string
           enum:
-            - Draft
-            - In Review
-            - Open
-            - Paid
-            - Canceled
-            - Corrective
+          - Draft
+          - In Review
+          - Open
+          - Paid
+          - Canceled
+          - Corrective
           readOnly: true
+          example: Draft
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     SalesInvoiceCreate:
       type: object
       properties:
         externalDocumentNumber:
           type: string
           maxLength: 35
+          example: example_value
         invoiceDate:
           type: string
           format: date
+          example: '2026-01-15'
         customerId:
           type: string
           format: uuid
+          example: '500123'
         customerNumber:
           type: string
           maxLength: 20
+          example: example_value
         currencyCode:
           type: string
           maxLength: 10
+          example: example_value
         pricesIncludeTax:
           type: boolean
+          example: true
     PurchaseInvoice:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         number:
           type: string
           maxLength: 20
+          example: example_value
         invoiceDate:
           type: string
           format: date
+          example: '2026-01-15'
         postingDate:
           type: string
           format: date
+          example: '2026-01-15'
         dueDate:
           type: string
           format: date
+          example: '2026-01-15'
         vendorId:
           type: string
           format: uuid
+          example: '500123'
         vendorNumber:
           type: string
           maxLength: 20
+          example: example_value
         vendorName:
           type: string
           maxLength: 100
+          example: example_value
         currencyCode:
           type: string
           maxLength: 10
+          example: example_value
         pricesIncludeTax:
           type: boolean
+          example: true
         totalAmountExcludingTax:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         totalTaxAmount:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         totalAmountIncludingTax:
           type: number
           format: decimal
           readOnly: true
+          example: 42.5
         status:
           type: string
           enum:
-            - Draft
-            - In Review
-            - Open
-            - Paid
-            - Canceled
-            - Corrective
+          - Draft
+          - In Review
+          - Open
+          - Paid
+          - Canceled
+          - Corrective
           readOnly: true
+          example: Draft
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     PurchaseInvoiceCreate:
       type: object
       properties:
         invoiceDate:
           type: string
           format: date
+          example: '2026-01-15'
         vendorId:
           type: string
           format: uuid
+          example: '500123'
         vendorNumber:
           type: string
           maxLength: 20
+          example: example_value
         currencyCode:
           type: string
           maxLength: 10
+          example: example_value
         pricesIncludeTax:
           type: boolean
+          example: true
     Employee:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         number:
           type: string
           maxLength: 20
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         givenName:
           type: string
           maxLength: 30
+          example: example_value
         middleName:
           type: string
           maxLength: 30
+          example: example_value
         surname:
           type: string
           maxLength: 30
+          example: example_value
         jobTitle:
           type: string
           maxLength: 30
+          example: example_value
         addressLine1:
           type: string
           maxLength: 100
+          example: example_value
         addressLine2:
           type: string
           maxLength: 50
+          example: example_value
         city:
           type: string
           maxLength: 30
+          example: example_value
         state:
           type: string
           maxLength: 20
+          example: example_value
         country:
           type: string
           maxLength: 10
+          example: example_value
         postalCode:
           type: string
           maxLength: 20
+          example: example_value
         phoneNumber:
           type: string
           maxLength: 30
+          example: example_value
         mobilePhone:
           type: string
           maxLength: 30
+          example: example_value
         email:
           type: string
           maxLength: 80
+          example: user@example.com
         personalEmail:
           type: string
           maxLength: 80
+          example: user@example.com
         employmentDate:
           type: string
           format: date
+          example: '2026-01-15'
         terminationDate:
           type: string
           format: date
+          example: '2026-01-15'
         status:
           type: string
           enum:
-            - Active
-            - Inactive
+          - Active
+          - Inactive
+          example: Active
         birthDate:
           type: string
           format: date
+          example: '2026-01-15'
         statisticsGroupCode:
           type: string
           maxLength: 10
+          example: example_value
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     Dimension:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         code:
           type: string
           maxLength: 20
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     Currency:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         code:
           type: string
           maxLength: 10
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         symbol:
           type: string
           maxLength: 10
+          example: example_value
         amountDecimalPlaces:
           type: string
+          example: example_value
         amountRoundingPrecision:
           type: number
           format: decimal
+          example: 42.5
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     PaymentTerm:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         code:
           type: string
           maxLength: 10
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         dueDateCalculation:
           type: string
           description: The date formula for due date calculation
+          example: example_value
         discountDateCalculation:
           type: string
           description: The date formula for discount date calculation
+          example: example_value
         discountPercent:
           type: number
           format: decimal
+          example: 42.5
         calculateDiscountOnCreditMemos:
           type: boolean
+          example: true
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     PaymentMethod:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         code:
           type: string
           maxLength: 10
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     CountryRegion:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         code:
           type: string
           maxLength: 10
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         addressFormat:
           type: string
+          example: example_value
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     ItemCategory:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         code:
           type: string
           maxLength: 20
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
     CustomerPaymentJournal:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         code:
           type: string
           maxLength: 10
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
         balancingAccountId:
           type: string
           format: uuid
+          example: '500123'
         balancingAccountNumber:
           type: string
           maxLength: 20
+          example: example_value
     VendorPaymentJournal:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         code:
           type: string
           maxLength: 10
+          example: example_value
         displayName:
           type: string
           maxLength: 100
+          example: example_value
         lastModifiedDateTime:
           type: string
           format: date-time
           readOnly: true
+          example: '2026-01-15T10:30:00Z'
         balancingAccountId:
           type: string
           format: uuid
+          example: '500123'
         balancingAccountNumber:
           type: string
           maxLength: 20
+          example: example_value

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Environment",
+  "type": "object",
+  "properties": {
+    "friendlyName": {
+      "type": "string",
+      "description": "Display name of the environment"
+    },
+    "type": {
+      "type": "string",
+      "description": "Environment type"
+    },
+    "name": {
+      "type": "string",
+      "description": "Environment name, unique within an application family"
+    },
+    "countryCode": {
+      "type": "string",
+      "description": "Country/region code where the environment is deployed"
+    },
+    "applicationFamily": {
+      "type": "string",
+      "description": "Family of the environment application"
+    },
+    "aadTenantId": {
+      "type": "string",
+      "description": "Microsoft Entra tenant ID that owns the environment"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the environment"
+    },
+    "webClientLoginUrl": {
+      "type": "string",
+      "description": "URL to log into the environment"
+    },
+    "webServiceUrl": {
+      "type": "string",
+      "description": "URL to access the environment service API"
+    },
+    "locationName": {
+      "type": "string",
+      "description": "Azure region where the database is stored"
+    },
+    "geoName": {
+      "type": "string",
+      "description": "Azure geo where the database is stored"
+    },
+    "ringName": {
+      "type": "string",
+      "description": "Logical ring group name (e.g., Prod, Preview)"
+    },
+    "appInsightsKey": {
+      "type": "string",
+      "description": "Application Insights instrumentation key"
+    },
+    "softDeletedOn": {
+      "type": "string",
+      "description": "When the environment was soft deleted"
+    },
+    "hardDeletePendingOn": {
+      "type": "string",
+      "description": "When the environment will be permanently deleted"
+    },
+    "deleteReason": {
+      "type": "string",
+      "description": "Reason the environment was deleted"
+    },
+    "appSourceAppsUpdateCadence": {
+      "type": "string",
+      "description": "Update cadence for installed AppSource apps"
+    },
+    "versionDetails": {
+      "type": "object"
+    }
+  }
+}

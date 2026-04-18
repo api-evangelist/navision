@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ConfigurationPackage",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string",
+      "description": "The package code"
+    },
+    "packageName": {
+      "type": "string",
+      "description": "The package name"
+    },
+    "languageId": {
+      "type": "integer"
+    },
+    "productVersion": {
+      "type": "string"
+    },
+    "processingOrder": {
+      "type": "integer"
+    },
+    "excludeConfigurationTables": {
+      "type": "boolean"
+    },
+    "numberOfTables": {
+      "type": "integer"
+    },
+    "numberOfRecords": {
+      "type": "integer"
+    },
+    "numberOfErrors": {
+      "type": "integer"
+    },
+    "importStatus": {
+      "type": "string"
+    },
+    "applyStatus": {
+      "type": "string"
+    }
+  }
+}

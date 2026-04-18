@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UsedStorage",
+  "type": "object",
+  "properties": {
+    "environmentType": {
+      "type": "string"
+    },
+    "environmentName": {
+      "type": "string"
+    },
+    "applicationFamily": {
+      "type": "string"
+    },
+    "databaseStorageInKilobytes": {
+      "type": "integer",
+      "description": "Used database storage in kilobytes"
+    }
+  }
+}

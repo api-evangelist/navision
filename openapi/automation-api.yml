@@ -20,60 +20,60 @@ externalDocs:
   description: Automation API Documentation
   url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
 servers:
-  - url: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
-    description: Business Central Online Automation API
-    variables:
-      environment:
-        default: production
-        description: The name of the Business Central environment
-  - url: https://{server}:{port}/{instance}/api/microsoft/automation/v2.0
-    description: Business Central On-Premises Automation API
-    variables:
-      server:
-        default: localhost
-        description: The on-premises server hostname
-      port:
-        default: '7048'
-        description: The OData services port
-      instance:
-        default: BC
-        description: The Business Central server instance name
+- url: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+  description: Business Central Online Automation API
+  variables:
+    environment:
+      default: production
+      description: The name of the Business Central environment
+- url: https://{server}:{port}/{instance}/api/microsoft/automation/v2.0
+  description: Business Central On-Premises Automation API
+  variables:
+    server:
+      default: localhost
+      description: The on-premises server hostname
+    port:
+      default: '7048'
+      description: The OData services port
+    instance:
+      default: BC
+      description: The Business Central server instance name
 security:
-  - oauth2: []
-  - bearerAuth: []
+- oauth2: []
+- bearerAuth: []
 tags:
-  - name: Companies
-    description: Manage automation companies
-  - name: Extensions
-    description: Manage installed extensions
-  - name: Extension Upload
-    description: Upload and install per-tenant extensions
-  - name: Extension Deployment Status
-    description: Monitor extension installation progress
-  - name: Users
-    description: Manage Business Central users
-  - name: User Groups
-    description: Manage user groups (deprecated in v25, use security groups)
-  - name: Security Groups
-    description: Manage security groups
-  - name: Permission Sets
-    description: Manage permission sets and user permissions
-  - name: Configuration Packages
-    description: Manage RapidStart configuration packages
-  - name: Features
-    description: Manage feature flags
-  - name: Profiles
-    description: Manage user profiles
-  - name: Scheduled Jobs
-    description: View scheduled background jobs
+- name: Companies
+  description: Manage automation companies
+- name: Extensions
+  description: Manage installed extensions
+- name: Extension Upload
+  description: Upload and install per-tenant extensions
+- name: Extension Deployment Status
+  description: Monitor extension installation progress
+- name: Users
+  description: Manage Business Central users
+- name: User Groups
+  description: Manage user groups (deprecated in v25, use security groups)
+- name: Security Groups
+  description: Manage security groups
+- name: Permission Sets
+  description: Manage permission sets and user permissions
+- name: Configuration Packages
+  description: Manage RapidStart configuration packages
+- name: Features
+  description: Manage feature flags
+- name: Profiles
+  description: Manage user profiles
+- name: Scheduled Jobs
+  description: View scheduled background jobs
 paths:
   /companies:
     get:
-      summary: List companies
+      summary: List Companies
       description: Returns a list of companies available for automation.
       operationId: listCompanies
       tags:
-        - Companies
+      - Companies
       responses:
         '200':
           description: Successfully retrieved companies
@@ -86,17 +86,30 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Company'
+              examples:
+                Listcompanies200Example:
+                  summary: Default listCompanies 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      name: Example Title
+                      displayName: example_value
+                      businessProfileId: '500123'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/automationCompanies:
     get:
-      summary: List automation companies
+      summary: List Automation Companies
       description: Returns a list of automation company objects.
       operationId: listAutomationCompanies
       tags:
-        - Companies
+      - Companies
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       responses:
         '200':
           description: Successfully retrieved automation companies
@@ -109,22 +122,44 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/AutomationCompany'
+              examples:
+                Listautomationcompanies200Example:
+                  summary: Default listAutomationCompanies 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      name: Example Title
+                      displayName: example_value
+                      businessProfileId: '500123'
+                      evaluationCompany: true
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Create a company
+      summary: Create a Company
       description: Creates a new company in the Business Central tenant.
       operationId: createAutomationCompany
       tags:
-        - Companies
+      - Companies
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AutomationCompanyCreate'
+            examples:
+              CreateautomationcompanyRequestExample:
+                summary: Default createAutomationCompany request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  displayName: example_value
+                  businessProfileId: '500123'
       responses:
         '201':
           description: Company created successfully
@@ -132,25 +167,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AutomationCompany'
+              examples:
+                Createautomationcompany201Example:
+                  summary: Default createAutomationCompany 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    displayName: example_value
+                    businessProfileId: '500123'
+                    evaluationCompany: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/automationCompanies({automationCompany_id}):
     get:
-      summary: Get an automation company
+      summary: Get an Automation Company
       description: Retrieves a specific automation company by ID.
       operationId: getAutomationCompany
       tags:
-        - Companies
+      - Companies
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - name: automationCompany_id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - $ref: '#/components/parameters/company_id'
+      - name: automationCompany_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
       responses:
         '200':
           description: Successfully retrieved automation company
@@ -158,31 +207,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AutomationCompany'
+              examples:
+                Getautomationcompany200Example:
+                  summary: Default getAutomationCompany 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    displayName: example_value
+                    businessProfileId: '500123'
+                    evaluationCompany: true
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
-      summary: Update an automation company
+      summary: Update an Automation Company
       description: Updates properties of an automation company (e.g., rename).
       operationId: updateAutomationCompany
       tags:
-        - Companies
+      - Companies
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - name: automationCompany_id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-        - $ref: '#/components/parameters/ifMatch'
+      - $ref: '#/components/parameters/company_id'
+      - name: automationCompany_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
+      - $ref: '#/components/parameters/ifMatch'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AutomationCompanyUpdate'
+            examples:
+              UpdateautomationcompanyRequestExample:
+                summary: Default updateAutomationCompany request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  displayName: example_value
       responses:
         '200':
           description: Company updated successfully
@@ -190,22 +260,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AutomationCompany'
+              examples:
+                Updateautomationcompany200Example:
+                  summary: Default updateAutomationCompany 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    displayName: example_value
+                    businessProfileId: '500123'
+                    evaluationCompany: true
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
-      summary: Delete an automation company
+      summary: Delete an Automation Company
       description: Deletes a company from the tenant.
       operationId: deleteAutomationCompany
       tags:
-        - Companies
+      - Companies
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - name: automationCompany_id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - $ref: '#/components/parameters/company_id'
+      - name: automationCompany_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
       responses:
         '204':
           description: Company deleted successfully
@@ -213,15 +297,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/extensions:
     get:
-      summary: List extensions
+      summary: List Extensions
       description: Returns a list of extensions published to the tenant.
       operationId: listExtensions
       tags:
-        - Extensions
+      - Extensions
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       responses:
         '200':
           description: Successfully retrieved extensions
@@ -234,83 +321,121 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Extension'
+              examples:
+                Listextensions200Example:
+                  summary: Default listExtensions 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      packageId: '500123'
+                      displayName: example_value
+                      publisher: example_value
+                      versionMajor: 10
+                      versionMinor: 10
+                      versionBuild: 10
+                      versionRevision: 10
+                      isInstalled: true
+                      publishedAs: Global
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/extensions({extension_id})/Microsoft.NAV.install:
     post:
-      summary: Install an extension
+      summary: Install an Extension
       description: Installs a published extension on the tenant.
       operationId: installExtension
       tags:
-        - Extensions
+      - Extensions
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/extension_id'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/extension_id'
       responses:
         '204':
           description: Extension installation initiated
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/extensions({extension_id})/Microsoft.NAV.uninstall:
     post:
-      summary: Uninstall an extension
+      summary: Uninstall an Extension
       description: Uninstalls an extension from the tenant.
       operationId: uninstallExtension
       tags:
-        - Extensions
+      - Extensions
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/extension_id'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/extension_id'
       responses:
         '204':
           description: Extension uninstallation initiated
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/extensions({extension_id})/Microsoft.NAV.uninstallAndDeleteExtensionData:
     post:
-      summary: Uninstall and delete extension data
+      summary: Uninstall and Delete Extension Data
       description: Uninstalls an extension and deletes all data owned by the extension. This action cannot be undone.
       operationId: uninstallAndDeleteExtensionData
       tags:
-        - Extensions
+      - Extensions
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/extension_id'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/extension_id'
       responses:
         '204':
           description: Extension uninstallation and data deletion initiated
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/extensions({extension_id})/Microsoft.NAV.unpublish:
     post:
-      summary: Unpublish an extension
+      summary: Unpublish an Extension
       description: Unpublishes an uninstalled extension from the tenant.
       operationId: unpublishExtension
       tags:
-        - Extensions
+      - Extensions
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/extension_id'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/extension_id'
       responses:
         '204':
           description: Extension unpublished
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/extensionUpload:
     post:
-      summary: Create extension upload record
+      summary: Create Extension Upload Record
       description: Creates an extension upload record for uploading a per-tenant extension.
       operationId: createExtensionUpload
       tags:
-        - Extension Upload
+      - Extension Upload
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ExtensionUploadCreate'
+            examples:
+              CreateextensionuploadRequestExample:
+                summary: Default createExtensionUpload request
+                x-microcks-default: true
+                value:
+                  schedule: Current version
+                  schemaSyncMode: Add
       responses:
         '201':
           description: Extension upload record created
@@ -318,24 +443,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExtensionUpload'
+              examples:
+                Createextensionupload201Example:
+                  summary: Default createExtensionUpload 201 response
+                  x-microcks-default: true
+                  value:
+                    systemId: '500123'
+                    schedule: Current version
+                    schemaSyncMode: Add
+                    status: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/extensionUpload({extensionUpload_id})/extensionContent:
     patch:
-      summary: Upload extension file
+      summary: Upload Extension File
       description: Uploads the extension file content to the extension upload record.
       operationId: uploadExtensionFile
       tags:
-        - Extension Upload
+      - Extension Upload
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - name: extensionUpload_id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-        - $ref: '#/components/parameters/ifMatch'
+      - $ref: '#/components/parameters/company_id'
+      - name: extensionUpload_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
+      - $ref: '#/components/parameters/ifMatch'
       requestBody:
         required: true
         content:
@@ -343,40 +481,52 @@ paths:
             schema:
               type: string
               format: binary
+            examples:
+              UploadextensionfileRequestExample:
+                summary: Default uploadExtensionFile request
+                x-microcks-default: true
+                value: example_value
       responses:
         '200':
           description: Extension file uploaded
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/extensionUpload({extensionUpload_id})/Microsoft.NAV.upload:
     post:
-      summary: Install uploaded extension
+      summary: Install Uploaded Extension
       description: Triggers the installation of a previously uploaded per-tenant extension.
       operationId: installUploadedExtension
       tags:
-        - Extension Upload
+      - Extension Upload
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - name: extensionUpload_id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - $ref: '#/components/parameters/company_id'
+      - name: extensionUpload_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
       responses:
         '204':
           description: Extension installation initiated
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/extensionDeploymentStatus:
     get:
-      summary: List extension deployment statuses
+      summary: List Extension Deployment Statuses
       description: Returns a list of ongoing extension deployment statuses.
       operationId: listExtensionDeploymentStatuses
       tags:
-        - Extension Deployment Status
+      - Extension Deployment Status
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       responses:
         '200':
           description: Successfully retrieved deployment statuses
@@ -389,17 +539,33 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ExtensionDeploymentStatus'
+              examples:
+                Listextensiondeploymentstatuses200Example:
+                  summary: Default listExtensionDeploymentStatuses 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      name: Example Title
+                      publisher: example_value
+                      operationType: example_value
+                      status: Unknown
+                      appVersion: example_value
+                      startedOn: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/users:
     get:
-      summary: List users
+      summary: List Users
       description: Returns a list of Business Central users.
       operationId: listUsers
       tags:
-        - Users
+      - Users
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       responses:
         '200':
           description: Successfully retrieved users
@@ -412,18 +578,32 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/User'
+              examples:
+                Listusers200Example:
+                  summary: Default listUsers 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - userSecurityId: '500123'
+                      userName: example_value
+                      displayName: example_value
+                      state: Enabled
+                      expiryDate: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/users({user_id}):
     get:
-      summary: Get a user
+      summary: Get a User
       description: Retrieves a specific user by user security ID.
       operationId: getUser
       tags:
-        - Users
+      - Users
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/user_id'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/user_id'
       responses:
         '200':
           description: Successfully retrieved user
@@ -431,26 +611,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+              examples:
+                Getuser200Example:
+                  summary: Default getUser 200 response
+                  x-microcks-default: true
+                  value:
+                    userSecurityId: '500123'
+                    userName: example_value
+                    displayName: example_value
+                    state: Enabled
+                    expiryDate: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
-      summary: Update a user
+      summary: Update a User
       description: Updates properties of a Business Central user.
       operationId: updateUser
       tags:
-        - Users
+      - Users
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/user_id'
-        - $ref: '#/components/parameters/ifMatch'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/user_id'
+      - $ref: '#/components/parameters/ifMatch'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UserUpdate'
+            examples:
+              UpdateuserRequestExample:
+                summary: Default updateUser request
+                x-microcks-default: true
+                value:
+                  state: Enabled
+                  expiryDate: '2026-01-15T10:30:00Z'
       responses:
         '200':
           description: User updated successfully
@@ -458,51 +658,70 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+              examples:
+                Updateuser200Example:
+                  summary: Default updateUser 200 response
+                  x-microcks-default: true
+                  value:
+                    userSecurityId: '500123'
+                    userName: example_value
+                    displayName: example_value
+                    state: Enabled
+                    expiryDate: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/users/Microsoft.NAV.getNewUsersFromOffice365:
     post:
-      summary: Get new users from Office 365
+      summary: Get New Users From Office 365
       description: >-
         Retrieves new users or updated user information from Office 365.
         Runs synchronously. Not supported with S2S authentication.
       operationId: getNewUsersFromOffice365
       tags:
-        - Users
+      - Users
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       responses:
         '200':
           description: Users retrieved successfully
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/users/Microsoft.NAV.getNewUsersFromOffice365Async:
     post:
-      summary: Get new users from Office 365 (async)
+      summary: Get New Users From Office 365 (async)
       description: >-
         Schedules a background job to retrieve new users from Office 365.
         Returns a link to the scheduled job for tracking progress. Not
         supported with S2S authentication.
       operationId: getNewUsersFromOffice365Async
       tags:
-        - Users
+      - Users
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       responses:
         '202':
           description: Background job scheduled
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/users({user_id})/userPermissions:
     get:
-      summary: List user permissions
+      summary: List User Permissions
       description: Returns permission sets assigned to the user.
       operationId: listUserPermissions
       tags:
-        - Permission Sets
+      - Permission Sets
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/user_id'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/user_id'
       responses:
         '200':
           description: Successfully retrieved user permissions
@@ -515,17 +734,32 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/UserPermission'
+              examples:
+                Listuserpermissions200Example:
+                  summary: Default listUserPermissions 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      roleId: '500123'
+                      displayName: example_value
+                      company: example_value
+                      scope: System
+                      appId: '500123'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Assign a permission set to a user
+      summary: Assign a Permission Set to a User
       description: Assigns a permission set to the specified user.
       operationId: createUserPermission
       tags:
-        - Permission Sets
+      - Permission Sets
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - $ref: '#/components/parameters/user_id'
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/user_id'
       requestBody:
         required: true
         content:
@@ -533,11 +767,17 @@ paths:
             schema:
               type: object
               required:
-                - roleId
+              - roleId
               properties:
                 roleId:
                   type: string
                   description: The permission set role ID
+            examples:
+              CreateuserpermissionRequestExample:
+                summary: Default createUserPermission request
+                x-microcks-default: true
+                value:
+                  roleId: '500123'
       responses:
         '201':
           description: Permission set assigned
@@ -545,17 +785,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserPermission'
+              examples:
+                Createuserpermission201Example:
+                  summary: Default createUserPermission 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    roleId: '500123'
+                    displayName: example_value
+                    company: example_value
+                    scope: System
+                    appId: '500123'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/permissionSets:
     get:
-      summary: List permission sets
+      summary: List Permission Sets
       description: Returns a list of available permission sets.
       operationId: listPermissionSets
       tags:
-        - Permission Sets
+      - Permission Sets
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       responses:
         '200':
           description: Successfully retrieved permission sets
@@ -568,17 +822,32 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/PermissionSet'
+              examples:
+                Listpermissionsets200Example:
+                  summary: Default listPermissionSets 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      roleId: '500123'
+                      displayName: example_value
+                      scope: System
+                      appId: '500123'
+                      extensionName: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/securityGroups:
     get:
-      summary: List security groups
+      summary: List Security Groups
       description: Returns a list of security groups.
       operationId: listSecurityGroups
       tags:
-        - Security Groups
+      - Security Groups
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       responses:
         '200':
           description: Successfully retrieved security groups
@@ -591,17 +860,30 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/SecurityGroup'
+              examples:
+                Listsecuritygroups200Example:
+                  summary: Default listSecurityGroups 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      groupId: '500123'
+                      code: example_value
+                      displayName: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/configurationPackages:
     get:
-      summary: List configuration packages
+      summary: List Configuration Packages
       description: Returns a list of RapidStart configuration packages.
       operationId: listConfigurationPackages
       tags:
-        - Configuration Packages
+      - Configuration Packages
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       responses:
         '200':
           description: Successfully retrieved configuration packages
@@ -614,16 +896,37 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ConfigurationPackage'
+              examples:
+                Listconfigurationpackages200Example:
+                  summary: Default listConfigurationPackages 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      code: example_value
+                      packageName: example_value
+                      languageId: '500123'
+                      productVersion: example_value
+                      processingOrder: 10
+                      excludeConfigurationTables: true
+                      numberOfTables: 10
+                      numberOfRecords: 10
+                      numberOfErrors: 10
+                      importStatus: ' '
+                      applyStatus: ' '
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Create a configuration package
+      summary: Create a Configuration Package
       description: Creates a new RapidStart configuration package record.
       operationId: createConfigurationPackage
       tags:
-        - Configuration Packages
+      - Configuration Packages
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       requestBody:
         required: true
         content:
@@ -631,8 +934,8 @@ paths:
             schema:
               type: object
               required:
-                - code
-                - packageName
+              - code
+              - packageName
               properties:
                 code:
                   type: string
@@ -640,6 +943,13 @@ paths:
                 packageName:
                   type: string
                   description: The configuration package name
+            examples:
+              CreateconfigurationpackageRequestExample:
+                summary: Default createConfigurationPackage request
+                x-microcks-default: true
+                value:
+                  code: example_value
+                  packageName: example_value
       responses:
         '201':
           description: Configuration package created
@@ -647,29 +957,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConfigurationPackage'
+              examples:
+                Createconfigurationpackage201Example:
+                  summary: Default createConfigurationPackage 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    code: example_value
+                    packageName: example_value
+                    languageId: '500123'
+                    productVersion: example_value
+                    processingOrder: 10
+                    excludeConfigurationTables: true
+                    numberOfTables: 10
+                    numberOfRecords: 10
+                    numberOfErrors: 10
+                    importStatus: ' '
+                    applyStatus: ' '
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/configurationPackages({package_id})/file('{code}')/content:
     patch:
-      summary: Upload RapidStart package file
+      summary: Upload Rapidstart Package File
       description: Uploads the RapidStart package file content.
       operationId: uploadConfigurationPackageFile
       tags:
-        - Configuration Packages
+      - Configuration Packages
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - name: package_id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-        - name: code
-          in: path
-          required: true
-          schema:
-            type: string
-        - $ref: '#/components/parameters/ifMatch'
+      - $ref: '#/components/parameters/company_id'
+      - name: package_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
+      - name: code
+        in: path
+        required: true
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/ifMatch'
       requestBody:
         required: true
         content:
@@ -677,60 +1009,76 @@ paths:
             schema:
               type: string
               format: binary
+            examples:
+              UploadconfigurationpackagefileRequestExample:
+                summary: Default uploadConfigurationPackageFile request
+                x-microcks-default: true
+                value: example_value
       responses:
         '200':
           description: Package file uploaded
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/configurationPackages({package_id})/Microsoft.NAV.import:
     post:
-      summary: Import a configuration package
+      summary: Import a Configuration Package
       description: Imports the uploaded RapidStart configuration package.
       operationId: importConfigurationPackage
       tags:
-        - Configuration Packages
+      - Configuration Packages
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - name: package_id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - $ref: '#/components/parameters/company_id'
+      - name: package_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
       responses:
         '204':
           description: Import initiated
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/configurationPackages({package_id})/Microsoft.NAV.apply:
     post:
-      summary: Apply a configuration package
+      summary: Apply a Configuration Package
       description: Applies the imported RapidStart configuration package.
       operationId: applyConfigurationPackage
       tags:
-        - Configuration Packages
+      - Configuration Packages
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - name: package_id
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - $ref: '#/components/parameters/company_id'
+      - name: package_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
       responses:
         '204':
           description: Apply initiated
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/features:
     get:
-      summary: List features
+      summary: List Features
       description: Returns a list of features available in feature management.
       operationId: listFeatures
       tags:
-        - Features
+      - Features
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       responses:
         '200':
           description: Successfully retrieved features
@@ -743,22 +1091,37 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Feature'
+              examples:
+                Listfeatures200Example:
+                  summary: Default listFeatures 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      displayName: example_value
+                      description: A sample description.
+                      enabled: true
+                      learnMoreUrl: https://www.example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/features({feature_id})/Microsoft.NAV.activate:
     post:
-      summary: Activate a feature
+      summary: Activate a Feature
       description: Activates the specified feature.
       operationId: activateFeature
       tags:
-        - Features
+      - Features
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - name: feature_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/company_id'
+      - name: feature_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
       requestBody:
         content:
           application/json:
@@ -771,39 +1134,53 @@ paths:
                 startDateTime:
                   type: string
                   format: date-time
+            examples:
+              ActivatefeatureRequestExample:
+                summary: Default activateFeature request
+                x-microcks-default: true
+                value:
+                  updateInBackground: true
+                  startDateTime: '2026-01-15T10:30:00Z'
       responses:
         '200':
           description: Feature activated
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/features({feature_id})/Microsoft.NAV.deactivate:
     post:
-      summary: Deactivate a feature
+      summary: Deactivate a Feature
       description: Deactivates the specified feature.
       operationId: deactivateFeature
       tags:
-        - Features
+      - Features
       parameters:
-        - $ref: '#/components/parameters/company_id'
-        - name: feature_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/company_id'
+      - name: feature_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '500123'
       responses:
         '200':
           description: Feature deactivated
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/profiles:
     get:
-      summary: List profiles
+      summary: List Profiles
       description: Returns a list of user profiles.
       operationId: listProfiles
       tags:
-        - Profiles
+      - Profiles
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       responses:
         '200':
           description: Successfully retrieved profiles
@@ -816,17 +1193,32 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Profile'
+              examples:
+                Listprofiles200Example:
+                  summary: Default listProfiles 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - profileId: '500123'
+                      scope: System
+                      caption: example_value
+                      description: A sample description.
+                      applicationId: '500123'
+                      enabled: true
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /companies({company_id})/scheduledJobs:
     get:
-      summary: List scheduled jobs
+      summary: List Scheduled Jobs
       description: Returns a list of scheduled background jobs.
       operationId: listScheduledJobs
       tags:
-        - Scheduled Jobs
+      - Scheduled Jobs
       parameters:
-        - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/company_id'
       responses:
         '200':
           description: Successfully retrieved scheduled jobs
@@ -839,8 +1231,24 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/ScheduledJob'
+              examples:
+                Listscheduledjobs200Example:
+                  summary: Default listScheduledJobs 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      category: example_value
+                      status: example_value
+                      description: A sample description.
+                      errorMessage: example_value
+                      startDateTime: '2026-01-15T10:30:00Z'
+                      endDateTime: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     oauth2:
@@ -922,57 +1330,72 @@ components:
               type: string
             message:
               type: string
+          example: example_value
     Company:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         name:
           type: string
+          example: Example Title
         displayName:
           type: string
+          example: example_value
         businessProfileId:
           type: string
+          example: '500123'
     AutomationCompany:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         name:
           type: string
           description: The company name
+          example: Example Title
         displayName:
           type: string
           description: The company display name
+          example: example_value
         businessProfileId:
           type: string
           description: The business profile ID
+          example: '500123'
         evaluationCompany:
           type: boolean
           description: Whether this is an evaluation company
+          example: true
     AutomationCompanyCreate:
       type: object
       required:
-        - name
-        - displayName
+      - name
+      - displayName
       properties:
         name:
           type: string
           description: The name of the new company
+          example: Example Title
         displayName:
           type: string
           description: The display name of the new company
+          example: example_value
         businessProfileId:
           type: string
+          example: '500123'
     AutomationCompanyUpdate:
       type: object
       properties:
         name:
           type: string
+          example: Example Title
         displayName:
           type: string
+          example: example_value
     Extension:
       type: object
       properties:
@@ -980,106 +1403,129 @@ components:
           type: string
           format: uuid
           description: The extension ID
+          example: abc123
         packageId:
           type: string
           format: uuid
           description: The package ID used for install/uninstall operations
+          example: '500123'
         displayName:
           type: string
           description: The extension display name
+          example: example_value
         publisher:
           type: string
           description: The extension publisher
+          example: example_value
         versionMajor:
           type: integer
           description: Major version number
+          example: 10
         versionMinor:
           type: integer
           description: Minor version number
+          example: 10
         versionBuild:
           type: integer
           description: Build version number
+          example: 10
         versionRevision:
           type: integer
           description: Revision version number
+          example: 10
         isInstalled:
           type: boolean
           description: Whether the extension is currently installed
+          example: true
         publishedAs:
           type: string
           description: How the extension was published
           enum:
-            - Global
-            - Dev
-            - PTE
+          - Global
+          - Dev
+          - PTE
+          example: Global
     ExtensionUpload:
       type: object
       properties:
         systemId:
           type: string
           format: uuid
+          example: '500123'
         schedule:
           type: string
           description: When to schedule the installation
           enum:
-            - Current version
-            - Next minor version
-            - Next major version
+          - Current version
+          - Next minor version
+          - Next major version
+          example: Current version
         schemaSyncMode:
           type: string
           description: Schema synchronization mode
           enum:
-            - Add
-            - Force Sync
+          - Add
+          - Force Sync
+          example: Add
         status:
           type: string
           readOnly: true
+          example: example_value
     ExtensionUploadCreate:
       type: object
       required:
-        - schedule
-        - schemaSyncMode
+      - schedule
+      - schemaSyncMode
       properties:
         schedule:
           type: string
           enum:
-            - Current version
-            - Next minor version
-            - Next major version
+          - Current version
+          - Next minor version
+          - Next major version
+          example: Current version
         schemaSyncMode:
           type: string
           enum:
-            - Add
-            - Force Sync
+          - Add
+          - Force Sync
+          example: Add
     ExtensionDeploymentStatus:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         name:
           type: string
           description: Extension name
+          example: Example Title
         publisher:
           type: string
           description: Extension publisher
+          example: example_value
         operationType:
           type: string
           description: Type of deployment operation
+          example: example_value
         status:
           type: string
           description: Deployment status
           enum:
-            - Unknown
-            - InProgress
-            - Completed
-            - Failed
+          - Unknown
+          - InProgress
+          - Completed
+          - Failed
+          example: Unknown
         appVersion:
           type: string
           description: Extension version
+          example: example_value
         startedOn:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
     User:
       type: object
       properties:
@@ -1087,200 +1533,253 @@ components:
           type: string
           format: uuid
           description: The user security ID
+          example: '500123'
         userName:
           type: string
           description: The user name
+          example: example_value
         displayName:
           type: string
           description: The user display name
+          example: example_value
         state:
           type: string
           description: The user state
           enum:
-            - Enabled
-            - Disabled
+          - Enabled
+          - Disabled
+          example: Enabled
         expiryDate:
           type: string
           format: date-time
           description: The user expiry date
+          example: '2026-01-15T10:30:00Z'
     UserUpdate:
       type: object
       properties:
         state:
           type: string
           enum:
-            - Enabled
-            - Disabled
+          - Enabled
+          - Disabled
+          example: Enabled
         expiryDate:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
     UserPermission:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         roleId:
           type: string
           description: The permission set role ID
+          example: '500123'
         displayName:
           type: string
           description: The permission set display name
+          example: example_value
         company:
           type: string
           description: The company name scope
+          example: example_value
         scope:
           type: string
           enum:
-            - System
-            - Tenant
+          - System
+          - Tenant
+          example: System
         appId:
           type: string
           format: uuid
+          example: '500123'
     PermissionSet:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         roleId:
           type: string
           description: The permission set role ID
+          example: '500123'
         displayName:
           type: string
           description: The permission set display name
+          example: example_value
         scope:
           type: string
           enum:
-            - System
-            - Tenant
+          - System
+          - Tenant
+          example: System
         appId:
           type: string
           format: uuid
+          example: '500123'
         extensionName:
           type: string
+          example: example_value
     SecurityGroup:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         groupId:
           type: string
           format: uuid
           description: The Microsoft Entra security group ID
+          example: '500123'
         code:
           type: string
           description: The security group code
+          example: example_value
         displayName:
           type: string
           description: The security group display name
+          example: example_value
     ConfigurationPackage:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         code:
           type: string
           description: The package code
+          example: example_value
         packageName:
           type: string
           description: The package name
+          example: example_value
         languageId:
           type: integer
+          example: '500123'
         productVersion:
           type: string
+          example: example_value
         processingOrder:
           type: integer
+          example: 10
         excludeConfigurationTables:
           type: boolean
+          example: true
         numberOfTables:
           type: integer
           readOnly: true
+          example: 10
         numberOfRecords:
           type: integer
           readOnly: true
+          example: 10
         numberOfErrors:
           type: integer
           readOnly: true
+          example: 10
         importStatus:
           type: string
           readOnly: true
           enum:
-            - ' '
-            - InProgress
-            - Completed
-            - Error
+          - ' '
+          - InProgress
+          - Completed
+          - Error
+          example: ' '
         applyStatus:
           type: string
           readOnly: true
           enum:
-            - ' '
-            - InProgress
-            - Completed
-            - Error
+          - ' '
+          - InProgress
+          - Completed
+          - Error
+          example: ' '
     Feature:
       type: object
       properties:
         id:
           type: string
           description: The feature ID
+          example: abc123
         displayName:
           type: string
           description: The feature display name
+          example: example_value
         description:
           type: string
           description: The feature description
+          example: A sample description.
         enabled:
           type: boolean
           description: Whether the feature is enabled
+          example: true
         learnMoreUrl:
           type: string
           format: uri
           description: URL to documentation about the feature
+          example: https://www.example.com
     Profile:
       type: object
       properties:
         profileId:
           type: string
           description: The profile ID
+          example: '500123'
         scope:
           type: string
           enum:
-            - System
-            - Tenant
+          - System
+          - Tenant
+          example: System
         caption:
           type: string
           description: The profile caption
+          example: example_value
         description:
           type: string
+          example: A sample description.
         applicationId:
           type: string
           format: uuid
+          example: '500123'
         enabled:
           type: boolean
+          example: true
     ScheduledJob:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         category:
           type: string
           description: The job category
+          example: example_value
         status:
           type: string
           description: The job status
+          example: example_value
         description:
           type: string
           description: The job description
+          example: A sample description.
         errorMessage:
           type: string
           description: Error message if the job failed
+          example: example_value
         startDateTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         endDateTime:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'

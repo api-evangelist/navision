@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Item",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the item"
+    },
+    "number": {
+      "type": "string",
+      "description": "The item number"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The item display name"
+    },
+    "displayName2": {
+      "type": "string",
+      "description": "The item display name 2"
+    },
+    "type": {
+      "type": "string",
+      "description": "The item type"
+    },
+    "itemCategoryId": {
+      "type": "string",
+      "description": "The item category ID"
+    },
+    "itemCategoryCode": {
+      "type": "string",
+      "description": "The item category code"
+    },
+    "blocked": {
+      "type": "boolean",
+      "description": "Whether the item is blocked"
+    },
+    "gtin": {
+      "type": "string",
+      "description": "The Global Trade Item Number"
+    },
+    "inventory": {
+      "type": "number",
+      "description": "The current inventory quantity"
+    },
+    "unitPrice": {
+      "type": "number",
+      "description": "The unit price"
+    },
+    "priceIncludesTax": {
+      "type": "boolean",
+      "description": "Whether the price includes tax"
+    },
+    "unitCost": {
+      "type": "number",
+      "description": "The unit cost"
+    },
+    "taxGroupId": {
+      "type": "string",
+      "description": "The tax group ID"
+    },
+    "taxGroupCode": {
+      "type": "string",
+      "description": "The tax group code"
+    },
+    "baseUnitOfMeasureId": {
+      "type": "string",
+      "description": "The base unit of measure ID"
+    },
+    "baseUnitOfMeasureCode": {
+      "type": "string",
+      "description": "The base unit of measure code"
+    },
+    "generalProductPostingGroupId": {
+      "type": "string"
+    },
+    "generalProductPostingGroupCode": {
+      "type": "string"
+    },
+    "inventoryPostingGroupId": {
+      "type": "string"
+    },
+    "inventoryPostingGroupCode": {
+      "type": "string"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    }
+  }
+}

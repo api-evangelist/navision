@@ -1,0 +1,12 @@
+{
+  "id": "abc123",
+  "packageId": "500123",
+  "displayName": "example_value",
+  "publisher": "example_value",
+  "versionMajor": 10,
+  "versionMinor": 10,
+  "versionBuild": 10,
+  "versionRevision": 10,
+  "isInstalled": true,
+  "publishedAs": "example_value"
+}

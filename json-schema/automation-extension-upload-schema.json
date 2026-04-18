@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExtensionUpload",
+  "type": "object",
+  "properties": {
+    "systemId": {
+      "type": "string"
+    },
+    "schedule": {
+      "type": "string",
+      "description": "When to schedule the installation"
+    },
+    "schemaSyncMode": {
+      "type": "string",
+      "description": "Schema synchronization mode"
+    },
+    "status": {
+      "type": "string"
+    }
+  }
+}

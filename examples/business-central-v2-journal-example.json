@@ -1,0 +1,9 @@
+{
+  "id": "abc123",
+  "code": "example_value",
+  "displayName": "example_value",
+  "templateDisplayName": "example_value",
+  "lastModifiedDateTime": "example_value",
+  "balancingAccountId": "500123",
+  "balancingAccountNumber": "example_value"
+}

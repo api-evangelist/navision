@@ -1,0 +1,6 @@
+{
+  "environmentType": "example_value",
+  "environmentName": "example_value",
+  "applicationFamily": "example_value",
+  "databaseStorageInKilobytes": 10
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AppUpdateRequest",
+  "type": "object",
+  "properties": {
+    "targetVersion": {
+      "type": "string",
+      "description": "Target version to update to"
+    },
+    "allowPreviewVersion": {
+      "type": "boolean",
+      "description": "Whether to allow preview versions"
+    },
+    "ignoreUpgradeWindow": {
+      "type": "boolean",
+      "description": "Whether to ignore the update window"
+    },
+    "allowDependencyUpdate": {
+      "type": "boolean",
+      "description": "Whether to also update dependent apps"
+    }
+  }
+}

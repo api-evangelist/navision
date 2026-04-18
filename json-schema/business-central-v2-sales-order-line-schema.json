@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SalesOrderLine",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "documentId": {
+      "type": "string"
+    },
+    "sequence": {
+      "type": "integer"
+    },
+    "itemId": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "lineType": {
+      "type": "string"
+    },
+    "lineObjectNumber": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "description2": {
+      "type": "string"
+    },
+    "unitOfMeasureId": {
+      "type": "string"
+    },
+    "unitOfMeasureCode": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "number"
+    },
+    "unitPrice": {
+      "type": "number"
+    },
+    "discountAmount": {
+      "type": "number"
+    },
+    "discountPercent": {
+      "type": "number"
+    },
+    "discountAppliedBeforeTax": {
+      "type": "boolean"
+    },
+    "amountExcludingTax": {
+      "type": "number"
+    },
+    "taxCode": {
+      "type": "string"
+    },
+    "taxPercent": {
+      "type": "number"
+    },
+    "totalTaxAmount": {
+      "type": "number"
+    },
+    "amountIncludingTax": {
+      "type": "number"
+    },
+    "netAmount": {
+      "type": "number"
+    },
+    "netTaxAmount": {
+      "type": "number"
+    },
+    "netAmountIncludingTax": {
+      "type": "number"
+    },
+    "shipmentDate": {
+      "type": "string"
+    },
+    "shippedQuantity": {
+      "type": "number"
+    },
+    "invoicedQuantity": {
+      "type": "number"
+    },
+    "invoiceQuantity": {
+      "type": "number"
+    },
+    "shipQuantity": {
+      "type": "number"
+    }
+  }
+}

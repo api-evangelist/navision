@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "EnvironmentSettings",
+  "type": "object",
+  "properties": {
+    "appInsightsKey": {
+      "type": "string"
+    },
+    "updateWindow": {
+      "type": "object"
+    },
+    "securityGroupId": {
+      "type": "string"
+    }
+  }
+}

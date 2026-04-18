@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UserPermission",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "roleId": {
+      "type": "string",
+      "description": "The permission set role ID"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The permission set display name"
+    },
+    "company": {
+      "type": "string",
+      "description": "The company name scope"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "appId": {
+      "type": "string"
+    }
+  }
+}

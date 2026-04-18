@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ScheduledJob",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "description": "The job category"
+    },
+    "status": {
+      "type": "string",
+      "description": "The job status"
+    },
+    "description": {
+      "type": "string",
+      "description": "The job description"
+    },
+    "errorMessage": {
+      "type": "string",
+      "description": "Error message if the job failed"
+    },
+    "startDateTime": {
+      "type": "string"
+    },
+    "endDateTime": {
+      "type": "string"
+    }
+  }
+}

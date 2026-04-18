@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CopyEnvironmentRequest",
+  "type": "object",
+  "properties": {
+    "environmentName": {
+      "type": "string",
+      "description": "Name for the new environment"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of environment to create"
+    }
+  }
+}

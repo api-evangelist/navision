@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PurchaseOrder",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the purchase order"
+    },
+    "number": {
+      "type": "string",
+      "description": "The purchase order number"
+    },
+    "orderDate": {
+      "type": "string",
+      "description": "The order date"
+    },
+    "postingDate": {
+      "type": "string",
+      "description": "The posting date"
+    },
+    "vendorId": {
+      "type": "string",
+      "description": "The vendor ID"
+    },
+    "vendorNumber": {
+      "type": "string",
+      "description": "The vendor number"
+    },
+    "vendorName": {
+      "type": "string",
+      "description": "The vendor name"
+    },
+    "payToName": {
+      "type": "string"
+    },
+    "payToVendorId": {
+      "type": "string"
+    },
+    "payToVendorNumber": {
+      "type": "string"
+    },
+    "shipToName": {
+      "type": "string"
+    },
+    "shipToContact": {
+      "type": "string"
+    },
+    "buyFromAddressLine1": {
+      "type": "string"
+    },
+    "buyFromAddressLine2": {
+      "type": "string"
+    },
+    "buyFromCity": {
+      "type": "string"
+    },
+    "buyFromCountry": {
+      "type": "string"
+    },
+    "buyFromState": {
+      "type": "string"
+    },
+    "buyFromPostCode": {
+      "type": "string"
+    },
+    "currencyId": {
+      "type": "string"
+    },
+    "currencyCode": {
+      "type": "string"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean"
+    },
+    "paymentTermsId": {
+      "type": "string"
+    },
+    "shipmentMethodId": {
+      "type": "string"
+    },
+    "purchaser": {
+      "type": "string"
+    },
+    "requestedReceiptDate": {
+      "type": "string"
+    },
+    "discountAmount": {
+      "type": "number"
+    },
+    "discountAppliedBeforeTax": {
+      "type": "boolean"
+    },
+    "totalAmountExcludingTax": {
+      "type": "number"
+    },
+    "totalTaxAmount": {
+      "type": "number"
+    },
+    "totalAmountIncludingTax": {
+      "type": "number"
+    },
+    "fullyReceived": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "string"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    },
+    "purchaseOrderLines": {
+      "type": "array"
+    }
+  }
+}

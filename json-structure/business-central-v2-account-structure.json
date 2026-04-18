@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Account",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "number": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "subCategory": {
+      "type": "string"
+    },
+    "blocked": {
+      "type": "boolean"
+    },
+    "accountType": {
+      "type": "string"
+    },
+    "directPosting": {
+      "type": "boolean"
+    },
+    "netChange": {
+      "type": "number"
+    },
+    "consolidationTranslationMethod": {
+      "type": "string"
+    },
+    "consolidationDebitAccount": {
+      "type": "string"
+    },
+    "consolidationCreditAccount": {
+      "type": "string"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    }
+  }
+}

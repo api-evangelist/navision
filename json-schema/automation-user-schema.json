@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "User",
+  "type": "object",
+  "properties": {
+    "userSecurityId": {
+      "type": "string",
+      "description": "The user security ID"
+    },
+    "userName": {
+      "type": "string",
+      "description": "The user name"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The user display name"
+    },
+    "state": {
+      "type": "string",
+      "description": "The user state"
+    },
+    "expiryDate": {
+      "type": "string",
+      "description": "The user expiry date"
+    }
+  }
+}

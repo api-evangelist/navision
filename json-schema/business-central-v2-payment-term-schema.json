@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PaymentTerm",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "dueDateCalculation": {
+      "type": "string",
+      "description": "The date formula for due date calculation"
+    },
+    "discountDateCalculation": {
+      "type": "string",
+      "description": "The date formula for discount date calculation"
+    },
+    "discountPercent": {
+      "type": "number"
+    },
+    "calculateDiscountOnCreditMemos": {
+      "type": "boolean"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    }
+  }
+}

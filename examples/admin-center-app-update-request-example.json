@@ -1,0 +1,6 @@
+{
+  "targetVersion": "example_value",
+  "allowPreviewVersion": true,
+  "ignoreUpgradeWindow": true,
+  "allowDependencyUpdate": true
+}

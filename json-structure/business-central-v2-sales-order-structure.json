@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "SalesOrder",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "number": {
+      "type": "string"
+    },
+    "externalDocumentNumber": {
+      "type": "string"
+    },
+    "orderDate": {
+      "type": "string"
+    },
+    "postingDate": {
+      "type": "string"
+    },
+    "customerId": {
+      "type": "string"
+    },
+    "customerNumber": {
+      "type": "string"
+    },
+    "customerName": {
+      "type": "string"
+    },
+    "billToName": {
+      "type": "string"
+    },
+    "billToCustomerId": {
+      "type": "string"
+    },
+    "billToCustomerNumber": {
+      "type": "string"
+    },
+    "shipToName": {
+      "type": "string"
+    },
+    "shipToContact": {
+      "type": "string"
+    },
+    "sellToAddressLine1": {
+      "type": "string"
+    },
+    "sellToAddressLine2": {
+      "type": "string"
+    },
+    "sellToCity": {
+      "type": "string"
+    },
+    "sellToCountry": {
+      "type": "string"
+    },
+    "sellToState": {
+      "type": "string"
+    },
+    "sellToPostCode": {
+      "type": "string"
+    },
+    "currencyId": {
+      "type": "string"
+    },
+    "currencyCode": {
+      "type": "string"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean"
+    },
+    "paymentTermsId": {
+      "type": "string"
+    },
+    "shipmentMethodId": {
+      "type": "string"
+    },
+    "salesperson": {
+      "type": "string"
+    },
+    "requestedDeliveryDate": {
+      "type": "string"
+    },
+    "discountAmount": {
+      "type": "number"
+    },
+    "discountAppliedBeforeTax": {
+      "type": "boolean"
+    },
+    "totalAmountExcludingTax": {
+      "type": "number"
+    },
+    "totalTaxAmount": {
+      "type": "number"
+    },
+    "totalAmountIncludingTax": {
+      "type": "number"
+    },
+    "fullyShipped": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "string"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    },
+    "phoneNumber": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "salesOrderLines": {
+      "type": "array"
+    }
+  }
+}

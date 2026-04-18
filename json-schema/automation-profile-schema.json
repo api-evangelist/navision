@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Profile",
+  "type": "object",
+  "properties": {
+    "profileId": {
+      "type": "string",
+      "description": "The profile ID"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "caption": {
+      "type": "string",
+      "description": "The profile caption"
+    },
+    "description": {
+      "type": "string"
+    },
+    "applicationId": {
+      "type": "string"
+    },
+    "enabled": {
+      "type": "boolean"
+    }
+  }
+}

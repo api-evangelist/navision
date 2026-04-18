@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AutomationCompanyCreate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the new company"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name of the new company"
+    },
+    "businessProfileId": {
+      "type": "string"
+    }
+  }
+}

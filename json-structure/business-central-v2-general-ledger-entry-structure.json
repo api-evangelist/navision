@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "GeneralLedgerEntry",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "entryNumber": {
+      "type": "integer"
+    },
+    "postingDate": {
+      "type": "string"
+    },
+    "documentNumber": {
+      "type": "string"
+    },
+    "documentType": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "accountNumber": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "debitAmount": {
+      "type": "number"
+    },
+    "creditAmount": {
+      "type": "number"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    }
+  }
+}

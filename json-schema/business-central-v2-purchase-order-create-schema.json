@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PurchaseOrderCreate",
+  "type": "object",
+  "properties": {
+    "orderDate": {
+      "type": "string"
+    },
+    "vendorId": {
+      "type": "string"
+    },
+    "vendorNumber": {
+      "type": "string"
+    },
+    "currencyCode": {
+      "type": "string"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean"
+    },
+    "requestedReceiptDate": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExtensionDeploymentStatus",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "Extension name"
+    },
+    "publisher": {
+      "type": "string",
+      "description": "Extension publisher"
+    },
+    "operationType": {
+      "type": "string",
+      "description": "Type of deployment operation"
+    },
+    "status": {
+      "type": "string",
+      "description": "Deployment status"
+    },
+    "appVersion": {
+      "type": "string",
+      "description": "Extension version"
+    },
+    "startedOn": {
+      "type": "string"
+    }
+  }
+}

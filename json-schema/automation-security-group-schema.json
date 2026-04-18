@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SecurityGroup",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "groupId": {
+      "type": "string",
+      "description": "The Microsoft Entra security group ID"
+    },
+    "code": {
+      "type": "string",
+      "description": "The security group code"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The security group display name"
+    }
+  }
+}

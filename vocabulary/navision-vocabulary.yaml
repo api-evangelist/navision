@@ -1,0 +1,45 @@
+name: navision API Vocabulary
+provider: navision
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 109
+schemas: 72
+tags:
+- Accounts
+- App Management
+- Available Applications
+- Companies
+- Configuration Packages
+- Countries/Regions
+- Currency
+- Customer Payments
+- Customers
+- Dimensions
+- Employees
+- Environment Operations
+- Environment Settings
+- Environments
+- Extension Deployment Status
+- Extension Upload
+- Extensions
+- Features
+- Item Categories
+- Items
+- Journals
+- Notifications
+- Payment Methods
+- Payment Terms
+- Permission Sets
+- Profiles
+- Purchase Invoices
+- Purchase Orders
+- Sales Invoices
+- Sales Orders
+- Scheduled Jobs
+- Security Groups
+- Storage
+- Support Settings
+- Update Management
+- Users
+- Vendor Payments
+- Vendors

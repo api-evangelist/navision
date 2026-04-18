@@ -1,0 +1,8 @@
+{
+  "EnvironmentName": "example_value",
+  "EnvironmentType": "example_value",
+  "PointInTime": "example_value",
+  "SkipInstallingPTEs": true,
+  "SkipInstallingThirdPartyGlobalApps": true,
+  "SkipEnvironmentCleanup": true
+}

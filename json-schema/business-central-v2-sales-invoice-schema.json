@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SalesInvoice",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "number": {
+      "type": "string"
+    },
+    "externalDocumentNumber": {
+      "type": "string"
+    },
+    "invoiceDate": {
+      "type": "string"
+    },
+    "postingDate": {
+      "type": "string"
+    },
+    "dueDate": {
+      "type": "string"
+    },
+    "customerId": {
+      "type": "string"
+    },
+    "customerNumber": {
+      "type": "string"
+    },
+    "customerName": {
+      "type": "string"
+    },
+    "currencyCode": {
+      "type": "string"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean"
+    },
+    "totalAmountExcludingTax": {
+      "type": "number"
+    },
+    "totalTaxAmount": {
+      "type": "number"
+    },
+    "totalAmountIncludingTax": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    }
+  }
+}

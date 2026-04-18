@@ -1,0 +1,13 @@
+{
+  "id": "abc123",
+  "entryNumber": 10,
+  "postingDate": "example_value",
+  "documentNumber": "example_value",
+  "documentType": "example_value",
+  "accountId": "500123",
+  "accountNumber": "example_value",
+  "description": "A sample description.",
+  "debitAmount": 42.5,
+  "creditAmount": 42.5,
+  "lastModifiedDateTime": "example_value"
+}

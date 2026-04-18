@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ConfigurationPackage",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "packageName": {
+      "type": "string"
+    },
+    "languageId": {
+      "type": "integer"
+    },
+    "productVersion": {
+      "type": "string"
+    },
+    "processingOrder": {
+      "type": "integer"
+    },
+    "excludeConfigurationTables": {
+      "type": "boolean"
+    },
+    "numberOfTables": {
+      "type": "integer"
+    },
+    "numberOfRecords": {
+      "type": "integer"
+    },
+    "numberOfErrors": {
+      "type": "integer"
+    },
+    "importStatus": {
+      "type": "string"
+    },
+    "applyStatus": {
+      "type": "string"
+    }
+  }
+}

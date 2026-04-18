@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "PermissionSet",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "roleId": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "appId": {
+      "type": "string"
+    },
+    "extensionName": {
+      "type": "string"
+    }
+  }
+}

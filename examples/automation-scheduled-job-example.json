@@ -1,0 +1,9 @@
+{
+  "id": "abc123",
+  "category": "example_value",
+  "status": "example_value",
+  "description": "A sample description.",
+  "errorMessage": "example_value",
+  "startDateTime": "example_value",
+  "endDateTime": "example_value"
+}

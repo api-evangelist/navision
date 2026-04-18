@@ -1,0 +1,9 @@
+{
+  "id": "abc123",
+  "name": "Example Title",
+  "publisher": "example_value",
+  "operationType": "example_value",
+  "status": "example_value",
+  "appVersion": "example_value",
+  "startedOn": "example_value"
+}

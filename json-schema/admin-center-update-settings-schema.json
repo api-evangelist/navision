@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UpdateSettings",
+  "type": "object",
+  "properties": {
+    "preferredStartTimeUtc": {
+      "type": "string",
+      "description": "Preferred start time for the update window (UTC)"
+    },
+    "preferredEndTimeUtc": {
+      "type": "string",
+      "description": "Preferred end time for the update window (UTC)"
+    }
+  }
+}

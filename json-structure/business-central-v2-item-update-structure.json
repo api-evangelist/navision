@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ItemUpdate",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "itemCategoryCode": {
+      "type": "string"
+    },
+    "blocked": {
+      "type": "boolean"
+    },
+    "gtin": {
+      "type": "string"
+    },
+    "unitPrice": {
+      "type": "number"
+    },
+    "unitCost": {
+      "type": "number"
+    },
+    "taxGroupCode": {
+      "type": "string"
+    },
+    "baseUnitOfMeasureCode": {
+      "type": "string"
+    }
+  }
+}

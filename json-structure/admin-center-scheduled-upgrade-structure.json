@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ScheduledUpgrade",
+  "type": "object",
+  "properties": {
+    "environmentName": {
+      "type": "string"
+    },
+    "upgradeIsScheduled": {
+      "type": "boolean"
+    },
+    "scheduledDate": {
+      "type": "string"
+    },
+    "registeredDate": {
+      "type": "string"
+    },
+    "targetVersion": {
+      "type": "string"
+    },
+    "canTenantSelectDate": {
+      "type": "boolean"
+    },
+    "ignoreUpgradeWindow": {
+      "type": "boolean"
+    }
+  }
+}

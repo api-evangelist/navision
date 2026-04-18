@@ -1,0 +1,15 @@
+{
+  "id": "abc123",
+  "type": "example_value",
+  "status": "example_value",
+  "aadTenantId": "500123",
+  "createdOn": "example_value",
+  "startedOn": "example_value",
+  "completedOn": "example_value",
+  "createdBy": "example_value",
+  "errorMessage": "example_value",
+  "parameters": "example_value",
+  "environmentName": "example_value",
+  "environmentType": "example_value",
+  "productFamily": "example_value"
+}

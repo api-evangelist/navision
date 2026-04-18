@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "UsedStorage",
+  "type": "object",
+  "properties": {
+    "environmentType": {
+      "type": "string"
+    },
+    "environmentName": {
+      "type": "string"
+    },
+    "applicationFamily": {
+      "type": "string"
+    },
+    "databaseStorageInKilobytes": {
+      "type": "integer"
+    }
+  }
+}

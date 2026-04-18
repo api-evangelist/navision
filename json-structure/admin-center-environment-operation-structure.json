@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "EnvironmentOperation",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "aadTenantId": {
+      "type": "string"
+    },
+    "createdOn": {
+      "type": "string"
+    },
+    "startedOn": {
+      "type": "string"
+    },
+    "completedOn": {
+      "type": "string"
+    },
+    "createdBy": {
+      "type": "string"
+    },
+    "errorMessage": {
+      "type": "string"
+    },
+    "parameters": {
+      "type": "object"
+    },
+    "environmentName": {
+      "type": "string"
+    },
+    "environmentType": {
+      "type": "string"
+    },
+    "productFamily": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "RestoreEnvironmentRequest",
+  "type": "object",
+  "properties": {
+    "EnvironmentName": {
+      "type": "string"
+    },
+    "EnvironmentType": {
+      "type": "string"
+    },
+    "PointInTime": {
+      "type": "string"
+    },
+    "SkipInstallingPTEs": {
+      "type": "boolean"
+    },
+    "SkipInstallingThirdPartyGlobalApps": {
+      "type": "boolean"
+    },
+    "SkipEnvironmentCleanup": {
+      "type": "boolean"
+    }
+  }
+}

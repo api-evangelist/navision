@@ -1,0 +1,7 @@
+{
+  "invoiceDate": "example_value",
+  "vendorId": "500123",
+  "vendorNumber": "example_value",
+  "currencyCode": "example_value",
+  "pricesIncludeTax": true
+}

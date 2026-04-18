@@ -1,0 +1,20 @@
+{
+  "friendlyName": "example_value",
+  "type": "example_value",
+  "name": "Example Title",
+  "countryCode": "example_value",
+  "applicationFamily": "example_value",
+  "aadTenantId": "500123",
+  "status": "example_value",
+  "webClientLoginUrl": "https://www.example.com",
+  "webServiceUrl": "https://www.example.com",
+  "locationName": "example_value",
+  "geoName": "example_value",
+  "ringName": "example_value",
+  "appInsightsKey": "example_value",
+  "softDeletedOn": "example_value",
+  "hardDeletePendingOn": "example_value",
+  "deleteReason": "example_value",
+  "appSourceAppsUpdateCadence": "example_value",
+  "versionDetails": "example_value"
+}

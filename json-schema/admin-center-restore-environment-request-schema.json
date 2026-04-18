@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RestoreEnvironmentRequest",
+  "type": "object",
+  "properties": {
+    "EnvironmentName": {
+      "type": "string",
+      "description": "Name of the new restored environment"
+    },
+    "EnvironmentType": {
+      "type": "string",
+      "description": "Type of the new environment"
+    },
+    "PointInTime": {
+      "type": "string",
+      "description": "Point in time to restore to (ISO 8601 UTC)"
+    },
+    "SkipInstallingPTEs": {
+      "type": "boolean",
+      "description": "Whether to uninstall per-tenant extensions"
+    },
+    "SkipInstallingThirdPartyGlobalApps": {
+      "type": "boolean",
+      "description": "Whether to uninstall third-party AppSource apps"
+    },
+    "SkipEnvironmentCleanup": {
+      "type": "boolean",
+      "description": "Whether to skip execution of cleanup codeunits"
+    }
+  }
+}

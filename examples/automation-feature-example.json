@@ -1,0 +1,7 @@
+{
+  "id": "abc123",
+  "displayName": "example_value",
+  "description": "A sample description.",
+  "enabled": true,
+  "learnMoreUrl": "https://www.example.com"
+}

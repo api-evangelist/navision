@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AppUpdateRequest",
+  "type": "object",
+  "properties": {
+    "targetVersion": {
+      "type": "string"
+    },
+    "allowPreviewVersion": {
+      "type": "boolean"
+    },
+    "ignoreUpgradeWindow": {
+      "type": "boolean"
+    },
+    "allowDependencyUpdate": {
+      "type": "boolean"
+    }
+  }
+}

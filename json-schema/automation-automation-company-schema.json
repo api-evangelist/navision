@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AutomationCompany",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "The company name"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The company display name"
+    },
+    "businessProfileId": {
+      "type": "string",
+      "description": "The business profile ID"
+    },
+    "evaluationCompany": {
+      "type": "boolean",
+      "description": "Whether this is an evaluation company"
+    }
+  }
+}

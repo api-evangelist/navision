@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "JournalCreate",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "templateDisplayName": {
+      "type": "string"
+    }
+  }
+}

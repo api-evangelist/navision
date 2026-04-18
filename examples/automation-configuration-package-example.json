@@ -1,0 +1,14 @@
+{
+  "id": "abc123",
+  "code": "example_value",
+  "packageName": "example_value",
+  "languageId": "500123",
+  "productVersion": "example_value",
+  "processingOrder": 10,
+  "excludeConfigurationTables": true,
+  "numberOfTables": 10,
+  "numberOfRecords": 10,
+  "numberOfErrors": 10,
+  "importStatus": "example_value",
+  "applyStatus": "example_value"
+}

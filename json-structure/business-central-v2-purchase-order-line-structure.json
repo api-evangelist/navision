@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "PurchaseOrderLine",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "documentId": {
+      "type": "string"
+    },
+    "sequence": {
+      "type": "integer"
+    },
+    "itemId": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "lineType": {
+      "type": "string"
+    },
+    "lineObjectNumber": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "description2": {
+      "type": "string"
+    },
+    "unitOfMeasureId": {
+      "type": "string"
+    },
+    "unitOfMeasureCode": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "number"
+    },
+    "directUnitCost": {
+      "type": "number"
+    },
+    "discountAmount": {
+      "type": "number"
+    },
+    "discountPercent": {
+      "type": "number"
+    },
+    "discountAppliedBeforeTax": {
+      "type": "boolean"
+    },
+    "amountExcludingTax": {
+      "type": "number"
+    },
+    "taxCode": {
+      "type": "string"
+    },
+    "taxPercent": {
+      "type": "number"
+    },
+    "totalTaxAmount": {
+      "type": "number"
+    },
+    "amountIncludingTax": {
+      "type": "number"
+    },
+    "expectedReceiptDate": {
+      "type": "string"
+    },
+    "receivedQuantity": {
+      "type": "number"
+    },
+    "invoicedQuantity": {
+      "type": "number"
+    },
+    "invoiceQuantity": {
+      "type": "number"
+    },
+    "receiveQuantity": {
+      "type": "number"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Extension",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The extension ID"
+    },
+    "packageId": {
+      "type": "string",
+      "description": "The package ID used for install/uninstall operations"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The extension display name"
+    },
+    "publisher": {
+      "type": "string",
+      "description": "The extension publisher"
+    },
+    "versionMajor": {
+      "type": "integer",
+      "description": "Major version number"
+    },
+    "versionMinor": {
+      "type": "integer",
+      "description": "Minor version number"
+    },
+    "versionBuild": {
+      "type": "integer",
+      "description": "Build version number"
+    },
+    "versionRevision": {
+      "type": "integer",
+      "description": "Revision version number"
+    },
+    "isInstalled": {
+      "type": "boolean",
+      "description": "Whether the extension is currently installed"
+    },
+    "publishedAs": {
+      "type": "string",
+      "description": "How the extension was published"
+    }
+  }
+}

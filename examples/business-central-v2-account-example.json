@@ -1,0 +1,15 @@
+{
+  "id": "abc123",
+  "number": "example_value",
+  "displayName": "example_value",
+  "category": "example_value",
+  "subCategory": "example_value",
+  "blocked": true,
+  "accountType": "example_value",
+  "directPosting": true,
+  "netChange": 42.5,
+  "consolidationTranslationMethod": "example_value",
+  "consolidationDebitAccount": "example_value",
+  "consolidationCreditAccount": "example_value",
+  "lastModifiedDateTime": "example_value"
+}

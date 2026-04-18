@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Company",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the company"
+    },
+    "systemVersion": {
+      "type": "string",
+      "description": "The system version"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the company"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name of the company"
+    },
+    "businessProfileId": {
+      "type": "string",
+      "description": "The business profile ID"
+    }
+  }
+}

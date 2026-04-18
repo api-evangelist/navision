@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "SupportSettings",
+  "type": "object",
+  "properties": {
+    "appId": {
+      "type": "string"
+    },
+    "supportUrl": {
+      "type": "string"
+    },
+    "supportEmail": {
+      "type": "string"
+    },
+    "supportPhone": {
+      "type": "string"
+    }
+  }
+}

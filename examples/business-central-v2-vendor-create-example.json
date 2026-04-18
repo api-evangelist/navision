@@ -1,0 +1,17 @@
+{
+  "number": "example_value",
+  "displayName": "example_value",
+  "addressLine1": "example_value",
+  "addressLine2": "example_value",
+  "city": "example_value",
+  "state": "example_value",
+  "country": "example_value",
+  "postalCode": "example_value",
+  "phoneNumber": "example_value",
+  "email": "user@example.com",
+  "website": "example_value",
+  "taxRegistrationNumber": "example_value",
+  "currencyCode": "example_value",
+  "taxLiable": true,
+  "blocked": "example_value"
+}

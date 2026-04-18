@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Environment",
+  "type": "object",
+  "properties": {
+    "friendlyName": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "countryCode": {
+      "type": "string"
+    },
+    "applicationFamily": {
+      "type": "string"
+    },
+    "aadTenantId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "webClientLoginUrl": {
+      "type": "string"
+    },
+    "webServiceUrl": {
+      "type": "string"
+    },
+    "locationName": {
+      "type": "string"
+    },
+    "geoName": {
+      "type": "string"
+    },
+    "ringName": {
+      "type": "string"
+    },
+    "appInsightsKey": {
+      "type": "string"
+    },
+    "softDeletedOn": {
+      "type": "string"
+    },
+    "hardDeletePendingOn": {
+      "type": "string"
+    },
+    "deleteReason": {
+      "type": "string"
+    },
+    "appSourceAppsUpdateCadence": {
+      "type": "string"
+    },
+    "versionDetails": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "environmentName": "example_value",
+  "upgradeIsScheduled": true,
+  "scheduledDate": "example_value",
+  "registeredDate": "example_value",
+  "targetVersion": "example_value",
+  "canTenantSelectDate": true,
+  "ignoreUpgradeWindow": true
+}

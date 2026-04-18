@@ -1,0 +1,10 @@
+{
+  "id": "abc123",
+  "code": "example_value",
+  "displayName": "example_value",
+  "dueDateCalculation": "example_value",
+  "discountDateCalculation": "example_value",
+  "discountPercent": 42.5,
+  "calculateDiscountOnCreditMemos": true,
+  "lastModifiedDateTime": "example_value"
+}

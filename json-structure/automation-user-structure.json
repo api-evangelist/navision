@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "userSecurityId": {
+      "type": "string"
+    },
+    "userName": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "expiryDate": {
+      "type": "string"
+    }
+  }
+}

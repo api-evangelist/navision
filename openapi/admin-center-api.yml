@@ -20,40 +20,40 @@ externalDocs:
   description: Administration Center API Documentation
   url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
 servers:
-  - url: https://api.businesscentral.dynamics.com/admin/v2.28
-    description: Business Central Administration Center
+- url: https://api.businesscentral.dynamics.com/admin/v2.28
+  description: Business Central Administration Center
 security:
-  - oauth2: []
-  - bearerAuth: []
+- oauth2: []
+- bearerAuth: []
 tags:
-  - name: Environments
-    description: Manage Business Central environments
-  - name: Environment Settings
-    description: Manage environment settings and configuration
-  - name: Environment Operations
-    description: View and track environment operations
-  - name: Notifications
-    description: Manage administrative notifications
-  - name: Telemetry
-    description: View tenant telemetry data
-  - name: App Management
-    description: Manage installed applications
-  - name: Update Management
-    description: Manage environment updates
-  - name: Available Applications
-    description: Query available application versions and countries
-  - name: Storage
-    description: View storage usage and quotas
-  - name: Support Settings
-    description: Manage support settings
+- name: Environments
+  description: Manage Business Central environments
+- name: Environment Settings
+  description: Manage environment settings and configuration
+- name: Environment Operations
+  description: View and track environment operations
+- name: Notifications
+  description: Manage administrative notifications
+- name: Telemetry
+  description: View tenant telemetry data
+- name: App Management
+  description: Manage installed applications
+- name: Update Management
+  description: Manage environment updates
+- name: Available Applications
+  description: Query available application versions and countries
+- name: Storage
+  description: View storage usage and quotas
+- name: Support Settings
+  description: Manage support settings
 paths:
   /applications/environments:
     get:
-      summary: List all environments
+      summary: List All Environments
       description: Returns a list of all environments across all application families for the tenant.
       operationId: listAllEnvironments
       tags:
-        - Environments
+      - Environments
       responses:
         '200':
           description: Successfully retrieved environments
@@ -66,17 +66,47 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Environment'
+              examples:
+                Listallenvironments200Example:
+                  summary: Default listAllEnvironments 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - friendlyName: example_value
+                      type: Production
+                      name: Example Title
+                      countryCode: example_value
+                      applicationFamily: example_value
+                      aadTenantId: '500123'
+                      status: NotReady
+                      webClientLoginUrl: https://www.example.com
+                      webServiceUrl: https://www.example.com
+                      locationName: example_value
+                      geoName: example_value
+                      ringName: example_value
+                      appInsightsKey: example_value
+                      softDeletedOn: '2026-01-15T10:30:00Z'
+                      hardDeletePendingOn: '2026-01-15T10:30:00Z'
+                      deleteReason: example_value
+                      appSourceAppsUpdateCadence: example_value
+                      versionDetails:
+                        version: example_value
+                        gracePeriodStartDate: '2026-01-15T10:30:00Z'
+                        enforcedUpdatePeriodStartDate: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments:
     get:
-      summary: List environments by application family
+      summary: List Environments by Application Family
       description: Returns a list of environments for the specified application family.
       operationId: listEnvironments
       tags:
-        - Environments
+      - Environments
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/applicationFamily'
       responses:
         '200':
           description: Successfully retrieved environments
@@ -89,6 +119,33 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Environment'
+              examples:
+                Listenvironments200Example:
+                  summary: Default listEnvironments 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - friendlyName: example_value
+                      type: Production
+                      name: Example Title
+                      countryCode: example_value
+                      applicationFamily: example_value
+                      aadTenantId: '500123'
+                      status: NotReady
+                      webClientLoginUrl: https://www.example.com
+                      webServiceUrl: https://www.example.com
+                      locationName: example_value
+                      geoName: example_value
+                      ringName: example_value
+                      appInsightsKey: example_value
+                      softDeletedOn: '2026-01-15T10:30:00Z'
+                      hardDeletePendingOn: '2026-01-15T10:30:00Z'
+                      deleteReason: example_value
+                      appSourceAppsUpdateCadence: example_value
+                      versionDetails:
+                        version: example_value
+                        gracePeriodStartDate: '2026-01-15T10:30:00Z'
+                        enforcedUpdatePeriodStartDate: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
@@ -97,16 +154,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Listenvironments404Example:
+                  summary: Default listEnvironments 404 response
+                  x-microcks-default: true
+                  value:
+                    code: example_value
+                    message: example_value
+                    target: example_value
+                    extensionData: example_value
+                    clientError:
+                    - code: example_value
+                      message: example_value
+                      target: example_value
+                      extensionData: example_value
+                      clientError: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}:
     get:
-      summary: Get an environment
+      summary: Get an Environment
       description: Returns the properties for the specified environment.
       operationId: getEnvironment
       tags:
-        - Environments
+      - Environments
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       responses:
         '200':
           description: Successfully retrieved environment
@@ -114,6 +189,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Environment'
+              examples:
+                Getenvironment200Example:
+                  summary: Default getEnvironment 200 response
+                  x-microcks-default: true
+                  value:
+                    friendlyName: example_value
+                    type: Production
+                    name: Example Title
+                    countryCode: example_value
+                    applicationFamily: example_value
+                    aadTenantId: '500123'
+                    status: NotReady
+                    webClientLoginUrl: https://www.example.com
+                    webServiceUrl: https://www.example.com
+                    locationName: example_value
+                    geoName: example_value
+                    ringName: example_value
+                    appInsightsKey: example_value
+                    softDeletedOn: '2026-01-15T10:30:00Z'
+                    hardDeletePendingOn: '2026-01-15T10:30:00Z'
+                    deleteReason: example_value
+                    appSourceAppsUpdateCadence: example_value
+                    versionDetails:
+                      version: example_value
+                      gracePeriodStartDate: '2026-01-15T10:30:00Z'
+                      enforcedUpdatePeriodStartDate: '2026-01-15T10:30:00Z'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
@@ -122,23 +223,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Getenvironment404Example:
+                  summary: Default getEnvironment 404 response
+                  x-microcks-default: true
+                  value:
+                    code: example_value
+                    message: example_value
+                    target: example_value
+                    extensionData: example_value
+                    clientError:
+                    - code: example_value
+                      message: example_value
+                      target: example_value
+                      extensionData: example_value
+                      clientError: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
-      summary: Create a new environment
+      summary: Create a New Environment
       description: >-
         Creates a new environment with sample data. The operation is
         asynchronous; poll the environment operations endpoint to track status.
       operationId: createEnvironment
       tags:
-        - Environments
+      - Environments
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateEnvironmentRequest'
+            examples:
+              CreateenvironmentRequestExample:
+                summary: Default createEnvironment request
+                x-microcks-default: true
+                value:
+                  environmentType: Production
+                  countryCode: example_value
+                  ringName: example_value
+                  applicationVersion: example_value
       responses:
         '201':
           description: Environment creation initiated (API v2.8 and earlier)
@@ -146,18 +274,77 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Environment'
+              examples:
+                Createenvironment201Example:
+                  summary: Default createEnvironment 201 response
+                  x-microcks-default: true
+                  value:
+                    friendlyName: example_value
+                    type: Production
+                    name: Example Title
+                    countryCode: example_value
+                    applicationFamily: example_value
+                    aadTenantId: '500123'
+                    status: NotReady
+                    webClientLoginUrl: https://www.example.com
+                    webServiceUrl: https://www.example.com
+                    locationName: example_value
+                    geoName: example_value
+                    ringName: example_value
+                    appInsightsKey: example_value
+                    softDeletedOn: '2026-01-15T10:30:00Z'
+                    hardDeletePendingOn: '2026-01-15T10:30:00Z'
+                    deleteReason: example_value
+                    appSourceAppsUpdateCadence: example_value
+                    versionDetails:
+                      version: example_value
+                      gracePeriodStartDate: '2026-01-15T10:30:00Z'
+                      enforcedUpdatePeriodStartDate: '2026-01-15T10:30:00Z'
         '202':
           description: Environment creation scheduled (API v2.9 and later)
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnvironmentOperation'
+              examples:
+                Createenvironment202Example:
+                  summary: Default createEnvironment 202 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    type: create
+                    status: Queued
+                    aadTenantId: '500123'
+                    createdOn: '2026-01-15T10:30:00Z'
+                    startedOn: '2026-01-15T10:30:00Z'
+                    completedOn: '2026-01-15T10:30:00Z'
+                    createdBy: example_value
+                    errorMessage: example_value
+                    parameters: example_value
+                    environmentName: example_value
+                    environmentType: example_value
+                    productFamily: example_value
         '400':
           description: Bad request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Createenvironment400Example:
+                  summary: Default createEnvironment 400 response
+                  x-microcks-default: true
+                  value:
+                    code: example_value
+                    message: example_value
+                    target: example_value
+                    extensionData: example_value
+                    clientError:
+                    - code: example_value
+                      message: example_value
+                      target: example_value
+                      extensionData: example_value
+                      clientError: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
         '409':
@@ -166,18 +353,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Createenvironment409Example:
+                  summary: Default createEnvironment 409 response
+                  x-microcks-default: true
+                  value:
+                    code: example_value
+                    message: example_value
+                    target: example_value
+                    extensionData: example_value
+                    clientError:
+                    - code: example_value
+                      message: example_value
+                      target: example_value
+                      extensionData: example_value
+                      clientError: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
-      summary: Delete an environment
+      summary: Delete an Environment
       description: >-
         Soft deletes the specified environment. The environment is retained for
         14 days during which it can be recovered. Environments with status
         Creating Failed or Removing Failed are permanently deleted immediately.
       operationId: deleteEnvironment
       tags:
-        - Environments
+      - Environments
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       responses:
         '202':
           description: Delete operation scheduled
@@ -185,6 +390,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnvironmentOperation'
+              examples:
+                Deleteenvironment202Example:
+                  summary: Default deleteEnvironment 202 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    type: create
+                    status: Queued
+                    aadTenantId: '500123'
+                    createdOn: '2026-01-15T10:30:00Z'
+                    startedOn: '2026-01-15T10:30:00Z'
+                    completedOn: '2026-01-15T10:30:00Z'
+                    createdBy: example_value
+                    errorMessage: example_value
+                    parameters: example_value
+                    environmentName: example_value
+                    environmentType: example_value
+                    productFamily: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
         '404':
@@ -193,22 +416,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Deleteenvironment404Example:
+                  summary: Default deleteEnvironment 404 response
+                  x-microcks-default: true
+                  value:
+                    code: example_value
+                    message: example_value
+                    target: example_value
+                    extensionData: example_value
+                    clientError:
+                    - code: example_value
+                      message: example_value
+                      target: example_value
+                      extensionData: example_value
+                      clientError: {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/copy:
     post:
-      summary: Copy an environment
+      summary: Copy an Environment
       description: Creates a new environment as a copy of an existing environment's data.
       operationId: copyEnvironment
       tags:
-        - Environments
+      - Environments
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CopyEnvironmentRequest'
+            examples:
+              CopyenvironmentRequestExample:
+                summary: Default copyEnvironment request
+                x-microcks-default: true
+                value:
+                  environmentName: example_value
+                  type: Production
       responses:
         '201':
           description: Copy initiated (API v2.8 and earlier)
@@ -216,30 +464,92 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Environment'
+              examples:
+                Copyenvironment201Example:
+                  summary: Default copyEnvironment 201 response
+                  x-microcks-default: true
+                  value:
+                    friendlyName: example_value
+                    type: Production
+                    name: Example Title
+                    countryCode: example_value
+                    applicationFamily: example_value
+                    aadTenantId: '500123'
+                    status: NotReady
+                    webClientLoginUrl: https://www.example.com
+                    webServiceUrl: https://www.example.com
+                    locationName: example_value
+                    geoName: example_value
+                    ringName: example_value
+                    appInsightsKey: example_value
+                    softDeletedOn: '2026-01-15T10:30:00Z'
+                    hardDeletePendingOn: '2026-01-15T10:30:00Z'
+                    deleteReason: example_value
+                    appSourceAppsUpdateCadence: example_value
+                    versionDetails:
+                      version: example_value
+                      gracePeriodStartDate: '2026-01-15T10:30:00Z'
+                      enforcedUpdatePeriodStartDate: '2026-01-15T10:30:00Z'
         '202':
           description: Copy operation scheduled (API v2.9 and later)
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnvironmentOperation'
+              examples:
+                Copyenvironment202Example:
+                  summary: Default copyEnvironment 202 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    type: create
+                    status: Queued
+                    aadTenantId: '500123'
+                    createdOn: '2026-01-15T10:30:00Z'
+                    startedOn: '2026-01-15T10:30:00Z'
+                    completedOn: '2026-01-15T10:30:00Z'
+                    createdBy: example_value
+                    errorMessage: example_value
+                    parameters: example_value
+                    environmentName: example_value
+                    environmentType: example_value
+                    productFamily: example_value
         '400':
           description: Bad request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Copyenvironment400Example:
+                  summary: Default copyEnvironment 400 response
+                  x-microcks-default: true
+                  value:
+                    code: example_value
+                    message: example_value
+                    target: example_value
+                    extensionData: example_value
+                    clientError:
+                    - code: example_value
+                      message: example_value
+                      target: example_value
+                      extensionData: example_value
+                      clientError: {}
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/rename:
     post:
-      summary: Rename an environment
+      summary: Rename an Environment
       description: Schedules a rename operation on an environment.
       operationId: renameEnvironment
       tags:
-        - Environments
+      - Environments
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       requestBody:
         required: true
         content:
@@ -247,11 +557,17 @@ paths:
             schema:
               type: object
               required:
-                - NewEnvironmentName
+              - NewEnvironmentName
               properties:
                 NewEnvironmentName:
                   type: string
                   description: The new name for the environment
+            examples:
+              RenameenvironmentRequestExample:
+                summary: Default renameEnvironment request
+                x-microcks-default: true
+                value:
+                  NewEnvironmentName: example_value
       responses:
         '202':
           description: Rename operation scheduled
@@ -259,24 +575,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnvironmentOperation'
+              examples:
+                Renameenvironment202Example:
+                  summary: Default renameEnvironment 202 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    type: create
+                    status: Queued
+                    aadTenantId: '500123'
+                    createdOn: '2026-01-15T10:30:00Z'
+                    startedOn: '2026-01-15T10:30:00Z'
+                    completedOn: '2026-01-15T10:30:00Z'
+                    createdBy: example_value
+                    errorMessage: example_value
+                    parameters: example_value
+                    environmentName: example_value
+                    environmentType: example_value
+                    productFamily: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/restore:
     post:
-      summary: Restore an environment
+      summary: Restore an Environment
       description: Restores an existing environment from a point in time in the past.
       operationId: restoreEnvironment
       tags:
-        - Environments
+      - Environments
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RestoreEnvironmentRequest'
+            examples:
+              RestoreenvironmentRequestExample:
+                summary: Default restoreEnvironment request
+                x-microcks-default: true
+                value:
+                  EnvironmentName: example_value
+                  EnvironmentType: Production
+                  PointInTime: '2026-01-15T10:30:00Z'
+                  SkipInstallingPTEs: true
+                  SkipInstallingThirdPartyGlobalApps: true
+                  SkipEnvironmentCleanup: true
       responses:
         '202':
           description: Restore operation scheduled
@@ -284,18 +632,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnvironmentOperation'
+              examples:
+                Restoreenvironment202Example:
+                  summary: Default restoreEnvironment 202 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    type: create
+                    status: Queued
+                    aadTenantId: '500123'
+                    createdOn: '2026-01-15T10:30:00Z'
+                    startedOn: '2026-01-15T10:30:00Z'
+                    completedOn: '2026-01-15T10:30:00Z'
+                    createdBy: example_value
+                    errorMessage: example_value
+                    parameters: example_value
+                    environmentName: example_value
+                    environmentType: example_value
+                    productFamily: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/recover:
     post:
-      summary: Recover a deleted environment
+      summary: Recover a Deleted Environment
       description: Recovers a soft-deleted environment.
       operationId: recoverEnvironment
       tags:
-        - Environments
+      - Environments
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       responses:
         '202':
           description: Recovery operation scheduled
@@ -303,18 +672,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnvironmentOperation'
+              examples:
+                Recoverenvironment202Example:
+                  summary: Default recoverEnvironment 202 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    type: create
+                    status: Queued
+                    aadTenantId: '500123'
+                    createdOn: '2026-01-15T10:30:00Z'
+                    startedOn: '2026-01-15T10:30:00Z'
+                    completedOn: '2026-01-15T10:30:00Z'
+                    createdBy: example_value
+                    errorMessage: example_value
+                    parameters: example_value
+                    environmentName: example_value
+                    environmentType: example_value
+                    productFamily: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/availableRestorePeriods:
     get:
-      summary: Get available restore periods
+      summary: Get Available Restore Periods
       description: Returns an ordered list of available restore periods for the environment.
       operationId: getAvailableRestorePeriods
       tags:
-        - Environments
+      - Environments
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       responses:
         '200':
           description: Successfully retrieved restore periods
@@ -327,17 +717,29 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/RestorePeriod'
+              examples:
+                Getavailablerestoreperiods200Example:
+                  summary: Default getAvailableRestorePeriods 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - from: '2026-01-15T10:30:00Z'
+                      to: '2026-01-15T10:30:00Z'
+                      correspondingApplicationPackageVersion: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /environments/{environmentName}/operations:
     get:
-      summary: List environment operations
+      summary: List Environment Operations
       description: Returns a list of operations that have been performed on the environment.
       operationId: listEnvironmentOperations
       tags:
-        - Environment Operations
+      - Environment Operations
       parameters:
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/environmentName'
       responses:
         '200':
           description: Successfully retrieved operations
@@ -350,17 +752,39 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/EnvironmentOperation'
+              examples:
+                Listenvironmentoperations200Example:
+                  summary: Default listEnvironmentOperations 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      type: create
+                      status: Queued
+                      aadTenantId: '500123'
+                      createdOn: '2026-01-15T10:30:00Z'
+                      startedOn: '2026-01-15T10:30:00Z'
+                      completedOn: '2026-01-15T10:30:00Z'
+                      createdBy: example_value
+                      errorMessage: example_value
+                      parameters: example_value
+                      environmentName: example_value
+                      environmentType: example_value
+                      productFamily: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/operations:
     get:
-      summary: List operations on all environments
+      summary: List Operations on All Environments
       description: Returns operations that have occurred on all environments for the application family.
       operationId: listAllEnvironmentOperations
       tags:
-        - Environment Operations
+      - Environment Operations
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/applicationFamily'
       responses:
         '200':
           description: Successfully retrieved operations
@@ -373,18 +797,40 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/EnvironmentOperation'
+              examples:
+                Listallenvironmentoperations200Example:
+                  summary: Default listAllEnvironmentOperations 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      type: create
+                      status: Queued
+                      aadTenantId: '500123'
+                      createdOn: '2026-01-15T10:30:00Z'
+                      startedOn: '2026-01-15T10:30:00Z'
+                      completedOn: '2026-01-15T10:30:00Z'
+                      createdBy: example_value
+                      errorMessage: example_value
+                      parameters: example_value
+                      environmentName: example_value
+                      environmentType: example_value
+                      productFamily: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/settings:
     get:
-      summary: Get environment settings
+      summary: Get Environment Settings
       description: Returns settings for the specified environment.
       operationId: getEnvironmentSettings
       tags:
-        - Environment Settings
+      - Environment Settings
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       responses:
         '200':
           description: Successfully retrieved environment settings
@@ -392,39 +838,62 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnvironmentSettings'
+              examples:
+                Getenvironmentsettings200Example:
+                  summary: Default getEnvironmentSettings 200 response
+                  x-microcks-default: true
+                  value:
+                    appInsightsKey: example_value
+                    updateWindow:
+                      preferredStartTimeUtc: example_value
+                      preferredEndTimeUtc: example_value
+                    securityGroupId: '500123'
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/settings/upgrade:
     put:
-      summary: Set update settings
+      summary: Set Update Settings
       description: Sets the update window and other update-related settings for the environment.
       operationId: setUpdateSettings
       tags:
-        - Update Management
+      - Update Management
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateSettings'
+            examples:
+              SetupdatesettingsRequestExample:
+                summary: Default setUpdateSettings request
+                x-microcks-default: true
+                value:
+                  preferredStartTimeUtc: example_value
+                  preferredEndTimeUtc: example_value
       responses:
         '200':
           description: Update settings applied
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/settings/appInsightsKey:
     post:
-      summary: Set Application Insights key
+      summary: Set Application Insights Key
       description: Sets the Azure Application Insights instrumentation key for the environment.
       operationId: setAppInsightsKey
       tags:
-        - Environment Settings
+      - Environment Settings
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       requestBody:
         required: true
         content:
@@ -435,21 +904,30 @@ paths:
                 key:
                   type: string
                   description: The Application Insights instrumentation key
+            examples:
+              SetappinsightskeyRequestExample:
+                summary: Default setAppInsightsKey request
+                x-microcks-default: true
+                value:
+                  key: example_value
       responses:
         '200':
           description: Key set successfully
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/apps:
     get:
-      summary: List installed apps
+      summary: List Installed Apps
       description: Returns a list of apps installed in the specified environment.
       operationId: listInstalledApps
       tags:
-        - App Management
+      - App Management
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       responses:
         '200':
           description: Successfully retrieved installed apps
@@ -462,30 +940,56 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/AppInfo'
+              examples:
+                Listinstalledapps200Example:
+                  summary: Default listInstalledApps 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      name: Example Title
+                      publisher: example_value
+                      version: example_value
+                      state: example_value
+                      lastOperationId: '500123'
+                      lastUpdateAttemptResult: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/apps/{appId}/update:
     post:
-      summary: Update an app
+      summary: Update an App
       description: Schedules an update of the specified app to a newer version.
       operationId: updateApp
       tags:
-        - App Management
+      - App Management
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
-        - name: appId
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AppUpdateRequest'
+            examples:
+              UpdateappRequestExample:
+                summary: Default updateApp request
+                x-microcks-default: true
+                value:
+                  targetVersion: example_value
+                  allowPreviewVersion: true
+                  ignoreUpgradeWindow: true
+                  allowDependencyUpdate: true
       responses:
         '202':
           description: App update scheduled
@@ -493,30 +997,61 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnvironmentOperation'
+              examples:
+                Updateapp202Example:
+                  summary: Default updateApp 202 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    type: create
+                    status: Queued
+                    aadTenantId: '500123'
+                    createdOn: '2026-01-15T10:30:00Z'
+                    startedOn: '2026-01-15T10:30:00Z'
+                    completedOn: '2026-01-15T10:30:00Z'
+                    createdBy: example_value
+                    errorMessage: example_value
+                    parameters: example_value
+                    environmentName: example_value
+                    environmentType: example_value
+                    productFamily: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/apps/{appId}/install:
     post:
-      summary: Install an app
+      summary: Install an App
       description: Installs the specified app in the environment.
       operationId: installApp
       tags:
-        - App Management
+      - App Management
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
-        - name: appId
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AppInstallRequest'
+            examples:
+              InstallappRequestExample:
+                summary: Default installApp request
+                x-microcks-default: true
+                value:
+                  targetVersion: example_value
+                  allowPreviewVersion: true
+                  acceptIsvEula: true
+                  allowDependencyUpdate: true
       responses:
         '202':
           description: App installation scheduled
@@ -524,24 +1059,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnvironmentOperation'
+              examples:
+                Installapp202Example:
+                  summary: Default installApp 202 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    type: create
+                    status: Queued
+                    aadTenantId: '500123'
+                    createdOn: '2026-01-15T10:30:00Z'
+                    startedOn: '2026-01-15T10:30:00Z'
+                    completedOn: '2026-01-15T10:30:00Z'
+                    createdBy: example_value
+                    errorMessage: example_value
+                    parameters: example_value
+                    environmentName: example_value
+                    environmentType: example_value
+                    productFamily: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/apps/{appId}/uninstall:
     post:
-      summary: Uninstall an app
+      summary: Uninstall an App
       description: Uninstalls the specified app from the environment.
       operationId: uninstallApp
       tags:
-        - App Management
+      - App Management
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
-        - name: appId
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
       requestBody:
         content:
           application/json:
@@ -551,6 +1108,12 @@ paths:
                 deleteData:
                   type: boolean
                   description: Whether to delete data associated with the extension
+            examples:
+              UninstallappRequestExample:
+                summary: Default uninstallApp request
+                x-microcks-default: true
+                value:
+                  deleteData: true
       responses:
         '202':
           description: App uninstallation scheduled
@@ -558,18 +1121,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnvironmentOperation'
+              examples:
+                Uninstallapp202Example:
+                  summary: Default uninstallApp 202 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    type: create
+                    status: Queued
+                    aadTenantId: '500123'
+                    createdOn: '2026-01-15T10:30:00Z'
+                    startedOn: '2026-01-15T10:30:00Z'
+                    completedOn: '2026-01-15T10:30:00Z'
+                    createdBy: example_value
+                    errorMessage: example_value
+                    parameters: example_value
+                    environmentName: example_value
+                    environmentType: example_value
+                    productFamily: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/usedstorage:
     get:
-      summary: Get environment storage usage
+      summary: Get Environment Storage Usage
       description: Returns used storage information for the specified environment.
       operationId: getEnvironmentStorage
       tags:
-        - Storage
+      - Storage
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       responses:
         '200':
           description: Successfully retrieved storage usage
@@ -577,15 +1161,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UsedStorage'
+              examples:
+                Getenvironmentstorage200Example:
+                  summary: Default getEnvironmentStorage 200 response
+                  x-microcks-default: true
+                  value:
+                    environmentType: example_value
+                    environmentName: example_value
+                    applicationFamily: example_value
+                    databaseStorageInKilobytes: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /environments/usedstorage:
     get:
-      summary: Get storage usage for all environments
+      summary: Get Storage Usage for All Environments
       description: Returns storage usage information for all environments.
       operationId: getAllEnvironmentsStorage
       tags:
-        - Storage
+      - Storage
       responses:
         '200':
           description: Successfully retrieved storage usage
@@ -598,15 +1194,28 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/UsedStorage'
+              examples:
+                Getallenvironmentsstorage200Example:
+                  summary: Default getAllEnvironmentsStorage 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - environmentType: example_value
+                      environmentName: example_value
+                      applicationFamily: example_value
+                      databaseStorageInKilobytes: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /environments/quotas:
     get:
-      summary: Get allowed quotas
+      summary: Get Allowed Quotas
       description: Returns the different types of quotas and their limits.
       operationId: getQuotas
       tags:
-        - Storage
+      - Storage
       responses:
         '200':
           description: Successfully retrieved quotas
@@ -614,18 +1223,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Quotas'
+              examples:
+                Getquotas200Example:
+                  summary: Default getQuotas 200 response
+                  x-microcks-default: true
+                  value:
+                    environmentsCount:
+                      production: 10
+                      sandbox: 10
+                    storageInKilobytes:
+                      default: 10
+                      userLicenses: 10
+                      additionalCapacity: 10
+                      total: 10
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/notifications:
     get:
-      summary: List notification recipients
+      summary: List Notification Recipients
       description: Returns a list of notification recipients for the environment.
       operationId: listNotificationRecipients
       tags:
-        - Notifications
+      - Notifications
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       responses:
         '200':
           description: Successfully retrieved notification recipients
@@ -638,23 +1263,43 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/NotificationRecipient'
+              examples:
+                Listnotificationrecipients200Example:
+                  summary: Default listNotificationRecipients 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      name: Example Title
+                      email: user@example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
-      summary: Add a notification recipient
+      summary: Add a Notification Recipient
       description: Adds a new notification recipient for the environment.
       operationId: addNotificationRecipient
       tags:
-        - Notifications
+      - Notifications
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/NotificationRecipient'
+            examples:
+              AddnotificationrecipientRequestExample:
+                summary: Default addNotificationRecipient request
+                x-microcks-default: true
+                value:
+                  id: abc123
+                  name: Example Title
+                  email: user@example.com
       responses:
         '201':
           description: Notification recipient added
@@ -662,18 +1307,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotificationRecipient'
+              examples:
+                Addnotificationrecipient201Example:
+                  summary: Default addNotificationRecipient 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    email: user@example.com
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/scheduledUpgrade:
     get:
-      summary: Get scheduled upgrade
+      summary: Get Scheduled Upgrade
       description: Returns information about any pending scheduled upgrade for the environment.
       operationId: getScheduledUpgrade
       tags:
-        - Update Management
+      - Update Management
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       responses:
         '200':
           description: Successfully retrieved scheduled upgrade information
@@ -681,18 +1337,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ScheduledUpgrade'
+              examples:
+                Getscheduledupgrade200Example:
+                  summary: Default getScheduledUpgrade 200 response
+                  x-microcks-default: true
+                  value:
+                    environmentName: example_value
+                    upgradeIsScheduled: true
+                    scheduledDate: '2026-01-15T10:30:00Z'
+                    registeredDate: '2026-01-15T10:30:00Z'
+                    targetVersion: example_value
+                    canTenantSelectDate: true
+                    ignoreUpgradeWindow: true
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/environments/{environmentName}/supportSettings:
     get:
-      summary: Get support settings
+      summary: Get Support Settings
       description: Returns the support contact settings for the specified environment.
       operationId: getSupportSettings
       tags:
-        - Support Settings
+      - Support Settings
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
-        - $ref: '#/components/parameters/environmentName'
+      - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/environmentName'
       responses:
         '200':
           description: Successfully retrieved support settings
@@ -700,17 +1371,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SupportSettings'
+              examples:
+                Getsupportsettings200Example:
+                  summary: Default getSupportSettings 200 response
+                  x-microcks-default: true
+                  value:
+                    appId: '500123'
+                    supportUrl: https://www.example.com
+                    supportEmail: user@example.com
+                    supportPhone: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/availableCountries:
     get:
-      summary: List available countries
+      summary: List Available Countries
       description: Returns a list of countries where environments can be created.
       operationId: listAvailableCountries
       tags:
-        - Available Applications
+      - Available Applications
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/applicationFamily'
       responses:
         '200':
           description: Successfully retrieved available countries
@@ -728,17 +1411,28 @@ paths:
                           type: string
                         name:
                           type: string
+              examples:
+                Listavailablecountries200Example:
+                  summary: Default listAvailableCountries 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - countryCode: example_value
+                      name: Example Title
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /applications/{applicationFamily}/availableApplicationVersions:
     get:
-      summary: List available application versions
+      summary: List Available Application Versions
       description: Returns a list of available application versions for the specified application family.
       operationId: listAvailableVersions
       tags:
-        - Available Applications
+      - Available Applications
       parameters:
-        - $ref: '#/components/parameters/applicationFamily'
+      - $ref: '#/components/parameters/applicationFamily'
       responses:
         '200':
           description: Successfully retrieved available versions
@@ -756,8 +1450,19 @@ paths:
                           type: string
                         platformVersion:
                           type: string
+              examples:
+                Listavailableversions200Example:
+                  summary: Default listAvailableVersions 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - applicationVersion: example_value
+                      platformVersion: example_value
         '401':
           $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     oauth2:
@@ -807,96 +1512,118 @@ components:
         code:
           type: string
           description: A stable error code describing the type and nature of the error
+          example: example_value
         message:
           type: string
           description: A readable description of the error and cause
+          example: example_value
         target:
           type: string
           description: Information about what part of the request caused the error
+          example: example_value
         extensionData:
           type: object
           description: Additional key/value information about the error
           additionalProperties: true
+          example: example_value
         clientError:
           type: array
           description: Nested list of error objects with more details
           items:
             $ref: '#/components/schemas/ErrorResponse'
+          example: []
     Environment:
       type: object
       properties:
         friendlyName:
           type: string
           description: Display name of the environment
+          example: example_value
         type:
           type: string
           description: Environment type
           enum:
-            - Production
-            - Sandbox
+          - Production
+          - Sandbox
+          example: Production
         name:
           type: string
           description: Environment name, unique within an application family
+          example: Example Title
         countryCode:
           type: string
           description: Country/region code where the environment is deployed
+          example: example_value
         applicationFamily:
           type: string
           description: Family of the environment application
+          example: example_value
         aadTenantId:
           type: string
           format: uuid
           description: Microsoft Entra tenant ID that owns the environment
+          example: '500123'
         status:
           type: string
           description: Current status of the environment
           enum:
-            - NotReady
-            - Removing
-            - Preparing
-            - Active
-            - Upgrading
-            - CreatingFailed
-            - RemovingFailed
-            - SoftDeleting
-            - SoftDeletingFailed
-            - SoftDeleted
-            - Recovering
-            - RecoveringFailed
+          - NotReady
+          - Removing
+          - Preparing
+          - Active
+          - Upgrading
+          - CreatingFailed
+          - RemovingFailed
+          - SoftDeleting
+          - SoftDeletingFailed
+          - SoftDeleted
+          - Recovering
+          - RecoveringFailed
+          example: NotReady
         webClientLoginUrl:
           type: string
           format: uri
           description: URL to log into the environment
+          example: https://www.example.com
         webServiceUrl:
           type: string
           format: uri
           description: URL to access the environment service API
+          example: https://www.example.com
         locationName:
           type: string
           description: Azure region where the database is stored
+          example: example_value
         geoName:
           type: string
           description: Azure geo where the database is stored
+          example: example_value
         ringName:
           type: string
           description: Logical ring group name (e.g., Prod, Preview)
+          example: example_value
         appInsightsKey:
           type: string
           description: Application Insights instrumentation key
+          example: example_value
         softDeletedOn:
           type: string
           format: date-time
           description: When the environment was soft deleted
+          example: '2026-01-15T10:30:00Z'
         hardDeletePendingOn:
           type: string
           format: date-time
           description: When the environment will be permanently deleted
+          example: '2026-01-15T10:30:00Z'
         deleteReason:
           type: string
           description: Reason the environment was deleted
+          example: example_value
         appSourceAppsUpdateCadence:
           type: string
           description: Update cadence for installed AppSource apps
+          example: example_value
         versionDetails:
           type: object
           properties:
@@ -911,6 +1638,7 @@ components:
               type: string
               format: date-time
               description: When the enforced update period starts
+          example: example_value
     EnvironmentOperation:
       type: object
       properties:
@@ -918,156 +1646,185 @@ components:
           type: string
           format: uuid
           description: Operation ID used for tracking
+          example: abc123
         type:
           type: string
           description: Type of operation
           enum:
-            - create
-            - copy
-            - delete
-            - softDelete
-            - recover
-            - environmentRename
-            - pitRestore
-            - environmentAppInstall
-            - environmentAppUninstall
-            - environmentAppUpdate
-            - environmentAppHotfix
-            - modify
-            - update
-            - restart
-            - moveToAnotherAadTenant
+          - create
+          - copy
+          - delete
+          - softDelete
+          - recover
+          - environmentRename
+          - pitRestore
+          - environmentAppInstall
+          - environmentAppUninstall
+          - environmentAppUpdate
+          - environmentAppHotfix
+          - modify
+          - update
+          - restart
+          - moveToAnotherAadTenant
+          example: create
         status:
           type: string
           description: Status of the operation
           enum:
-            - Queued
-            - Scheduled
-            - Running
-            - Succeeded
-            - Failed
-            - Canceled
-            - Skipped
+          - Queued
+          - Scheduled
+          - Running
+          - Succeeded
+          - Failed
+          - Canceled
+          - Skipped
+          example: Queued
         aadTenantId:
           type: string
           format: uuid
           description: Microsoft Entra tenant ID
+          example: '500123'
         createdOn:
           type: string
           format: date-time
           description: When the operation was created
+          example: '2026-01-15T10:30:00Z'
         startedOn:
           type: string
           format: date-time
           description: When the operation started executing
+          example: '2026-01-15T10:30:00Z'
         completedOn:
           type: string
           format: date-time
           description: When the operation completed
+          example: '2026-01-15T10:30:00Z'
         createdBy:
           type: string
           description: Who created the operation
+          example: example_value
         errorMessage:
           type: string
           description: Error message for failed operations
+          example: example_value
         parameters:
           type: object
           description: Operation-specific parameters
           additionalProperties: true
+          example: example_value
         environmentName:
           type: string
           description: Name of the affected environment
+          example: example_value
         environmentType:
           type: string
           description: Type of the affected environment
+          example: example_value
         productFamily:
           type: string
           description: Product family of the affected environment
+          example: example_value
     CreateEnvironmentRequest:
       type: object
       required:
-        - environmentType
-        - countryCode
+      - environmentType
+      - countryCode
       properties:
         environmentType:
           type: string
           description: Type of environment to create
           enum:
-            - Production
-            - Sandbox
+          - Production
+          - Sandbox
+          example: Production
         countryCode:
           type: string
           description: Country to create the environment within
+          example: example_value
         ringName:
           type: string
           description: Logical ring group (only Sandbox may be created in Preview ring)
+          example: example_value
         applicationVersion:
           type: string
           description: Application version (e.g., 26.0.0.0)
+          example: example_value
     CopyEnvironmentRequest:
       type: object
       required:
-        - environmentName
-        - type
+      - environmentName
+      - type
       properties:
         environmentName:
           type: string
           description: Name for the new environment
+          example: example_value
         type:
           type: string
           description: Type of environment to create
           enum:
-            - Production
-            - Sandbox
+          - Production
+          - Sandbox
+          example: Production
     RestoreEnvironmentRequest:
       type: object
       required:
-        - EnvironmentName
-        - EnvironmentType
-        - PointInTime
+      - EnvironmentName
+      - EnvironmentType
+      - PointInTime
       properties:
         EnvironmentName:
           type: string
           description: Name of the new restored environment
+          example: example_value
         EnvironmentType:
           type: string
           description: Type of the new environment
           enum:
-            - Production
-            - Sandbox
+          - Production
+          - Sandbox
+          example: Production
         PointInTime:
           type: string
           format: date-time
           description: Point in time to restore to (ISO 8601 UTC)
+          example: '2026-01-15T10:30:00Z'
         SkipInstallingPTEs:
           type: boolean
           description: Whether to uninstall per-tenant extensions
           default: false
+          example: true
         SkipInstallingThirdPartyGlobalApps:
           type: boolean
           description: Whether to uninstall third-party AppSource apps
           default: false
+          example: true
         SkipEnvironmentCleanup:
           type: boolean
           description: Whether to skip execution of cleanup codeunits
           default: false
+          example: true
     RestorePeriod:
       type: object
       properties:
         from:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         to:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         correspondingApplicationPackageVersion:
           type: string
+          example: example_value
     EnvironmentSettings:
       type: object
       properties:
         appInsightsKey:
           type: string
           description: Application Insights instrumentation key
+          example: example_value
         updateWindow:
           type: object
           properties:
@@ -1077,10 +1834,12 @@ components:
             preferredEndTimeUtc:
               type: string
               format: time
+          example: example_value
         securityGroupId:
           type: string
           format: uuid
           description: Security group assigned to the environment
+          example: '500123'
     UpdateSettings:
       type: object
       properties:
@@ -1088,72 +1847,93 @@ components:
           type: string
           format: time
           description: Preferred start time for the update window (UTC)
+          example: example_value
         preferredEndTimeUtc:
           type: string
           format: time
           description: Preferred end time for the update window (UTC)
+          example: example_value
     AppInfo:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         name:
           type: string
+          example: Example Title
         publisher:
           type: string
+          example: example_value
         version:
           type: string
+          example: example_value
         state:
           type: string
+          example: example_value
         lastOperationId:
           type: string
           format: uuid
+          example: '500123'
         lastUpdateAttemptResult:
           type: string
+          example: example_value
     AppUpdateRequest:
       type: object
       properties:
         targetVersion:
           type: string
           description: Target version to update to
+          example: example_value
         allowPreviewVersion:
           type: boolean
           description: Whether to allow preview versions
+          example: true
         ignoreUpgradeWindow:
           type: boolean
           description: Whether to ignore the update window
+          example: true
         allowDependencyUpdate:
           type: boolean
           description: Whether to also update dependent apps
+          example: true
     AppInstallRequest:
       type: object
       properties:
         targetVersion:
           type: string
           description: Version to install
+          example: example_value
         allowPreviewVersion:
           type: boolean
           description: Whether to allow preview versions
+          example: true
         acceptIsvEula:
           type: boolean
           description: Whether the ISV EULA is accepted
+          example: true
         allowDependencyUpdate:
           type: boolean
           description: Whether to also update dependent apps
+          example: true
     UsedStorage:
       type: object
       properties:
         environmentType:
           type: string
+          example: example_value
         environmentName:
           type: string
+          example: example_value
         applicationFamily:
           type: string
+          example: example_value
         databaseStorageInKilobytes:
           type: integer
           format: int64
           description: Used database storage in kilobytes
+          example: 10
     Quotas:
       type: object
       properties:
@@ -1166,6 +1946,7 @@ components:
             sandbox:
               type: integer
               description: Maximum number of sandbox environments
+          example: example_value
         storageInKilobytes:
           type: object
           properties:
@@ -1181,47 +1962,62 @@ components:
             total:
               type: integer
               description: Total allowed storage
+          example: example_value
     NotificationRecipient:
       type: object
       properties:
         id:
           type: string
           format: uuid
+          example: abc123
         name:
           type: string
+          example: Example Title
         email:
           type: string
           format: email
+          example: user@example.com
     ScheduledUpgrade:
       type: object
       properties:
         environmentName:
           type: string
+          example: example_value
         upgradeIsScheduled:
           type: boolean
+          example: true
         scheduledDate:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         registeredDate:
           type: string
           format: date-time
+          example: '2026-01-15T10:30:00Z'
         targetVersion:
           type: string
+          example: example_value
         canTenantSelectDate:
           type: boolean
+          example: true
         ignoreUpgradeWindow:
           type: boolean
+          example: true
     SupportSettings:
       type: object
       properties:
         appId:
           type: string
           format: uuid
+          example: '500123'
         supportUrl:
           type: string
           format: uri
+          example: https://www.example.com
         supportEmail:
           type: string
           format: email
+          example: user@example.com
         supportPhone:
           type: string
+          example: example_value

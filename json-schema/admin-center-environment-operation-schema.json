@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EnvironmentOperation",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Operation ID used for tracking"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of operation"
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the operation"
+    },
+    "aadTenantId": {
+      "type": "string",
+      "description": "Microsoft Entra tenant ID"
+    },
+    "createdOn": {
+      "type": "string",
+      "description": "When the operation was created"
+    },
+    "startedOn": {
+      "type": "string",
+      "description": "When the operation started executing"
+    },
+    "completedOn": {
+      "type": "string",
+      "description": "When the operation completed"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "Who created the operation"
+    },
+    "errorMessage": {
+      "type": "string",
+      "description": "Error message for failed operations"
+    },
+    "parameters": {
+      "type": "object",
+      "description": "Operation-specific parameters"
+    },
+    "environmentName": {
+      "type": "string",
+      "description": "Name of the affected environment"
+    },
+    "environmentType": {
+      "type": "string",
+      "description": "Type of the affected environment"
+    },
+    "productFamily": {
+      "type": "string",
+      "description": "Product family of the affected environment"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "abc123",
+  "number": "example_value",
+  "invoiceDate": "example_value",
+  "postingDate": "example_value",
+  "dueDate": "example_value",
+  "vendorId": "500123",
+  "vendorNumber": "example_value",
+  "vendorName": "example_value",
+  "currencyCode": "example_value",
+  "pricesIncludeTax": true,
+  "totalAmountExcludingTax": 42.5,
+  "totalTaxAmount": 42.5,
+  "totalAmountIncludingTax": 42.5,
+  "status": "example_value",
+  "lastModifiedDateTime": "example_value"
+}

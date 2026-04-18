@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SalesOrder",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the sales order"
+    },
+    "number": {
+      "type": "string",
+      "description": "The sales order number"
+    },
+    "externalDocumentNumber": {
+      "type": "string",
+      "description": "The external document number"
+    },
+    "orderDate": {
+      "type": "string",
+      "description": "The order date"
+    },
+    "postingDate": {
+      "type": "string",
+      "description": "The posting date"
+    },
+    "customerId": {
+      "type": "string",
+      "description": "The customer ID"
+    },
+    "customerNumber": {
+      "type": "string",
+      "description": "The customer number"
+    },
+    "customerName": {
+      "type": "string",
+      "description": "The customer name"
+    },
+    "billToName": {
+      "type": "string",
+      "description": "The bill-to name"
+    },
+    "billToCustomerId": {
+      "type": "string",
+      "description": "The bill-to customer ID"
+    },
+    "billToCustomerNumber": {
+      "type": "string",
+      "description": "The bill-to customer number"
+    },
+    "shipToName": {
+      "type": "string",
+      "description": "The ship-to name"
+    },
+    "shipToContact": {
+      "type": "string",
+      "description": "The ship-to contact"
+    },
+    "sellToAddressLine1": {
+      "type": "string"
+    },
+    "sellToAddressLine2": {
+      "type": "string"
+    },
+    "sellToCity": {
+      "type": "string"
+    },
+    "sellToCountry": {
+      "type": "string"
+    },
+    "sellToState": {
+      "type": "string"
+    },
+    "sellToPostCode": {
+      "type": "string"
+    },
+    "currencyId": {
+      "type": "string"
+    },
+    "currencyCode": {
+      "type": "string"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean"
+    },
+    "paymentTermsId": {
+      "type": "string"
+    },
+    "shipmentMethodId": {
+      "type": "string"
+    },
+    "salesperson": {
+      "type": "string"
+    },
+    "requestedDeliveryDate": {
+      "type": "string"
+    },
+    "discountAmount": {
+      "type": "number",
+      "description": "The total discount amount"
+    },
+    "discountAppliedBeforeTax": {
+      "type": "boolean"
+    },
+    "totalAmountExcludingTax": {
+      "type": "number"
+    },
+    "totalTaxAmount": {
+      "type": "number"
+    },
+    "totalAmountIncludingTax": {
+      "type": "number"
+    },
+    "fullyShipped": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "string",
+      "description": "The order status"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    },
+    "phoneNumber": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "salesOrderLines": {
+      "type": "array"
+    }
+  }
+}

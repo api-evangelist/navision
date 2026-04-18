@@ -1,0 +1,11 @@
+{
+  "displayName": "example_value",
+  "type": "example_value",
+  "itemCategoryCode": "example_value",
+  "blocked": true,
+  "gtin": "example_value",
+  "unitPrice": 42.5,
+  "unitCost": 42.5,
+  "taxGroupCode": "example_value",
+  "baseUnitOfMeasureCode": "example_value"
+}

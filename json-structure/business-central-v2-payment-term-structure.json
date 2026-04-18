@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "PaymentTerm",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "dueDateCalculation": {
+      "type": "string"
+    },
+    "discountDateCalculation": {
+      "type": "string"
+    },
+    "discountPercent": {
+      "type": "number"
+    },
+    "calculateDiscountOnCreditMemos": {
+      "type": "boolean"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Item",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "number": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "displayName2": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "itemCategoryId": {
+      "type": "string"
+    },
+    "itemCategoryCode": {
+      "type": "string"
+    },
+    "blocked": {
+      "type": "boolean"
+    },
+    "gtin": {
+      "type": "string"
+    },
+    "inventory": {
+      "type": "number"
+    },
+    "unitPrice": {
+      "type": "number"
+    },
+    "priceIncludesTax": {
+      "type": "boolean"
+    },
+    "unitCost": {
+      "type": "number"
+    },
+    "taxGroupId": {
+      "type": "string"
+    },
+    "taxGroupCode": {
+      "type": "string"
+    },
+    "baseUnitOfMeasureId": {
+      "type": "string"
+    },
+    "baseUnitOfMeasureCode": {
+      "type": "string"
+    },
+    "generalProductPostingGroupId": {
+      "type": "string"
+    },
+    "generalProductPostingGroupCode": {
+      "type": "string"
+    },
+    "inventoryPostingGroupId": {
+      "type": "string"
+    },
+    "inventoryPostingGroupCode": {
+      "type": "string"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    }
+  }
+}

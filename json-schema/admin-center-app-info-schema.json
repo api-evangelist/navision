@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AppInfo",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "lastOperationId": {
+      "type": "string"
+    },
+    "lastUpdateAttemptResult": {
+      "type": "string"
+    }
+  }
+}

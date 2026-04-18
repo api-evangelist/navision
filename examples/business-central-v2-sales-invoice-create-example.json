@@ -1,0 +1,8 @@
+{
+  "externalDocumentNumber": "example_value",
+  "invoiceDate": "example_value",
+  "customerId": "500123",
+  "customerNumber": "example_value",
+  "currencyCode": "example_value",
+  "pricesIncludeTax": true
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "VendorPaymentJournal",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    },
+    "balancingAccountId": {
+      "type": "string"
+    },
+    "balancingAccountNumber": {
+      "type": "string"
+    }
+  }
+}

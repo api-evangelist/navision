@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "JournalLine",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "journalId": {
+      "type": "string"
+    },
+    "journalDisplayName": {
+      "type": "string"
+    },
+    "lineNumber": {
+      "type": "integer"
+    },
+    "accountType": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "accountNumber": {
+      "type": "string"
+    },
+    "postingDate": {
+      "type": "string"
+    },
+    "documentNumber": {
+      "type": "string"
+    },
+    "externalDocumentNumber": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "description": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "taxCode": {
+      "type": "string"
+    },
+    "balanceAccountType": {
+      "type": "string"
+    },
+    "balanceAccountNumber": {
+      "type": "string"
+    },
+    "lastModifiedDateTime": {
+      "type": "string"
+    }
+  }
+}

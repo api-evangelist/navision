@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "CreateEnvironmentRequest",
+  "type": "object",
+  "properties": {
+    "environmentType": {
+      "type": "string"
+    },
+    "countryCode": {
+      "type": "string"
+    },
+    "ringName": {
+      "type": "string"
+    },
+    "applicationVersion": {
+      "type": "string"
+    }
+  }
+}

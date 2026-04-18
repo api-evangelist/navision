@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "PurchaseInvoiceCreate",
+  "type": "object",
+  "properties": {
+    "invoiceDate": {
+      "type": "string"
+    },
+    "vendorId": {
+      "type": "string"
+    },
+    "vendorNumber": {
+      "type": "string"
+    },
+    "currencyCode": {
+      "type": "string"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean"
+    }
+  }
+}

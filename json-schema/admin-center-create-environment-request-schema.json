@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateEnvironmentRequest",
+  "type": "object",
+  "properties": {
+    "environmentType": {
+      "type": "string",
+      "description": "Type of environment to create"
+    },
+    "countryCode": {
+      "type": "string",
+      "description": "Country to create the environment within"
+    },
+    "ringName": {
+      "type": "string",
+      "description": "Logical ring group (only Sandbox may be created in Preview ring)"
+    },
+    "applicationVersion": {
+      "type": "string",
+      "description": "Application version (e.g., 26.0.0.0)"
+    }
+  }
+}

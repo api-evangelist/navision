@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EnvironmentSettings",
+  "type": "object",
+  "properties": {
+    "appInsightsKey": {
+      "type": "string",
+      "description": "Application Insights instrumentation key"
+    },
+    "updateWindow": {
+      "type": "object"
+    },
+    "securityGroupId": {
+      "type": "string",
+      "description": "Security group assigned to the environment"
+    }
+  }
+}

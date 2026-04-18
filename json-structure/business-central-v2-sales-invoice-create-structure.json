@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "SalesInvoiceCreate",
+  "type": "object",
+  "properties": {
+    "externalDocumentNumber": {
+      "type": "string"
+    },
+    "invoiceDate": {
+      "type": "string"
+    },
+    "customerId": {
+      "type": "string"
+    },
+    "customerNumber": {
+      "type": "string"
+    },
+    "currencyCode": {
+      "type": "string"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean"
+    }
+  }
+}
