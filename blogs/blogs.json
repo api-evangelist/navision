@@ -1,0 +1,13 @@
+{
+  "repo": "navision",
+  "feeds": [
+    {
+      "source": "https://www.microsoft.com/en-us/dynamics-365/blog/product/dynamics-365-business-central/",
+      "feed_url": "https://www.microsoft.com/en-us/dynamics-365/blog/feed/",
+      "saved": 10,
+      "title": "Microsoft Dynamics 365 Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:32:30Z"
+}
