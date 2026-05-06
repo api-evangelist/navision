@@ -1,391 +1,860 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Dynamics NAV Platform Administration"
-  description: "Unified workflow for administering Dynamics 365 Business Central combining the Administration Center API for environment management with the Automation API for company setup, extensions, users, and permissions. Used by platform administrators and IT teams."
+  label: Dynamics NAV Platform Administration
+  description: Unified workflow for administering Dynamics 365 Business Central combining the Administration Center API for
+    environment management with the Automation API for company setup, extensions, users, and permissions. Used by platform
+    administrators and IT teams.
   tags:
-    - Business Central
-    - Dynamics 365
-    - Administration
-    - Automation
-    - Environment Management
-    - User Management
-  created: "2026-04-18"
-  modified: "2026-04-18"
-
+  - Business Central
+  - Dynamics 365
+  - Administration
+  - Automation
+  - Environment Management
+  - User Management
+  created: '2026-04-18'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      BC_ADMIN_OAUTH_TOKEN: BC_ADMIN_OAUTH_TOKEN
-      BC_OAUTH_TOKEN: BC_OAUTH_TOKEN
-
+- namespace: env
+  keys:
+    BC_ADMIN_OAUTH_TOKEN: BC_ADMIN_OAUTH_TOKEN
+    BC_OAUTH_TOKEN: BC_OAUTH_TOKEN
 capability:
   consumes:
-    - import: admin-center
-      location: ./shared/admin-center.yaml
-    - import: automation
-      location: ./shared/automation.yaml
-
+  - type: http
+    namespace: admin-center
+    baseUri: https://api.businesscentral.dynamics.com/admin/v2.28
+    description: Business Central Administration Center API for environment and tenant management.
+    authentication:
+      type: bearer
+      token: '{{BC_ADMIN_OAUTH_TOKEN}}'
+    resources:
+    - name: environments
+      path: /applications
+      description: Environment lifecycle management.
+      operations:
+      - name: list-all-environments
+        method: GET
+        description: Returns all environments across all application families.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: list-environments
+        method: GET
+        description: Returns environments for a specified application family.
+        inputParameters:
+        - name: applicationFamily
+          in: path
+          type: string
+          required: true
+          description: Application family (e.g., BusinessCentral)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-environment
+        method: GET
+        description: Returns properties for a specified environment.
+        inputParameters:
+        - name: applicationFamily
+          in: path
+          type: string
+          required: true
+          description: Application family
+        - name: environmentName
+          in: path
+          type: string
+          required: true
+          description: Environment name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-environment
+        method: PUT
+        description: Creates a new environment.
+        inputParameters:
+        - name: applicationFamily
+          in: path
+          type: string
+          required: true
+          description: Application family
+        - name: environmentName
+          in: path
+          type: string
+          required: true
+          description: Environment name
+        body:
+          type: json
+          data:
+            environmentType: '{{tools.environmentType}}'
+            countryCode: '{{tools.countryCode}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-environment
+        method: DELETE
+        description: Soft deletes an environment.
+        inputParameters:
+        - name: applicationFamily
+          in: path
+          type: string
+          required: true
+          description: Application family
+        - name: environmentName
+          in: path
+          type: string
+          required: true
+          description: Environment name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: copy-environment
+        method: POST
+        description: Creates a copy of an environment.
+        inputParameters:
+        - name: applicationFamily
+          in: path
+          type: string
+          required: true
+          description: Application family
+        - name: environmentName
+          in: path
+          type: string
+          required: true
+          description: Source environment name
+        body:
+          type: json
+          data:
+            environmentName: '{{tools.targetName}}'
+            type: '{{tools.type}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: restore-environment
+        method: POST
+        description: Restores an environment from a point in time.
+        inputParameters:
+        - name: applicationFamily
+          in: path
+          type: string
+          required: true
+          description: Application family
+        - name: environmentName
+          in: path
+          type: string
+          required: true
+          description: Environment name
+        body:
+          type: json
+          data:
+            EnvironmentName: '{{tools.targetName}}'
+            PointInTime: '{{tools.pointInTime}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: list-installed-apps
+        method: GET
+        description: Returns apps installed in an environment.
+        inputParameters:
+        - name: applicationFamily
+          in: path
+          type: string
+          required: true
+          description: Application family
+        - name: environmentName
+          in: path
+          type: string
+          required: true
+          description: Environment name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-environment-settings
+        method: GET
+        description: Returns settings for an environment.
+        inputParameters:
+        - name: applicationFamily
+          in: path
+          type: string
+          required: true
+          description: Application family
+        - name: environmentName
+          in: path
+          type: string
+          required: true
+          description: Environment name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-environment-storage
+        method: GET
+        description: Returns storage usage for an environment.
+        inputParameters:
+        - name: applicationFamily
+          in: path
+          type: string
+          required: true
+          description: Application family
+        - name: environmentName
+          in: path
+          type: string
+          required: true
+          description: Environment name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-scheduled-upgrade
+        method: GET
+        description: Returns scheduled upgrade information.
+        inputParameters:
+        - name: applicationFamily
+          in: path
+          type: string
+          required: true
+          description: Application family
+        - name: environmentName
+          in: path
+          type: string
+          required: true
+          description: Environment name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-quotas
+        method: GET
+        description: Returns allowed quotas and limits.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: automation
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+    description: Business Central Automation API for tenant setup and management.
+    authentication:
+      type: bearer
+      token: '{{BC_OAUTH_TOKEN}}'
+    resources:
+    - name: companies
+      path: /companies
+      description: Company management.
+      operations:
+      - name: list-companies
+        method: GET
+        description: List companies available for automation.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: list-automation-companies
+        method: GET
+        description: List automation company objects.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-automation-company
+        method: POST
+        description: Create a new company.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            displayName: '{{tools.displayName}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-automation-company
+        method: DELETE
+        description: Delete a company.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        - name: automationCompany_id
+          in: path
+          type: string
+          required: true
+          description: Automation company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: extensions
+      path: /companies({company_id})/extensions
+      description: Extension management.
+      operations:
+      - name: list-extensions
+        method: GET
+        description: List extensions published to the tenant.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: install-extension
+        method: POST
+        description: Install a published extension.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        - name: extension_id
+          in: path
+          type: string
+          required: true
+          description: Extension package ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: uninstall-extension
+        method: POST
+        description: Uninstall an extension.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        - name: extension_id
+          in: path
+          type: string
+          required: true
+          description: Extension package ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users
+      path: /companies({company_id})/users
+      description: User management.
+      operations:
+      - name: list-users
+        method: GET
+        description: List Business Central users.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-user
+        method: GET
+        description: Get a user by ID.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        - name: user_id
+          in: path
+          type: string
+          required: true
+          description: User security ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-user
+        method: PATCH
+        description: Update user properties.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        - name: user_id
+          in: path
+          type: string
+          required: true
+          description: User security ID
+        body:
+          type: json
+          data:
+            state: '{{tools.state}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: permission-sets
+      path: /companies({company_id})/permissionSets
+      description: Permission set management.
+      operations:
+      - name: list-permission-sets
+        method: GET
+        description: List available permission sets.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: features
+      path: /companies({company_id})/features
+      description: Feature management.
+      operations:
+      - name: list-features
+        method: GET
+        description: List features in feature management.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configuration-packages
+      path: /companies({company_id})/configurationPackages
+      description: RapidStart configuration packages.
+      operations:
+      - name: list-configuration-packages
+        method: GET
+        description: List RapidStart configuration packages.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: security-groups
+      path: /companies({company_id})/securityGroups
+      description: Security group management.
+      operations:
+      - name: list-security-groups
+        method: GET
+        description: List security groups.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: scheduled-jobs
+      path: /companies({company_id})/scheduledJobs
+      description: Scheduled background jobs.
+      operations:
+      - name: list-scheduled-jobs
+        method: GET
+        description: List scheduled background jobs.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8081
-      namespace: platform-admin-api
-      description: "Unified REST API for Business Central platform administration."
-      resources:
-        - path: /v1/environments
-          name: environments
-          description: "Environment management"
-          operations:
-            - method: GET
-              name: list-environments
-              description: "List all environments"
-              call: "admin-center.list-all-environments"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/environments/{environmentName}
-          name: environment
-          description: "Single environment"
-          operations:
-            - method: GET
-              name: get-environment
-              description: "Get environment details"
-              call: "admin-center.get-environment"
-              with:
-                applicationFamily: "rest.applicationFamily"
-                environmentName: "rest.environmentName"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: PUT
-              name: create-environment
-              description: "Create a new environment"
-              call: "admin-center.create-environment"
-              with:
-                applicationFamily: "rest.applicationFamily"
-                environmentName: "rest.environmentName"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: DELETE
-              name: delete-environment
-              description: "Delete an environment"
-              call: "admin-center.delete-environment"
-              with:
-                applicationFamily: "rest.applicationFamily"
-                environmentName: "rest.environmentName"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/companies
-          name: companies
-          description: "Company management"
-          operations:
-            - method: GET
-              name: list-companies
-              description: "List automation companies"
-              call: "automation.list-companies"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/extensions
-          name: extensions
-          description: "Extension management"
-          operations:
-            - method: GET
-              name: list-extensions
-              description: "List extensions"
-              call: "automation.list-extensions"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/users
-          name: users
-          description: "User management"
-          operations:
-            - method: GET
-              name: list-users
-              description: "List users"
-              call: "automation.list-users"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/permission-sets
-          name: permission-sets
-          description: "Permission sets"
-          operations:
-            - method: GET
-              name: list-permission-sets
-              description: "List permission sets"
-              call: "automation.list-permission-sets"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/quotas
-          name: quotas
-          description: "Storage quotas"
-          operations:
-            - method: GET
-              name: get-quotas
-              description: "Get allowed quotas"
-              call: "admin-center.get-quotas"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9081
-      namespace: platform-admin-mcp
-      transport: http
-      description: "MCP server for AI-assisted Business Central platform administration."
-      tools:
-        - name: list-all-environments
-          description: "List all Business Central environments"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "admin-center.list-all-environments"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-environment
-          description: "Get environment details"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "admin-center.get-environment"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-environment
-          description: "Create a new environment"
-          hints:
-            readOnly: false
-          call: "admin-center.create-environment"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: delete-environment
-          description: "Delete an environment"
-          hints:
-            readOnly: false
-            destructive: true
-          call: "admin-center.delete-environment"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: copy-environment
-          description: "Copy an environment"
-          hints:
-            readOnly: false
-          call: "admin-center.copy-environment"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: restore-environment
-          description: "Restore an environment from a point in time"
-          hints:
-            readOnly: false
-          call: "admin-center.restore-environment"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-installed-apps
-          description: "List installed apps in an environment"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "admin-center.list-installed-apps"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-environment-settings
-          description: "Get environment settings"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "admin-center.get-environment-settings"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-environment-storage
-          description: "Get environment storage usage"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "admin-center.get-environment-storage"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-scheduled-upgrade
-          description: "Get scheduled upgrade information"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "admin-center.get-scheduled-upgrade"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-quotas
-          description: "Get allowed quotas and limits"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "admin-center.get-quotas"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-companies
-          description: "List automation companies"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "automation.list-companies"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-automation-company
-          description: "Create a new company"
-          hints:
-            readOnly: false
-          call: "automation.create-automation-company"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: delete-automation-company
-          description: "Delete a company"
-          hints:
-            readOnly: false
-            destructive: true
-          call: "automation.delete-automation-company"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-extensions
-          description: "List published extensions"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "automation.list-extensions"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: install-extension
-          description: "Install an extension"
-          hints:
-            readOnly: false
-          call: "automation.install-extension"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: uninstall-extension
-          description: "Uninstall an extension"
-          hints:
-            readOnly: false
-            destructive: true
-          call: "automation.uninstall-extension"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-users
-          description: "List Business Central users"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "automation.list-users"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-user
-          description: "Get a user by ID"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "automation.get-user"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: update-user
-          description: "Update user properties"
-          hints:
-            readOnly: false
-            idempotent: true
-          call: "automation.update-user"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-permission-sets
-          description: "List permission sets"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "automation.list-permission-sets"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-features
-          description: "List features"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "automation.list-features"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-security-groups
-          description: "List security groups"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "automation.list-security-groups"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-configuration-packages
-          description: "List RapidStart configuration packages"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "automation.list-configuration-packages"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-scheduled-jobs
-          description: "List scheduled background jobs"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "automation.list-scheduled-jobs"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8081
+    namespace: platform-admin-api
+    description: Unified REST API for Business Central platform administration.
+    resources:
+    - path: /v1/environments
+      name: environments
+      description: Environment management
+      operations:
+      - method: GET
+        name: list-environments
+        description: List all environments
+        call: admin-center.list-all-environments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/{environmentName}
+      name: environment
+      description: Single environment
+      operations:
+      - method: GET
+        name: get-environment
+        description: Get environment details
+        call: admin-center.get-environment
+        with:
+          applicationFamily: rest.applicationFamily
+          environmentName: rest.environmentName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: create-environment
+        description: Create a new environment
+        call: admin-center.create-environment
+        with:
+          applicationFamily: rest.applicationFamily
+          environmentName: rest.environmentName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete-environment
+        description: Delete an environment
+        call: admin-center.delete-environment
+        with:
+          applicationFamily: rest.applicationFamily
+          environmentName: rest.environmentName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies
+      name: companies
+      description: Company management
+      operations:
+      - method: GET
+        name: list-companies
+        description: List automation companies
+        call: automation.list-companies
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/extensions
+      name: extensions
+      description: Extension management
+      operations:
+      - method: GET
+        name: list-extensions
+        description: List extensions
+        call: automation.list-extensions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users
+      name: users
+      description: User management
+      operations:
+      - method: GET
+        name: list-users
+        description: List users
+        call: automation.list-users
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/permission-sets
+      name: permission-sets
+      description: Permission sets
+      operations:
+      - method: GET
+        name: list-permission-sets
+        description: List permission sets
+        call: automation.list-permission-sets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/quotas
+      name: quotas
+      description: Storage quotas
+      operations:
+      - method: GET
+        name: get-quotas
+        description: Get allowed quotas
+        call: admin-center.get-quotas
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9081
+    namespace: platform-admin-mcp
+    transport: http
+    description: MCP server for AI-assisted Business Central platform administration.
+    tools:
+    - name: list-all-environments
+      description: List all Business Central environments
+      hints:
+        readOnly: true
+        idempotent: true
+      call: admin-center.list-all-environments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-environment
+      description: Get environment details
+      hints:
+        readOnly: true
+        idempotent: true
+      call: admin-center.get-environment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-environment
+      description: Create a new environment
+      hints:
+        readOnly: false
+      call: admin-center.create-environment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-environment
+      description: Delete an environment
+      hints:
+        readOnly: false
+        destructive: true
+      call: admin-center.delete-environment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: copy-environment
+      description: Copy an environment
+      hints:
+        readOnly: false
+      call: admin-center.copy-environment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: restore-environment
+      description: Restore an environment from a point in time
+      hints:
+        readOnly: false
+      call: admin-center.restore-environment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-installed-apps
+      description: List installed apps in an environment
+      hints:
+        readOnly: true
+        idempotent: true
+      call: admin-center.list-installed-apps
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-environment-settings
+      description: Get environment settings
+      hints:
+        readOnly: true
+        idempotent: true
+      call: admin-center.get-environment-settings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-environment-storage
+      description: Get environment storage usage
+      hints:
+        readOnly: true
+        idempotent: true
+      call: admin-center.get-environment-storage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-scheduled-upgrade
+      description: Get scheduled upgrade information
+      hints:
+        readOnly: true
+        idempotent: true
+      call: admin-center.get-scheduled-upgrade
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-quotas
+      description: Get allowed quotas and limits
+      hints:
+        readOnly: true
+        idempotent: true
+      call: admin-center.get-quotas
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-companies
+      description: List automation companies
+      hints:
+        readOnly: true
+        idempotent: true
+      call: automation.list-companies
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-automation-company
+      description: Create a new company
+      hints:
+        readOnly: false
+      call: automation.create-automation-company
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-automation-company
+      description: Delete a company
+      hints:
+        readOnly: false
+        destructive: true
+      call: automation.delete-automation-company
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-extensions
+      description: List published extensions
+      hints:
+        readOnly: true
+        idempotent: true
+      call: automation.list-extensions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: install-extension
+      description: Install an extension
+      hints:
+        readOnly: false
+      call: automation.install-extension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uninstall-extension
+      description: Uninstall an extension
+      hints:
+        readOnly: false
+        destructive: true
+      call: automation.uninstall-extension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-users
+      description: List Business Central users
+      hints:
+        readOnly: true
+        idempotent: true
+      call: automation.list-users
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user
+      description: Get a user by ID
+      hints:
+        readOnly: true
+        idempotent: true
+      call: automation.get-user
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-user
+      description: Update user properties
+      hints:
+        readOnly: false
+        idempotent: true
+      call: automation.update-user
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-permission-sets
+      description: List permission sets
+      hints:
+        readOnly: true
+        idempotent: true
+      call: automation.list-permission-sets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-features
+      description: List features
+      hints:
+        readOnly: true
+        idempotent: true
+      call: automation.list-features
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-security-groups
+      description: List security groups
+      hints:
+        readOnly: true
+        idempotent: true
+      call: automation.list-security-groups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-configuration-packages
+      description: List RapidStart configuration packages
+      hints:
+        readOnly: true
+        idempotent: true
+      call: automation.list-configuration-packages
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-scheduled-jobs
+      description: List scheduled background jobs
+      hints:
+        readOnly: true
+        idempotent: true
+      call: automation.list-scheduled-jobs
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,358 +1,794 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Dynamics NAV Business Operations"
-  description: "Unified workflow for day-to-day business operations in Dynamics 365 Business Central combining the Business Central API v2.0 for managing customers, vendors, items, orders, invoices, and financials. Used by accountants, sales teams, and operations managers."
+  label: Dynamics NAV Business Operations
+  description: Unified workflow for day-to-day business operations in Dynamics 365 Business Central combining the Business
+    Central API v2.0 for managing customers, vendors, items, orders, invoices, and financials. Used by accountants, sales
+    teams, and operations managers.
   tags:
-    - Business Central
-    - Dynamics 365
-    - ERP
-    - Finance
-    - Sales
-    - Purchasing
-  created: "2026-04-18"
-  modified: "2026-04-18"
-
+  - Business Central
+  - Dynamics 365
+  - ERP
+  - Finance
+  - Sales
+  - Purchasing
+  created: '2026-04-18'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      BC_OAUTH_TOKEN: BC_OAUTH_TOKEN
-
+- namespace: env
+  keys:
+    BC_OAUTH_TOKEN: BC_OAUTH_TOKEN
 capability:
   consumes:
-    - import: business-central-v2
-      location: ./shared/business-central-v2.yaml
-
+  - type: http
+    namespace: business-central-v2
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+    description: Dynamics 365 Business Central API v2.0 for business entity management.
+    authentication:
+      type: bearer
+      token: '{{BC_OAUTH_TOKEN}}'
+    resources:
+    - name: companies
+      path: /companies
+      description: Company operations.
+      operations:
+      - name: list-companies
+        method: GET
+        description: List available companies.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: customers
+      path: /companies({company_id})/customers
+      description: Customer management.
+      operations:
+      - name: list-customers
+        method: GET
+        description: List all customers.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-customer
+        method: POST
+        description: Create a new customer.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        body:
+          type: json
+          data:
+            displayName: '{{tools.displayName}}'
+            email: '{{tools.email}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-customer
+        method: GET
+        description: Get a customer by ID.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        - name: customer_id
+          in: path
+          type: string
+          required: true
+          description: Customer ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-customer
+        method: PATCH
+        description: Update a customer.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        - name: customer_id
+          in: path
+          type: string
+          required: true
+          description: Customer ID
+        body:
+          type: json
+          data:
+            displayName: '{{tools.displayName}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-customer
+        method: DELETE
+        description: Delete a customer.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        - name: customer_id
+          in: path
+          type: string
+          required: true
+          description: Customer ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: vendors
+      path: /companies({company_id})/vendors
+      description: Vendor management.
+      operations:
+      - name: list-vendors
+        method: GET
+        description: List all vendors.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-vendor
+        method: POST
+        description: Create a new vendor.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        body:
+          type: json
+          data:
+            displayName: '{{tools.displayName}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-vendor
+        method: GET
+        description: Get a vendor by ID.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        - name: vendor_id
+          in: path
+          type: string
+          required: true
+          description: Vendor ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: items
+      path: /companies({company_id})/items
+      description: Inventory item management.
+      operations:
+      - name: list-items
+        method: GET
+        description: List all items.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-item
+        method: POST
+        description: Create a new item.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        body:
+          type: json
+          data:
+            number: '{{tools.number}}'
+            displayName: '{{tools.displayName}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-item
+        method: GET
+        description: Get an item by ID.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        - name: item_id
+          in: path
+          type: string
+          required: true
+          description: Item ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sales-orders
+      path: /companies({company_id})/salesOrders
+      description: Sales order management.
+      operations:
+      - name: list-sales-orders
+        method: GET
+        description: List all sales orders.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-sales-order
+        method: POST
+        description: Create a new sales order.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        body:
+          type: json
+          data:
+            customerNumber: '{{tools.customerNumber}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-sales-order
+        method: GET
+        description: Get a sales order by ID.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        - name: salesOrder_id
+          in: path
+          type: string
+          required: true
+          description: Sales order ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: purchase-orders
+      path: /companies({company_id})/purchaseOrders
+      description: Purchase order management.
+      operations:
+      - name: list-purchase-orders
+        method: GET
+        description: List all purchase orders.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-purchase-order
+        method: POST
+        description: Create a new purchase order.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        body:
+          type: json
+          data:
+            vendorNumber: '{{tools.vendorNumber}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-purchase-order
+        method: GET
+        description: Get a purchase order by ID.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        - name: purchaseOrder_id
+          in: path
+          type: string
+          required: true
+          description: Purchase order ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: accounts
+      path: /companies({company_id})/accounts
+      description: General ledger accounts.
+      operations:
+      - name: list-accounts
+        method: GET
+        description: List all accounts.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: journals
+      path: /companies({company_id})/journals
+      description: General journal management.
+      operations:
+      - name: list-journals
+        method: GET
+        description: List all journals.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-journal
+        method: POST
+        description: Create a new journal.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        body:
+          type: json
+          data:
+            code: '{{tools.code}}'
+            displayName: '{{tools.displayName}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sales-invoices
+      path: /companies({company_id})/salesInvoices
+      description: Sales invoice management.
+      operations:
+      - name: list-sales-invoices
+        method: GET
+        description: List all sales invoices.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-sales-invoice
+        method: POST
+        description: Create a new sales invoice.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        body:
+          type: json
+          data:
+            customerNumber: '{{tools.customerNumber}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: purchase-invoices
+      path: /companies({company_id})/purchaseInvoices
+      description: Purchase invoice management.
+      operations:
+      - name: list-purchase-invoices
+        method: GET
+        description: List all purchase invoices.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: employees
+      path: /companies({company_id})/employees
+      description: Employee management.
+      operations:
+      - name: list-employees
+        method: GET
+        description: List all employees.
+        inputParameters:
+        - name: company_id
+          in: path
+          type: string
+          required: true
+          description: Company ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: business-ops-api
-      description: "Unified REST API for Business Central day-to-day business operations."
-      resources:
-        - path: /v1/companies
-          name: companies
-          description: "Company information"
-          operations:
-            - method: GET
-              name: list-companies
-              description: "List available companies"
-              call: "business-central-v2.list-companies"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/customers
-          name: customers
-          description: "Customer management"
-          operations:
-            - method: GET
-              name: list-customers
-              description: "List all customers"
-              call: "business-central-v2.list-customers"
-              with:
-                company_id: "rest.company_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-customer
-              description: "Create a customer"
-              call: "business-central-v2.create-customer"
-              with:
-                company_id: "rest.company_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/customers/{customer_id}
-          name: customer
-          description: "Single customer"
-          operations:
-            - method: GET
-              name: get-customer
-              description: "Get a customer"
-              call: "business-central-v2.get-customer"
-              with:
-                company_id: "rest.company_id"
-                customer_id: "rest.customer_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/vendors
-          name: vendors
-          description: "Vendor management"
-          operations:
-            - method: GET
-              name: list-vendors
-              description: "List all vendors"
-              call: "business-central-v2.list-vendors"
-              with:
-                company_id: "rest.company_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/items
-          name: items
-          description: "Inventory items"
-          operations:
-            - method: GET
-              name: list-items
-              description: "List all items"
-              call: "business-central-v2.list-items"
-              with:
-                company_id: "rest.company_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/sales-orders
-          name: sales-orders
-          description: "Sales orders"
-          operations:
-            - method: GET
-              name: list-sales-orders
-              description: "List sales orders"
-              call: "business-central-v2.list-sales-orders"
-              with:
-                company_id: "rest.company_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-sales-order
-              description: "Create a sales order"
-              call: "business-central-v2.create-sales-order"
-              with:
-                company_id: "rest.company_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/purchase-orders
-          name: purchase-orders
-          description: "Purchase orders"
-          operations:
-            - method: GET
-              name: list-purchase-orders
-              description: "List purchase orders"
-              call: "business-central-v2.list-purchase-orders"
-              with:
-                company_id: "rest.company_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/accounts
-          name: accounts
-          description: "General ledger accounts"
-          operations:
-            - method: GET
-              name: list-accounts
-              description: "List accounts"
-              call: "business-central-v2.list-accounts"
-              with:
-                company_id: "rest.company_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/journals
-          name: journals
-          description: "General journals"
-          operations:
-            - method: GET
-              name: list-journals
-              description: "List journals"
-              call: "business-central-v2.list-journals"
-              with:
-                company_id: "rest.company_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/sales-invoices
-          name: sales-invoices
-          description: "Sales invoices"
-          operations:
-            - method: GET
-              name: list-sales-invoices
-              description: "List sales invoices"
-              call: "business-central-v2.list-sales-invoices"
-              with:
-                company_id: "rest.company_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9080
-      namespace: business-ops-mcp
-      transport: http
-      description: "MCP server for AI-assisted Business Central business operations."
-      tools:
-        - name: list-companies
-          description: "List available companies"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "business-central-v2.list-companies"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-customers
-          description: "List all customers"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "business-central-v2.list-customers"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-customer
-          description: "Create a new customer"
-          hints:
-            readOnly: false
-          call: "business-central-v2.create-customer"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-customer
-          description: "Get a customer by ID"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "business-central-v2.get-customer"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-vendors
-          description: "List all vendors"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "business-central-v2.list-vendors"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-vendor
-          description: "Create a new vendor"
-          hints:
-            readOnly: false
-          call: "business-central-v2.create-vendor"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-items
-          description: "List inventory items"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "business-central-v2.list-items"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-item
-          description: "Create a new inventory item"
-          hints:
-            readOnly: false
-          call: "business-central-v2.create-item"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-sales-orders
-          description: "List all sales orders"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "business-central-v2.list-sales-orders"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-sales-order
-          description: "Create a new sales order"
-          hints:
-            readOnly: false
-          call: "business-central-v2.create-sales-order"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-purchase-orders
-          description: "List all purchase orders"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "business-central-v2.list-purchase-orders"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-purchase-order
-          description: "Create a new purchase order"
-          hints:
-            readOnly: false
-          call: "business-central-v2.create-purchase-order"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-accounts
-          description: "List general ledger accounts"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "business-central-v2.list-accounts"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-journals
-          description: "List general journals"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "business-central-v2.list-journals"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-sales-invoices
-          description: "List sales invoices"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "business-central-v2.list-sales-invoices"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-purchase-invoices
-          description: "List purchase invoices"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "business-central-v2.list-purchase-invoices"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-employees
-          description: "List all employees"
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "business-central-v2.list-employees"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: business-ops-api
+    description: Unified REST API for Business Central day-to-day business operations.
+    resources:
+    - path: /v1/companies
+      name: companies
+      description: Company information
+      operations:
+      - method: GET
+        name: list-companies
+        description: List available companies
+        call: business-central-v2.list-companies
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers
+      name: customers
+      description: Customer management
+      operations:
+      - method: GET
+        name: list-customers
+        description: List all customers
+        call: business-central-v2.list-customers
+        with:
+          company_id: rest.company_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-customer
+        description: Create a customer
+        call: business-central-v2.create-customer
+        with:
+          company_id: rest.company_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{customer_id}
+      name: customer
+      description: Single customer
+      operations:
+      - method: GET
+        name: get-customer
+        description: Get a customer
+        call: business-central-v2.get-customer
+        with:
+          company_id: rest.company_id
+          customer_id: rest.customer_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/vendors
+      name: vendors
+      description: Vendor management
+      operations:
+      - method: GET
+        name: list-vendors
+        description: List all vendors
+        call: business-central-v2.list-vendors
+        with:
+          company_id: rest.company_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/items
+      name: items
+      description: Inventory items
+      operations:
+      - method: GET
+        name: list-items
+        description: List all items
+        call: business-central-v2.list-items
+        with:
+          company_id: rest.company_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sales-orders
+      name: sales-orders
+      description: Sales orders
+      operations:
+      - method: GET
+        name: list-sales-orders
+        description: List sales orders
+        call: business-central-v2.list-sales-orders
+        with:
+          company_id: rest.company_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-sales-order
+        description: Create a sales order
+        call: business-central-v2.create-sales-order
+        with:
+          company_id: rest.company_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/purchase-orders
+      name: purchase-orders
+      description: Purchase orders
+      operations:
+      - method: GET
+        name: list-purchase-orders
+        description: List purchase orders
+        call: business-central-v2.list-purchase-orders
+        with:
+          company_id: rest.company_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts
+      name: accounts
+      description: General ledger accounts
+      operations:
+      - method: GET
+        name: list-accounts
+        description: List accounts
+        call: business-central-v2.list-accounts
+        with:
+          company_id: rest.company_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/journals
+      name: journals
+      description: General journals
+      operations:
+      - method: GET
+        name: list-journals
+        description: List journals
+        call: business-central-v2.list-journals
+        with:
+          company_id: rest.company_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sales-invoices
+      name: sales-invoices
+      description: Sales invoices
+      operations:
+      - method: GET
+        name: list-sales-invoices
+        description: List sales invoices
+        call: business-central-v2.list-sales-invoices
+        with:
+          company_id: rest.company_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9080
+    namespace: business-ops-mcp
+    transport: http
+    description: MCP server for AI-assisted Business Central business operations.
+    tools:
+    - name: list-companies
+      description: List available companies
+      hints:
+        readOnly: true
+        idempotent: true
+      call: business-central-v2.list-companies
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-customers
+      description: List all customers
+      hints:
+        readOnly: true
+        idempotent: true
+      call: business-central-v2.list-customers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-customer
+      description: Create a new customer
+      hints:
+        readOnly: false
+      call: business-central-v2.create-customer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-customer
+      description: Get a customer by ID
+      hints:
+        readOnly: true
+        idempotent: true
+      call: business-central-v2.get-customer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-vendors
+      description: List all vendors
+      hints:
+        readOnly: true
+        idempotent: true
+      call: business-central-v2.list-vendors
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-vendor
+      description: Create a new vendor
+      hints:
+        readOnly: false
+      call: business-central-v2.create-vendor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-items
+      description: List inventory items
+      hints:
+        readOnly: true
+        idempotent: true
+      call: business-central-v2.list-items
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-item
+      description: Create a new inventory item
+      hints:
+        readOnly: false
+      call: business-central-v2.create-item
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-sales-orders
+      description: List all sales orders
+      hints:
+        readOnly: true
+        idempotent: true
+      call: business-central-v2.list-sales-orders
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-sales-order
+      description: Create a new sales order
+      hints:
+        readOnly: false
+      call: business-central-v2.create-sales-order
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-purchase-orders
+      description: List all purchase orders
+      hints:
+        readOnly: true
+        idempotent: true
+      call: business-central-v2.list-purchase-orders
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-purchase-order
+      description: Create a new purchase order
+      hints:
+        readOnly: false
+      call: business-central-v2.create-purchase-order
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-accounts
+      description: List general ledger accounts
+      hints:
+        readOnly: true
+        idempotent: true
+      call: business-central-v2.list-accounts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-journals
+      description: List general journals
+      hints:
+        readOnly: true
+        idempotent: true
+      call: business-central-v2.list-journals
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-sales-invoices
+      description: List sales invoices
+      hints:
+        readOnly: true
+        idempotent: true
+      call: business-central-v2.list-sales-invoices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-purchase-invoices
+      description: List purchase invoices
+      hints:
+        readOnly: true
+        idempotent: true
+      call: business-central-v2.list-purchase-invoices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-employees
+      description: List all employees
+      hints:
+        readOnly: true
+        idempotent: true
+      call: business-central-v2.list-employees
+      outputParameters:
+      - type: object
+        mapping: $.
