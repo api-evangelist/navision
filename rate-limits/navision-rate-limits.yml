@@ -4,118 +4,134 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Microsoft Dynamics NAV
 providerId: navision
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
-  - Business Management
-  - Dynamics NAV
+  - Rate Limiting
   - ERP
-  - Finance
-  - Inventory
   - Microsoft
   - Navision
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Microsoft Dynamics NAV API surface. Captures
-  per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values
-  to be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  - Dynamics NAV
+description: Microsoft Dynamics NAV's modern successor — Dynamics 365 Business Central — publishes operational
+  limits per environment and per user for OData v4, REST API, and SOAP endpoints. Production environments
+  allow 600 requests/min/environment (legacy) and 6,000 requests per 5-minute sliding window per user.
+  Sandbox environments are capped at 300 requests/min. Throttling returns HTTP 429 with retry guidance;
+  504/503 may indicate queueing or timeout.
+sources:
+  - https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/operational-limits-online
+  - https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/dynamics-rate-limits
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
+  payloadTooLarge: 413
+  requestTimeout: 408
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
+  - name: OData speed (rate) — per user
+    scope: user
+    metric: requests_per_5_minutes
+    limit: 6000
     timeFrame: minute
-    applies:
-      - Dynamics NAV Web Services API
-      - Dynamics NAV OData API
-      - Dynamics NAV SOAP Web Services
-      - Business Central API v2.0
-      - Business Central Administration Center API
-      - Business Central Automation API
-      - Business Central REST API Web Services
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Dynamics NAV Web Services API
-      - Dynamics NAV OData API
-      - Dynamics NAV SOAP Web Services
-      - Business Central API v2.0
-      - Business Central Administration Center API
-      - Business Central Automation API
-      - Business Central REST API Web Services
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
+    notes: 5-minute sliding window. Distribute load across multiple users / service principals.
+  - name: OData speed (rate) — production (legacy per-environment)
+    scope: environment
     metric: requests_per_minute
+    limit: 600
+    timeFrame: minute
+    notes: Legacy per-environment limit superseded by per-user limits in late 2023.
+  - name: OData speed (rate) — sandbox (legacy per-environment)
+    scope: environment
+    metric: requests_per_minute
+    limit: 300
+    timeFrame: minute
+  - name: OData max concurrent requests — per user
+    scope: user
+    metric: concurrent_requests
+    limit: 5
+  - name: OData max connections — per user
+    scope: user
+    metric: concurrent_requests
     limit: 100
-    burst: 200
+    notes: Includes processed and queued requests; exceeds returns 429.
+  - name: OData max request queue size — per user
+    scope: user
+    metric: queued_requests
+    limit: 95
+  - name: OData max page size
+    scope: environment
+    metric: entities_per_response
+    limit: 20000
+    notes: Returns 413 Request Entity Too Large.
+  - name: OData max body size
+    scope: environment
+    metric: mb_per_request
+    limit: 350
+  - name: OData max batch size
+    scope: environment
+    metric: operations_per_batch
+    limit: 100
+  - name: OData operation timeout
+    scope: environment
+    metric: minutes
+    limit: 8
+    notes: Returns 408 Request Timeout.
+  - name: SOAP speed (rate) — per user
+    scope: user
+    metric: requests_per_5_minutes
+    limit: 6000
     timeFrame: minute
-    applies:
-      - Dynamics NAV Web Services API
-      - Dynamics NAV OData API
-      - Dynamics NAV SOAP Web Services
-      - Business Central API v2.0
-      - Business Central Administration Center API
-      - Business Central Automation API
-      - Business Central REST API Web Services
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Dynamics NAV Web Services API
-      - Dynamics NAV OData API
-      - Dynamics NAV SOAP Web Services
-      - Business Central API v2.0
-      - Business Central Administration Center API
-      - Business Central Automation API
-      - Business Central REST API Web Services
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Dynamics NAV Web Services API
-      - Dynamics NAV OData API
-      - Dynamics NAV SOAP Web Services
-      - Business Central API v2.0
-      - Business Central Administration Center API
-      - Business Central Automation API
-      - Business Central REST API Web Services
+    notes: SOAP endpoints scheduled for deprecation; prefer OData / REST API.
+  - name: SOAP max concurrent requests
+    scope: environment
+    metric: concurrent_requests
+    limit: 5
+  - name: SOAP max connections
+    scope: environment
+    metric: concurrent_requests
+    limit: 100
+  - name: SOAP max message size
+    scope: environment
+    metric: kb_per_request
+    limit: 65536
+  - name: Webhook subscriptions
+    scope: environment
+    metric: subscriptions
+    limit: 200
+  - name: Max file upload size
+    scope: environment
+    metric: mb_per_file
+    limit: 350
+  - name: Companies per environment
+    scope: environment
+    metric: companies
+    limit: 300
+  - name: Background sessions concurrency
+    scope: environment
+    metric: concurrent_sessions
+    limit: 10
+  - name: Background sessions queue length
+    scope: environment
+    metric: queued_sessions
+    limit: 100
+  - name: Scheduled tasks (per user)
+    scope: user
+    metric: concurrent_tasks
+    limit: 5
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: 429 throttling and retry
+    description: Exceeding rate or queue limits returns HTTP 429 Too Many Requests. Implement retry logic
+      with exponential backoff; honor Retry-After when present.
+  - name: 503 queue timeout
+    description: When the concurrent-request queue is saturated, requests wait up to 8 minutes; if not
+      processed they return 503 Service Temporarily Unavailable.
+  - name: Per-user fan-out
+    description: Per-user limits are strict. Spread workload across multiple users or service principals
+      using round-robin to scale beyond a single user's quota.
+  - name: SOAP deprecation
+    description: SOAP endpoints have reduced throughput targets and are slated for deprecation; migrate
+      to REST API or OData v4.
+  - name: Sandbox vs production
+    description: Sandbox environments have lower legacy per-environment caps (300 vs 600 rpm). Do not
+      load-test in sandbox.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

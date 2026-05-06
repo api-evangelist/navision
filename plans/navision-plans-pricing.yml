@@ -4,208 +4,130 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Microsoft Dynamics NAV
 providerId: navision
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Business Management
   - Dynamics NAV
   - ERP
   - Finance
-  - Inventory
   - Microsoft
   - Navision
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+description: Microsoft Dynamics NAV (Navision) is the predecessor to Microsoft Dynamics 365 Business
+  Central, which is the active commercial offering. Pricing is per-user-per-month subscription with two
+  full-user SKUs (Essentials, Premium) and a limited-access Team Members SKU. Annual commitment is required.
+  Copilot Credits are sold separately. The legacy on-premises Dynamics NAV product is no longer sold;
+  customers receive a 30-day free trial.
+sources:
+  - https://www.microsoft.com/en-us/dynamics-365/products/business-central/pricing
+  - https://www.microsoft.com/dynamics-365/
 plans:
-  - id: navision-free
-    name: Free
+  - id: navision-trial
+    name: Free Trial
     type: freemium
-    description: Free entry tier for the Microsoft Dynamics NAV API surface. Intended for evaluation,
-      prototyping, and low-volume integrations. Real limits and pricing must be reconciled with the provider's
-      published plan documentation.
+    description: 30-day free trial of Dynamics 365 Business Central.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
+      - label: Trial period
+        name: trial
+        type: flat
+        metric: month
+        limit: 1
         timeFrame: month
         geo: global
-        domains:
-          - https://{server}:{port}/{instance}/api/{version}
-          - https://{server}:{port}/{instance}/OData/Company('{company}')
-          - https://{server}:{port}/{instance}/WS/{company}/
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
-          - https://api.businesscentral.dynamics.com/admin/v2.28
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://{server}:{port}/{instance}/api/{version}
-          - https://{server}:{port}/{instance}/OData/Company('{company}')
-          - https://{server}:{port}/{instance}/WS/{company}/
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
-          - https://api.businesscentral.dynamics.com/admin/v2.28
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api
         unit: 1
         price: '0.00'
         userMultiplied: false
     elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Dynamics NAV Web Services API
-      - name: Dynamics NAV OData API
-      - name: Dynamics NAV SOAP Web Services
-      - name: Business Central API v2.0
-      - name: Business Central Administration Center API
-      - name: Business Central Automation API
-      - name: Business Central REST API Web Services
-  - id: navision-pro
-    name: Professional
-    type: paid
-    description: Production tier for Microsoft Dynamics NAV. Provides higher quotas, priority support,
-      and access to the broader API portfolio. Pricing placeholder; align with the provider's pricing
-      page.
+      - name: Connect finance, sales, service, and operations
+      - name: Single easy-to-use solution
+  - id: navision-team-members
+    name: Business Central Team Members
+    type: subscription
+    description: Limited-access SKU for users who only read data, approve workflows, or update select
+      information.
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
+      - label: Team Member subscription
+        name: team_members_seat
+        type: subscription
+        metric: seat
+        limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://{server}:{port}/{instance}/api/{version}
-          - https://{server}:{port}/{instance}/OData/Company('{company}')
-          - https://{server}:{port}/{instance}/WS/{company}/
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
-          - https://api.businesscentral.dynamics.com/admin/v2.28
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api
         unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
+        price: '8.00'
+        userMultiplied: true
+    elements:
+      - name: Read data
+      - name: Approve workflows
+      - name: Create or update select information
+      - name: Annual commitment required
+  - id: navision-essentials
+    name: Business Central Essentials
+    type: subscription
+    description: Full-user SKU covering finance, sales, fulfillment, purchasing, inventory, supply chain
+      planning, project management, warehouse management, and service order management.
+    entries:
+      - label: Essentials subscription
+        name: essentials_seat
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: month
         geo: global
-        domains:
-          - https://{server}:{port}/{instance}/api/{version}
-          - https://{server}:{port}/{instance}/OData/Company('{company}')
-          - https://{server}:{port}/{instance}/WS/{company}/
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
-          - https://api.businesscentral.dynamics.com/admin/v2.28
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api
         unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
+        price: '80.00'
+        userMultiplied: true
+    elements:
+      - name: Finance
+      - name: Sales
+      - name: Fulfillment
+      - name: Purchasing
+      - name: Inventory
+      - name: Supply chain planning
+      - name: Project management
+      - name: Warehouse management
+      - name: Service order management
+      - name: Multiple environments / companies
+      - name: Microsoft Copilot included (credits separate)
+      - name: Annual commitment required
+  - id: navision-premium
+    name: Business Central Premium
+    type: subscription
+    description: Full-user SKU adding service management and manufacturing on top of Essentials.
+    entries:
+      - label: Premium subscription
+        name: premium_seat
+        type: subscription
+        metric: seat
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '110.00'
+        userMultiplied: true
+    elements:
+      - name: All Essentials features
+      - name: Service management
+      - name: Manufacturing
+      - name: Microsoft Copilot included (credits separate)
+      - name: Annual commitment required
+  - id: navision-copilot-credits
+    name: Microsoft Copilot Credits
+    type: usage-based
+    description: Copilot AI agent capacity is sold separately and billed via consumed credits.
+    entries:
+      - label: Copilot Credits
+        name: copilot_credits
         type: metered
-        metric: requests
+        metric: credit
         limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://{server}:{port}/{instance}/api/{version}
-          - https://{server}:{port}/{instance}/OData/Company('{company}')
-          - https://{server}:{port}/{instance}/WS/{company}/
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
-          - https://api.businesscentral.dynamics.com/admin/v2.28
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: see Microsoft Copilot Credit pricing
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Dynamics NAV Web Services API
-      - name: Dynamics NAV OData API
-      - name: Dynamics NAV SOAP Web Services
-      - name: Business Central API v2.0
-      - name: Business Central Administration Center API
-      - name: Business Central Automation API
-      - name: Business Central REST API Web Services
-  - id: navision-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-negotiated tier for Microsoft Dynamics NAV. Includes dedicated capacity, contractual
-      SLAs, security review, data residency options, and named technical account management.
-    entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: configurable
-        domains:
-          - https://{server}:{port}/{instance}/api/{version}
-          - https://{server}:{port}/{instance}/OData/Company('{company}')
-          - https://{server}:{port}/{instance}/WS/{company}/
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
-          - https://api.businesscentral.dynamics.com/admin/v2.28
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api
-        unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://{server}:{port}/{instance}/api/{version}
-          - https://{server}:{port}/{instance}/OData/Company('{company}')
-          - https://{server}:{port}/{instance}/WS/{company}/
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
-          - https://api.businesscentral.dynamics.com/admin/v2.28
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
-          - https://api.businesscentral.dynamics.com/v2.0/{environment}/api
-        unit: 1
-        price: custom
-        userMultiplied: false
-    elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Dynamics NAV Web Services API
-      - name: Dynamics NAV OData API
-      - name: Dynamics NAV SOAP Web Services
-      - name: Business Central API v2.0
-      - name: Business Central Administration Center API
-      - name: Business Central Automation API
-      - name: Business Central REST API Web Services
+      - name: Required for AI agents in Business Central
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
