@@ -3,11 +3,11 @@
   "feeds": [
     {
       "source": "https://www.microsoft.com/en-us/dynamics-365/blog/product/dynamics-365-business-central/",
-      "feed_url": "https://www.microsoft.com/en-us/dynamics-365/blog/feed/",
-      "saved": 10,
-      "title": "Microsoft Dynamics 365 Blog"
+      "feed_url": "https://www.microsoft.com/en-us/dynamics-365/blog/product/dynamics-365-business-central/feed/",
+      "title": "Dynamics 365 Business Central - Microsoft Dynamics 365 Blog",
+      "saved": 0
     }
   ],
   "post_count": 10,
-  "fetched": "2026-05-03T23:32:30Z"
+  "fetched": "2026-05-09T20:17:51Z"
 }
