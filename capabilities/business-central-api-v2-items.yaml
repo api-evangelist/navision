@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dynamics 365 Business Central API v2.0 — Items
+  description: 'Dynamics 365 Business Central API v2.0 — Items. 5 operations. Lead operation: List Items. Self-contained Naftiko
+    capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Items
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: business-central-api-v2-items
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+    description: Dynamics 365 Business Central API v2.0 — Items business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-items
+      path: /companies({company_id})/items
+      operations:
+      - name: listitems
+        method: GET
+        description: List Items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createitem
+        method: POST
+        description: Create an Item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: companies({company_id})-items({item_id})
+      path: /companies({company_id})/items({item_id})
+      operations:
+      - name: getitem
+        method: GET
+        description: Get an Item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateitem
+        method: PATCH
+        description: Update an Item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteitem
+        method: DELETE
+        description: Delete an Item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: business-central-api-v2-items-rest
+    port: 8080
+    description: REST adapter for Dynamics 365 Business Central API v2.0 — Items. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/items
+      name: companies-company-id-items
+      description: REST surface for companies({company_id})-items.
+      operations:
+      - method: GET
+        name: listitems
+        description: List Items
+        call: business-central-api-v2-items.listitems
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createitem
+        description: Create an Item
+        call: business-central-api-v2-items.createitem
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/items-item-id
+      name: companies-company-id-items-item-id
+      description: REST surface for companies({company_id})-items({item_id}).
+      operations:
+      - method: GET
+        name: getitem
+        description: Get an Item
+        call: business-central-api-v2-items.getitem
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateitem
+        description: Update an Item
+        call: business-central-api-v2-items.updateitem
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteitem
+        description: Delete an Item
+        call: business-central-api-v2-items.deleteitem
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: business-central-api-v2-items-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dynamics 365 Business Central API v2.0 — Items. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-items
+      description: List Items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-items.listitems
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-item
+      description: Create an Item
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: business-central-api-v2-items.createitem
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-item
+      description: Get an Item
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-items.getitem
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-item
+      description: Update an Item
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-items.updateitem
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-item
+      description: Delete an Item
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: business-central-api-v2-items.deleteitem
+      outputParameters:
+      - type: object
+        mapping: $.

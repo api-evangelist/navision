@@ -1,0 +1,229 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dynamics 365 Business Central API v2.0 — Sales Orders
+  description: 'Dynamics 365 Business Central API v2.0 — Sales Orders. 6 operations. Lead operation: List Sales Orders. Self-contained
+    Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Sales Orders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: business-central-api-v2-sales-orders
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+    description: Dynamics 365 Business Central API v2.0 — Sales Orders business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-salesOrders
+      path: /companies({company_id})/salesOrders
+      operations:
+      - name: listsalesorders
+        method: GET
+        description: List Sales Orders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createsalesorder
+        method: POST
+        description: Create a Sales Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: companies({company_id})-salesOrders({salesOrder_id})
+      path: /companies({company_id})/salesOrders({salesOrder_id})
+      operations:
+      - name: getsalesorder
+        method: GET
+        description: Get a Sales Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatesalesorder
+        method: PATCH
+        description: Update a Sales Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletesalesorder
+        method: DELETE
+        description: Delete a Sales Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies({company_id})-salesOrders({salesOrder_id})-salesOrderLines
+      path: /companies({company_id})/salesOrders({salesOrder_id})/salesOrderLines
+      operations:
+      - name: listsalesorderlines
+        method: GET
+        description: List Sales Order Lines
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: business-central-api-v2-sales-orders-rest
+    port: 8080
+    description: REST adapter for Dynamics 365 Business Central API v2.0 — Sales Orders. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/salesorders
+      name: companies-company-id-salesorders
+      description: REST surface for companies({company_id})-salesOrders.
+      operations:
+      - method: GET
+        name: listsalesorders
+        description: List Sales Orders
+        call: business-central-api-v2-sales-orders.listsalesorders
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createsalesorder
+        description: Create a Sales Order
+        call: business-central-api-v2-sales-orders.createsalesorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/salesorders-salesorder-id
+      name: companies-company-id-salesorders-salesorder-id
+      description: REST surface for companies({company_id})-salesOrders({salesOrder_id}).
+      operations:
+      - method: GET
+        name: getsalesorder
+        description: Get a Sales Order
+        call: business-central-api-v2-sales-orders.getsalesorder
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatesalesorder
+        description: Update a Sales Order
+        call: business-central-api-v2-sales-orders.updatesalesorder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletesalesorder
+        description: Delete a Sales Order
+        call: business-central-api-v2-sales-orders.deletesalesorder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/salesorders-salesorder-id/salesorderlines
+      name: companies-company-id-salesorders-salesorder-id-salesorderlines
+      description: REST surface for companies({company_id})-salesOrders({salesOrder_id})-salesOrderLines.
+      operations:
+      - method: GET
+        name: listsalesorderlines
+        description: List Sales Order Lines
+        call: business-central-api-v2-sales-orders.listsalesorderlines
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: business-central-api-v2-sales-orders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dynamics 365 Business Central API v2.0 — Sales Orders. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-sales-orders
+      description: List Sales Orders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-sales-orders.listsalesorders
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-sales-order
+      description: Create a Sales Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: business-central-api-v2-sales-orders.createsalesorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-sales-order
+      description: Get a Sales Order
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-sales-orders.getsalesorder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-sales-order
+      description: Update a Sales Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-sales-orders.updatesalesorder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-sales-order
+      description: Delete a Sales Order
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: business-central-api-v2-sales-orders.deletesalesorder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-sales-order-lines
+      description: List Sales Order Lines
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-sales-orders.listsalesorderlines
+      outputParameters:
+      - type: object
+        mapping: $.

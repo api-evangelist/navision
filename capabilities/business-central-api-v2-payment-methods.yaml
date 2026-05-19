@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dynamics 365 Business Central API v2.0 — Payment Methods
+  description: 'Dynamics 365 Business Central API v2.0 — Payment Methods. 1 operations. Lead operation: List Payment Methods.
+    Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Payment Methods
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: business-central-api-v2-payment-methods
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+    description: Dynamics 365 Business Central API v2.0 — Payment Methods business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-paymentMethods
+      path: /companies({company_id})/paymentMethods
+      operations:
+      - name: listpaymentmethods
+        method: GET
+        description: List Payment Methods
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: business-central-api-v2-payment-methods-rest
+    port: 8080
+    description: REST adapter for Dynamics 365 Business Central API v2.0 — Payment Methods. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/paymentmethods
+      name: companies-company-id-paymentmethods
+      description: REST surface for companies({company_id})-paymentMethods.
+      operations:
+      - method: GET
+        name: listpaymentmethods
+        description: List Payment Methods
+        call: business-central-api-v2-payment-methods.listpaymentmethods
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: business-central-api-v2-payment-methods-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dynamics 365 Business Central API v2.0 — Payment Methods. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-payment-methods
+      description: List Payment Methods
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-payment-methods.listpaymentmethods
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dynamics 365 Business Central API v2.0 — Countries/Regions
+  description: 'Dynamics 365 Business Central API v2.0 — Countries/Regions. 1 operations. Lead operation: List Countries/regions.
+    Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Countries/Regions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: business-central-api-v2-countries-regions
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+    description: Dynamics 365 Business Central API v2.0 — Countries/Regions business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: companies({company_id})-countriesRegions
+      path: /companies({company_id})/countriesRegions
+      operations:
+      - name: listcountriesregions
+        method: GET
+        description: List Countries/regions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: business-central-api-v2-countries-regions-rest
+    port: 8080
+    description: REST adapter for Dynamics 365 Business Central API v2.0 — Countries/Regions. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/countriesregions
+      name: companies-company-id-countriesregions
+      description: REST surface for companies({company_id})-countriesRegions.
+      operations:
+      - method: GET
+        name: listcountriesregions
+        description: List Countries/regions
+        call: business-central-api-v2-countries-regions.listcountriesregions
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: business-central-api-v2-countries-regions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dynamics 365 Business Central API v2.0 — Countries/Regions. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-countries-regions
+      description: List Countries/regions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-countries-regions.listcountriesregions
+      outputParameters:
+      - type: object
+        mapping: $.

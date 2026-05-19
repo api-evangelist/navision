@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Automation API v2.0 — Security Groups
+  description: 'Business Central Automation API v2.0 — Security Groups. 1 operations. Lead operation: List Security Groups.
+    Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Security Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: automation-security-groups
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+    description: Business Central Automation API v2.0 — Security Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-securityGroups
+      path: /companies({company_id})/securityGroups
+      operations:
+      - name: listsecuritygroups
+        method: GET
+        description: List Security Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: automation-security-groups-rest
+    port: 8080
+    description: REST adapter for Business Central Automation API v2.0 — Security Groups. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/securitygroups
+      name: companies-company-id-securitygroups
+      description: REST surface for companies({company_id})-securityGroups.
+      operations:
+      - method: GET
+        name: listsecuritygroups
+        description: List Security Groups
+        call: automation-security-groups.listsecuritygroups
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: automation-security-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Automation API v2.0 — Security Groups. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-security-groups
+      description: List Security Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-security-groups.listsecuritygroups
+      outputParameters:
+      - type: object
+        mapping: $.

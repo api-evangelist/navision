@@ -1,0 +1,106 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Administration Center API — Notifications
+  description: 'Business Central Administration Center API — Notifications. 2 operations. Lead operation: List Notification
+    Recipients. Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Notifications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-center-notifications
+    baseUri: https://api.businesscentral.dynamics.com/admin/v2.28
+    description: Business Central Administration Center API — Notifications business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: applications-applicationFamily-environments-environmentName-notifications
+      path: /applications/{applicationFamily}/environments/{environmentName}/notifications
+      operations:
+      - name: listnotificationrecipients
+        method: GET
+        description: List Notification Recipients
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: addnotificationrecipient
+        method: POST
+        description: Add a Notification Recipient
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-center-notifications-rest
+    port: 8080
+    description: REST adapter for Business Central Administration Center API — Notifications. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/applications/{applicationfamily}/environments/{environmentname}/notifications
+      name: applications-applicationfamily-environments-environmentname-notifications
+      description: REST surface for applications-applicationFamily-environments-environmentName-notifications.
+      operations:
+      - method: GET
+        name: listnotificationrecipients
+        description: List Notification Recipients
+        call: admin-center-notifications.listnotificationrecipients
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addnotificationrecipient
+        description: Add a Notification Recipient
+        call: admin-center-notifications.addnotificationrecipient
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-center-notifications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Administration Center API — Notifications. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-notification-recipients
+      description: List Notification Recipients
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-center-notifications.listnotificationrecipients
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-notification-recipient
+      description: Add a Notification Recipient
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-center-notifications.addnotificationrecipient
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

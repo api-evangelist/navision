@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Administration Center API — Available Applications
+  description: 'Business Central Administration Center API — Available Applications. 2 operations. Lead operation: List Available
+    Application Versions. Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Available Applications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-center-available-applications
+    baseUri: https://api.businesscentral.dynamics.com/admin/v2.28
+    description: Business Central Administration Center API — Available Applications business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: applications-applicationFamily-availableApplicationVersions
+      path: /applications/{applicationFamily}/availableApplicationVersions
+      operations:
+      - name: listavailableversions
+        method: GET
+        description: List Available Application Versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-applicationFamily-availableCountries
+      path: /applications/{applicationFamily}/availableCountries
+      operations:
+      - name: listavailablecountries
+        method: GET
+        description: List Available Countries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-center-available-applications-rest
+    port: 8080
+    description: REST adapter for Business Central Administration Center API — Available Applications. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/applications/{applicationfamily}/availableapplicationversions
+      name: applications-applicationfamily-availableapplicationversions
+      description: REST surface for applications-applicationFamily-availableApplicationVersions.
+      operations:
+      - method: GET
+        name: listavailableversions
+        description: List Available Application Versions
+        call: admin-center-available-applications.listavailableversions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{applicationfamily}/availablecountries
+      name: applications-applicationfamily-availablecountries
+      description: REST surface for applications-applicationFamily-availableCountries.
+      operations:
+      - method: GET
+        name: listavailablecountries
+        description: List Available Countries
+        call: admin-center-available-applications.listavailablecountries
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-center-available-applications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Administration Center API — Available Applications. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: list-available-application-versions
+      description: List Available Application Versions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-center-available-applications.listavailableversions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-available-countries
+      description: List Available Countries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-center-available-applications.listavailablecountries
+      outputParameters:
+      - type: object
+        mapping: $.

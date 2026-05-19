@@ -1,0 +1,169 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Automation API v2.0 — Extension Upload
+  description: 'Business Central Automation API v2.0 — Extension Upload. 3 operations. Lead operation: Create Extension Upload
+    Record. Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Extension Upload
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: automation-extension-upload
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+    description: Business Central Automation API v2.0 — Extension Upload business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-extensionUpload
+      path: /companies({company_id})/extensionUpload
+      operations:
+      - name: createextensionupload
+        method: POST
+        description: Create Extension Upload Record
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: companies({company_id})-extensionUpload({extensionUpload_id})-Microsoft.NAV.uplo
+      path: /companies({company_id})/extensionUpload({extensionUpload_id})/Microsoft.NAV.upload
+      operations:
+      - name: installuploadedextension
+        method: POST
+        description: Install Uploaded Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: extensionUpload_id
+          in: path
+          type: string
+          required: true
+    - name: companies({company_id})-extensionUpload({extensionUpload_id})-extensionContent
+      path: /companies({company_id})/extensionUpload({extensionUpload_id})/extensionContent
+      operations:
+      - name: uploadextensionfile
+        method: PATCH
+        description: Upload Extension File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: extensionUpload_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: automation-extension-upload-rest
+    port: 8080
+    description: REST adapter for Business Central Automation API v2.0 — Extension Upload. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/extensionupload
+      name: companies-company-id-extensionupload
+      description: REST surface for companies({company_id})-extensionUpload.
+      operations:
+      - method: POST
+        name: createextensionupload
+        description: Create Extension Upload Record
+        call: automation-extension-upload.createextensionupload
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/extensionupload-extensionupload-id/microsoft-nav-upload
+      name: companies-company-id-extensionupload-extensionupload-id-microsoft-nav-uplo
+      description: REST surface for companies({company_id})-extensionUpload({extensionUpload_id})-Microsoft.NAV.uplo.
+      operations:
+      - method: POST
+        name: installuploadedextension
+        description: Install Uploaded Extension
+        call: automation-extension-upload.installuploadedextension
+        with:
+          extensionUpload_id: rest.extensionUpload_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/extensionupload-extensionupload-id/extensioncontent
+      name: companies-company-id-extensionupload-extensionupload-id-extensioncontent
+      description: REST surface for companies({company_id})-extensionUpload({extensionUpload_id})-extensionContent.
+      operations:
+      - method: PATCH
+        name: uploadextensionfile
+        description: Upload Extension File
+        call: automation-extension-upload.uploadextensionfile
+        with:
+          extensionUpload_id: rest.extensionUpload_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: automation-extension-upload-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Automation API v2.0 — Extension Upload. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: create-extension-upload-record
+      description: Create Extension Upload Record
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-extension-upload.createextensionupload
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: install-uploaded-extension
+      description: Install Uploaded Extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-extension-upload.installuploadedextension
+      with:
+        extensionUpload_id: tools.extensionUpload_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-extension-file
+      description: Upload Extension File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: automation-extension-upload.uploadextensionfile
+      with:
+        extensionUpload_id: tools.extensionUpload_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

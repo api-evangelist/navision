@@ -1,0 +1,253 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Automation API v2.0 — Companies
+  description: 'Business Central Automation API v2.0 — Companies. 6 operations. Lead operation: List Companies. Self-contained
+    Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Companies
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: automation-companies
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+    description: Business Central Automation API v2.0 — Companies business capability. Self-contained, no shared references.
+    resources:
+    - name: companies
+      path: /companies
+      operations:
+      - name: listcompanies
+        method: GET
+        description: List Companies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies({company_id})-automationCompanies
+      path: /companies({company_id})/automationCompanies
+      operations:
+      - name: listautomationcompanies
+        method: GET
+        description: List Automation Companies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createautomationcompany
+        method: POST
+        description: Create a Company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: companies({company_id})-automationCompanies({automationCompany_id})
+      path: /companies({company_id})/automationCompanies({automationCompany_id})
+      operations:
+      - name: getautomationcompany
+        method: GET
+        description: Get an Automation Company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: automationCompany_id
+          in: path
+          type: string
+          required: true
+      - name: updateautomationcompany
+        method: PATCH
+        description: Update an Automation Company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: automationCompany_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteautomationcompany
+        method: DELETE
+        description: Delete an Automation Company
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: automationCompany_id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: automation-companies-rest
+    port: 8080
+    description: REST adapter for Business Central Automation API v2.0 — Companies. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies
+      name: companies
+      description: REST surface for companies.
+      operations:
+      - method: GET
+        name: listcompanies
+        description: List Companies
+        call: automation-companies.listcompanies
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/automationcompanies
+      name: companies-company-id-automationcompanies
+      description: REST surface for companies({company_id})-automationCompanies.
+      operations:
+      - method: GET
+        name: listautomationcompanies
+        description: List Automation Companies
+        call: automation-companies.listautomationcompanies
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createautomationcompany
+        description: Create a Company
+        call: automation-companies.createautomationcompany
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/automationcompanies-automationcompany-id
+      name: companies-company-id-automationcompanies-automationcompany-id
+      description: REST surface for companies({company_id})-automationCompanies({automationCompany_id}).
+      operations:
+      - method: GET
+        name: getautomationcompany
+        description: Get an Automation Company
+        call: automation-companies.getautomationcompany
+        with:
+          automationCompany_id: rest.automationCompany_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateautomationcompany
+        description: Update an Automation Company
+        call: automation-companies.updateautomationcompany
+        with:
+          automationCompany_id: rest.automationCompany_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteautomationcompany
+        description: Delete an Automation Company
+        call: automation-companies.deleteautomationcompany
+        with:
+          automationCompany_id: rest.automationCompany_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: automation-companies-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Automation API v2.0 — Companies. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-companies
+      description: List Companies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-companies.listcompanies
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-automation-companies
+      description: List Automation Companies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-companies.listautomationcompanies
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-company
+      description: Create a Company
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-companies.createautomationcompany
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-automation-company
+      description: Get an Automation Company
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-companies.getautomationcompany
+      with:
+        automationCompany_id: tools.automationCompany_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-automation-company
+      description: Update an Automation Company
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: automation-companies.updateautomationcompany
+      with:
+        automationCompany_id: tools.automationCompany_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-automation-company
+      description: Delete an Automation Company
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: automation-companies.deleteautomationcompany
+      with:
+        automationCompany_id: tools.automationCompany_id
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,146 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dynamics 365 Business Central API v2.0 — Journals
+  description: 'Dynamics 365 Business Central API v2.0 — Journals. 3 operations. Lead operation: List Journals. Self-contained
+    Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Journals
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: business-central-api-v2-journals
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+    description: Dynamics 365 Business Central API v2.0 — Journals business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-journals
+      path: /companies({company_id})/journals
+      operations:
+      - name: listjournals
+        method: GET
+        description: List Journals
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createjournal
+        method: POST
+        description: Create a Journal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: companies({company_id})-journals({journal_id})-journalLines
+      path: /companies({company_id})/journals({journal_id})/journalLines
+      operations:
+      - name: listjournallines
+        method: GET
+        description: List Journal Lines
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: journal_id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: business-central-api-v2-journals-rest
+    port: 8080
+    description: REST adapter for Dynamics 365 Business Central API v2.0 — Journals. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/journals
+      name: companies-company-id-journals
+      description: REST surface for companies({company_id})-journals.
+      operations:
+      - method: GET
+        name: listjournals
+        description: List Journals
+        call: business-central-api-v2-journals.listjournals
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createjournal
+        description: Create a Journal
+        call: business-central-api-v2-journals.createjournal
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/journals-journal-id/journallines
+      name: companies-company-id-journals-journal-id-journallines
+      description: REST surface for companies({company_id})-journals({journal_id})-journalLines.
+      operations:
+      - method: GET
+        name: listjournallines
+        description: List Journal Lines
+        call: business-central-api-v2-journals.listjournallines
+        with:
+          journal_id: rest.journal_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: business-central-api-v2-journals-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dynamics 365 Business Central API v2.0 — Journals. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-journals
+      description: List Journals
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-journals.listjournals
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-journal
+      description: Create a Journal
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: business-central-api-v2-journals.createjournal
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-journal-lines
+      description: List Journal Lines
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-journals.listjournallines
+      with:
+        journal_id: tools.journal_id
+      outputParameters:
+      - type: object
+        mapping: $.

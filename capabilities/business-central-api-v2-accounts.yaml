@@ -1,0 +1,143 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dynamics 365 Business Central API v2.0 — Accounts
+  description: 'Dynamics 365 Business Central API v2.0 — Accounts. 3 operations. Lead operation: List Accounts. Self-contained
+    Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: business-central-api-v2-accounts
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+    description: Dynamics 365 Business Central API v2.0 — Accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-accounts
+      path: /companies({company_id})/accounts
+      operations:
+      - name: listaccounts
+        method: GET
+        description: List Accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies({company_id})-accounts({account_id})
+      path: /companies({company_id})/accounts({account_id})
+      operations:
+      - name: getaccount
+        method: GET
+        description: Get an Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: account_id
+          in: path
+          type: string
+          required: true
+    - name: companies({company_id})-generalLedgerEntries
+      path: /companies({company_id})/generalLedgerEntries
+      operations:
+      - name: listgeneralledgerentries
+        method: GET
+        description: List General Ledger Entries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: business-central-api-v2-accounts-rest
+    port: 8080
+    description: REST adapter for Dynamics 365 Business Central API v2.0 — Accounts. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/accounts
+      name: companies-company-id-accounts
+      description: REST surface for companies({company_id})-accounts.
+      operations:
+      - method: GET
+        name: listaccounts
+        description: List Accounts
+        call: business-central-api-v2-accounts.listaccounts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/accounts-account-id
+      name: companies-company-id-accounts-account-id
+      description: REST surface for companies({company_id})-accounts({account_id}).
+      operations:
+      - method: GET
+        name: getaccount
+        description: Get an Account
+        call: business-central-api-v2-accounts.getaccount
+        with:
+          account_id: rest.account_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/generalledgerentries
+      name: companies-company-id-generalledgerentries
+      description: REST surface for companies({company_id})-generalLedgerEntries.
+      operations:
+      - method: GET
+        name: listgeneralledgerentries
+        description: List General Ledger Entries
+        call: business-central-api-v2-accounts.listgeneralledgerentries
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: business-central-api-v2-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dynamics 365 Business Central API v2.0 — Accounts. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-accounts
+      description: List Accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-accounts.listaccounts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-account
+      description: Get an Account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-accounts.getaccount
+      with:
+        account_id: tools.account_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-general-ledger-entries
+      description: List General Ledger Entries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-accounts.listgeneralledgerentries
+      outputParameters:
+      - type: object
+        mapping: $.

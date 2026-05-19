@@ -1,0 +1,385 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Administration Center API — Environments
+  description: 'Business Central Administration Center API — Environments. 10 operations. Lead operation: List All Environments.
+    Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Environments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-center-environments
+    baseUri: https://api.businesscentral.dynamics.com/admin/v2.28
+    description: Business Central Administration Center API — Environments business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: applications-environments
+      path: /applications/environments
+      operations:
+      - name: listallenvironments
+        method: GET
+        description: List All Environments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-applicationFamily-environments
+      path: /applications/{applicationFamily}/environments
+      operations:
+      - name: listenvironments
+        method: GET
+        description: List Environments by Application Family
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-applicationFamily-environments-environmentName
+      path: /applications/{applicationFamily}/environments/{environmentName}
+      operations:
+      - name: getenvironment
+        method: GET
+        description: Get an Environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createenvironment
+        method: PUT
+        description: Create a New Environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteenvironment
+        method: DELETE
+        description: Delete an Environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-applicationFamily-environments-environmentName-availableRestorePeri
+      path: /applications/{applicationFamily}/environments/{environmentName}/availableRestorePeriods
+      operations:
+      - name: getavailablerestoreperiods
+        method: GET
+        description: Get Available Restore Periods
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-applicationFamily-environments-environmentName-copy
+      path: /applications/{applicationFamily}/environments/{environmentName}/copy
+      operations:
+      - name: copyenvironment
+        method: POST
+        description: Copy an Environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: applications-applicationFamily-environments-environmentName-recover
+      path: /applications/{applicationFamily}/environments/{environmentName}/recover
+      operations:
+      - name: recoverenvironment
+        method: POST
+        description: Recover a Deleted Environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-applicationFamily-environments-environmentName-rename
+      path: /applications/{applicationFamily}/environments/{environmentName}/rename
+      operations:
+      - name: renameenvironment
+        method: POST
+        description: Rename an Environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: applications-applicationFamily-environments-environmentName-restore
+      path: /applications/{applicationFamily}/environments/{environmentName}/restore
+      operations:
+      - name: restoreenvironment
+        method: POST
+        description: Restore an Environment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-center-environments-rest
+    port: 8080
+    description: REST adapter for Business Central Administration Center API — Environments. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/applications/environments
+      name: applications-environments
+      description: REST surface for applications-environments.
+      operations:
+      - method: GET
+        name: listallenvironments
+        description: List All Environments
+        call: admin-center-environments.listallenvironments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{applicationfamily}/environments
+      name: applications-applicationfamily-environments
+      description: REST surface for applications-applicationFamily-environments.
+      operations:
+      - method: GET
+        name: listenvironments
+        description: List Environments by Application Family
+        call: admin-center-environments.listenvironments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{applicationfamily}/environments/{environmentname}
+      name: applications-applicationfamily-environments-environmentname
+      description: REST surface for applications-applicationFamily-environments-environmentName.
+      operations:
+      - method: GET
+        name: getenvironment
+        description: Get an Environment
+        call: admin-center-environments.getenvironment
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: createenvironment
+        description: Create a New Environment
+        call: admin-center-environments.createenvironment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteenvironment
+        description: Delete an Environment
+        call: admin-center-environments.deleteenvironment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{applicationfamily}/environments/{environmentname}/availablerestoreperiods
+      name: applications-applicationfamily-environments-environmentname-availablerestoreperi
+      description: REST surface for applications-applicationFamily-environments-environmentName-availableRestorePeri.
+      operations:
+      - method: GET
+        name: getavailablerestoreperiods
+        description: Get Available Restore Periods
+        call: admin-center-environments.getavailablerestoreperiods
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{applicationfamily}/environments/{environmentname}/copy
+      name: applications-applicationfamily-environments-environmentname-copy
+      description: REST surface for applications-applicationFamily-environments-environmentName-copy.
+      operations:
+      - method: POST
+        name: copyenvironment
+        description: Copy an Environment
+        call: admin-center-environments.copyenvironment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{applicationfamily}/environments/{environmentname}/recover
+      name: applications-applicationfamily-environments-environmentname-recover
+      description: REST surface for applications-applicationFamily-environments-environmentName-recover.
+      operations:
+      - method: POST
+        name: recoverenvironment
+        description: Recover a Deleted Environment
+        call: admin-center-environments.recoverenvironment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{applicationfamily}/environments/{environmentname}/rename
+      name: applications-applicationfamily-environments-environmentname-rename
+      description: REST surface for applications-applicationFamily-environments-environmentName-rename.
+      operations:
+      - method: POST
+        name: renameenvironment
+        description: Rename an Environment
+        call: admin-center-environments.renameenvironment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{applicationfamily}/environments/{environmentname}/restore
+      name: applications-applicationfamily-environments-environmentname-restore
+      description: REST surface for applications-applicationFamily-environments-environmentName-restore.
+      operations:
+      - method: POST
+        name: restoreenvironment
+        description: Restore an Environment
+        call: admin-center-environments.restoreenvironment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-center-environments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Administration Center API — Environments. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-all-environments
+      description: List All Environments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-center-environments.listallenvironments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-environments-application-family
+      description: List Environments by Application Family
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-center-environments.listenvironments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-environment
+      description: Get an Environment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-center-environments.getenvironment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-environment
+      description: Create a New Environment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: admin-center-environments.createenvironment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-environment
+      description: Delete an Environment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: admin-center-environments.deleteenvironment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-available-restore-periods
+      description: Get Available Restore Periods
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-center-environments.getavailablerestoreperiods
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: copy-environment
+      description: Copy an Environment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-center-environments.copyenvironment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: recover-deleted-environment
+      description: Recover a Deleted Environment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-center-environments.recoverenvironment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rename-environment
+      description: Rename an Environment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-center-environments.renameenvironment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: restore-environment
+      description: Restore an Environment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-center-environments.restoreenvironment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

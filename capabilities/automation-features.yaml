@@ -1,0 +1,159 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Automation API v2.0 — Features
+  description: 'Business Central Automation API v2.0 — Features. 3 operations. Lead operation: List Features. Self-contained
+    Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Features
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: automation-features
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+    description: Business Central Automation API v2.0 — Features business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-features
+      path: /companies({company_id})/features
+      operations:
+      - name: listfeatures
+        method: GET
+        description: List Features
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies({company_id})-features({feature_id})-Microsoft.NAV.activate
+      path: /companies({company_id})/features({feature_id})/Microsoft.NAV.activate
+      operations:
+      - name: activatefeature
+        method: POST
+        description: Activate a Feature
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: feature_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: companies({company_id})-features({feature_id})-Microsoft.NAV.deactivate
+      path: /companies({company_id})/features({feature_id})/Microsoft.NAV.deactivate
+      operations:
+      - name: deactivatefeature
+        method: POST
+        description: Deactivate a Feature
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: feature_id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: automation-features-rest
+    port: 8080
+    description: REST adapter for Business Central Automation API v2.0 — Features. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/features
+      name: companies-company-id-features
+      description: REST surface for companies({company_id})-features.
+      operations:
+      - method: GET
+        name: listfeatures
+        description: List Features
+        call: automation-features.listfeatures
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/features-feature-id/microsoft-nav-activate
+      name: companies-company-id-features-feature-id-microsoft-nav-activate
+      description: REST surface for companies({company_id})-features({feature_id})-Microsoft.NAV.activate.
+      operations:
+      - method: POST
+        name: activatefeature
+        description: Activate a Feature
+        call: automation-features.activatefeature
+        with:
+          feature_id: rest.feature_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/features-feature-id/microsoft-nav-deactivate
+      name: companies-company-id-features-feature-id-microsoft-nav-deactivate
+      description: REST surface for companies({company_id})-features({feature_id})-Microsoft.NAV.deactivate.
+      operations:
+      - method: POST
+        name: deactivatefeature
+        description: Deactivate a Feature
+        call: automation-features.deactivatefeature
+        with:
+          feature_id: rest.feature_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: automation-features-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Automation API v2.0 — Features. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-features
+      description: List Features
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-features.listfeatures
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: activate-feature
+      description: Activate a Feature
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-features.activatefeature
+      with:
+        feature_id: tools.feature_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deactivate-feature
+      description: Deactivate a Feature
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-features.deactivatefeature
+      with:
+        feature_id: tools.feature_id
+      outputParameters:
+      - type: object
+        mapping: $.

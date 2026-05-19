@@ -1,0 +1,198 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Automation API v2.0 — Extensions
+  description: 'Business Central Automation API v2.0 — Extensions. 5 operations. Lead operation: List Extensions. Self-contained
+    Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Extensions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: automation-extensions
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+    description: Business Central Automation API v2.0 — Extensions business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-extensions
+      path: /companies({company_id})/extensions
+      operations:
+      - name: listextensions
+        method: GET
+        description: List Extensions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies({company_id})-extensions({extension_id})-Microsoft.NAV.install
+      path: /companies({company_id})/extensions({extension_id})/Microsoft.NAV.install
+      operations:
+      - name: installextension
+        method: POST
+        description: Install an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies({company_id})-extensions({extension_id})-Microsoft.NAV.uninstall
+      path: /companies({company_id})/extensions({extension_id})/Microsoft.NAV.uninstall
+      operations:
+      - name: uninstallextension
+        method: POST
+        description: Uninstall an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies({company_id})-extensions({extension_id})-Microsoft.NAV.uninstallAndDel
+      path: /companies({company_id})/extensions({extension_id})/Microsoft.NAV.uninstallAndDeleteExtensionData
+      operations:
+      - name: uninstallanddeleteextensiondata
+        method: POST
+        description: Uninstall and Delete Extension Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies({company_id})-extensions({extension_id})-Microsoft.NAV.unpublish
+      path: /companies({company_id})/extensions({extension_id})/Microsoft.NAV.unpublish
+      operations:
+      - name: unpublishextension
+        method: POST
+        description: Unpublish an Extension
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: automation-extensions-rest
+    port: 8080
+    description: REST adapter for Business Central Automation API v2.0 — Extensions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/extensions
+      name: companies-company-id-extensions
+      description: REST surface for companies({company_id})-extensions.
+      operations:
+      - method: GET
+        name: listextensions
+        description: List Extensions
+        call: automation-extensions.listextensions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/extensions-extension-id/microsoft-nav-install
+      name: companies-company-id-extensions-extension-id-microsoft-nav-install
+      description: REST surface for companies({company_id})-extensions({extension_id})-Microsoft.NAV.install.
+      operations:
+      - method: POST
+        name: installextension
+        description: Install an Extension
+        call: automation-extensions.installextension
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/extensions-extension-id/microsoft-nav-uninstall
+      name: companies-company-id-extensions-extension-id-microsoft-nav-uninstall
+      description: REST surface for companies({company_id})-extensions({extension_id})-Microsoft.NAV.uninstall.
+      operations:
+      - method: POST
+        name: uninstallextension
+        description: Uninstall an Extension
+        call: automation-extensions.uninstallextension
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/extensions-extension-id/microsoft-nav-uninstallanddeleteextensiondata
+      name: companies-company-id-extensions-extension-id-microsoft-nav-uninstallanddel
+      description: REST surface for companies({company_id})-extensions({extension_id})-Microsoft.NAV.uninstallAndDel.
+      operations:
+      - method: POST
+        name: uninstallanddeleteextensiondata
+        description: Uninstall and Delete Extension Data
+        call: automation-extensions.uninstallanddeleteextensiondata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/extensions-extension-id/microsoft-nav-unpublish
+      name: companies-company-id-extensions-extension-id-microsoft-nav-unpublish
+      description: REST surface for companies({company_id})-extensions({extension_id})-Microsoft.NAV.unpublish.
+      operations:
+      - method: POST
+        name: unpublishextension
+        description: Unpublish an Extension
+        call: automation-extensions.unpublishextension
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: automation-extensions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Automation API v2.0 — Extensions. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-extensions
+      description: List Extensions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-extensions.listextensions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: install-extension
+      description: Install an Extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-extensions.installextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uninstall-extension
+      description: Uninstall an Extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-extensions.uninstallextension
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uninstall-and-delete-extension-data
+      description: Uninstall and Delete Extension Data
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-extensions.uninstallanddeleteextensiondata
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unpublish-extension
+      description: Unpublish an Extension
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-extensions.unpublishextension
+      outputParameters:
+      - type: object
+        mapping: $.

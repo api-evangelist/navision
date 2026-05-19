@@ -1,0 +1,134 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Administration Center API — Storage
+  description: 'Business Central Administration Center API — Storage. 3 operations. Lead operation: Get Environment Storage
+    Usage. Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Storage
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-center-storage
+    baseUri: https://api.businesscentral.dynamics.com/admin/v2.28
+    description: Business Central Administration Center API — Storage business capability. Self-contained, no shared references.
+    resources:
+    - name: applications-applicationFamily-environments-environmentName-usedstorage
+      path: /applications/{applicationFamily}/environments/{environmentName}/usedstorage
+      operations:
+      - name: getenvironmentstorage
+        method: GET
+        description: Get Environment Storage Usage
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: environments-quotas
+      path: /environments/quotas
+      operations:
+      - name: getquotas
+        method: GET
+        description: Get Allowed Quotas
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: environments-usedstorage
+      path: /environments/usedstorage
+      operations:
+      - name: getallenvironmentsstorage
+        method: GET
+        description: Get Storage Usage for All Environments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-center-storage-rest
+    port: 8080
+    description: REST adapter for Business Central Administration Center API — Storage. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/applications/{applicationfamily}/environments/{environmentname}/usedstorage
+      name: applications-applicationfamily-environments-environmentname-usedstorage
+      description: REST surface for applications-applicationFamily-environments-environmentName-usedstorage.
+      operations:
+      - method: GET
+        name: getenvironmentstorage
+        description: Get Environment Storage Usage
+        call: admin-center-storage.getenvironmentstorage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/quotas
+      name: environments-quotas
+      description: REST surface for environments-quotas.
+      operations:
+      - method: GET
+        name: getquotas
+        description: Get Allowed Quotas
+        call: admin-center-storage.getquotas
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/environments/usedstorage
+      name: environments-usedstorage
+      description: REST surface for environments-usedstorage.
+      operations:
+      - method: GET
+        name: getallenvironmentsstorage
+        description: Get Storage Usage for All Environments
+        call: admin-center-storage.getallenvironmentsstorage
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-center-storage-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Administration Center API — Storage. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: get-environment-storage-usage
+      description: Get Environment Storage Usage
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-center-storage.getenvironmentstorage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-allowed-quotas
+      description: Get Allowed Quotas
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-center-storage.getquotas
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-storage-usage-all-environments
+      description: Get Storage Usage for All Environments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-center-storage.getallenvironmentsstorage
+      outputParameters:
+      - type: object
+        mapping: $.

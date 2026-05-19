@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Automation API v2.0 — Profiles
+  description: 'Business Central Automation API v2.0 — Profiles. 1 operations. Lead operation: List Profiles. Self-contained
+    Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Profiles
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: automation-profiles
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+    description: Business Central Automation API v2.0 — Profiles business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-profiles
+      path: /companies({company_id})/profiles
+      operations:
+      - name: listprofiles
+        method: GET
+        description: List Profiles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: automation-profiles-rest
+    port: 8080
+    description: REST adapter for Business Central Automation API v2.0 — Profiles. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/profiles
+      name: companies-company-id-profiles
+      description: REST surface for companies({company_id})-profiles.
+      operations:
+      - method: GET
+        name: listprofiles
+        description: List Profiles
+        call: automation-profiles.listprofiles
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: automation-profiles-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Automation API v2.0 — Profiles. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-profiles
+      description: List Profiles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-profiles.listprofiles
+      outputParameters:
+      - type: object
+        mapping: $.

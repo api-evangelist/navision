@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Administration Center API — Support Settings
+  description: 'Business Central Administration Center API — Support Settings. 1 operations. Lead operation: Get Support Settings.
+    Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Support Settings
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-center-support-settings
+    baseUri: https://api.businesscentral.dynamics.com/admin/v2.28
+    description: Business Central Administration Center API — Support Settings business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: applications-applicationFamily-environments-environmentName-supportSettings
+      path: /applications/{applicationFamily}/environments/{environmentName}/supportSettings
+      operations:
+      - name: getsupportsettings
+        method: GET
+        description: Get Support Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-center-support-settings-rest
+    port: 8080
+    description: REST adapter for Business Central Administration Center API — Support Settings. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/applications/{applicationfamily}/environments/{environmentname}/supportsettings
+      name: applications-applicationfamily-environments-environmentname-supportsettings
+      description: REST surface for applications-applicationFamily-environments-environmentName-supportSettings.
+      operations:
+      - method: GET
+        name: getsupportsettings
+        description: Get Support Settings
+        call: admin-center-support-settings.getsupportsettings
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-center-support-settings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Administration Center API — Support Settings. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: get-support-settings
+      description: Get Support Settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-center-support-settings.getsupportsettings
+      outputParameters:
+      - type: object
+        mapping: $.

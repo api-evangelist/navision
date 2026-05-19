@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Automation API v2.0 — Scheduled Jobs
+  description: 'Business Central Automation API v2.0 — Scheduled Jobs. 1 operations. Lead operation: List Scheduled Jobs.
+    Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Scheduled Jobs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: automation-scheduled-jobs
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+    description: Business Central Automation API v2.0 — Scheduled Jobs business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-scheduledJobs
+      path: /companies({company_id})/scheduledJobs
+      operations:
+      - name: listscheduledjobs
+        method: GET
+        description: List Scheduled Jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: automation-scheduled-jobs-rest
+    port: 8080
+    description: REST adapter for Business Central Automation API v2.0 — Scheduled Jobs. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/scheduledjobs
+      name: companies-company-id-scheduledjobs
+      description: REST surface for companies({company_id})-scheduledJobs.
+      operations:
+      - method: GET
+        name: listscheduledjobs
+        description: List Scheduled Jobs
+        call: automation-scheduled-jobs.listscheduledjobs
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: automation-scheduled-jobs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Automation API v2.0 — Scheduled Jobs. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-scheduled-jobs
+      description: List Scheduled Jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-scheduled-jobs.listscheduledjobs
+      outputParameters:
+      - type: object
+        mapping: $.

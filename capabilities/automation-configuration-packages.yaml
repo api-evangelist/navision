@@ -1,0 +1,242 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Automation API v2.0 — Configuration Packages
+  description: 'Business Central Automation API v2.0 — Configuration Packages. 5 operations. Lead operation: List Configuration
+    Packages. Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Configuration Packages
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: automation-configuration-packages
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+    description: Business Central Automation API v2.0 — Configuration Packages business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: companies({company_id})-configurationPackages
+      path: /companies({company_id})/configurationPackages
+      operations:
+      - name: listconfigurationpackages
+        method: GET
+        description: List Configuration Packages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createconfigurationpackage
+        method: POST
+        description: Create a Configuration Package
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: companies({company_id})-configurationPackages({package_id})-Microsoft.NAV.apply
+      path: /companies({company_id})/configurationPackages({package_id})/Microsoft.NAV.apply
+      operations:
+      - name: applyconfigurationpackage
+        method: POST
+        description: Apply a Configuration Package
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: package_id
+          in: path
+          type: string
+          required: true
+    - name: companies({company_id})-configurationPackages({package_id})-Microsoft.NAV.import
+      path: /companies({company_id})/configurationPackages({package_id})/Microsoft.NAV.import
+      operations:
+      - name: importconfigurationpackage
+        method: POST
+        description: Import a Configuration Package
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: package_id
+          in: path
+          type: string
+          required: true
+    - name: companies({company_id})-configurationPackages({package_id})-file('{code}')-conte
+      path: /companies({company_id})/configurationPackages({package_id})/file('{code}')/content
+      operations:
+      - name: uploadconfigurationpackagefile
+        method: PATCH
+        description: Upload Rapidstart Package File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: package_id
+          in: path
+          type: string
+          required: true
+        - name: code
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: automation-configuration-packages-rest
+    port: 8080
+    description: REST adapter for Business Central Automation API v2.0 — Configuration Packages. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/configurationpackages
+      name: companies-company-id-configurationpackages
+      description: REST surface for companies({company_id})-configurationPackages.
+      operations:
+      - method: GET
+        name: listconfigurationpackages
+        description: List Configuration Packages
+        call: automation-configuration-packages.listconfigurationpackages
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createconfigurationpackage
+        description: Create a Configuration Package
+        call: automation-configuration-packages.createconfigurationpackage
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/configurationpackages-package-id/microsoft-nav-apply
+      name: companies-company-id-configurationpackages-package-id-microsoft-nav-apply
+      description: REST surface for companies({company_id})-configurationPackages({package_id})-Microsoft.NAV.apply.
+      operations:
+      - method: POST
+        name: applyconfigurationpackage
+        description: Apply a Configuration Package
+        call: automation-configuration-packages.applyconfigurationpackage
+        with:
+          package_id: rest.package_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/configurationpackages-package-id/microsoft-nav-import
+      name: companies-company-id-configurationpackages-package-id-microsoft-nav-import
+      description: REST surface for companies({company_id})-configurationPackages({package_id})-Microsoft.NAV.import.
+      operations:
+      - method: POST
+        name: importconfigurationpackage
+        description: Import a Configuration Package
+        call: automation-configuration-packages.importconfigurationpackage
+        with:
+          package_id: rest.package_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/configurationpackages-package-id/file-code/content
+      name: companies-company-id-configurationpackages-package-id-file-code-conte
+      description: REST surface for companies({company_id})-configurationPackages({package_id})-file('{code}')-conte.
+      operations:
+      - method: PATCH
+        name: uploadconfigurationpackagefile
+        description: Upload Rapidstart Package File
+        call: automation-configuration-packages.uploadconfigurationpackagefile
+        with:
+          package_id: rest.package_id
+          code: rest.code
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: automation-configuration-packages-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Automation API v2.0 — Configuration Packages. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-configuration-packages
+      description: List Configuration Packages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-configuration-packages.listconfigurationpackages
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-configuration-package
+      description: Create a Configuration Package
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-configuration-packages.createconfigurationpackage
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apply-configuration-package
+      description: Apply a Configuration Package
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-configuration-packages.applyconfigurationpackage
+      with:
+        package_id: tools.package_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: import-configuration-package
+      description: Import a Configuration Package
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-configuration-packages.importconfigurationpackage
+      with:
+        package_id: tools.package_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upload-rapidstart-package-file
+      description: Upload Rapidstart Package File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: automation-configuration-packages.uploadconfigurationpackagefile
+      with:
+        package_id: tools.package_id
+        code: tools.code
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

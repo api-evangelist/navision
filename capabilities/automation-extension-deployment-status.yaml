@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Automation API v2.0 — Extension Deployment Status
+  description: 'Business Central Automation API v2.0 — Extension Deployment Status. 1 operations. Lead operation: List Extension
+    Deployment Statuses. Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Extension Deployment Status
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: automation-extension-deployment-status
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+    description: Business Central Automation API v2.0 — Extension Deployment Status business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: companies({company_id})-extensionDeploymentStatus
+      path: /companies({company_id})/extensionDeploymentStatus
+      operations:
+      - name: listextensiondeploymentstatuses
+        method: GET
+        description: List Extension Deployment Statuses
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: automation-extension-deployment-status-rest
+    port: 8080
+    description: REST adapter for Business Central Automation API v2.0 — Extension Deployment Status. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/extensiondeploymentstatus
+      name: companies-company-id-extensiondeploymentstatus
+      description: REST surface for companies({company_id})-extensionDeploymentStatus.
+      operations:
+      - method: GET
+        name: listextensiondeploymentstatuses
+        description: List Extension Deployment Statuses
+        call: automation-extension-deployment-status.listextensiondeploymentstatuses
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: automation-extension-deployment-status-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Automation API v2.0 — Extension Deployment Status. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: list-extension-deployment-statuses
+      description: List Extension Deployment Statuses
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-extension-deployment-status.listextensiondeploymentstatuses
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dynamics 365 Business Central API v2.0 — Sales Invoices
+  description: 'Dynamics 365 Business Central API v2.0 — Sales Invoices. 2 operations. Lead operation: List Sales Invoices.
+    Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Sales Invoices
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: business-central-api-v2-sales-invoices
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+    description: Dynamics 365 Business Central API v2.0 — Sales Invoices business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-salesInvoices
+      path: /companies({company_id})/salesInvoices
+      operations:
+      - name: listsalesinvoices
+        method: GET
+        description: List Sales Invoices
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createsalesinvoice
+        method: POST
+        description: Create a Sales Invoice
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: business-central-api-v2-sales-invoices-rest
+    port: 8080
+    description: REST adapter for Dynamics 365 Business Central API v2.0 — Sales Invoices. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/salesinvoices
+      name: companies-company-id-salesinvoices
+      description: REST surface for companies({company_id})-salesInvoices.
+      operations:
+      - method: GET
+        name: listsalesinvoices
+        description: List Sales Invoices
+        call: business-central-api-v2-sales-invoices.listsalesinvoices
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createsalesinvoice
+        description: Create a Sales Invoice
+        call: business-central-api-v2-sales-invoices.createsalesinvoice
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: business-central-api-v2-sales-invoices-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dynamics 365 Business Central API v2.0 — Sales Invoices. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-sales-invoices
+      description: List Sales Invoices
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-sales-invoices.listsalesinvoices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-sales-invoice
+      description: Create a Sales Invoice
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: business-central-api-v2-sales-invoices.createsalesinvoice
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

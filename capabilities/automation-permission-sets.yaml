@@ -1,0 +1,137 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Automation API v2.0 — Permission Sets
+  description: 'Business Central Automation API v2.0 — Permission Sets. 3 operations. Lead operation: List Permission Sets.
+    Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Permission Sets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: automation-permission-sets
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+    description: Business Central Automation API v2.0 — Permission Sets business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-permissionSets
+      path: /companies({company_id})/permissionSets
+      operations:
+      - name: listpermissionsets
+        method: GET
+        description: List Permission Sets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies({company_id})-users({user_id})-userPermissions
+      path: /companies({company_id})/users({user_id})/userPermissions
+      operations:
+      - name: listuserpermissions
+        method: GET
+        description: List User Permissions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createuserpermission
+        method: POST
+        description: Assign a Permission Set to a User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: automation-permission-sets-rest
+    port: 8080
+    description: REST adapter for Business Central Automation API v2.0 — Permission Sets. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/permissionsets
+      name: companies-company-id-permissionsets
+      description: REST surface for companies({company_id})-permissionSets.
+      operations:
+      - method: GET
+        name: listpermissionsets
+        description: List Permission Sets
+        call: automation-permission-sets.listpermissionsets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/users-user-id/userpermissions
+      name: companies-company-id-users-user-id-userpermissions
+      description: REST surface for companies({company_id})-users({user_id})-userPermissions.
+      operations:
+      - method: GET
+        name: listuserpermissions
+        description: List User Permissions
+        call: automation-permission-sets.listuserpermissions
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createuserpermission
+        description: Assign a Permission Set to a User
+        call: automation-permission-sets.createuserpermission
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: automation-permission-sets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Automation API v2.0 — Permission Sets. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-permission-sets
+      description: List Permission Sets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-permission-sets.listpermissionsets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-user-permissions
+      description: List User Permissions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-permission-sets.listuserpermissions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assign-permission-set-user
+      description: Assign a Permission Set to a User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: automation-permission-sets.createuserpermission
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

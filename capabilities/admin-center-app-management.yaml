@@ -1,0 +1,215 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Administration Center API — App Management
+  description: 'Business Central Administration Center API — App Management. 4 operations. Lead operation: List Installed
+    Apps. Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - App Management
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: admin-center-app-management
+    baseUri: https://api.businesscentral.dynamics.com/admin/v2.28
+    description: Business Central Administration Center API — App Management business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: applications-applicationFamily-environments-environmentName-apps
+      path: /applications/{applicationFamily}/environments/{environmentName}/apps
+      operations:
+      - name: listinstalledapps
+        method: GET
+        description: List Installed Apps
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: applications-applicationFamily-environments-environmentName-apps-appId-install
+      path: /applications/{applicationFamily}/environments/{environmentName}/apps/{appId}/install
+      operations:
+      - name: installapp
+        method: POST
+        description: Install an App
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: applications-applicationFamily-environments-environmentName-apps-appId-uninstall
+      path: /applications/{applicationFamily}/environments/{environmentName}/apps/{appId}/uninstall
+      operations:
+      - name: uninstallapp
+        method: POST
+        description: Uninstall an App
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: applications-applicationFamily-environments-environmentName-apps-appId-update
+      path: /applications/{applicationFamily}/environments/{environmentName}/apps/{appId}/update
+      operations:
+      - name: updateapp
+        method: POST
+        description: Update an App
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: admin-center-app-management-rest
+    port: 8080
+    description: REST adapter for Business Central Administration Center API — App Management. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/applications/{applicationfamily}/environments/{environmentname}/apps
+      name: applications-applicationfamily-environments-environmentname-apps
+      description: REST surface for applications-applicationFamily-environments-environmentName-apps.
+      operations:
+      - method: GET
+        name: listinstalledapps
+        description: List Installed Apps
+        call: admin-center-app-management.listinstalledapps
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{applicationfamily}/environments/{environmentname}/apps/{appid}/install
+      name: applications-applicationfamily-environments-environmentname-apps-appid-install
+      description: REST surface for applications-applicationFamily-environments-environmentName-apps-appId-install.
+      operations:
+      - method: POST
+        name: installapp
+        description: Install an App
+        call: admin-center-app-management.installapp
+        with:
+          appId: rest.appId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{applicationfamily}/environments/{environmentname}/apps/{appid}/uninstall
+      name: applications-applicationfamily-environments-environmentname-apps-appid-uninstall
+      description: REST surface for applications-applicationFamily-environments-environmentName-apps-appId-uninstall.
+      operations:
+      - method: POST
+        name: uninstallapp
+        description: Uninstall an App
+        call: admin-center-app-management.uninstallapp
+        with:
+          appId: rest.appId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/applications/{applicationfamily}/environments/{environmentname}/apps/{appid}/update
+      name: applications-applicationfamily-environments-environmentname-apps-appid-update
+      description: REST surface for applications-applicationFamily-environments-environmentName-apps-appId-update.
+      operations:
+      - method: POST
+        name: updateapp
+        description: Update an App
+        call: admin-center-app-management.updateapp
+        with:
+          appId: rest.appId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: admin-center-app-management-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Administration Center API — App Management. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-installed-apps
+      description: List Installed Apps
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: admin-center-app-management.listinstalledapps
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: install-app
+      description: Install an App
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-center-app-management.installapp
+      with:
+        appId: tools.appId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uninstall-app
+      description: Uninstall an App
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-center-app-management.uninstallapp
+      with:
+        appId: tools.appId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-app
+      description: Update an App
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: admin-center-app-management.updateapp
+      with:
+        appId: tools.appId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

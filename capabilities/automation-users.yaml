@@ -1,0 +1,201 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Business Central Automation API v2.0 — Users
+  description: 'Business Central Automation API v2.0 — Users. 5 operations. Lead operation: List Users. Self-contained Naftiko
+    capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Users
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: automation-users
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+    description: Business Central Automation API v2.0 — Users business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-users
+      path: /companies({company_id})/users
+      operations:
+      - name: listusers
+        method: GET
+        description: List Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies({company_id})-users({user_id})
+      path: /companies({company_id})/users({user_id})
+      operations:
+      - name: getuser
+        method: GET
+        description: Get a User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateuser
+        method: PATCH
+        description: Update a User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: companies({company_id})-users-Microsoft.NAV.getNewUsersFromOffice365
+      path: /companies({company_id})/users/Microsoft.NAV.getNewUsersFromOffice365
+      operations:
+      - name: getnewusersfromoffice365
+        method: POST
+        description: Get New Users From Office 365
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: companies({company_id})-users-Microsoft.NAV.getNewUsersFromOffice365Async
+      path: /companies({company_id})/users/Microsoft.NAV.getNewUsersFromOffice365Async
+      operations:
+      - name: getnewusersfromoffice365async
+        method: POST
+        description: Get New Users From Office 365 (async)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: automation-users-rest
+    port: 8080
+    description: REST adapter for Business Central Automation API v2.0 — Users. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/users
+      name: companies-company-id-users
+      description: REST surface for companies({company_id})-users.
+      operations:
+      - method: GET
+        name: listusers
+        description: List Users
+        call: automation-users.listusers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/users-user-id
+      name: companies-company-id-users-user-id
+      description: REST surface for companies({company_id})-users({user_id}).
+      operations:
+      - method: GET
+        name: getuser
+        description: Get a User
+        call: automation-users.getuser
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateuser
+        description: Update a User
+        call: automation-users.updateuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/users/microsoft-nav-getnewusersfromoffice365
+      name: companies-company-id-users-microsoft-nav-getnewusersfromoffice365
+      description: REST surface for companies({company_id})-users-Microsoft.NAV.getNewUsersFromOffice365.
+      operations:
+      - method: POST
+        name: getnewusersfromoffice365
+        description: Get New Users From Office 365
+        call: automation-users.getnewusersfromoffice365
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/companies-company-id/users/microsoft-nav-getnewusersfromoffice365async
+      name: companies-company-id-users-microsoft-nav-getnewusersfromoffice365async
+      description: REST surface for companies({company_id})-users-Microsoft.NAV.getNewUsersFromOffice365Async.
+      operations:
+      - method: POST
+        name: getnewusersfromoffice365async
+        description: Get New Users From Office 365 (async)
+        call: automation-users.getnewusersfromoffice365async
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: automation-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Business Central Automation API v2.0 — Users. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-users
+      description: List Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-users.listusers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user
+      description: Get a User
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: automation-users.getuser
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-user
+      description: Update a User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: automation-users.updateuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-new-users-office-365
+      description: Get New Users From Office 365
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: automation-users.getnewusersfromoffice365
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-new-users-office-365-2
+      description: Get New Users From Office 365 (async)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: automation-users.getnewusersfromoffice365async
+      outputParameters:
+      - type: object
+        mapping: $.

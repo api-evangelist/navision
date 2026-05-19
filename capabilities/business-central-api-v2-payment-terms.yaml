@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dynamics 365 Business Central API v2.0 — Payment Terms
+  description: 'Dynamics 365 Business Central API v2.0 — Payment Terms. 1 operations. Lead operation: List Payment Terms.
+    Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Payment Terms
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: business-central-api-v2-payment-terms
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+    description: Dynamics 365 Business Central API v2.0 — Payment Terms business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-paymentTerms
+      path: /companies({company_id})/paymentTerms
+      operations:
+      - name: listpaymentterms
+        method: GET
+        description: List Payment Terms
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: business-central-api-v2-payment-terms-rest
+    port: 8080
+    description: REST adapter for Dynamics 365 Business Central API v2.0 — Payment Terms. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/paymentterms
+      name: companies-company-id-paymentterms
+      description: REST surface for companies({company_id})-paymentTerms.
+      operations:
+      - method: GET
+        name: listpaymentterms
+        description: List Payment Terms
+        call: business-central-api-v2-payment-terms.listpaymentterms
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: business-central-api-v2-payment-terms-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dynamics 365 Business Central API v2.0 — Payment Terms. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-payment-terms
+      description: List Payment Terms
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-payment-terms.listpaymentterms
+      outputParameters:
+      - type: object
+        mapping: $.

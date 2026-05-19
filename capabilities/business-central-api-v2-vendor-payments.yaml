@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Dynamics 365 Business Central API v2.0 — Vendor Payments
+  description: 'Dynamics 365 Business Central API v2.0 — Vendor Payments. 1 operations. Lead operation: List Vendor Payment
+    Journals. Self-contained Naftiko capability covering one Navision business surface.'
+  tags:
+  - Navision
+  - Vendor Payments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NAVISION_API_KEY: NAVISION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: business-central-api-v2-vendor-payments
+    baseUri: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+    description: Dynamics 365 Business Central API v2.0 — Vendor Payments business capability. Self-contained, no shared references.
+    resources:
+    - name: companies({company_id})-vendorPaymentJournals
+      path: /companies({company_id})/vendorPaymentJournals
+      operations:
+      - name: listvendorpaymentjournals
+        method: GET
+        description: List Vendor Payment Journals
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NAVISION_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: business-central-api-v2-vendor-payments-rest
+    port: 8080
+    description: REST adapter for Dynamics 365 Business Central API v2.0 — Vendor Payments. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/companies-company-id/vendorpaymentjournals
+      name: companies-company-id-vendorpaymentjournals
+      description: REST surface for companies({company_id})-vendorPaymentJournals.
+      operations:
+      - method: GET
+        name: listvendorpaymentjournals
+        description: List Vendor Payment Journals
+        call: business-central-api-v2-vendor-payments.listvendorpaymentjournals
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: business-central-api-v2-vendor-payments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Dynamics 365 Business Central API v2.0 — Vendor Payments. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-vendor-payment-journals
+      description: List Vendor Payment Journals
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: business-central-api-v2-vendor-payments.listvendorpaymentjournals
+      outputParameters:
+      - type: object
+        mapping: $.
