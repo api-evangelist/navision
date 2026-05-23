@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ItemUpdate",
+  "title": "ItemUpdate",
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Inventory",
+        "Service",
+        "Non-Inventory"
+      ],
+      "example": "Inventory"
+    },
+    "itemCategoryCode": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "blocked": {
+      "type": "boolean",
+      "example": true
+    },
+    "gtin": {
+      "type": "string",
+      "maxLength": 14,
+      "example": "example_value"
+    },
+    "unitPrice": {
+      "type": "number",
+      "format": "decimal",
+      "example": 42.5
+    },
+    "unitCost": {
+      "type": "number",
+      "format": "decimal",
+      "example": 42.5
+    },
+    "taxGroupCode": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "baseUnitOfMeasureCode": {
+      "type": "string",
+      "maxLength": 10,
+      "example": "example_value"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "operationId": "updateApp",
+  "method": "POST",
+  "path": "/applications/{applicationFamily}/environments/{environmentName}/apps/{appId}/update",
+  "summary": "Update an App",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdateappRequestExample",
+      "example": {
+        "targetVersion": "example_value",
+        "allowPreviewVersion": true,
+        "ignoreUpgradeWindow": true,
+        "allowDependencyUpdate": true
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "202",
+      "contentType": "application/json",
+      "name": "Updateapp202Example",
+      "example": {
+        "id": "abc123",
+        "type": "create",
+        "status": "Queued",
+        "aadTenantId": "500123",
+        "createdOn": "2026-01-15T10:30:00Z",
+        "startedOn": "2026-01-15T10:30:00Z",
+        "completedOn": "2026-01-15T10:30:00Z",
+        "createdBy": "example_value",
+        "errorMessage": "example_value",
+        "parameters": "example_value",
+        "environmentName": "example_value",
+        "environmentType": "example_value",
+        "productFamily": "example_value"
+      }
+    }
+  ]
+}

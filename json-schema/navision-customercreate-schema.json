@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CustomerCreate",
+  "title": "CustomerCreate",
+  "type": "object",
+  "required": [
+    "displayName"
+  ],
+  "properties": {
+    "number": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "displayName": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Person",
+        "Company"
+      ],
+      "example": "Person"
+    },
+    "addressLine1": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "addressLine2": {
+      "type": "string",
+      "maxLength": 50,
+      "example": "example_value"
+    },
+    "city": {
+      "type": "string",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "state": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "country": {
+      "type": "string",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "postalCode": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "phoneNumber": {
+      "type": "string",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "email": {
+      "type": "string",
+      "maxLength": 80,
+      "example": "user@example.com"
+    },
+    "website": {
+      "type": "string",
+      "maxLength": 80,
+      "example": "example_value"
+    },
+    "taxLiable": {
+      "type": "boolean",
+      "example": true
+    },
+    "taxRegistrationNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "currencyCode": {
+      "type": "string",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "blocked": {
+      "type": "string",
+      "enum": [
+        " ",
+        "Ship",
+        "Invoice",
+        "All"
+      ],
+      "example": " "
+    }
+  }
+}

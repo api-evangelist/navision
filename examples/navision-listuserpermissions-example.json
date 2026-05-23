@@ -1,0 +1,26 @@
+{
+  "operationId": "listUserPermissions",
+  "method": "GET",
+  "path": "/companies({company_id})/users({user_id})/userPermissions",
+  "summary": "List User Permissions",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listuserpermissions200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "roleId": "500123",
+            "displayName": "example_value",
+            "company": "example_value",
+            "scope": "System",
+            "appId": "500123"
+          }
+        ]
+      }
+    }
+  ]
+}

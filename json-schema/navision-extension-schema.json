@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Extension",
+  "title": "Extension",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The extension ID",
+      "example": "abc123"
+    },
+    "packageId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The package ID used for install/uninstall operations",
+      "example": "500123"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The extension display name",
+      "example": "example_value"
+    },
+    "publisher": {
+      "type": "string",
+      "description": "The extension publisher",
+      "example": "example_value"
+    },
+    "versionMajor": {
+      "type": "integer",
+      "description": "Major version number",
+      "example": 10
+    },
+    "versionMinor": {
+      "type": "integer",
+      "description": "Minor version number",
+      "example": 10
+    },
+    "versionBuild": {
+      "type": "integer",
+      "description": "Build version number",
+      "example": 10
+    },
+    "versionRevision": {
+      "type": "integer",
+      "description": "Revision version number",
+      "example": 10
+    },
+    "isInstalled": {
+      "type": "boolean",
+      "description": "Whether the extension is currently installed",
+      "example": true
+    },
+    "publishedAs": {
+      "type": "string",
+      "description": "How the extension was published",
+      "enum": [
+        "Global",
+        "Dev",
+        "PTE"
+      ],
+      "example": "Global"
+    }
+  }
+}

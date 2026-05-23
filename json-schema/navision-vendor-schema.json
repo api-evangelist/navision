@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Vendor",
+  "title": "Vendor",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the vendor",
+      "example": "abc123"
+    },
+    "number": {
+      "type": "string",
+      "description": "The vendor number",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The vendor display name",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "addressLine1": {
+      "type": "string",
+      "description": "First line of the address",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "addressLine2": {
+      "type": "string",
+      "description": "Second line of the address",
+      "maxLength": 50,
+      "example": "example_value"
+    },
+    "city": {
+      "type": "string",
+      "description": "The city",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "state": {
+      "type": "string",
+      "description": "The state or province code",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "country": {
+      "type": "string",
+      "description": "The country/region code",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "postalCode": {
+      "type": "string",
+      "description": "The postal code",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "phoneNumber": {
+      "type": "string",
+      "description": "The phone number",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "email": {
+      "type": "string",
+      "description": "The email address",
+      "maxLength": 80,
+      "example": "user@example.com"
+    },
+    "website": {
+      "type": "string",
+      "description": "The website URL",
+      "maxLength": 80,
+      "example": "example_value"
+    },
+    "taxRegistrationNumber": {
+      "type": "string",
+      "description": "The tax registration number",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "currencyId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The currency ID",
+      "example": "500123"
+    },
+    "currencyCode": {
+      "type": "string",
+      "description": "The currency code",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "paymentTermsId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The payment terms ID",
+      "example": "500123"
+    },
+    "paymentMethodId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The payment method ID",
+      "example": "500123"
+    },
+    "taxLiable": {
+      "type": "boolean",
+      "description": "Whether the vendor is tax liable",
+      "example": true
+    },
+    "blocked": {
+      "type": "string",
+      "description": "Whether the vendor is blocked",
+      "enum": [
+        " ",
+        "Payment",
+        "All"
+      ],
+      "example": " "
+    },
+    "balance": {
+      "type": "number",
+      "format": "decimal",
+      "description": "The vendor balance",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    }
+  }
+}

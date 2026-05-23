@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Profile",
+  "title": "Profile",
+  "type": "object",
+  "properties": {
+    "profileId": {
+      "type": "string",
+      "description": "The profile ID",
+      "example": "500123"
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "System",
+        "Tenant"
+      ],
+      "example": "System"
+    },
+    "caption": {
+      "type": "string",
+      "description": "The profile caption",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "example": "A sample description."
+    },
+    "applicationId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "enabled": {
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

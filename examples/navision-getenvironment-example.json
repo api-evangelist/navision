@@ -1,0 +1,58 @@
+{
+  "operationId": "getEnvironment",
+  "method": "GET",
+  "path": "/applications/{applicationFamily}/environments/{environmentName}",
+  "summary": "Get an Environment",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getenvironment200Example",
+      "example": {
+        "friendlyName": "example_value",
+        "type": "Production",
+        "name": "Example Title",
+        "countryCode": "example_value",
+        "applicationFamily": "example_value",
+        "aadTenantId": "500123",
+        "status": "NotReady",
+        "webClientLoginUrl": "https://www.example.com",
+        "webServiceUrl": "https://www.example.com",
+        "locationName": "example_value",
+        "geoName": "example_value",
+        "ringName": "example_value",
+        "appInsightsKey": "example_value",
+        "softDeletedOn": "2026-01-15T10:30:00Z",
+        "hardDeletePendingOn": "2026-01-15T10:30:00Z",
+        "deleteReason": "example_value",
+        "appSourceAppsUpdateCadence": "example_value",
+        "versionDetails": {
+          "version": "example_value",
+          "gracePeriodStartDate": "2026-01-15T10:30:00Z",
+          "enforcedUpdatePeriodStartDate": "2026-01-15T10:30:00Z"
+        }
+      }
+    },
+    {
+      "status": "404",
+      "contentType": "application/json",
+      "name": "Getenvironment404Example",
+      "example": {
+        "code": "example_value",
+        "message": "example_value",
+        "target": "example_value",
+        "extensionData": "example_value",
+        "clientError": [
+          {
+            "code": "example_value",
+            "message": "example_value",
+            "target": "example_value",
+            "extensionData": "example_value",
+            "clientError": {}
+          }
+        ]
+      }
+    }
+  ]
+}

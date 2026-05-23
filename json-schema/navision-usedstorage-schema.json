@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UsedStorage",
+  "title": "UsedStorage",
+  "type": "object",
+  "properties": {
+    "environmentType": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "environmentName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "applicationFamily": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "databaseStorageInKilobytes": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Used database storage in kilobytes",
+      "example": 10
+    }
+  }
+}

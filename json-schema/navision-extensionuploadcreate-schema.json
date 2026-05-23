@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExtensionUploadCreate",
+  "title": "ExtensionUploadCreate",
+  "type": "object",
+  "required": [
+    "schedule",
+    "schemaSyncMode"
+  ],
+  "properties": {
+    "schedule": {
+      "type": "string",
+      "enum": [
+        "Current version",
+        "Next minor version",
+        "Next major version"
+      ],
+      "example": "Current version"
+    },
+    "schemaSyncMode": {
+      "type": "string",
+      "enum": [
+        "Add",
+        "Force Sync"
+      ],
+      "example": "Add"
+    }
+  }
+}

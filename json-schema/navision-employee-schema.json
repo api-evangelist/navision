@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Employee",
+  "title": "Employee",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "number": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "displayName": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "givenName": {
+      "type": "string",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "middleName": {
+      "type": "string",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "surname": {
+      "type": "string",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "jobTitle": {
+      "type": "string",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "addressLine1": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "addressLine2": {
+      "type": "string",
+      "maxLength": 50,
+      "example": "example_value"
+    },
+    "city": {
+      "type": "string",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "state": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "country": {
+      "type": "string",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "postalCode": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "phoneNumber": {
+      "type": "string",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "mobilePhone": {
+      "type": "string",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "email": {
+      "type": "string",
+      "maxLength": 80,
+      "example": "user@example.com"
+    },
+    "personalEmail": {
+      "type": "string",
+      "maxLength": 80,
+      "example": "user@example.com"
+    },
+    "employmentDate": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "terminationDate": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "example": "Active"
+    },
+    "birthDate": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "statisticsGroupCode": {
+      "type": "string",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    }
+  }
+}

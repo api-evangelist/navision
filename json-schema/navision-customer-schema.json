@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Customer",
+  "title": "Customer",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "description": "ETag for concurrency control",
+      "example": "example_value"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the customer",
+      "example": "abc123"
+    },
+    "number": {
+      "type": "string",
+      "description": "The customer number",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The customer display name",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "type": {
+      "type": "string",
+      "description": "The customer type",
+      "enum": [
+        "Person",
+        "Company"
+      ],
+      "example": "Person"
+    },
+    "addressLine1": {
+      "type": "string",
+      "description": "First line of the address",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "addressLine2": {
+      "type": "string",
+      "description": "Second line of the address",
+      "maxLength": 50,
+      "example": "example_value"
+    },
+    "city": {
+      "type": "string",
+      "description": "The city",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "state": {
+      "type": "string",
+      "description": "The state or province code",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "country": {
+      "type": "string",
+      "description": "The country/region code",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "postalCode": {
+      "type": "string",
+      "description": "The postal code",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "phoneNumber": {
+      "type": "string",
+      "description": "The phone number",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "email": {
+      "type": "string",
+      "description": "The email address",
+      "maxLength": 80,
+      "example": "user@example.com"
+    },
+    "website": {
+      "type": "string",
+      "description": "The website URL",
+      "maxLength": 80,
+      "example": "example_value"
+    },
+    "salespersonCode": {
+      "type": "string",
+      "description": "The salesperson code",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "balanceDue": {
+      "type": "number",
+      "format": "decimal",
+      "description": "The balance due from the customer",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "creditLimit": {
+      "type": "number",
+      "format": "decimal",
+      "description": "The credit limit",
+      "example": 42.5
+    },
+    "taxLiable": {
+      "type": "boolean",
+      "description": "Whether the customer is tax liable",
+      "example": true
+    },
+    "taxAreaId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The tax area ID",
+      "example": "500123"
+    },
+    "taxAreaDisplayName": {
+      "type": "string",
+      "description": "The tax area display name",
+      "readOnly": true,
+      "example": "example_value"
+    },
+    "taxRegistrationNumber": {
+      "type": "string",
+      "description": "The tax registration number",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "currencyId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The currency ID",
+      "example": "500123"
+    },
+    "currencyCode": {
+      "type": "string",
+      "description": "The currency code",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "paymentTermsId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The payment terms ID",
+      "example": "500123"
+    },
+    "shipmentMethodId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The shipment method ID",
+      "example": "500123"
+    },
+    "paymentMethodId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The payment method ID",
+      "example": "500123"
+    },
+    "blocked": {
+      "type": "string",
+      "description": "Whether the customer is blocked",
+      "enum": [
+        " ",
+        "Ship",
+        "Invoice",
+        "All"
+      ],
+      "example": " "
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the customer was last modified",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    }
+  }
+}

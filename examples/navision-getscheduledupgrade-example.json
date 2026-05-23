@@ -1,0 +1,23 @@
+{
+  "operationId": "getScheduledUpgrade",
+  "method": "GET",
+  "path": "/applications/{applicationFamily}/environments/{environmentName}/scheduledUpgrade",
+  "summary": "Get Scheduled Upgrade",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getscheduledupgrade200Example",
+      "example": {
+        "environmentName": "example_value",
+        "upgradeIsScheduled": true,
+        "scheduledDate": "2026-01-15T10:30:00Z",
+        "registeredDate": "2026-01-15T10:30:00Z",
+        "targetVersion": "example_value",
+        "canTenantSelectDate": true,
+        "ignoreUpgradeWindow": true
+      }
+    }
+  ]
+}

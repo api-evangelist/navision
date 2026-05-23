@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CopyEnvironmentRequest",
+  "title": "CopyEnvironmentRequest",
+  "type": "object",
+  "required": [
+    "environmentName",
+    "type"
+  ],
+  "properties": {
+    "environmentName": {
+      "type": "string",
+      "description": "Name for the new environment",
+      "example": "example_value"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of environment to create",
+      "enum": [
+        "Production",
+        "Sandbox"
+      ],
+      "example": "Production"
+    }
+  }
+}

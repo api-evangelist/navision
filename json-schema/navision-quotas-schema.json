@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Quotas",
+  "title": "Quotas",
+  "type": "object",
+  "properties": {
+    "environmentsCount": {
+      "type": "object",
+      "properties": {
+        "production": {
+          "type": "integer",
+          "description": "Maximum number of production environments"
+        },
+        "sandbox": {
+          "type": "integer",
+          "description": "Maximum number of sandbox environments"
+        }
+      },
+      "example": "example_value"
+    },
+    "storageInKilobytes": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "integer",
+          "description": "Default storage allowance"
+        },
+        "userLicenses": {
+          "type": "integer",
+          "description": "Storage based on user licenses"
+        },
+        "additionalCapacity": {
+          "type": "integer",
+          "description": "Storage from purchased add-ons"
+        },
+        "total": {
+          "type": "integer",
+          "description": "Total allowed storage"
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

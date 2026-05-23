@@ -1,0 +1,27 @@
+{
+  "operationId": "listScheduledJobs",
+  "method": "GET",
+  "path": "/companies({company_id})/scheduledJobs",
+  "summary": "List Scheduled Jobs",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listscheduledjobs200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "category": "example_value",
+            "status": "example_value",
+            "description": "A sample description.",
+            "errorMessage": "example_value",
+            "startDateTime": "2026-01-15T10:30:00Z",
+            "endDateTime": "2026-01-15T10:30:00Z"
+          }
+        ]
+      }
+    }
+  ]
+}

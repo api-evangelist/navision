@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Company",
+  "title": "Company",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "name": {
+      "type": "string",
+      "example": "Example Title"
+    },
+    "displayName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "businessProfileId": {
+      "type": "string",
+      "example": "500123"
+    }
+  }
+}

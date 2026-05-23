@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/User",
+  "title": "User",
+  "type": "object",
+  "properties": {
+    "userSecurityId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The user security ID",
+      "example": "500123"
+    },
+    "userName": {
+      "type": "string",
+      "description": "The user name",
+      "example": "example_value"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The user display name",
+      "example": "example_value"
+    },
+    "state": {
+      "type": "string",
+      "description": "The user state",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "example": "Enabled"
+    },
+    "expiryDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The user expiry date",
+      "example": "2026-01-15T10:30:00Z"
+    }
+  }
+}

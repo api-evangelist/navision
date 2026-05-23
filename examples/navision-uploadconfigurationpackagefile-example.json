@@ -1,0 +1,14 @@
+{
+  "operationId": "uploadConfigurationPackageFile",
+  "method": "PATCH",
+  "path": "/companies({company_id})/configurationPackages({package_id})/file('{code}')/content",
+  "summary": "Upload Rapidstart Package File",
+  "requestExamples": [
+    {
+      "contentType": "application/octet-stream",
+      "name": "UploadconfigurationpackagefileRequestExample",
+      "example": "example_value"
+    }
+  ],
+  "responseExamples": []
+}

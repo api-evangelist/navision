@@ -1,0 +1,23 @@
+{
+  "operationId": "getAvailableRestorePeriods",
+  "method": "GET",
+  "path": "/applications/{applicationFamily}/environments/{environmentName}/availableRestorePeriods",
+  "summary": "Get Available Restore Periods",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getavailablerestoreperiods200Example",
+      "example": {
+        "value": [
+          {
+            "from": "2026-01-15T10:30:00Z",
+            "to": "2026-01-15T10:30:00Z",
+            "correspondingApplicationPackageVersion": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

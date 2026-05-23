@@ -1,0 +1,94 @@
+{
+  "operationId": "createPurchaseOrder",
+  "method": "POST",
+  "path": "/companies({company_id})/purchaseOrders",
+  "summary": "Create a Purchase Order",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreatepurchaseorderRequestExample",
+      "example": {
+        "orderDate": "2026-01-15",
+        "vendorId": "500123",
+        "vendorNumber": "example_value",
+        "currencyCode": "example_value",
+        "pricesIncludeTax": true,
+        "requestedReceiptDate": "2026-01-15"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createpurchaseorder201Example",
+      "example": {
+        "@odata.etag": "example_value",
+        "id": "abc123",
+        "number": "example_value",
+        "orderDate": "2026-01-15",
+        "postingDate": "2026-01-15",
+        "vendorId": "500123",
+        "vendorNumber": "example_value",
+        "vendorName": "example_value",
+        "payToName": "example_value",
+        "payToVendorId": "500123",
+        "payToVendorNumber": "example_value",
+        "shipToName": "example_value",
+        "shipToContact": "example_value",
+        "buyFromAddressLine1": "example_value",
+        "buyFromAddressLine2": "example_value",
+        "buyFromCity": "example_value",
+        "buyFromCountry": "example_value",
+        "buyFromState": "example_value",
+        "buyFromPostCode": "example_value",
+        "currencyId": "500123",
+        "currencyCode": "example_value",
+        "pricesIncludeTax": true,
+        "paymentTermsId": "500123",
+        "shipmentMethodId": "500123",
+        "purchaser": "example_value",
+        "requestedReceiptDate": "2026-01-15",
+        "discountAmount": 42.5,
+        "discountAppliedBeforeTax": true,
+        "totalAmountExcludingTax": 42.5,
+        "totalTaxAmount": 42.5,
+        "totalAmountIncludingTax": 42.5,
+        "fullyReceived": true,
+        "status": "Draft",
+        "lastModifiedDateTime": "2026-01-15T10:30:00Z",
+        "purchaseOrderLines": [
+          {
+            "@odata.etag": "example_value",
+            "id": "abc123",
+            "documentId": "500123",
+            "sequence": 10,
+            "itemId": "500123",
+            "accountId": "500123",
+            "lineType": "Comment",
+            "lineObjectNumber": "example_value",
+            "description": "A sample description.",
+            "description2": "example_value",
+            "unitOfMeasureId": "500123",
+            "unitOfMeasureCode": "example_value",
+            "quantity": 42.5,
+            "directUnitCost": 42.5,
+            "discountAmount": 42.5,
+            "discountPercent": 42.5,
+            "discountAppliedBeforeTax": true,
+            "amountExcludingTax": 42.5,
+            "taxCode": "example_value",
+            "taxPercent": 42.5,
+            "totalTaxAmount": 42.5,
+            "amountIncludingTax": 42.5,
+            "expectedReceiptDate": "2026-01-15",
+            "receivedQuantity": 42.5,
+            "invoicedQuantity": 42.5,
+            "invoiceQuantity": 42.5,
+            "receiveQuantity": 42.5
+          }
+        ]
+      }
+    }
+  ]
+}

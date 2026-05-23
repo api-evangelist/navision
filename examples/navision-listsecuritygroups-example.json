@@ -1,0 +1,24 @@
+{
+  "operationId": "listSecurityGroups",
+  "method": "GET",
+  "path": "/companies({company_id})/securityGroups",
+  "summary": "List Security Groups",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listsecuritygroups200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "groupId": "500123",
+            "code": "example_value",
+            "displayName": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

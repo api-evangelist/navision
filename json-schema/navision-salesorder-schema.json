@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SalesOrder",
+  "title": "SalesOrder",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the sales order",
+      "example": "abc123"
+    },
+    "number": {
+      "type": "string",
+      "description": "The sales order number",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "externalDocumentNumber": {
+      "type": "string",
+      "description": "The external document number",
+      "maxLength": 35,
+      "example": "example_value"
+    },
+    "orderDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The order date",
+      "example": "2026-01-15"
+    },
+    "postingDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The posting date",
+      "example": "2026-01-15"
+    },
+    "customerId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The customer ID",
+      "example": "500123"
+    },
+    "customerNumber": {
+      "type": "string",
+      "description": "The customer number",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "customerName": {
+      "type": "string",
+      "description": "The customer name",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "billToName": {
+      "type": "string",
+      "description": "The bill-to name",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "billToCustomerId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The bill-to customer ID",
+      "example": "500123"
+    },
+    "billToCustomerNumber": {
+      "type": "string",
+      "description": "The bill-to customer number",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "shipToName": {
+      "type": "string",
+      "description": "The ship-to name",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "shipToContact": {
+      "type": "string",
+      "description": "The ship-to contact",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "sellToAddressLine1": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "sellToAddressLine2": {
+      "type": "string",
+      "maxLength": 50,
+      "example": "example_value"
+    },
+    "sellToCity": {
+      "type": "string",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "sellToCountry": {
+      "type": "string",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "sellToState": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "sellToPostCode": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "currencyId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "currencyCode": {
+      "type": "string",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean",
+      "example": true
+    },
+    "paymentTermsId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "shipmentMethodId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "salesperson": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "requestedDeliveryDate": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "discountAmount": {
+      "type": "number",
+      "format": "decimal",
+      "description": "The total discount amount",
+      "example": 42.5
+    },
+    "discountAppliedBeforeTax": {
+      "type": "boolean",
+      "example": true
+    },
+    "totalAmountExcludingTax": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "totalTaxAmount": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "totalAmountIncludingTax": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "fullyShipped": {
+      "type": "boolean",
+      "readOnly": true,
+      "example": true
+    },
+    "status": {
+      "type": "string",
+      "description": "The order status",
+      "enum": [
+        "Draft",
+        "In Review",
+        "Open",
+        "Released"
+      ],
+      "readOnly": true,
+      "example": "Draft"
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "phoneNumber": {
+      "type": "string",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "email": {
+      "type": "string",
+      "maxLength": 80,
+      "example": "user@example.com"
+    },
+    "salesOrderLines": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SalesOrderLine"
+      },
+      "example": []
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "operationId": "listAvailableCountries",
+  "method": "GET",
+  "path": "/applications/{applicationFamily}/availableCountries",
+  "summary": "List Available Countries",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listavailablecountries200Example",
+      "example": {
+        "value": [
+          {
+            "countryCode": "example_value",
+            "name": "Example Title"
+          }
+        ]
+      }
+    }
+  ]
+}

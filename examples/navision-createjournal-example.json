@@ -1,0 +1,33 @@
+{
+  "operationId": "createJournal",
+  "method": "POST",
+  "path": "/companies({company_id})/journals",
+  "summary": "Create a Journal",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreatejournalRequestExample",
+      "example": {
+        "code": "example_value",
+        "displayName": "example_value",
+        "templateDisplayName": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createjournal201Example",
+      "example": {
+        "id": "abc123",
+        "code": "example_value",
+        "displayName": "example_value",
+        "templateDisplayName": "example_value",
+        "lastModifiedDateTime": "2026-01-15T10:30:00Z",
+        "balancingAccountId": "500123",
+        "balancingAccountNumber": "example_value"
+      }
+    }
+  ]
+}

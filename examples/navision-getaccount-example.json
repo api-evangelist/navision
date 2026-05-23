@@ -1,0 +1,29 @@
+{
+  "operationId": "getAccount",
+  "method": "GET",
+  "path": "/companies({company_id})/accounts({account_id})",
+  "summary": "Get an Account",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getaccount200Example",
+      "example": {
+        "id": "abc123",
+        "number": "example_value",
+        "displayName": "example_value",
+        "category": " ",
+        "subCategory": "example_value",
+        "blocked": true,
+        "accountType": "Posting",
+        "directPosting": true,
+        "netChange": 42.5,
+        "consolidationTranslationMethod": "example_value",
+        "consolidationDebitAccount": "example_value",
+        "consolidationCreditAccount": "example_value",
+        "lastModifiedDateTime": "2026-01-15T10:30:00Z"
+      }
+    }
+  ]
+}

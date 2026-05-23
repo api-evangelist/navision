@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateEnvironmentRequest",
+  "title": "CreateEnvironmentRequest",
+  "type": "object",
+  "required": [
+    "environmentType",
+    "countryCode"
+  ],
+  "properties": {
+    "environmentType": {
+      "type": "string",
+      "description": "Type of environment to create",
+      "enum": [
+        "Production",
+        "Sandbox"
+      ],
+      "example": "Production"
+    },
+    "countryCode": {
+      "type": "string",
+      "description": "Country to create the environment within",
+      "example": "example_value"
+    },
+    "ringName": {
+      "type": "string",
+      "description": "Logical ring group (only Sandbox may be created in Preview ring)",
+      "example": "example_value"
+    },
+    "applicationVersion": {
+      "type": "string",
+      "description": "Application version (e.g., 26.0.0.0)",
+      "example": "example_value"
+    }
+  }
+}

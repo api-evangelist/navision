@@ -1,0 +1,33 @@
+{
+  "operationId": "listAllEnvironmentOperations",
+  "method": "GET",
+  "path": "/applications/{applicationFamily}/environments/operations",
+  "summary": "List Operations on All Environments",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listallenvironmentoperations200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "type": "create",
+            "status": "Queued",
+            "aadTenantId": "500123",
+            "createdOn": "2026-01-15T10:30:00Z",
+            "startedOn": "2026-01-15T10:30:00Z",
+            "completedOn": "2026-01-15T10:30:00Z",
+            "createdBy": "example_value",
+            "errorMessage": "example_value",
+            "parameters": "example_value",
+            "environmentName": "example_value",
+            "environmentType": "example_value",
+            "productFamily": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

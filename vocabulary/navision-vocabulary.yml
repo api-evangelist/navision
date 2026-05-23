@@ -1,0 +1,49 @@
+name: Microsoft Dynamics NAV Domain Vocabulary
+provider: Microsoft Dynamics NAV
+providerId: navision
+description: Tag-derived vocabulary for the Microsoft Dynamics NAV API surface; sourced from openapi/ tags.
+terms:
+- term: Customers
+  description: Manage customer records
+- term: Vendors
+  description: Manage vendor records
+- term: Items
+  description: Manage inventory items
+- term: Sales Orders
+  description: Manage sales orders and lines
+- term: Purchase Orders
+  description: Manage purchase orders and lines
+- term: Accounts
+  description: Manage general ledger accounts
+- term: Journals
+  description: Manage general journals and journal lines
+- term: Companies
+  description: Retrieve company information
+- term: Employees
+  description: Manage employee records
+- term: Sales Invoices
+  description: Manage sales invoices and lines
+- term: Purchase Invoices
+  description: Manage purchase invoices and lines
+- term: Sales Quotes
+  description: Manage sales quotes and lines
+- term: Sales Credit Memos
+  description: Manage sales credit memos
+- term: Purchase Credit Memos
+  description: Manage purchase credit memos
+- term: Dimensions
+  description: Manage dimensions and dimension values
+- term: Currency
+  description: Manage currencies and exchange rates
+- term: Payment Terms
+  description: Manage payment terms
+- term: Payment Methods
+  description: Manage payment methods
+- term: Countries/Regions
+  description: Manage country and region codes
+- term: Item Categories
+  description: Manage item categories
+- term: Customer Payments
+  description: Manage customer payment journals
+- term: Vendor Payments
+  description: Manage vendor payment journals

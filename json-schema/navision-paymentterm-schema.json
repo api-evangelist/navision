@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PaymentTerm",
+  "title": "PaymentTerm",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "code": {
+      "type": "string",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "displayName": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "dueDateCalculation": {
+      "type": "string",
+      "description": "The date formula for due date calculation",
+      "example": "example_value"
+    },
+    "discountDateCalculation": {
+      "type": "string",
+      "description": "The date formula for discount date calculation",
+      "example": "example_value"
+    },
+    "discountPercent": {
+      "type": "number",
+      "format": "decimal",
+      "example": 42.5
+    },
+    "calculateDiscountOnCreditMemos": {
+      "type": "boolean",
+      "example": true
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    }
+  }
+}

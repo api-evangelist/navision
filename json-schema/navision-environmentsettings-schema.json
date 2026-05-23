@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EnvironmentSettings",
+  "title": "EnvironmentSettings",
+  "type": "object",
+  "properties": {
+    "appInsightsKey": {
+      "type": "string",
+      "description": "Application Insights instrumentation key",
+      "example": "example_value"
+    },
+    "updateWindow": {
+      "type": "object",
+      "properties": {
+        "preferredStartTimeUtc": {
+          "type": "string",
+          "format": "time"
+        },
+        "preferredEndTimeUtc": {
+          "type": "string",
+          "format": "time"
+        }
+      },
+      "example": "example_value"
+    },
+    "securityGroupId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Security group assigned to the environment",
+      "example": "500123"
+    }
+  }
+}

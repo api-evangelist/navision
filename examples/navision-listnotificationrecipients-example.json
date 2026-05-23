@@ -1,0 +1,23 @@
+{
+  "operationId": "listNotificationRecipients",
+  "method": "GET",
+  "path": "/applications/{applicationFamily}/environments/{environmentName}/notifications",
+  "summary": "List Notification Recipients",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listnotificationrecipients200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "name": "Example Title",
+            "email": "user@example.com"
+          }
+        ]
+      }
+    }
+  ]
+}

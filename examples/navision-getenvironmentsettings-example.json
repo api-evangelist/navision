@@ -1,0 +1,22 @@
+{
+  "operationId": "getEnvironmentSettings",
+  "method": "GET",
+  "path": "/applications/{applicationFamily}/environments/{environmentName}/settings",
+  "summary": "Get Environment Settings",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getenvironmentsettings200Example",
+      "example": {
+        "appInsightsKey": "example_value",
+        "updateWindow": {
+          "preferredStartTimeUtc": "example_value",
+          "preferredEndTimeUtc": "example_value"
+        },
+        "securityGroupId": "500123"
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AutomationCompany",
+  "title": "AutomationCompany",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "name": {
+      "type": "string",
+      "description": "The company name",
+      "example": "Example Title"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The company display name",
+      "example": "example_value"
+    },
+    "businessProfileId": {
+      "type": "string",
+      "description": "The business profile ID",
+      "example": "500123"
+    },
+    "evaluationCompany": {
+      "type": "boolean",
+      "description": "Whether this is an evaluation company",
+      "example": true
+    }
+  }
+}

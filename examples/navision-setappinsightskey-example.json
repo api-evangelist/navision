@@ -1,0 +1,16 @@
+{
+  "operationId": "setAppInsightsKey",
+  "method": "POST",
+  "path": "/applications/{applicationFamily}/environments/{environmentName}/settings/appInsightsKey",
+  "summary": "Set Application Insights Key",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "SetappinsightskeyRequestExample",
+      "example": {
+        "key": "example_value"
+      }
+    }
+  ],
+  "responseExamples": []
+}

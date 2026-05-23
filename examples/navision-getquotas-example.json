@@ -1,0 +1,26 @@
+{
+  "operationId": "getQuotas",
+  "method": "GET",
+  "path": "/environments/quotas",
+  "summary": "Get Allowed Quotas",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getquotas200Example",
+      "example": {
+        "environmentsCount": {
+          "production": 10,
+          "sandbox": 10
+        },
+        "storageInKilobytes": {
+          "default": 10,
+          "userLicenses": 10,
+          "additionalCapacity": 10,
+          "total": 10
+        }
+      }
+    }
+  ]
+}

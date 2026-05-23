@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SecurityGroup",
+  "title": "SecurityGroup",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "groupId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The Microsoft Entra security group ID",
+      "example": "500123"
+    },
+    "code": {
+      "type": "string",
+      "description": "The security group code",
+      "example": "example_value"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The security group display name",
+      "example": "example_value"
+    }
+  }
+}

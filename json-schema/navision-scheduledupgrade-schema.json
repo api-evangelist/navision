@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScheduledUpgrade",
+  "title": "ScheduledUpgrade",
+  "type": "object",
+  "properties": {
+    "environmentName": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "upgradeIsScheduled": {
+      "type": "boolean",
+      "example": true
+    },
+    "scheduledDate": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "registeredDate": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "targetVersion": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "canTenantSelectDate": {
+      "type": "boolean",
+      "example": true
+    },
+    "ignoreUpgradeWindow": {
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

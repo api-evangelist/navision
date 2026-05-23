@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExtensionDeploymentStatus",
+  "title": "ExtensionDeploymentStatus",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Extension name",
+      "example": "Example Title"
+    },
+    "publisher": {
+      "type": "string",
+      "description": "Extension publisher",
+      "example": "example_value"
+    },
+    "operationType": {
+      "type": "string",
+      "description": "Type of deployment operation",
+      "example": "example_value"
+    },
+    "status": {
+      "type": "string",
+      "description": "Deployment status",
+      "enum": [
+        "Unknown",
+        "InProgress",
+        "Completed",
+        "Failed"
+      ],
+      "example": "Unknown"
+    },
+    "appVersion": {
+      "type": "string",
+      "description": "Extension version",
+      "example": "example_value"
+    },
+    "startedOn": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "operationId": "renameEnvironment",
+  "method": "POST",
+  "path": "/applications/{applicationFamily}/environments/{environmentName}/rename",
+  "summary": "Rename an Environment",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "RenameenvironmentRequestExample",
+      "example": {
+        "NewEnvironmentName": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "202",
+      "contentType": "application/json",
+      "name": "Renameenvironment202Example",
+      "example": {
+        "id": "abc123",
+        "type": "create",
+        "status": "Queued",
+        "aadTenantId": "500123",
+        "createdOn": "2026-01-15T10:30:00Z",
+        "startedOn": "2026-01-15T10:30:00Z",
+        "completedOn": "2026-01-15T10:30:00Z",
+        "createdBy": "example_value",
+        "errorMessage": "example_value",
+        "parameters": "example_value",
+        "environmentName": "example_value",
+        "environmentType": "example_value",
+        "productFamily": "example_value"
+      }
+    }
+  ]
+}

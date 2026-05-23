@@ -1,0 +1,29 @@
+{
+  "operationId": "addNotificationRecipient",
+  "method": "POST",
+  "path": "/applications/{applicationFamily}/environments/{environmentName}/notifications",
+  "summary": "Add a Notification Recipient",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "AddnotificationrecipientRequestExample",
+      "example": {
+        "id": "abc123",
+        "name": "Example Title",
+        "email": "user@example.com"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Addnotificationrecipient201Example",
+      "example": {
+        "id": "abc123",
+        "name": "Example Title",
+        "email": "user@example.com"
+      }
+    }
+  ]
+}

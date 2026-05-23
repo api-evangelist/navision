@@ -1,0 +1,26 @@
+{
+  "operationId": "listCustomerPaymentJournals",
+  "method": "GET",
+  "path": "/companies({company_id})/customerPaymentJournals",
+  "summary": "List Customer Payment Journals",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listcustomerpaymentjournals200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "code": "example_value",
+            "displayName": "example_value",
+            "lastModifiedDateTime": "2026-01-15T10:30:00Z",
+            "balancingAccountId": "500123",
+            "balancingAccountNumber": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

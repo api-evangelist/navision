@@ -1,0 +1,26 @@
+{
+  "operationId": "listProfiles",
+  "method": "GET",
+  "path": "/companies({company_id})/profiles",
+  "summary": "List Profiles",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listprofiles200Example",
+      "example": {
+        "value": [
+          {
+            "profileId": "500123",
+            "scope": "System",
+            "caption": "example_value",
+            "description": "A sample description.",
+            "applicationId": "500123",
+            "enabled": true
+          }
+        ]
+      }
+    }
+  ]
+}

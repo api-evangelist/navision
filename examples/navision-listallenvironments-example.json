@@ -1,0 +1,42 @@
+{
+  "operationId": "listAllEnvironments",
+  "method": "GET",
+  "path": "/applications/environments",
+  "summary": "List All Environments",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listallenvironments200Example",
+      "example": {
+        "value": [
+          {
+            "friendlyName": "example_value",
+            "type": "Production",
+            "name": "Example Title",
+            "countryCode": "example_value",
+            "applicationFamily": "example_value",
+            "aadTenantId": "500123",
+            "status": "NotReady",
+            "webClientLoginUrl": "https://www.example.com",
+            "webServiceUrl": "https://www.example.com",
+            "locationName": "example_value",
+            "geoName": "example_value",
+            "ringName": "example_value",
+            "appInsightsKey": "example_value",
+            "softDeletedOn": "2026-01-15T10:30:00Z",
+            "hardDeletePendingOn": "2026-01-15T10:30:00Z",
+            "deleteReason": "example_value",
+            "appSourceAppsUpdateCadence": "example_value",
+            "versionDetails": {
+              "version": "example_value",
+              "gracePeriodStartDate": "2026-01-15T10:30:00Z",
+              "enforcedUpdatePeriodStartDate": "2026-01-15T10:30:00Z"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

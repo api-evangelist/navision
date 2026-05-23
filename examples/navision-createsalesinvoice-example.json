@@ -1,0 +1,45 @@
+{
+  "operationId": "createSalesInvoice",
+  "method": "POST",
+  "path": "/companies({company_id})/salesInvoices",
+  "summary": "Create a Sales Invoice",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreatesalesinvoiceRequestExample",
+      "example": {
+        "externalDocumentNumber": "example_value",
+        "invoiceDate": "2026-01-15",
+        "customerId": "500123",
+        "customerNumber": "example_value",
+        "currencyCode": "example_value",
+        "pricesIncludeTax": true
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createsalesinvoice201Example",
+      "example": {
+        "id": "abc123",
+        "number": "example_value",
+        "externalDocumentNumber": "example_value",
+        "invoiceDate": "2026-01-15",
+        "postingDate": "2026-01-15",
+        "dueDate": "2026-01-15",
+        "customerId": "500123",
+        "customerNumber": "example_value",
+        "customerName": "example_value",
+        "currencyCode": "example_value",
+        "pricesIncludeTax": true,
+        "totalAmountExcludingTax": 42.5,
+        "totalTaxAmount": 42.5,
+        "totalAmountIncludingTax": 42.5,
+        "status": "Draft",
+        "lastModifiedDateTime": "2026-01-15T10:30:00Z"
+      }
+    }
+  ]
+}

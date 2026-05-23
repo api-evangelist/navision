@@ -1,0 +1,43 @@
+{
+  "operationId": "listEmployees",
+  "method": "GET",
+  "path": "/companies({company_id})/employees",
+  "summary": "List Employees",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listemployees200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "number": "example_value",
+            "displayName": "example_value",
+            "givenName": "example_value",
+            "middleName": "example_value",
+            "surname": "example_value",
+            "jobTitle": "example_value",
+            "addressLine1": "example_value",
+            "addressLine2": "example_value",
+            "city": "example_value",
+            "state": "example_value",
+            "country": "example_value",
+            "postalCode": "example_value",
+            "phoneNumber": "example_value",
+            "mobilePhone": "example_value",
+            "email": "user@example.com",
+            "personalEmail": "user@example.com",
+            "employmentDate": "2026-01-15",
+            "terminationDate": "2026-01-15",
+            "status": "Active",
+            "birthDate": "2026-01-15",
+            "statisticsGroupCode": "example_value",
+            "lastModifiedDateTime": "2026-01-15T10:30:00Z"
+          }
+        ]
+      }
+    }
+  ]
+}

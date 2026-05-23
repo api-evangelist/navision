@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Item",
+  "title": "Item",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the item",
+      "example": "abc123"
+    },
+    "number": {
+      "type": "string",
+      "description": "The item number",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The item display name",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "displayName2": {
+      "type": "string",
+      "description": "The item display name 2",
+      "maxLength": 50,
+      "example": "example_value"
+    },
+    "type": {
+      "type": "string",
+      "description": "The item type",
+      "enum": [
+        "Inventory",
+        "Service",
+        "Non-Inventory"
+      ],
+      "example": "Inventory"
+    },
+    "itemCategoryId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The item category ID",
+      "example": "500123"
+    },
+    "itemCategoryCode": {
+      "type": "string",
+      "description": "The item category code",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "blocked": {
+      "type": "boolean",
+      "description": "Whether the item is blocked",
+      "example": true
+    },
+    "gtin": {
+      "type": "string",
+      "description": "The Global Trade Item Number",
+      "maxLength": 14,
+      "example": "example_value"
+    },
+    "inventory": {
+      "type": "number",
+      "format": "decimal",
+      "description": "The current inventory quantity",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "unitPrice": {
+      "type": "number",
+      "format": "decimal",
+      "description": "The unit price",
+      "example": 42.5
+    },
+    "priceIncludesTax": {
+      "type": "boolean",
+      "description": "Whether the price includes tax",
+      "example": true
+    },
+    "unitCost": {
+      "type": "number",
+      "format": "decimal",
+      "description": "The unit cost",
+      "example": 42.5
+    },
+    "taxGroupId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The tax group ID",
+      "example": "500123"
+    },
+    "taxGroupCode": {
+      "type": "string",
+      "description": "The tax group code",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "baseUnitOfMeasureId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The base unit of measure ID",
+      "example": "500123"
+    },
+    "baseUnitOfMeasureCode": {
+      "type": "string",
+      "description": "The base unit of measure code",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "generalProductPostingGroupId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "generalProductPostingGroupCode": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "inventoryPostingGroupId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "inventoryPostingGroupCode": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    }
+  }
+}

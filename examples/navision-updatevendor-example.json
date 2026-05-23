@@ -1,0 +1,57 @@
+{
+  "operationId": "updateVendor",
+  "method": "PATCH",
+  "path": "/companies({company_id})/vendors({vendor_id})",
+  "summary": "Update a Vendor",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdatevendorRequestExample",
+      "example": {
+        "displayName": "example_value",
+        "addressLine1": "example_value",
+        "addressLine2": "example_value",
+        "city": "example_value",
+        "state": "example_value",
+        "country": "example_value",
+        "postalCode": "example_value",
+        "phoneNumber": "example_value",
+        "email": "user@example.com",
+        "website": "example_value",
+        "taxLiable": true,
+        "blocked": " "
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Updatevendor200Example",
+      "example": {
+        "@odata.etag": "example_value",
+        "id": "abc123",
+        "number": "example_value",
+        "displayName": "example_value",
+        "addressLine1": "example_value",
+        "addressLine2": "example_value",
+        "city": "example_value",
+        "state": "example_value",
+        "country": "example_value",
+        "postalCode": "example_value",
+        "phoneNumber": "example_value",
+        "email": "user@example.com",
+        "website": "example_value",
+        "taxRegistrationNumber": "example_value",
+        "currencyId": "500123",
+        "currencyCode": "example_value",
+        "paymentTermsId": "500123",
+        "paymentMethodId": "500123",
+        "taxLiable": true,
+        "blocked": " ",
+        "balance": 42.5,
+        "lastModifiedDateTime": "2026-01-15T10:30:00Z"
+      }
+    }
+  ]
+}

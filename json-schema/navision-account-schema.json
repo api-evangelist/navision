@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Account",
+  "title": "Account",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "number": {
+      "type": "string",
+      "description": "The account number",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The account display name",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "category": {
+      "type": "string",
+      "description": "The account category",
+      "enum": [
+        " ",
+        "Assets",
+        "Liabilities",
+        "Equity",
+        "Income",
+        "Cost of Goods Sold",
+        "Expense"
+      ],
+      "example": " "
+    },
+    "subCategory": {
+      "type": "string",
+      "description": "The account subcategory",
+      "maxLength": 80,
+      "example": "example_value"
+    },
+    "blocked": {
+      "type": "boolean",
+      "description": "Whether the account is blocked",
+      "example": true
+    },
+    "accountType": {
+      "type": "string",
+      "description": "The account type",
+      "enum": [
+        "Posting",
+        "Heading",
+        "Total",
+        "Begin-Total",
+        "End-Total"
+      ],
+      "example": "Posting"
+    },
+    "directPosting": {
+      "type": "boolean",
+      "description": "Whether direct posting is allowed",
+      "example": true
+    },
+    "netChange": {
+      "type": "number",
+      "format": "decimal",
+      "description": "The net change",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "consolidationTranslationMethod": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "consolidationDebitAccount": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "consolidationCreditAccount": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    }
+  }
+}

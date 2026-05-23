@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Environment",
+  "title": "Environment",
+  "type": "object",
+  "properties": {
+    "friendlyName": {
+      "type": "string",
+      "description": "Display name of the environment",
+      "example": "example_value"
+    },
+    "type": {
+      "type": "string",
+      "description": "Environment type",
+      "enum": [
+        "Production",
+        "Sandbox"
+      ],
+      "example": "Production"
+    },
+    "name": {
+      "type": "string",
+      "description": "Environment name, unique within an application family",
+      "example": "Example Title"
+    },
+    "countryCode": {
+      "type": "string",
+      "description": "Country/region code where the environment is deployed",
+      "example": "example_value"
+    },
+    "applicationFamily": {
+      "type": "string",
+      "description": "Family of the environment application",
+      "example": "example_value"
+    },
+    "aadTenantId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Microsoft Entra tenant ID that owns the environment",
+      "example": "500123"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the environment",
+      "enum": [
+        "NotReady",
+        "Removing",
+        "Preparing",
+        "Active",
+        "Upgrading",
+        "CreatingFailed",
+        "RemovingFailed",
+        "SoftDeleting",
+        "SoftDeletingFailed",
+        "SoftDeleted",
+        "Recovering",
+        "RecoveringFailed"
+      ],
+      "example": "NotReady"
+    },
+    "webClientLoginUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to log into the environment",
+      "example": "https://www.example.com"
+    },
+    "webServiceUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to access the environment service API",
+      "example": "https://www.example.com"
+    },
+    "locationName": {
+      "type": "string",
+      "description": "Azure region where the database is stored",
+      "example": "example_value"
+    },
+    "geoName": {
+      "type": "string",
+      "description": "Azure geo where the database is stored",
+      "example": "example_value"
+    },
+    "ringName": {
+      "type": "string",
+      "description": "Logical ring group name (e.g., Prod, Preview)",
+      "example": "example_value"
+    },
+    "appInsightsKey": {
+      "type": "string",
+      "description": "Application Insights instrumentation key",
+      "example": "example_value"
+    },
+    "softDeletedOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the environment was soft deleted",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "hardDeletePendingOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the environment will be permanently deleted",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "deleteReason": {
+      "type": "string",
+      "description": "Reason the environment was deleted",
+      "example": "example_value"
+    },
+    "appSourceAppsUpdateCadence": {
+      "type": "string",
+      "description": "Update cadence for installed AppSource apps",
+      "example": "example_value"
+    },
+    "versionDetails": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Current version number"
+        },
+        "gracePeriodStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the grace period starts for the current major version"
+        },
+        "enforcedUpdatePeriodStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the enforced update period starts"
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "operationId": "updateUser",
+  "method": "PATCH",
+  "path": "/companies({company_id})/users({user_id})",
+  "summary": "Update a User",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdateuserRequestExample",
+      "example": {
+        "state": "Enabled",
+        "expiryDate": "2026-01-15T10:30:00Z"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Updateuser200Example",
+      "example": {
+        "userSecurityId": "500123",
+        "userName": "example_value",
+        "displayName": "example_value",
+        "state": "Enabled",
+        "expiryDate": "2026-01-15T10:30:00Z"
+      }
+    }
+  ]
+}

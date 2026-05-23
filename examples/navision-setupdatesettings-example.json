@@ -1,0 +1,17 @@
+{
+  "operationId": "setUpdateSettings",
+  "method": "PUT",
+  "path": "/applications/{applicationFamily}/environments/{environmentName}/settings/upgrade",
+  "summary": "Set Update Settings",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "SetupdatesettingsRequestExample",
+      "example": {
+        "preferredStartTimeUtc": "example_value",
+        "preferredEndTimeUtc": "example_value"
+      }
+    }
+  ],
+  "responseExamples": []
+}

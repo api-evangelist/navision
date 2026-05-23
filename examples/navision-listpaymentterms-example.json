@@ -1,0 +1,28 @@
+{
+  "operationId": "listPaymentTerms",
+  "method": "GET",
+  "path": "/companies({company_id})/paymentTerms",
+  "summary": "List Payment Terms",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listpaymentterms200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "code": "example_value",
+            "displayName": "example_value",
+            "dueDateCalculation": "example_value",
+            "discountDateCalculation": "example_value",
+            "discountPercent": 42.5,
+            "calculateDiscountOnCreditMemos": true,
+            "lastModifiedDateTime": "2026-01-15T10:30:00Z"
+          }
+        ]
+      }
+    }
+  ]
+}

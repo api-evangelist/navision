@@ -1,0 +1,24 @@
+{
+  "operationId": "getAllEnvironmentsStorage",
+  "method": "GET",
+  "path": "/environments/usedstorage",
+  "summary": "Get Storage Usage for All Environments",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getallenvironmentsstorage200Example",
+      "example": {
+        "value": [
+          {
+            "environmentType": "example_value",
+            "environmentName": "example_value",
+            "applicationFamily": "example_value",
+            "databaseStorageInKilobytes": 10
+          }
+        ]
+      }
+    }
+  ]
+}

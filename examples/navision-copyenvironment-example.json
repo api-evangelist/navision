@@ -1,0 +1,87 @@
+{
+  "operationId": "copyEnvironment",
+  "method": "POST",
+  "path": "/applications/{applicationFamily}/environments/{environmentName}/copy",
+  "summary": "Copy an Environment",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CopyenvironmentRequestExample",
+      "example": {
+        "environmentName": "example_value",
+        "type": "Production"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Copyenvironment201Example",
+      "example": {
+        "friendlyName": "example_value",
+        "type": "Production",
+        "name": "Example Title",
+        "countryCode": "example_value",
+        "applicationFamily": "example_value",
+        "aadTenantId": "500123",
+        "status": "NotReady",
+        "webClientLoginUrl": "https://www.example.com",
+        "webServiceUrl": "https://www.example.com",
+        "locationName": "example_value",
+        "geoName": "example_value",
+        "ringName": "example_value",
+        "appInsightsKey": "example_value",
+        "softDeletedOn": "2026-01-15T10:30:00Z",
+        "hardDeletePendingOn": "2026-01-15T10:30:00Z",
+        "deleteReason": "example_value",
+        "appSourceAppsUpdateCadence": "example_value",
+        "versionDetails": {
+          "version": "example_value",
+          "gracePeriodStartDate": "2026-01-15T10:30:00Z",
+          "enforcedUpdatePeriodStartDate": "2026-01-15T10:30:00Z"
+        }
+      }
+    },
+    {
+      "status": "202",
+      "contentType": "application/json",
+      "name": "Copyenvironment202Example",
+      "example": {
+        "id": "abc123",
+        "type": "create",
+        "status": "Queued",
+        "aadTenantId": "500123",
+        "createdOn": "2026-01-15T10:30:00Z",
+        "startedOn": "2026-01-15T10:30:00Z",
+        "completedOn": "2026-01-15T10:30:00Z",
+        "createdBy": "example_value",
+        "errorMessage": "example_value",
+        "parameters": "example_value",
+        "environmentName": "example_value",
+        "environmentType": "example_value",
+        "productFamily": "example_value"
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "Copyenvironment400Example",
+      "example": {
+        "code": "example_value",
+        "message": "example_value",
+        "target": "example_value",
+        "extensionData": "example_value",
+        "clientError": [
+          {
+            "code": "example_value",
+            "message": "example_value",
+            "target": "example_value",
+            "extensionData": "example_value",
+            "clientError": {}
+          }
+        ]
+      }
+    }
+  ]
+}

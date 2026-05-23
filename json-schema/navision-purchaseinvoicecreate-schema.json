@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PurchaseInvoiceCreate",
+  "title": "PurchaseInvoiceCreate",
+  "type": "object",
+  "properties": {
+    "invoiceDate": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "vendorId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "vendorNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "currencyCode": {
+      "type": "string",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

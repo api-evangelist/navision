@@ -1,0 +1,25 @@
+{
+  "operationId": "listFeatures",
+  "method": "GET",
+  "path": "/companies({company_id})/features",
+  "summary": "List Features",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listfeatures200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "displayName": "example_value",
+            "description": "A sample description.",
+            "enabled": true,
+            "learnMoreUrl": "https://www.example.com"
+          }
+        ]
+      }
+    }
+  ]
+}

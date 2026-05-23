@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RestorePeriod",
+  "title": "RestorePeriod",
+  "type": "object",
+  "properties": {
+    "from": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "to": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "correspondingApplicationPackageVersion": {
+      "type": "string",
+      "example": "example_value"
+    }
+  }
+}

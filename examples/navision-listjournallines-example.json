@@ -1,0 +1,37 @@
+{
+  "operationId": "listJournalLines",
+  "method": "GET",
+  "path": "/companies({company_id})/journals({journal_id})/journalLines",
+  "summary": "List Journal Lines",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listjournallines200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "journalId": "500123",
+            "journalDisplayName": "example_value",
+            "lineNumber": 10,
+            "accountType": "G/L Account",
+            "accountId": "500123",
+            "accountNumber": "example_value",
+            "postingDate": "2026-01-15",
+            "documentNumber": "example_value",
+            "externalDocumentNumber": "example_value",
+            "amount": 42.5,
+            "description": "A sample description.",
+            "comment": "example_value",
+            "taxCode": "example_value",
+            "balanceAccountType": "example_value",
+            "balanceAccountNumber": "example_value",
+            "lastModifiedDateTime": "2026-01-15T10:30:00Z"
+          }
+        ]
+      }
+    }
+  ]
+}

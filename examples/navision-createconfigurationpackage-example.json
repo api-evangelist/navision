@@ -1,0 +1,37 @@
+{
+  "operationId": "createConfigurationPackage",
+  "method": "POST",
+  "path": "/companies({company_id})/configurationPackages",
+  "summary": "Create a Configuration Package",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreateconfigurationpackageRequestExample",
+      "example": {
+        "code": "example_value",
+        "packageName": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createconfigurationpackage201Example",
+      "example": {
+        "id": "abc123",
+        "code": "example_value",
+        "packageName": "example_value",
+        "languageId": "500123",
+        "productVersion": "example_value",
+        "processingOrder": 10,
+        "excludeConfigurationTables": true,
+        "numberOfTables": 10,
+        "numberOfRecords": 10,
+        "numberOfErrors": 10,
+        "importStatus": " ",
+        "applyStatus": " "
+      }
+    }
+  ]
+}

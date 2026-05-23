@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/JournalLine",
+  "title": "JournalLine",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "journalId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "journalDisplayName": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "lineNumber": {
+      "type": "integer",
+      "example": 10
+    },
+    "accountType": {
+      "type": "string",
+      "enum": [
+        "G/L Account",
+        "Customer",
+        "Vendor",
+        "Bank Account",
+        "Fixed Asset",
+        "Employee"
+      ],
+      "example": "G/L Account"
+    },
+    "accountId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "accountNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "postingDate": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "documentNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "externalDocumentNumber": {
+      "type": "string",
+      "maxLength": 35,
+      "example": "example_value"
+    },
+    "amount": {
+      "type": "number",
+      "format": "decimal",
+      "example": 42.5
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "A sample description."
+    },
+    "comment": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "taxCode": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "balanceAccountType": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "balanceAccountNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    }
+  }
+}

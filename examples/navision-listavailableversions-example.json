@@ -1,0 +1,22 @@
+{
+  "operationId": "listAvailableVersions",
+  "method": "GET",
+  "path": "/applications/{applicationFamily}/availableApplicationVersions",
+  "summary": "List Available Application Versions",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listavailableversions200Example",
+      "example": {
+        "value": [
+          {
+            "applicationVersion": "example_value",
+            "platformVersion": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

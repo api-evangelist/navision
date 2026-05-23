@@ -1,0 +1,26 @@
+{
+  "operationId": "listPermissionSets",
+  "method": "GET",
+  "path": "/companies({company_id})/permissionSets",
+  "summary": "List Permission Sets",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listpermissionsets200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "roleId": "500123",
+            "displayName": "example_value",
+            "scope": "System",
+            "appId": "500123",
+            "extensionName": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

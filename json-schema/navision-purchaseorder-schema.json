@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PurchaseOrder",
+  "title": "PurchaseOrder",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The unique identifier of the purchase order",
+      "example": "abc123"
+    },
+    "number": {
+      "type": "string",
+      "description": "The purchase order number",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "orderDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The order date",
+      "example": "2026-01-15"
+    },
+    "postingDate": {
+      "type": "string",
+      "format": "date",
+      "description": "The posting date",
+      "example": "2026-01-15"
+    },
+    "vendorId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The vendor ID",
+      "example": "500123"
+    },
+    "vendorNumber": {
+      "type": "string",
+      "description": "The vendor number",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "vendorName": {
+      "type": "string",
+      "description": "The vendor name",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "payToName": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "payToVendorId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "payToVendorNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "shipToName": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "shipToContact": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "buyFromAddressLine1": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "buyFromAddressLine2": {
+      "type": "string",
+      "maxLength": 50,
+      "example": "example_value"
+    },
+    "buyFromCity": {
+      "type": "string",
+      "maxLength": 30,
+      "example": "example_value"
+    },
+    "buyFromCountry": {
+      "type": "string",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "buyFromState": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "buyFromPostCode": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "currencyId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "currencyCode": {
+      "type": "string",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean",
+      "example": true
+    },
+    "paymentTermsId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "shipmentMethodId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "purchaser": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "requestedReceiptDate": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "discountAmount": {
+      "type": "number",
+      "format": "decimal",
+      "example": 42.5
+    },
+    "discountAppliedBeforeTax": {
+      "type": "boolean",
+      "example": true
+    },
+    "totalAmountExcludingTax": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "totalTaxAmount": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "totalAmountIncludingTax": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "fullyReceived": {
+      "type": "boolean",
+      "readOnly": true,
+      "example": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "In Review",
+        "Open",
+        "Released"
+      ],
+      "readOnly": true,
+      "example": "Draft"
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "purchaseOrderLines": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PurchaseOrderLine"
+      },
+      "example": []
+    }
+  }
+}

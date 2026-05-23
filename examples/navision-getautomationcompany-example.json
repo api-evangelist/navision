@@ -1,0 +1,21 @@
+{
+  "operationId": "getAutomationCompany",
+  "method": "GET",
+  "path": "/companies({company_id})/automationCompanies({automationCompany_id})",
+  "summary": "Get an Automation Company",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getautomationcompany200Example",
+      "example": {
+        "id": "abc123",
+        "name": "Example Title",
+        "displayName": "example_value",
+        "businessProfileId": "500123",
+        "evaluationCompany": true
+      }
+    }
+  ]
+}

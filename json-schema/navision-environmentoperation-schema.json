@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EnvironmentOperation",
+  "title": "EnvironmentOperation",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Operation ID used for tracking",
+      "example": "abc123"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of operation",
+      "enum": [
+        "create",
+        "copy",
+        "delete",
+        "softDelete",
+        "recover",
+        "environmentRename",
+        "pitRestore",
+        "environmentAppInstall",
+        "environmentAppUninstall",
+        "environmentAppUpdate",
+        "environmentAppHotfix",
+        "modify",
+        "update",
+        "restart",
+        "moveToAnotherAadTenant"
+      ],
+      "example": "create"
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the operation",
+      "enum": [
+        "Queued",
+        "Scheduled",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Skipped"
+      ],
+      "example": "Queued"
+    },
+    "aadTenantId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Microsoft Entra tenant ID",
+      "example": "500123"
+    },
+    "createdOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the operation was created",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "startedOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the operation started executing",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "completedOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the operation completed",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "Who created the operation",
+      "example": "example_value"
+    },
+    "errorMessage": {
+      "type": "string",
+      "description": "Error message for failed operations",
+      "example": "example_value"
+    },
+    "parameters": {
+      "type": "object",
+      "description": "Operation-specific parameters",
+      "additionalProperties": true,
+      "example": "example_value"
+    },
+    "environmentName": {
+      "type": "string",
+      "description": "Name of the affected environment",
+      "example": "example_value"
+    },
+    "environmentType": {
+      "type": "string",
+      "description": "Type of the affected environment",
+      "example": "example_value"
+    },
+    "productFamily": {
+      "type": "string",
+      "description": "Product family of the affected environment",
+      "example": "example_value"
+    }
+  }
+}

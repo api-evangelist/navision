@@ -1,0 +1,25 @@
+{
+  "operationId": "listUsers",
+  "method": "GET",
+  "path": "/companies({company_id})/users",
+  "summary": "List Users",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listusers200Example",
+      "example": {
+        "value": [
+          {
+            "userSecurityId": "500123",
+            "userName": "example_value",
+            "displayName": "example_value",
+            "state": "Enabled",
+            "expiryDate": "2026-01-15T10:30:00Z"
+          }
+        ]
+      }
+    }
+  ]
+}

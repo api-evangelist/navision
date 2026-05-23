@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SalesOrderLine",
+  "title": "SalesOrderLine",
+  "type": "object",
+  "properties": {
+    "@odata.etag": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "documentId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "sequence": {
+      "type": "integer",
+      "example": 10
+    },
+    "itemId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "accountId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "lineType": {
+      "type": "string",
+      "enum": [
+        "Comment",
+        "Account",
+        "Item",
+        "Resource",
+        "Fixed Asset",
+        "Charge"
+      ],
+      "example": "Comment"
+    },
+    "lineObjectNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "A sample description."
+    },
+    "description2": {
+      "type": "string",
+      "maxLength": 50,
+      "example": "example_value"
+    },
+    "unitOfMeasureId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "unitOfMeasureCode": {
+      "type": "string",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "quantity": {
+      "type": "number",
+      "format": "decimal",
+      "example": 42.5
+    },
+    "unitPrice": {
+      "type": "number",
+      "format": "decimal",
+      "example": 42.5
+    },
+    "discountAmount": {
+      "type": "number",
+      "format": "decimal",
+      "example": 42.5
+    },
+    "discountPercent": {
+      "type": "number",
+      "format": "decimal",
+      "example": 42.5
+    },
+    "discountAppliedBeforeTax": {
+      "type": "boolean",
+      "example": true
+    },
+    "amountExcludingTax": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "taxCode": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "taxPercent": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "totalTaxAmount": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "amountIncludingTax": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "netAmount": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "netTaxAmount": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "netAmountIncludingTax": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "shipmentDate": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "shippedQuantity": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "invoicedQuantity": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "invoiceQuantity": {
+      "type": "number",
+      "format": "decimal",
+      "example": 42.5
+    },
+    "shipQuantity": {
+      "type": "number",
+      "format": "decimal",
+      "example": 42.5
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UserPermission",
+  "title": "UserPermission",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "roleId": {
+      "type": "string",
+      "description": "The permission set role ID",
+      "example": "500123"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The permission set display name",
+      "example": "example_value"
+    },
+    "company": {
+      "type": "string",
+      "description": "The company name scope",
+      "example": "example_value"
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "System",
+        "Tenant"
+      ],
+      "example": "System"
+    },
+    "appId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    }
+  }
+}

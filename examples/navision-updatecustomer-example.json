@@ -1,0 +1,65 @@
+{
+  "operationId": "updateCustomer",
+  "method": "PATCH",
+  "path": "/companies({company_id})/customers({customer_id})",
+  "summary": "Update a Customer",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "UpdatecustomerRequestExample",
+      "example": {
+        "displayName": "example_value",
+        "type": "Person",
+        "addressLine1": "example_value",
+        "addressLine2": "example_value",
+        "city": "example_value",
+        "state": "example_value",
+        "country": "example_value",
+        "postalCode": "example_value",
+        "phoneNumber": "example_value",
+        "email": "user@example.com",
+        "website": "example_value",
+        "taxLiable": true,
+        "creditLimit": 42.5,
+        "blocked": " "
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Updatecustomer200Example",
+      "example": {
+        "@odata.etag": "example_value",
+        "id": "abc123",
+        "number": "example_value",
+        "displayName": "example_value",
+        "type": "Person",
+        "addressLine1": "example_value",
+        "addressLine2": "example_value",
+        "city": "example_value",
+        "state": "example_value",
+        "country": "example_value",
+        "postalCode": "example_value",
+        "phoneNumber": "example_value",
+        "email": "user@example.com",
+        "website": "example_value",
+        "salespersonCode": "example_value",
+        "balanceDue": 42.5,
+        "creditLimit": 42.5,
+        "taxLiable": true,
+        "taxAreaId": "500123",
+        "taxAreaDisplayName": "example_value",
+        "taxRegistrationNumber": "example_value",
+        "currencyId": "500123",
+        "currencyCode": "example_value",
+        "paymentTermsId": "500123",
+        "shipmentMethodId": "500123",
+        "paymentMethodId": "500123",
+        "blocked": " ",
+        "lastModifiedDateTime": "2026-01-15T10:30:00Z"
+      }
+    }
+  ]
+}

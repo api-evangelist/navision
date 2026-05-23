@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SalesInvoice",
+  "title": "SalesInvoice",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "number": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "externalDocumentNumber": {
+      "type": "string",
+      "maxLength": 35,
+      "example": "example_value"
+    },
+    "invoiceDate": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "postingDate": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "dueDate": {
+      "type": "string",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "customerId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "customerNumber": {
+      "type": "string",
+      "maxLength": 20,
+      "example": "example_value"
+    },
+    "customerName": {
+      "type": "string",
+      "maxLength": 100,
+      "example": "example_value"
+    },
+    "currencyCode": {
+      "type": "string",
+      "maxLength": 10,
+      "example": "example_value"
+    },
+    "pricesIncludeTax": {
+      "type": "boolean",
+      "example": true
+    },
+    "totalAmountExcludingTax": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "totalTaxAmount": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "totalAmountIncludingTax": {
+      "type": "number",
+      "format": "decimal",
+      "readOnly": true,
+      "example": 42.5
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "In Review",
+        "Open",
+        "Paid",
+        "Canceled",
+        "Corrective"
+      ],
+      "readOnly": true,
+      "example": "Draft"
+    },
+    "lastModifiedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    }
+  }
+}

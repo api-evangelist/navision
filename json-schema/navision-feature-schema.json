@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Feature",
+  "title": "Feature",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The feature ID",
+      "example": "abc123"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The feature display name",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "description": "The feature description",
+      "example": "A sample description."
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the feature is enabled",
+      "example": true
+    },
+    "learnMoreUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to documentation about the feature",
+      "example": "https://www.example.com"
+    }
+  }
+}

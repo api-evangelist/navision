@@ -1,0 +1,25 @@
+{
+  "operationId": "listAutomationCompanies",
+  "method": "GET",
+  "path": "/companies({company_id})/automationCompanies",
+  "summary": "List Automation Companies",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listautomationcompanies200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "name": "Example Title",
+            "displayName": "example_value",
+            "businessProfileId": "500123",
+            "evaluationCompany": true
+          }
+        ]
+      }
+    }
+  ]
+}

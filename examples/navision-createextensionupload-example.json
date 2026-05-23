@@ -1,0 +1,29 @@
+{
+  "operationId": "createExtensionUpload",
+  "method": "POST",
+  "path": "/companies({company_id})/extensionUpload",
+  "summary": "Create Extension Upload Record",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "CreateextensionuploadRequestExample",
+      "example": {
+        "schedule": "Current version",
+        "schemaSyncMode": "Add"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "Createextensionupload201Example",
+      "example": {
+        "systemId": "500123",
+        "schedule": "Current version",
+        "schemaSyncMode": "Add",
+        "status": "example_value"
+      }
+    }
+  ]
+}

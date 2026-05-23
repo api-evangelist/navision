@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScheduledJob",
+  "title": "ScheduledJob",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "category": {
+      "type": "string",
+      "description": "The job category",
+      "example": "example_value"
+    },
+    "status": {
+      "type": "string",
+      "description": "The job status",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "description": "The job description",
+      "example": "A sample description."
+    },
+    "errorMessage": {
+      "type": "string",
+      "description": "Error message if the job failed",
+      "example": "example_value"
+    },
+    "startDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "endDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    }
+  }
+}

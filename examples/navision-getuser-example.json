@@ -1,0 +1,21 @@
+{
+  "operationId": "getUser",
+  "method": "GET",
+  "path": "/companies({company_id})/users({user_id})",
+  "summary": "Get a User",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getuser200Example",
+      "example": {
+        "userSecurityId": "500123",
+        "userName": "example_value",
+        "displayName": "example_value",
+        "state": "Enabled",
+        "expiryDate": "2026-01-15T10:30:00Z"
+      }
+    }
+  ]
+}

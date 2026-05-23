@@ -1,0 +1,666 @@
+{
+  "provider": "Microsoft Dynamics NAV",
+  "providerId": "navision",
+  "kind": "json-structure",
+  "description": "Structural overview of the Microsoft Dynamics NAV API surface; extracted from openapi/.",
+  "schemaCount": 37,
+  "operationCount": 47,
+  "schemas": [
+    {
+      "name": "ErrorResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Company",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "Customer",
+      "type": "object",
+      "propertyCount": 28,
+      "required": []
+    },
+    {
+      "name": "CustomerCreate",
+      "type": "object",
+      "propertyCount": 16,
+      "required": [
+        "displayName"
+      ]
+    },
+    {
+      "name": "CustomerUpdate",
+      "type": "object",
+      "propertyCount": 14,
+      "required": []
+    },
+    {
+      "name": "Vendor",
+      "type": "object",
+      "propertyCount": 22,
+      "required": []
+    },
+    {
+      "name": "VendorCreate",
+      "type": "object",
+      "propertyCount": 15,
+      "required": [
+        "displayName"
+      ]
+    },
+    {
+      "name": "VendorUpdate",
+      "type": "object",
+      "propertyCount": 12,
+      "required": []
+    },
+    {
+      "name": "Item",
+      "type": "object",
+      "propertyCount": 23,
+      "required": []
+    },
+    {
+      "name": "ItemCreate",
+      "type": "object",
+      "propertyCount": 10,
+      "required": [
+        "displayName"
+      ]
+    },
+    {
+      "name": "ItemUpdate",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "SalesOrder",
+      "type": "object",
+      "propertyCount": 38,
+      "required": []
+    },
+    {
+      "name": "SalesOrderCreate",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "SalesOrderUpdate",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "SalesOrderLine",
+      "type": "object",
+      "propertyCount": 30,
+      "required": []
+    },
+    {
+      "name": "PurchaseOrder",
+      "type": "object",
+      "propertyCount": 35,
+      "required": []
+    },
+    {
+      "name": "PurchaseOrderCreate",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "PurchaseOrderUpdate",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "PurchaseOrderLine",
+      "type": "object",
+      "propertyCount": 27,
+      "required": []
+    },
+    {
+      "name": "Account",
+      "type": "object",
+      "propertyCount": 13,
+      "required": []
+    },
+    {
+      "name": "GeneralLedgerEntry",
+      "type": "object",
+      "propertyCount": 11,
+      "required": []
+    },
+    {
+      "name": "Journal",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "JournalCreate",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "code",
+        "displayName"
+      ]
+    },
+    {
+      "name": "JournalLine",
+      "type": "object",
+      "propertyCount": 17,
+      "required": []
+    },
+    {
+      "name": "SalesInvoice",
+      "type": "object",
+      "propertyCount": 16,
+      "required": []
+    },
+    {
+      "name": "SalesInvoiceCreate",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "PurchaseInvoice",
+      "type": "object",
+      "propertyCount": 15,
+      "required": []
+    },
+    {
+      "name": "PurchaseInvoiceCreate",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "Employee",
+      "type": "object",
+      "propertyCount": 23,
+      "required": []
+    },
+    {
+      "name": "Dimension",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Currency",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "PaymentTerm",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "PaymentMethod",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "CountryRegion",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "ItemCategory",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "CustomerPaymentJournal",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "VendorPaymentJournal",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/companies",
+      "operationId": "listCompanies",
+      "summary": "List Companies",
+      "tags": [
+        "Companies"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/customers",
+      "operationId": "listCustomers",
+      "summary": "List Customers",
+      "tags": [
+        "Customers"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies({company_id})/customers",
+      "operationId": "createCustomer",
+      "summary": "Create a Customer",
+      "tags": [
+        "Customers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/customers({customer_id})",
+      "operationId": "getCustomer",
+      "summary": "Get a Customer",
+      "tags": [
+        "Customers"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/companies({company_id})/customers({customer_id})",
+      "operationId": "deleteCustomer",
+      "summary": "Delete a Customer",
+      "tags": [
+        "Customers"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/companies({company_id})/customers({customer_id})",
+      "operationId": "updateCustomer",
+      "summary": "Update a Customer",
+      "tags": [
+        "Customers"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/vendors",
+      "operationId": "listVendors",
+      "summary": "List Vendors",
+      "tags": [
+        "Vendors"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies({company_id})/vendors",
+      "operationId": "createVendor",
+      "summary": "Create a Vendor",
+      "tags": [
+        "Vendors"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/vendors({vendor_id})",
+      "operationId": "getVendor",
+      "summary": "Get a Vendor",
+      "tags": [
+        "Vendors"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/companies({company_id})/vendors({vendor_id})",
+      "operationId": "deleteVendor",
+      "summary": "Delete a Vendor",
+      "tags": [
+        "Vendors"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/companies({company_id})/vendors({vendor_id})",
+      "operationId": "updateVendor",
+      "summary": "Update a Vendor",
+      "tags": [
+        "Vendors"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/items",
+      "operationId": "listItems",
+      "summary": "List Items",
+      "tags": [
+        "Items"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies({company_id})/items",
+      "operationId": "createItem",
+      "summary": "Create an Item",
+      "tags": [
+        "Items"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/items({item_id})",
+      "operationId": "getItem",
+      "summary": "Get an Item",
+      "tags": [
+        "Items"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/companies({company_id})/items({item_id})",
+      "operationId": "deleteItem",
+      "summary": "Delete an Item",
+      "tags": [
+        "Items"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/companies({company_id})/items({item_id})",
+      "operationId": "updateItem",
+      "summary": "Update an Item",
+      "tags": [
+        "Items"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/salesOrders",
+      "operationId": "listSalesOrders",
+      "summary": "List Sales Orders",
+      "tags": [
+        "Sales Orders"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies({company_id})/salesOrders",
+      "operationId": "createSalesOrder",
+      "summary": "Create a Sales Order",
+      "tags": [
+        "Sales Orders"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/salesOrders({salesOrder_id})",
+      "operationId": "getSalesOrder",
+      "summary": "Get a Sales Order",
+      "tags": [
+        "Sales Orders"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/companies({company_id})/salesOrders({salesOrder_id})",
+      "operationId": "deleteSalesOrder",
+      "summary": "Delete a Sales Order",
+      "tags": [
+        "Sales Orders"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/companies({company_id})/salesOrders({salesOrder_id})",
+      "operationId": "updateSalesOrder",
+      "summary": "Update a Sales Order",
+      "tags": [
+        "Sales Orders"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/salesOrders({salesOrder_id})/salesOrderLines",
+      "operationId": "listSalesOrderLines",
+      "summary": "List Sales Order Lines",
+      "tags": [
+        "Sales Orders"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/purchaseOrders",
+      "operationId": "listPurchaseOrders",
+      "summary": "List Purchase Orders",
+      "tags": [
+        "Purchase Orders"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies({company_id})/purchaseOrders",
+      "operationId": "createPurchaseOrder",
+      "summary": "Create a Purchase Order",
+      "tags": [
+        "Purchase Orders"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/purchaseOrders({purchaseOrder_id})",
+      "operationId": "getPurchaseOrder",
+      "summary": "Get a Purchase Order",
+      "tags": [
+        "Purchase Orders"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/companies({company_id})/purchaseOrders({purchaseOrder_id})",
+      "operationId": "deletePurchaseOrder",
+      "summary": "Delete a Purchase Order",
+      "tags": [
+        "Purchase Orders"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/companies({company_id})/purchaseOrders({purchaseOrder_id})",
+      "operationId": "updatePurchaseOrder",
+      "summary": "Update a Purchase Order",
+      "tags": [
+        "Purchase Orders"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/purchaseOrders({purchaseOrder_id})/purchaseOrderLines",
+      "operationId": "listPurchaseOrderLines",
+      "summary": "List Purchase Order Lines",
+      "tags": [
+        "Purchase Orders"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/accounts",
+      "operationId": "listAccounts",
+      "summary": "List Accounts",
+      "tags": [
+        "Accounts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/accounts({account_id})",
+      "operationId": "getAccount",
+      "summary": "Get an Account",
+      "tags": [
+        "Accounts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/generalLedgerEntries",
+      "operationId": "listGeneralLedgerEntries",
+      "summary": "List General Ledger Entries",
+      "tags": [
+        "Accounts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/journals",
+      "operationId": "listJournals",
+      "summary": "List Journals",
+      "tags": [
+        "Journals"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies({company_id})/journals",
+      "operationId": "createJournal",
+      "summary": "Create a Journal",
+      "tags": [
+        "Journals"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/journals({journal_id})/journalLines",
+      "operationId": "listJournalLines",
+      "summary": "List Journal Lines",
+      "tags": [
+        "Journals"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/salesInvoices",
+      "operationId": "listSalesInvoices",
+      "summary": "List Sales Invoices",
+      "tags": [
+        "Sales Invoices"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies({company_id})/salesInvoices",
+      "operationId": "createSalesInvoice",
+      "summary": "Create a Sales Invoice",
+      "tags": [
+        "Sales Invoices"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/purchaseInvoices",
+      "operationId": "listPurchaseInvoices",
+      "summary": "List Purchase Invoices",
+      "tags": [
+        "Purchase Invoices"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/companies({company_id})/purchaseInvoices",
+      "operationId": "createPurchaseInvoice",
+      "summary": "Create a Purchase Invoice",
+      "tags": [
+        "Purchase Invoices"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/employees",
+      "operationId": "listEmployees",
+      "summary": "List Employees",
+      "tags": [
+        "Employees"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/dimensions",
+      "operationId": "listDimensions",
+      "summary": "List Dimensions",
+      "tags": [
+        "Dimensions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/currencies",
+      "operationId": "listCurrencies",
+      "summary": "List Currencies",
+      "tags": [
+        "Currency"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/paymentTerms",
+      "operationId": "listPaymentTerms",
+      "summary": "List Payment Terms",
+      "tags": [
+        "Payment Terms"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/paymentMethods",
+      "operationId": "listPaymentMethods",
+      "summary": "List Payment Methods",
+      "tags": [
+        "Payment Methods"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/countriesRegions",
+      "operationId": "listCountriesRegions",
+      "summary": "List Countries/regions",
+      "tags": [
+        "Countries/Regions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/itemCategories",
+      "operationId": "listItemCategories",
+      "summary": "List Item Categories",
+      "tags": [
+        "Item Categories"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/customerPaymentJournals",
+      "operationId": "listCustomerPaymentJournals",
+      "summary": "List Customer Payment Journals",
+      "tags": [
+        "Customer Payments"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/companies({company_id})/vendorPaymentJournals",
+      "operationId": "listVendorPaymentJournals",
+      "summary": "List Vendor Payment Journals",
+      "tags": [
+        "Vendor Payments"
+      ]
+    }
+  ]
+}

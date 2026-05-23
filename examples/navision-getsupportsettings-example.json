@@ -1,0 +1,20 @@
+{
+  "operationId": "getSupportSettings",
+  "method": "GET",
+  "path": "/applications/{applicationFamily}/environments/{environmentName}/supportSettings",
+  "summary": "Get Support Settings",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Getsupportsettings200Example",
+      "example": {
+        "appId": "500123",
+        "supportUrl": "https://www.example.com",
+        "supportEmail": "user@example.com",
+        "supportPhone": "example_value"
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PermissionSet",
+  "title": "PermissionSet",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "abc123"
+    },
+    "roleId": {
+      "type": "string",
+      "description": "The permission set role ID",
+      "example": "500123"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The permission set display name",
+      "example": "example_value"
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "System",
+        "Tenant"
+      ],
+      "example": "System"
+    },
+    "appId": {
+      "type": "string",
+      "format": "uuid",
+      "example": "500123"
+    },
+    "extensionName": {
+      "type": "string",
+      "example": "example_value"
+    }
+  }
+}

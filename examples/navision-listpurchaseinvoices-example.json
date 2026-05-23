@@ -1,0 +1,35 @@
+{
+  "operationId": "listPurchaseInvoices",
+  "method": "GET",
+  "path": "/companies({company_id})/purchaseInvoices",
+  "summary": "List Purchase Invoices",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listpurchaseinvoices200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "number": "example_value",
+            "invoiceDate": "2026-01-15",
+            "postingDate": "2026-01-15",
+            "dueDate": "2026-01-15",
+            "vendorId": "500123",
+            "vendorNumber": "example_value",
+            "vendorName": "example_value",
+            "currencyCode": "example_value",
+            "pricesIncludeTax": true,
+            "totalAmountExcludingTax": 42.5,
+            "totalTaxAmount": 42.5,
+            "totalAmountIncludingTax": 42.5,
+            "status": "Draft",
+            "lastModifiedDateTime": "2026-01-15T10:30:00Z"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "operationId": "listInstalledApps",
+  "method": "GET",
+  "path": "/applications/{applicationFamily}/environments/{environmentName}/apps",
+  "summary": "List Installed Apps",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "Listinstalledapps200Example",
+      "example": {
+        "value": [
+          {
+            "id": "abc123",
+            "name": "Example Title",
+            "publisher": "example_value",
+            "version": "example_value",
+            "state": "example_value",
+            "lastOperationId": "500123",
+            "lastUpdateAttemptResult": "example_value"
+          }
+        ]
+      }
+    }
+  ]
+}

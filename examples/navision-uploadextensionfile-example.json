@@ -1,0 +1,14 @@
+{
+  "operationId": "uploadExtensionFile",
+  "method": "PATCH",
+  "path": "/companies({company_id})/extensionUpload({extensionUpload_id})/extensionContent",
+  "summary": "Upload Extension File",
+  "requestExamples": [
+    {
+      "contentType": "application/octet-stream",
+      "name": "UploadextensionfileRequestExample",
+      "example": "example_value"
+    }
+  ],
+  "responseExamples": []
+}
