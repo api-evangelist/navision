@@ -2,12 +2,17 @@
   "repo": "navision",
   "feeds": [
     {
-      "source": "https://www.microsoft.com/en-us/dynamics-365/blog/product/dynamics-365-business-central/",
+      "source": "https://www.microsoft.com/en-us/dynamics-365/blog/product/dynamics-365-business-central/feed/",
       "feed_url": "https://www.microsoft.com/en-us/dynamics-365/blog/product/dynamics-365-business-central/feed/",
-      "title": "Dynamics 365 Business Central - Microsoft Dynamics 365 Blog",
-      "saved": 10
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/users-credential-types",
+      "error": "HTTPError"
     }
   ],
   "post_count": 20,
-  "fetched": "2026-05-17T20:20:35Z"
+  "fetched": "2026-06-01T23:35:02Z"
 }
