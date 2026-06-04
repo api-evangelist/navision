@@ -1,0 +1,116 @@
+arazzo: 1.0.1
+info:
+  title: Business Central Onboard a Customer
+  summary: Resolve the working company, create a customer, and confirm it persisted.
+  description: >-
+    A foundational Business Central master-data flow. The workflow first
+    resolves the tenant company that scopes every downstream call, creates a new
+    customer record inside that company, and then reads the customer back by its
+    generated id to confirm it was persisted. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: businessCentralApi
+  url: ../openapi/business-central-api-v2.yml
+  type: openapi
+workflows:
+- workflowId: onboard-customer
+  summary: Create a customer in a Business Central company and verify it persisted.
+  description: >-
+    Resolves the target company, creates a customer using the supplied profile
+    fields, and re-reads the created customer by id to confirm the write.
+  inputs:
+    type: object
+    required:
+    - companyId
+    - displayName
+    properties:
+      companyId:
+        type: string
+        description: The UUID of the Business Central company to create the customer in.
+      number:
+        type: string
+        description: The customer number/code to assign (optional, may be auto-numbered).
+      displayName:
+        type: string
+        description: The customer display name.
+      type:
+        type: string
+        description: The customer type, either Person or Company.
+      email:
+        type: string
+        description: The customer email address.
+      phoneNumber:
+        type: string
+        description: The customer phone number.
+      city:
+        type: string
+        description: The customer city.
+      country:
+        type: string
+        description: The customer country/region code.
+      currencyCode:
+        type: string
+        description: The currency code for the customer.
+  steps:
+  - stepId: confirmCompany
+    description: >-
+      Confirm the supplied company id exists in the tenant before writing any
+      master data to it.
+    operationId: listCompanies
+    parameters:
+    - name: $filter
+      in: query
+      value: "id eq $inputs.companyId"
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      companyName: $response.body#/value/0/name
+  - stepId: createCustomer
+    description: >-
+      Create a new customer object in the resolved company using the supplied
+      profile fields.
+    operationId: createCustomer
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    requestBody:
+      contentType: application/json
+      payload:
+        number: $inputs.number
+        displayName: $inputs.displayName
+        type: $inputs.type
+        email: $inputs.email
+        phoneNumber: $inputs.phoneNumber
+        city: $inputs.city
+        country: $inputs.country
+        currencyCode: $inputs.currencyCode
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      customerId: $response.body#/id
+      customerNumber: $response.body#/number
+  - stepId: verifyCustomer
+    description: >-
+      Read the newly created customer back by its generated id to confirm the
+      record persisted in Business Central.
+    operationId: getCustomer
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    - name: customer_id
+      in: path
+      value: $steps.createCustomer.outputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      verifiedId: $response.body#/id
+      verifiedDisplayName: $response.body#/displayName
+      lastModifiedDateTime: $response.body#/lastModifiedDateTime
+  outputs:
+    customerId: $steps.createCustomer.outputs.customerId
+    customerNumber: $steps.createCustomer.outputs.customerNumber
+    verifiedDisplayName: $steps.verifyCustomer.outputs.verifiedDisplayName

@@ -1,0 +1,94 @@
+arazzo: 1.0.1
+info:
+  title: Business Central Create a Journal and Read Its Lines
+  summary: Create a general journal in a company and read back its line collection.
+  description: >-
+    A general-ledger setup flow for Business Central. The workflow confirms the
+    target company, creates a new journal batch, and then reads back the
+    journal's line collection so the caller can begin posting entries into it.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: businessCentralApi
+  url: ../openapi/business-central-api-v2.yml
+  type: openapi
+workflows:
+- workflowId: create-journal-and-read-lines
+  summary: Create a journal in a Business Central company and read its lines.
+  description: >-
+    Confirms the company, creates a journal with the supplied code and display
+    name, and lists the journal's lines using the generated journal id.
+  inputs:
+    type: object
+    required:
+    - companyId
+    - code
+    - displayName
+    properties:
+      companyId:
+        type: string
+        description: The UUID of the Business Central company.
+      code:
+        type: string
+        description: The journal code to assign.
+      displayName:
+        type: string
+        description: The journal display name.
+      templateDisplayName:
+        type: string
+        description: The journal template display name.
+  steps:
+  - stepId: confirmCompany
+    description: >-
+      Confirm the supplied company id exists in the tenant before creating a
+      journal in it.
+    operationId: listCompanies
+    parameters:
+    - name: $filter
+      in: query
+      value: "id eq $inputs.companyId"
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      companyName: $response.body#/value/0/name
+  - stepId: createJournal
+    description: >-
+      Create a new journal batch in the resolved company using the supplied code
+      and display name.
+    operationId: createJournal
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    requestBody:
+      contentType: application/json
+      payload:
+        code: $inputs.code
+        displayName: $inputs.displayName
+        templateDisplayName: $inputs.templateDisplayName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      journalId: $response.body#/id
+      journalCode: $response.body#/code
+  - stepId: readJournalLines
+    description: >-
+      Read the line collection of the newly created journal so entries can be
+      posted into it.
+    operationId: listJournalLines
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    - name: journal_id
+      in: path
+      value: $steps.createJournal.outputs.journalId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lines: $response.body#/value
+  outputs:
+    journalId: $steps.createJournal.outputs.journalId
+    journalCode: $steps.createJournal.outputs.journalCode
+    lines: $steps.readJournalLines.outputs.lines

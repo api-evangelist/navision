@@ -1,0 +1,117 @@
+arazzo: 1.0.1
+info:
+  title: Business Central Onboard a Vendor
+  summary: Resolve the working company, create a vendor, and confirm it persisted.
+  description: >-
+    A foundational Business Central accounts-payable flow. The workflow resolves
+    the tenant company that scopes every downstream call, creates a new vendor
+    record inside that company, and then reads the vendor back by its generated
+    id to confirm it was persisted. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: businessCentralApi
+  url: ../openapi/business-central-api-v2.yml
+  type: openapi
+workflows:
+- workflowId: onboard-vendor
+  summary: Create a vendor in a Business Central company and verify it persisted.
+  description: >-
+    Resolves the target company, creates a vendor using the supplied profile
+    fields, and re-reads the created vendor by id to confirm the write.
+  inputs:
+    type: object
+    required:
+    - companyId
+    - displayName
+    properties:
+      companyId:
+        type: string
+        description: The UUID of the Business Central company to create the vendor in.
+      number:
+        type: string
+        description: The vendor number/code to assign (optional, may be auto-numbered).
+      displayName:
+        type: string
+        description: The vendor display name.
+      email:
+        type: string
+        description: The vendor email address.
+      phoneNumber:
+        type: string
+        description: The vendor phone number.
+      city:
+        type: string
+        description: The vendor city.
+      country:
+        type: string
+        description: The vendor country/region code.
+      taxRegistrationNumber:
+        type: string
+        description: The vendor tax registration number.
+      currencyCode:
+        type: string
+        description: The currency code for the vendor.
+  steps:
+  - stepId: confirmCompany
+    description: >-
+      Confirm the supplied company id exists in the tenant before writing any
+      master data to it.
+    operationId: listCompanies
+    parameters:
+    - name: $filter
+      in: query
+      value: "id eq $inputs.companyId"
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      companyName: $response.body#/value/0/name
+  - stepId: createVendor
+    description: >-
+      Create a new vendor object in the resolved company using the supplied
+      profile fields.
+    operationId: createVendor
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    requestBody:
+      contentType: application/json
+      payload:
+        number: $inputs.number
+        displayName: $inputs.displayName
+        email: $inputs.email
+        phoneNumber: $inputs.phoneNumber
+        city: $inputs.city
+        country: $inputs.country
+        taxRegistrationNumber: $inputs.taxRegistrationNumber
+        currencyCode: $inputs.currencyCode
+        taxLiable: true
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      vendorId: $response.body#/id
+      vendorNumber: $response.body#/number
+  - stepId: verifyVendor
+    description: >-
+      Read the newly created vendor back by its generated id to confirm the
+      record persisted in Business Central.
+    operationId: getVendor
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    - name: vendor_id
+      in: path
+      value: $steps.createVendor.outputs.vendorId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      verifiedId: $response.body#/id
+      verifiedDisplayName: $response.body#/displayName
+      lastModifiedDateTime: $response.body#/lastModifiedDateTime
+  outputs:
+    vendorId: $steps.createVendor.outputs.vendorId
+    vendorNumber: $steps.createVendor.outputs.vendorNumber
+    verifiedDisplayName: $steps.verifyVendor.outputs.verifiedDisplayName

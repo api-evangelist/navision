@@ -1,0 +1,107 @@
+arazzo: 1.0.1
+info:
+  title: Business Central Create a Purchase Invoice for a Vendor
+  summary: Resolve a vendor by number, draft a purchase invoice, and confirm it landed.
+  description: >-
+    An accounts-payable entry flow for Business Central. The workflow resolves a
+    vendor by their number to obtain the vendor id, creates a draft purchase
+    invoice bound to that vendor, and then lists purchase invoices filtered to
+    the new invoice number to confirm the document landed. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: businessCentralApi
+  url: ../openapi/business-central-api-v2.yml
+  type: openapi
+workflows:
+- workflowId: create-purchase-invoice-for-vendor
+  summary: Resolve a vendor, create a purchase invoice, and confirm it via list filter.
+  description: >-
+    Finds the vendor by number, creates a draft purchase invoice referencing the
+    resolved vendor id, and lists purchase invoices filtered to the new invoice
+    number to confirm it persisted.
+  inputs:
+    type: object
+    required:
+    - companyId
+    - vendorNumber
+    properties:
+      companyId:
+        type: string
+        description: The UUID of the Business Central company.
+      vendorNumber:
+        type: string
+        description: The number of the vendor the invoice is for.
+      invoiceDate:
+        type: string
+        description: The invoice date (YYYY-MM-DD).
+      currencyCode:
+        type: string
+        description: The currency code for the invoice.
+  steps:
+  - stepId: findVendor
+    description: >-
+      Resolve the vendor by number to obtain the id required to bind the
+      purchase invoice, returning at most one match.
+    operationId: listVendors
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    - name: $filter
+      in: query
+      value: "number eq '$inputs.vendorNumber'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      vendorId: $response.body#/value/0/id
+      vendorName: $response.body#/value/0/displayName
+  - stepId: createPurchaseInvoice
+    description: >-
+      Create a draft purchase invoice bound to the resolved vendor id.
+    operationId: createPurchaseInvoice
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    requestBody:
+      contentType: application/json
+      payload:
+        invoiceDate: $inputs.invoiceDate
+        vendorId: $steps.findVendor.outputs.vendorId
+        vendorNumber: $inputs.vendorNumber
+        currencyCode: $inputs.currencyCode
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      invoiceId: $response.body#/id
+      invoiceNumber: $response.body#/number
+      status: $response.body#/status
+  - stepId: confirmInvoice
+    description: >-
+      List purchase invoices filtered to the newly created invoice number to
+      confirm the draft persisted.
+    operationId: listPurchaseInvoices
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    - name: $filter
+      in: query
+      value: "number eq '$steps.createPurchaseInvoice.outputs.invoiceNumber'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedId: $response.body#/value/0/id
+      confirmedTotalIncludingTax: $response.body#/value/0/totalAmountIncludingTax
+  outputs:
+    invoiceId: $steps.createPurchaseInvoice.outputs.invoiceId
+    invoiceNumber: $steps.createPurchaseInvoice.outputs.invoiceNumber
+    confirmedTotalIncludingTax: $steps.confirmInvoice.outputs.confirmedTotalIncludingTax

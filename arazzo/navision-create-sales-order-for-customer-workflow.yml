@@ -1,0 +1,110 @@
+arazzo: 1.0.1
+info:
+  title: Business Central Create a Sales Order for a Customer
+  summary: Resolve a customer by number, open a sales order for them, and read its lines.
+  description: >-
+    An order-to-cash entry flow for Business Central. The workflow resolves a
+    customer by their number to obtain the customer id, creates a sales order
+    header bound to that customer, and then reads back the order's line
+    collection so the caller can confirm the document was created. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: businessCentralApi
+  url: ../openapi/business-central-api-v2.yml
+  type: openapi
+workflows:
+- workflowId: create-sales-order-for-customer
+  summary: Resolve a customer, create a sales order for them, and read the order lines.
+  description: >-
+    Finds the customer by number, creates a sales order header referencing the
+    resolved customer id, and lists the new order's lines.
+  inputs:
+    type: object
+    required:
+    - companyId
+    - customerNumber
+    properties:
+      companyId:
+        type: string
+        description: The UUID of the Business Central company.
+      customerNumber:
+        type: string
+        description: The number of the customer the sales order is for.
+      externalDocumentNumber:
+        type: string
+        description: An external reference number for the order.
+      orderDate:
+        type: string
+        description: The order date (YYYY-MM-DD).
+      currencyCode:
+        type: string
+        description: The currency code for the order.
+      requestedDeliveryDate:
+        type: string
+        description: The requested delivery date (YYYY-MM-DD).
+  steps:
+  - stepId: findCustomer
+    description: >-
+      Resolve the customer by number to obtain the id required to bind the sales
+      order, returning at most one match.
+    operationId: listCustomers
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    - name: $filter
+      in: query
+      value: "number eq '$inputs.customerNumber'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      customerId: $response.body#/value/0/id
+      customerName: $response.body#/value/0/displayName
+  - stepId: createSalesOrder
+    description: >-
+      Create a sales order header bound to the resolved customer id.
+    operationId: createSalesOrder
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    requestBody:
+      contentType: application/json
+      payload:
+        externalDocumentNumber: $inputs.externalDocumentNumber
+        orderDate: $inputs.orderDate
+        customerId: $steps.findCustomer.outputs.customerId
+        customerNumber: $inputs.customerNumber
+        currencyCode: $inputs.currencyCode
+        requestedDeliveryDate: $inputs.requestedDeliveryDate
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      salesOrderId: $response.body#/id
+      salesOrderNumber: $response.body#/number
+      status: $response.body#/status
+  - stepId: readOrderLines
+    description: >-
+      Read the line collection of the newly created sales order to confirm the
+      document is in place.
+    operationId: listSalesOrderLines
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    - name: salesOrder_id
+      in: path
+      value: $steps.createSalesOrder.outputs.salesOrderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lines: $response.body#/value
+  outputs:
+    salesOrderId: $steps.createSalesOrder.outputs.salesOrderId
+    salesOrderNumber: $steps.createSalesOrder.outputs.salesOrderNumber
+    lines: $steps.readOrderLines.outputs.lines

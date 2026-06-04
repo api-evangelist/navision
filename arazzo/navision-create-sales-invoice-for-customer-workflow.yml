@@ -1,0 +1,111 @@
+arazzo: 1.0.1
+info:
+  title: Business Central Create a Sales Invoice for a Customer
+  summary: Resolve a customer by number, draft a sales invoice, and verify it by id.
+  description: >-
+    A billing entry flow for Business Central. The workflow resolves a customer
+    by their number to obtain the customer id, creates a draft sales invoice
+    bound to that customer, and then lists sales invoices filtered to the new
+    invoice number to confirm the document landed. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: businessCentralApi
+  url: ../openapi/business-central-api-v2.yml
+  type: openapi
+workflows:
+- workflowId: create-sales-invoice-for-customer
+  summary: Resolve a customer, create a sales invoice, and confirm it via list filter.
+  description: >-
+    Finds the customer by number, creates a draft sales invoice referencing the
+    resolved customer id, and lists sales invoices filtered to the new invoice
+    number to confirm it persisted.
+  inputs:
+    type: object
+    required:
+    - companyId
+    - customerNumber
+    properties:
+      companyId:
+        type: string
+        description: The UUID of the Business Central company.
+      customerNumber:
+        type: string
+        description: The number of the customer the invoice is for.
+      externalDocumentNumber:
+        type: string
+        description: An external reference number for the invoice.
+      invoiceDate:
+        type: string
+        description: The invoice date (YYYY-MM-DD).
+      currencyCode:
+        type: string
+        description: The currency code for the invoice.
+  steps:
+  - stepId: findCustomer
+    description: >-
+      Resolve the customer by number to obtain the id required to bind the sales
+      invoice, returning at most one match.
+    operationId: listCustomers
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    - name: $filter
+      in: query
+      value: "number eq '$inputs.customerNumber'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      customerId: $response.body#/value/0/id
+      customerName: $response.body#/value/0/displayName
+  - stepId: createSalesInvoice
+    description: >-
+      Create a draft sales invoice bound to the resolved customer id.
+    operationId: createSalesInvoice
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    requestBody:
+      contentType: application/json
+      payload:
+        externalDocumentNumber: $inputs.externalDocumentNumber
+        invoiceDate: $inputs.invoiceDate
+        customerId: $steps.findCustomer.outputs.customerId
+        customerNumber: $inputs.customerNumber
+        currencyCode: $inputs.currencyCode
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      invoiceId: $response.body#/id
+      invoiceNumber: $response.body#/number
+      status: $response.body#/status
+  - stepId: confirmInvoice
+    description: >-
+      List sales invoices filtered to the newly created invoice number to
+      confirm the draft persisted.
+    operationId: listSalesInvoices
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    - name: $filter
+      in: query
+      value: "number eq '$steps.createSalesInvoice.outputs.invoiceNumber'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedId: $response.body#/value/0/id
+      confirmedTotalIncludingTax: $response.body#/value/0/totalAmountIncludingTax
+  outputs:
+    invoiceId: $steps.createSalesInvoice.outputs.invoiceId
+    invoiceNumber: $steps.createSalesInvoice.outputs.invoiceNumber
+    confirmedTotalIncludingTax: $steps.confirmInvoice.outputs.confirmedTotalIncludingTax

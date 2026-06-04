@@ -1,0 +1,147 @@
+arazzo: 1.0.1
+info:
+  title: Business Central Upsert an Item
+  summary: Find an item by number and update it if it exists, otherwise create it.
+  description: >-
+    A common Business Central catalog-sync pattern. The workflow searches the
+    company item list for an existing item whose number matches the supplied
+    value, then branches: when a match is found it patches the existing item,
+    and when no match is found it creates a new item. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: businessCentralApi
+  url: ../openapi/business-central-api-v2.yml
+  type: openapi
+workflows:
+- workflowId: upsert-item
+  summary: Upsert a single inventory item in a Business Central company by its number.
+  description: >-
+    Looks for an existing item whose number matches the supplied value, then
+    either updates the matched item or creates a new one with the supplied
+    pricing and category fields.
+  inputs:
+    type: object
+    required:
+    - companyId
+    - number
+    - displayName
+    properties:
+      companyId:
+        type: string
+        description: The UUID of the Business Central company.
+      number:
+        type: string
+        description: The item number used to detect an existing item.
+      displayName:
+        type: string
+        description: The item display name.
+      type:
+        type: string
+        description: The item type (e.g. Inventory, Service, Non-Inventory).
+      unitPrice:
+        type: number
+        description: The item unit sales price.
+      unitCost:
+        type: number
+        description: The item unit cost.
+      itemCategoryCode:
+        type: string
+        description: The item category code.
+      baseUnitOfMeasureCode:
+        type: string
+        description: The base unit of measure code.
+  steps:
+  - stepId: findItem
+    description: >-
+      Search the company item list for an item whose number equals the supplied
+      value, returning at most one match.
+    operationId: listItems
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    - name: $filter
+      in: query
+      value: "number eq '$inputs.number'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchedItemId: $response.body#/value/0/id
+    onSuccess:
+    - name: itemExists
+      type: goto
+      stepId: updateExisting
+      criteria:
+      - context: $response.body
+        condition: $.value.length > 0
+        type: jsonpath
+    - name: itemMissing
+      type: goto
+      stepId: createNew
+      criteria:
+      - context: $response.body
+        condition: $.value.length == 0
+        type: jsonpath
+  - stepId: updateExisting
+    description: >-
+      Patch the matched item with the supplied pricing and category fields.
+    operationId: updateItem
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    - name: item_id
+      in: path
+      value: $steps.findItem.outputs.matchedItemId
+    - name: If-Match
+      in: header
+      value: "*"
+    requestBody:
+      contentType: application/json
+      payload:
+        displayName: $inputs.displayName
+        type: $inputs.type
+        unitPrice: $inputs.unitPrice
+        unitCost: $inputs.unitCost
+        itemCategoryCode: $inputs.itemCategoryCode
+        baseUnitOfMeasureCode: $inputs.baseUnitOfMeasureCode
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      itemId: $response.body#/id
+      lastModifiedDateTime: $response.body#/lastModifiedDateTime
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: createNew
+    description: >-
+      Create a new item in the company using the supplied fields when no
+      existing item matched the number.
+    operationId: createItem
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    requestBody:
+      contentType: application/json
+      payload:
+        number: $inputs.number
+        displayName: $inputs.displayName
+        type: $inputs.type
+        unitPrice: $inputs.unitPrice
+        unitCost: $inputs.unitCost
+        itemCategoryCode: $inputs.itemCategoryCode
+        baseUnitOfMeasureCode: $inputs.baseUnitOfMeasureCode
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      itemId: $response.body#/id
+      lastModifiedDateTime: $response.body#/lastModifiedDateTime
+  outputs:
+    updatedItemId: $steps.updateExisting.outputs.itemId
+    createdItemId: $steps.createNew.outputs.itemId

@@ -1,0 +1,106 @@
+arazzo: 1.0.1
+info:
+  title: Business Central Create a Purchase Order for a Vendor
+  summary: Resolve a vendor by number, open a purchase order for them, and read its lines.
+  description: >-
+    A procure-to-pay entry flow for Business Central. The workflow resolves a
+    vendor by their number to obtain the vendor id, creates a purchase order
+    header bound to that vendor, and then reads back the order's line collection
+    so the caller can confirm the document was created. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: businessCentralApi
+  url: ../openapi/business-central-api-v2.yml
+  type: openapi
+workflows:
+- workflowId: create-purchase-order-for-vendor
+  summary: Resolve a vendor, create a purchase order for them, and read the order lines.
+  description: >-
+    Finds the vendor by number, creates a purchase order header referencing the
+    resolved vendor id, and lists the new order's lines.
+  inputs:
+    type: object
+    required:
+    - companyId
+    - vendorNumber
+    properties:
+      companyId:
+        type: string
+        description: The UUID of the Business Central company.
+      vendorNumber:
+        type: string
+        description: The number of the vendor the purchase order is for.
+      orderDate:
+        type: string
+        description: The order date (YYYY-MM-DD).
+      currencyCode:
+        type: string
+        description: The currency code for the order.
+      requestedReceiptDate:
+        type: string
+        description: The requested receipt date (YYYY-MM-DD).
+  steps:
+  - stepId: findVendor
+    description: >-
+      Resolve the vendor by number to obtain the id required to bind the
+      purchase order, returning at most one match.
+    operationId: listVendors
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    - name: $filter
+      in: query
+      value: "number eq '$inputs.vendorNumber'"
+    - name: $top
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      vendorId: $response.body#/value/0/id
+      vendorName: $response.body#/value/0/displayName
+  - stepId: createPurchaseOrder
+    description: >-
+      Create a purchase order header bound to the resolved vendor id.
+    operationId: createPurchaseOrder
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    requestBody:
+      contentType: application/json
+      payload:
+        orderDate: $inputs.orderDate
+        vendorId: $steps.findVendor.outputs.vendorId
+        vendorNumber: $inputs.vendorNumber
+        currencyCode: $inputs.currencyCode
+        requestedReceiptDate: $inputs.requestedReceiptDate
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      purchaseOrderId: $response.body#/id
+      purchaseOrderNumber: $response.body#/number
+      status: $response.body#/status
+  - stepId: readOrderLines
+    description: >-
+      Read the line collection of the newly created purchase order to confirm
+      the document is in place.
+    operationId: listPurchaseOrderLines
+    parameters:
+    - name: company_id
+      in: path
+      value: $inputs.companyId
+    - name: purchaseOrder_id
+      in: path
+      value: $steps.createPurchaseOrder.outputs.purchaseOrderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lines: $response.body#/value
+  outputs:
+    purchaseOrderId: $steps.createPurchaseOrder.outputs.purchaseOrderId
+    purchaseOrderNumber: $steps.createPurchaseOrder.outputs.purchaseOrderNumber
+    lines: $steps.readOrderLines.outputs.lines

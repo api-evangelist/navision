@@ -263,6 +263,33 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/navision-create-journal-and-read-lines-workflow.yml
+    name: Business Central Create a Journal and Read Its Lines
+    summary: Create a general journal in a company and read back its line collection.
+  - url: arazzo/navision-create-purchase-invoice-for-vendor-workflow.yml
+    name: Business Central Create a Purchase Invoice for a Vendor
+    summary: Resolve a vendor by number, draft a purchase invoice, and confirm it landed.
+  - url: arazzo/navision-create-purchase-order-for-vendor-workflow.yml
+    name: Business Central Create a Purchase Order for a Vendor
+    summary: Resolve a vendor by number, open a purchase order for them, and read its lines.
+  - url: arazzo/navision-create-sales-invoice-for-customer-workflow.yml
+    name: Business Central Create a Sales Invoice for a Customer
+    summary: Resolve a customer by number, draft a sales invoice, and verify it by id.
+  - url: arazzo/navision-create-sales-order-for-customer-workflow.yml
+    name: Business Central Create a Sales Order for a Customer
+    summary: Resolve a customer by number, open a sales order for them, and read its lines.
+  - url: arazzo/navision-onboard-customer-workflow.yml
+    name: Business Central Onboard a Customer
+    summary: Resolve the working company, create a customer, and confirm it persisted.
+  - url: arazzo/navision-onboard-vendor-workflow.yml
+    name: Business Central Onboard a Vendor
+    summary: Resolve the working company, create a vendor, and confirm it persisted.
+  - url: arazzo/navision-upsert-item-workflow.yml
+    name: Business Central Upsert an Item
+    summary: Find an item by number and update it if it exists, otherwise create it.
 - type: LinkedIn
   url: https://www.linkedin.com/showcase/microsoft-dynamics-navision
 - type: Portal
