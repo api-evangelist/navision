@@ -1,0 +1,776 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Business Central Administration Center API",
+    "version": "2.28"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Environments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/environments"
+          },
+          "docs": "Returns a list of all environments across all application families for the tenant."
+        },
+        {
+          "info": {
+            "name": "List Environments by Application Family",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              }
+            ]
+          },
+          "docs": "Returns a list of environments for the specified application family."
+        },
+        {
+          "info": {
+            "name": "Get an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Returns the properties for the specified environment."
+        },
+        {
+          "info": {
+            "name": "Create a New Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new environment with sample data. The operation is asynchronous; poll the environment operations endpoint to track status."
+        },
+        {
+          "info": {
+            "name": "Delete an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Soft deletes the specified environment. The environment is retained for 14 days during which it can be recovered. Environments with status Creating Failed or Removing Failed are permanently deleted immediately."
+        },
+        {
+          "info": {
+            "name": "Copy an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/copy",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new environment as a copy of an existing environment's data."
+        },
+        {
+          "info": {
+            "name": "Rename an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/rename",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Schedules a rename operation on an environment."
+        },
+        {
+          "info": {
+            "name": "Restore an Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/restore",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restores an existing environment from a point in time in the past."
+        },
+        {
+          "info": {
+            "name": "Recover a Deleted Environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/recover",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Recovers a soft-deleted environment."
+        },
+        {
+          "info": {
+            "name": "Get Available Restore Periods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/availableRestorePeriods",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Returns an ordered list of available restore periods for the environment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Environment Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Environment Operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/environments/:environmentName/operations",
+            "params": [
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Returns a list of operations that have been performed on the environment."
+        },
+        {
+          "info": {
+            "name": "List Operations on All Environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/operations",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              }
+            ]
+          },
+          "docs": "Returns operations that have occurred on all environments for the application family."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Environment Settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Environment Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/settings",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Returns settings for the specified environment."
+        },
+        {
+          "info": {
+            "name": "Set Application Insights Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/settings/appInsightsKey",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the Azure Application Insights instrumentation key for the environment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Update Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set Update Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/settings/upgrade",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the update window and other update-related settings for the environment."
+        },
+        {
+          "info": {
+            "name": "Get Scheduled Upgrade",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/scheduledUpgrade",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Returns information about any pending scheduled upgrade for the environment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "App Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Installed Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/apps",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Returns a list of apps installed in the specified environment."
+        },
+        {
+          "info": {
+            "name": "Update an App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/apps/:appId/update",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              },
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Schedules an update of the specified app to a newer version."
+        },
+        {
+          "info": {
+            "name": "Install an App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/apps/:appId/install",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              },
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Installs the specified app in the environment."
+        },
+        {
+          "info": {
+            "name": "Uninstall an App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/apps/:appId/uninstall",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              },
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uninstalls the specified app from the environment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Storage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Environment Storage Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/usedstorage",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Returns used storage information for the specified environment."
+        },
+        {
+          "info": {
+            "name": "Get Storage Usage for All Environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/environments/usedstorage"
+          },
+          "docs": "Returns storage usage information for all environments."
+        },
+        {
+          "info": {
+            "name": "Get Allowed Quotas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/environments/quotas"
+          },
+          "docs": "Returns the different types of quotas and their limits."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notification Recipients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/notifications",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Returns a list of notification recipients for the environment."
+        },
+        {
+          "info": {
+            "name": "Add a Notification Recipient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/notifications",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new notification recipient for the environment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Support Settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Support Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/supportSettings",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Returns the support contact settings for the specified environment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Available Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Available Countries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/availableCountries",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              }
+            ]
+          },
+          "docs": "Returns a list of countries where environments can be created."
+        },
+        {
+          "info": {
+            "name": "List Available Application Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/availableApplicationVersions",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              }
+            ]
+          },
+          "docs": "Returns a list of available application versions for the specified application family."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
