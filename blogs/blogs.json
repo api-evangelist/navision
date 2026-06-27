@@ -10,12 +10,9 @@
     },
     {
       "source": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/users-credential-types",
-      "feed_url": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/users-credential-types",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "error": "HTTPError"
     }
   ],
   "post_count": 20,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:03:07Z"
 }

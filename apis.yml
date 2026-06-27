@@ -206,33 +206,30 @@ maintainers:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/microsoft-dynamics-nav/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/navision-create-journal-and-read-lines-workflow.yml
-        name: Business Central Create a Journal and Read Its Lines
-        summary: Create a general journal in a company and read back its line collection.
-      - url: arazzo/navision-create-purchase-invoice-for-vendor-workflow.yml
-        name: Business Central Create a Purchase Invoice for a Vendor
-        summary: Resolve a vendor by number, draft a purchase invoice, and confirm it landed.
-      - url: arazzo/navision-create-purchase-order-for-vendor-workflow.yml
-        name: Business Central Create a Purchase Order for a Vendor
-        summary: Resolve a vendor by number, open a purchase order for them, and read its lines.
-      - url: arazzo/navision-create-sales-invoice-for-customer-workflow.yml
-        name: Business Central Create a Sales Invoice for a Customer
-        summary: Resolve a customer by number, draft a sales invoice, and verify it by id.
-      - url: arazzo/navision-create-sales-order-for-customer-workflow.yml
-        name: Business Central Create a Sales Order for a Customer
-        summary: Resolve a customer by number, open a sales order for them, and read its lines.
-      - url: arazzo/navision-onboard-customer-workflow.yml
-        name: Business Central Onboard a Customer
-        summary: Resolve the working company, create a customer, and confirm it persisted.
-      - url: arazzo/navision-onboard-vendor-workflow.yml
-        name: Business Central Onboard a Vendor
-        summary: Resolve the working company, create a vendor, and confirm it persisted.
-      - url: arazzo/navision-upsert-item-workflow.yml
-        name: Business Central Upsert an Item
-        summary: Find an item by number and update it if it exists, otherwise create it.
+  - type: Arazzo
+    url: arazzo/navision-create-journal-and-read-lines-workflow.yml
+    name: Business Central Create a Journal and Read Its Lines
+  - type: Arazzo
+    url: arazzo/navision-create-purchase-invoice-for-vendor-workflow.yml
+    name: Business Central Create a Purchase Invoice for a Vendor
+  - type: Arazzo
+    url: arazzo/navision-create-purchase-order-for-vendor-workflow.yml
+    name: Business Central Create a Purchase Order for a Vendor
+  - type: Arazzo
+    url: arazzo/navision-create-sales-invoice-for-customer-workflow.yml
+    name: Business Central Create a Sales Invoice for a Customer
+  - type: Arazzo
+    url: arazzo/navision-create-sales-order-for-customer-workflow.yml
+    name: Business Central Create a Sales Order for a Customer
+  - type: Arazzo
+    url: arazzo/navision-onboard-customer-workflow.yml
+    name: Business Central Onboard a Customer
+  - type: Arazzo
+    url: arazzo/navision-onboard-vendor-workflow.yml
+    name: Business Central Onboard a Vendor
+  - type: Arazzo
+    url: arazzo/navision-upsert-item-workflow.yml
+    name: Business Central Upsert an Item
   - type: LinkedIn
     url: https://www.linkedin.com/showcase/microsoft-dynamics-navision
   - type: Portal
@@ -249,7 +246,7 @@ common:
     url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
   - type: Support
     url: https://support.microsoft.com/dynamics
-  - type: SignUp
+  - type: Signup
     url: https://learn.microsoft.com/en-us/dynamics365/business-central/trial-signup
   - type: Pricing
     url: https://www.microsoft.com/en-us/dynamics-365/products/business-central/pricing
@@ -295,10 +292,10 @@ common:
         description: Connect to Power BI, Power Automate, and Power Apps
       - name: Shopify
         description: Sync orders, customers, and inventory with Shopify stores
-  - type: SDK
+  - type: SDKs
     url: https://github.com/niclas-timm/laravel-dynamics-365-business-central
     title: Laravel SDK
-  - type: SDK
+  - type: SDKs
     url: https://github.com/AgoraIO/agora-rest-client-go
     title: Go REST Client
   - type: CLI
