@@ -1,0 +1,41 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/admin-center-api.yml, openapi/automation-api.yml, openapi/business-central-api-v2.yml
+schemes:
+- name: oauth2
+  source: openapi/admin-center-api.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+    tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+  - flow: clientCredentials
+    tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+  description: OAuth 2.0 authentication via Microsoft Entra ID
+- name: oauth2
+  source: openapi/automation-api.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+    tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+  - flow: clientCredentials
+    tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+  description: OAuth 2.0 authentication via Microsoft Entra ID
+- name: oauth2
+  source: openapi/business-central-api-v2.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+    tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+  - flow: clientCredentials
+    tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+  description: OAuth 2.0 authentication via Microsoft Entra ID
+scopes:
+- scope: https://api.businesscentral.dynamics.com/.default
+  description: Access Business Central Admin APIs
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/admin-center-api.yml
+  - openapi/automation-api.yml
+  - openapi/business-central-api-v2.yml
