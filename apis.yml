@@ -204,6 +204,12 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: VulnerabilityDisclosure
+    url: security/navision-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/navision-domain-security.yml
+  - type: Authentication
+    url: authentication/navision-authentication.yml
   - type: OAuthScopes
     url: scopes/navision-scopes.yml
   - type: PostmanWorkspace

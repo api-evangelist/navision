@@ -1,0 +1,34 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/admin-center-api.yml, openapi/automation-api.yml, openapi/business-central-api-v2.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+schemes:
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+    tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+    scopes: 1
+  - flow: clientCredentials
+    tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+    scopes: 1
+  description: OAuth 2.0 authentication via Microsoft Entra ID
+  sources:
+  - openapi/admin-center-api.yml
+  - openapi/automation-api.yml
+  - openapi/business-central-api-v2.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/admin-center-api.yml
+  - openapi/automation-api.yml
+  - openapi/business-central-api-v2.yml
