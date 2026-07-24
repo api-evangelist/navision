@@ -1,0 +1,383 @@
+openapi: 3.1.0
+info:
+  title: Business Central Administration Center Accounts Journals API
+  description: REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.
+  version: '2.28'
+  contact:
+    name: Microsoft Dynamics Support
+    email: bcsupport@microsoft.com
+    url: https://dynamics.microsoft.com/support/
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+servers:
+- url: https://api.businesscentral.dynamics.com/admin/v2.28
+  description: Business Central Administration Center
+security:
+- oauth2: []
+- bearerAuth: []
+tags:
+- name: Journals
+  description: Manage general journals and journal lines
+paths:
+  /companies({company_id})/journals:
+    get:
+      summary: List Journals
+      description: Returns a list of journal objects.
+      operationId: listJournals
+      tags:
+      - Journals
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved journals
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Journal'
+              examples:
+                Listjournals200Example:
+                  summary: Default listJournals 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      code: example_value
+                      displayName: example_value
+                      templateDisplayName: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                      balancingAccountId: '500123'
+                      balancingAccountNumber: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: Create a Journal
+      description: Creates a new journal in the specified company.
+      operationId: createJournal
+      tags:
+      - Journals
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JournalCreate'
+            examples:
+              CreatejournalRequestExample:
+                summary: Default createJournal request
+                x-microcks-default: true
+                value:
+                  code: example_value
+                  displayName: example_value
+                  templateDisplayName: example_value
+      responses:
+        '201':
+          description: Journal created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Journal'
+              examples:
+                Createjournal201Example:
+                  summary: Default createJournal 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    code: example_value
+                    displayName: example_value
+                    templateDisplayName: example_value
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                    balancingAccountId: '500123'
+                    balancingAccountNumber: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /companies({company_id})/journals({journal_id})/journalLines:
+    get:
+      summary: List Journal Lines
+      description: Returns a list of journal line objects for a specific journal.
+      operationId: listJournalLines
+      tags:
+      - Journals
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - name: journal_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved journal lines
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/JournalLine'
+              examples:
+                Listjournallines200Example:
+                  summary: Default listJournalLines 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      journalId: '500123'
+                      journalDisplayName: example_value
+                      lineNumber: 10
+                      accountType: G/L Account
+                      accountId: '500123'
+                      accountNumber: example_value
+                      postingDate: '2026-01-15'
+                      documentNumber: example_value
+                      externalDocumentNumber: example_value
+                      amount: 42.5
+                      description: A sample description.
+                      comment: example_value
+                      taxCode: example_value
+                      balanceAccountType: example_value
+                      balanceAccountNumber: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    skip:
+      name: $skip
+      in: query
+      description: Number of items to skip
+      schema:
+        type: integer
+        minimum: 0
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    top:
+      name: $top
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        minimum: 0
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
+    JournalLine:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        journalId:
+          type: string
+          format: uuid
+          example: '500123'
+        journalDisplayName:
+          type: string
+          maxLength: 100
+          example: example_value
+        lineNumber:
+          type: integer
+          example: 10
+        accountType:
+          type: string
+          enum:
+          - G/L Account
+          - Customer
+          - Vendor
+          - Bank Account
+          - Fixed Asset
+          - Employee
+          example: G/L Account
+        accountId:
+          type: string
+          format: uuid
+          example: '500123'
+        accountNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        postingDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+        documentNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        externalDocumentNumber:
+          type: string
+          maxLength: 35
+          example: example_value
+        amount:
+          type: number
+          format: decimal
+          example: 42.5
+        description:
+          type: string
+          maxLength: 100
+          example: A sample description.
+        comment:
+          type: string
+          example: example_value
+        taxCode:
+          type: string
+          maxLength: 20
+          example: example_value
+        balanceAccountType:
+          type: string
+          example: example_value
+        balanceAccountNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+    Journal:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        code:
+          type: string
+          maxLength: 10
+          example: example_value
+        displayName:
+          type: string
+          maxLength: 100
+          example: example_value
+        templateDisplayName:
+          type: string
+          maxLength: 100
+          example: example_value
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        balancingAccountId:
+          type: string
+          format: uuid
+          example: '500123'
+        balancingAccountNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+    JournalCreate:
+      type: object
+      required:
+      - code
+      - displayName
+      properties:
+        code:
+          type: string
+          maxLength: 10
+          example: example_value
+        displayName:
+          type: string
+          maxLength: 100
+          example: example_value
+        templateDisplayName:
+          type: string
+          maxLength: 100
+          example: example_value
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Microsoft Entra ID
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Administration Center API Documentation
+  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api

@@ -1,0 +1,1004 @@
+openapi: 3.1.0
+info:
+  title: Business Central Administration Center Accounts Sales Orders API
+  description: REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.
+  version: '2.28'
+  contact:
+    name: Microsoft Dynamics Support
+    email: bcsupport@microsoft.com
+    url: https://dynamics.microsoft.com/support/
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+servers:
+- url: https://api.businesscentral.dynamics.com/admin/v2.28
+  description: Business Central Administration Center
+security:
+- oauth2: []
+- bearerAuth: []
+tags:
+- name: Sales Orders
+  description: Manage sales orders and lines
+paths:
+  /companies({company_id})/salesOrders:
+    get:
+      summary: List Sales Orders
+      description: Returns a list of sales order objects from the specified company.
+      operationId: listSalesOrders
+      tags:
+      - Sales Orders
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: Successfully retrieved sales orders
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SalesOrder'
+              examples:
+                Listsalesorders200Example:
+                  summary: Default listSalesOrders 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      number: example_value
+                      externalDocumentNumber: example_value
+                      orderDate: '2026-01-15'
+                      postingDate: '2026-01-15'
+                      customerId: '500123'
+                      customerNumber: example_value
+                      customerName: example_value
+                      billToName: example_value
+                      billToCustomerId: '500123'
+                      billToCustomerNumber: example_value
+                      shipToName: example_value
+                      shipToContact: example_value
+                      sellToAddressLine1: example_value
+                      sellToAddressLine2: example_value
+                      sellToCity: example_value
+                      sellToCountry: example_value
+                      sellToState: example_value
+                      sellToPostCode: example_value
+                      currencyId: '500123'
+                      currencyCode: example_value
+                      pricesIncludeTax: true
+                      paymentTermsId: '500123'
+                      shipmentMethodId: '500123'
+                      salesperson: example_value
+                      requestedDeliveryDate: '2026-01-15'
+                      discountAmount: 42.5
+                      discountAppliedBeforeTax: true
+                      totalAmountExcludingTax: 42.5
+                      totalTaxAmount: 42.5
+                      totalAmountIncludingTax: 42.5
+                      fullyShipped: true
+                      status: Draft
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                      phoneNumber: example_value
+                      email: user@example.com
+                      salesOrderLines:
+                      - {}
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: Create a Sales Order
+      description: Creates a new sales order in the specified company.
+      operationId: createSalesOrder
+      tags:
+      - Sales Orders
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesOrderCreate'
+            examples:
+              CreatesalesorderRequestExample:
+                summary: Default createSalesOrder request
+                x-microcks-default: true
+                value:
+                  externalDocumentNumber: example_value
+                  orderDate: '2026-01-15'
+                  customerId: '500123'
+                  customerNumber: example_value
+                  currencyCode: example_value
+                  pricesIncludeTax: true
+                  requestedDeliveryDate: '2026-01-15'
+      responses:
+        '201':
+          description: Sales order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+              examples:
+                Createsalesorder201Example:
+                  summary: Default createSalesOrder 201 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    externalDocumentNumber: example_value
+                    orderDate: '2026-01-15'
+                    postingDate: '2026-01-15'
+                    customerId: '500123'
+                    customerNumber: example_value
+                    customerName: example_value
+                    billToName: example_value
+                    billToCustomerId: '500123'
+                    billToCustomerNumber: example_value
+                    shipToName: example_value
+                    shipToContact: example_value
+                    sellToAddressLine1: example_value
+                    sellToAddressLine2: example_value
+                    sellToCity: example_value
+                    sellToCountry: example_value
+                    sellToState: example_value
+                    sellToPostCode: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    pricesIncludeTax: true
+                    paymentTermsId: '500123'
+                    shipmentMethodId: '500123'
+                    salesperson: example_value
+                    requestedDeliveryDate: '2026-01-15'
+                    discountAmount: 42.5
+                    discountAppliedBeforeTax: true
+                    totalAmountExcludingTax: 42.5
+                    totalTaxAmount: 42.5
+                    totalAmountIncludingTax: 42.5
+                    fullyShipped: true
+                    status: Draft
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                    phoneNumber: example_value
+                    email: user@example.com
+                    salesOrderLines:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      documentId: '500123'
+                      sequence: 10
+                      itemId: '500123'
+                      accountId: '500123'
+                      lineType: Comment
+                      lineObjectNumber: example_value
+                      description: A sample description.
+                      description2: example_value
+                      unitOfMeasureId: '500123'
+                      unitOfMeasureCode: example_value
+                      quantity: 42.5
+                      unitPrice: 42.5
+                      discountAmount: 42.5
+                      discountPercent: 42.5
+                      discountAppliedBeforeTax: true
+                      amountExcludingTax: 42.5
+                      taxCode: example_value
+                      taxPercent: 42.5
+                      totalTaxAmount: 42.5
+                      amountIncludingTax: 42.5
+                      netAmount: 42.5
+                      netTaxAmount: 42.5
+                      netAmountIncludingTax: 42.5
+                      shipmentDate: '2026-01-15'
+                      shippedQuantity: 42.5
+                      invoicedQuantity: 42.5
+                      invoiceQuantity: 42.5
+                      shipQuantity: 42.5
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /companies({company_id})/salesOrders({salesOrder_id}):
+    get:
+      summary: Get a Sales Order
+      description: Retrieves a specific sales order by ID.
+      operationId: getSalesOrder
+      tags:
+      - Sales Orders
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/salesOrder_id'
+      - $ref: '#/components/parameters/select'
+      - $ref: '#/components/parameters/expand'
+      responses:
+        '200':
+          description: Successfully retrieved sales order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+              examples:
+                Getsalesorder200Example:
+                  summary: Default getSalesOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    externalDocumentNumber: example_value
+                    orderDate: '2026-01-15'
+                    postingDate: '2026-01-15'
+                    customerId: '500123'
+                    customerNumber: example_value
+                    customerName: example_value
+                    billToName: example_value
+                    billToCustomerId: '500123'
+                    billToCustomerNumber: example_value
+                    shipToName: example_value
+                    shipToContact: example_value
+                    sellToAddressLine1: example_value
+                    sellToAddressLine2: example_value
+                    sellToCity: example_value
+                    sellToCountry: example_value
+                    sellToState: example_value
+                    sellToPostCode: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    pricesIncludeTax: true
+                    paymentTermsId: '500123'
+                    shipmentMethodId: '500123'
+                    salesperson: example_value
+                    requestedDeliveryDate: '2026-01-15'
+                    discountAmount: 42.5
+                    discountAppliedBeforeTax: true
+                    totalAmountExcludingTax: 42.5
+                    totalTaxAmount: 42.5
+                    totalAmountIncludingTax: 42.5
+                    fullyShipped: true
+                    status: Draft
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                    phoneNumber: example_value
+                    email: user@example.com
+                    salesOrderLines:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      documentId: '500123'
+                      sequence: 10
+                      itemId: '500123'
+                      accountId: '500123'
+                      lineType: Comment
+                      lineObjectNumber: example_value
+                      description: A sample description.
+                      description2: example_value
+                      unitOfMeasureId: '500123'
+                      unitOfMeasureCode: example_value
+                      quantity: 42.5
+                      unitPrice: 42.5
+                      discountAmount: 42.5
+                      discountPercent: 42.5
+                      discountAppliedBeforeTax: true
+                      amountExcludingTax: 42.5
+                      taxCode: example_value
+                      taxPercent: 42.5
+                      totalTaxAmount: 42.5
+                      amountIncludingTax: 42.5
+                      netAmount: 42.5
+                      netTaxAmount: 42.5
+                      netAmountIncludingTax: 42.5
+                      shipmentDate: '2026-01-15'
+                      shippedQuantity: 42.5
+                      invoicedQuantity: 42.5
+                      invoiceQuantity: 42.5
+                      shipQuantity: 42.5
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      summary: Update a Sales Order
+      description: Updates an existing sales order.
+      operationId: updateSalesOrder
+      tags:
+      - Sales Orders
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/salesOrder_id'
+      - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesOrderUpdate'
+            examples:
+              UpdatesalesorderRequestExample:
+                summary: Default updateSalesOrder request
+                x-microcks-default: true
+                value:
+                  externalDocumentNumber: example_value
+                  orderDate: '2026-01-15'
+                  customerId: '500123'
+                  customerNumber: example_value
+                  currencyCode: example_value
+                  pricesIncludeTax: true
+                  requestedDeliveryDate: '2026-01-15'
+      responses:
+        '200':
+          description: Sales order updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SalesOrder'
+              examples:
+                Updatesalesorder200Example:
+                  summary: Default updateSalesOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    externalDocumentNumber: example_value
+                    orderDate: '2026-01-15'
+                    postingDate: '2026-01-15'
+                    customerId: '500123'
+                    customerNumber: example_value
+                    customerName: example_value
+                    billToName: example_value
+                    billToCustomerId: '500123'
+                    billToCustomerNumber: example_value
+                    shipToName: example_value
+                    shipToContact: example_value
+                    sellToAddressLine1: example_value
+                    sellToAddressLine2: example_value
+                    sellToCity: example_value
+                    sellToCountry: example_value
+                    sellToState: example_value
+                    sellToPostCode: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    pricesIncludeTax: true
+                    paymentTermsId: '500123'
+                    shipmentMethodId: '500123'
+                    salesperson: example_value
+                    requestedDeliveryDate: '2026-01-15'
+                    discountAmount: 42.5
+                    discountAppliedBeforeTax: true
+                    totalAmountExcludingTax: 42.5
+                    totalTaxAmount: 42.5
+                    totalAmountIncludingTax: 42.5
+                    fullyShipped: true
+                    status: Draft
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+                    phoneNumber: example_value
+                    email: user@example.com
+                    salesOrderLines:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      documentId: '500123'
+                      sequence: 10
+                      itemId: '500123'
+                      accountId: '500123'
+                      lineType: Comment
+                      lineObjectNumber: example_value
+                      description: A sample description.
+                      description2: example_value
+                      unitOfMeasureId: '500123'
+                      unitOfMeasureCode: example_value
+                      quantity: 42.5
+                      unitPrice: 42.5
+                      discountAmount: 42.5
+                      discountPercent: 42.5
+                      discountAppliedBeforeTax: true
+                      amountExcludingTax: 42.5
+                      taxCode: example_value
+                      taxPercent: 42.5
+                      totalTaxAmount: 42.5
+                      amountIncludingTax: 42.5
+                      netAmount: 42.5
+                      netTaxAmount: 42.5
+                      netAmountIncludingTax: 42.5
+                      shipmentDate: '2026-01-15'
+                      shippedQuantity: 42.5
+                      invoicedQuantity: 42.5
+                      invoiceQuantity: 42.5
+                      shipQuantity: 42.5
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      summary: Delete a Sales Order
+      description: Deletes a sales order by ID.
+      operationId: deleteSalesOrder
+      tags:
+      - Sales Orders
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/salesOrder_id'
+      responses:
+        '204':
+          description: Sales order deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /companies({company_id})/salesOrders({salesOrder_id})/salesOrderLines:
+    get:
+      summary: List Sales Order Lines
+      description: Returns a list of sales order line items.
+      operationId: listSalesOrderLines
+      tags:
+      - Sales Orders
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/salesOrder_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved sales order lines
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SalesOrderLine'
+              examples:
+                Listsalesorderlines200Example:
+                  summary: Default listSalesOrderLines 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      documentId: '500123'
+                      sequence: 10
+                      itemId: '500123'
+                      accountId: '500123'
+                      lineType: Comment
+                      lineObjectNumber: example_value
+                      description: A sample description.
+                      description2: example_value
+                      unitOfMeasureId: '500123'
+                      unitOfMeasureCode: example_value
+                      quantity: 42.5
+                      unitPrice: 42.5
+                      discountAmount: 42.5
+                      discountPercent: 42.5
+                      discountAppliedBeforeTax: true
+                      amountExcludingTax: 42.5
+                      taxCode: example_value
+                      taxPercent: 42.5
+                      totalTaxAmount: 42.5
+                      amountIncludingTax: 42.5
+                      netAmount: 42.5
+                      netTaxAmount: 42.5
+                      netAmountIncludingTax: 42.5
+                      shipmentDate: '2026-01-15'
+                      shippedQuantity: 42.5
+                      invoicedQuantity: 42.5
+                      invoiceQuantity: 42.5
+                      shipQuantity: 42.5
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    SalesOrderLine:
+      type: object
+      properties:
+        '@odata.etag':
+          type: string
+          example: example_value
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        documentId:
+          type: string
+          format: uuid
+          example: '500123'
+        sequence:
+          type: integer
+          example: 10
+        itemId:
+          type: string
+          format: uuid
+          example: '500123'
+        accountId:
+          type: string
+          format: uuid
+          example: '500123'
+        lineType:
+          type: string
+          enum:
+          - Comment
+          - Account
+          - Item
+          - Resource
+          - Fixed Asset
+          - Charge
+          example: Comment
+        lineObjectNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        description:
+          type: string
+          maxLength: 100
+          example: A sample description.
+        description2:
+          type: string
+          maxLength: 50
+          example: example_value
+        unitOfMeasureId:
+          type: string
+          format: uuid
+          example: '500123'
+        unitOfMeasureCode:
+          type: string
+          maxLength: 10
+          example: example_value
+        quantity:
+          type: number
+          format: decimal
+          example: 42.5
+        unitPrice:
+          type: number
+          format: decimal
+          example: 42.5
+        discountAmount:
+          type: number
+          format: decimal
+          example: 42.5
+        discountPercent:
+          type: number
+          format: decimal
+          example: 42.5
+        discountAppliedBeforeTax:
+          type: boolean
+          example: true
+        amountExcludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        taxCode:
+          type: string
+          maxLength: 20
+          example: example_value
+        taxPercent:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        totalTaxAmount:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        amountIncludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        netAmount:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        netTaxAmount:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        netAmountIncludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        shipmentDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+        shippedQuantity:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        invoicedQuantity:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        invoiceQuantity:
+          type: number
+          format: decimal
+          example: 42.5
+        shipQuantity:
+          type: number
+          format: decimal
+          example: 42.5
+    SalesOrderCreate:
+      type: object
+      properties:
+        externalDocumentNumber:
+          type: string
+          maxLength: 35
+          example: example_value
+        orderDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+        customerId:
+          type: string
+          format: uuid
+          example: '500123'
+        customerNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        currencyCode:
+          type: string
+          maxLength: 10
+          example: example_value
+        pricesIncludeTax:
+          type: boolean
+          example: true
+        requestedDeliveryDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+    SalesOrderUpdate:
+      type: object
+      properties:
+        externalDocumentNumber:
+          type: string
+          maxLength: 35
+          example: example_value
+        orderDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+        customerId:
+          type: string
+          format: uuid
+          example: '500123'
+        customerNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        currencyCode:
+          type: string
+          maxLength: 10
+          example: example_value
+        pricesIncludeTax:
+          type: boolean
+          example: true
+        requestedDeliveryDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+    SalesOrder:
+      type: object
+      properties:
+        '@odata.etag':
+          type: string
+          example: example_value
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the sales order
+          example: abc123
+        number:
+          type: string
+          description: The sales order number
+          maxLength: 20
+          example: example_value
+        externalDocumentNumber:
+          type: string
+          description: The external document number
+          maxLength: 35
+          example: example_value
+        orderDate:
+          type: string
+          format: date
+          description: The order date
+          example: '2026-01-15'
+        postingDate:
+          type: string
+          format: date
+          description: The posting date
+          example: '2026-01-15'
+        customerId:
+          type: string
+          format: uuid
+          description: The customer ID
+          example: '500123'
+        customerNumber:
+          type: string
+          description: The customer number
+          maxLength: 20
+          example: example_value
+        customerName:
+          type: string
+          description: The customer name
+          maxLength: 100
+          example: example_value
+        billToName:
+          type: string
+          description: The bill-to name
+          maxLength: 100
+          example: example_value
+        billToCustomerId:
+          type: string
+          format: uuid
+          description: The bill-to customer ID
+          example: '500123'
+        billToCustomerNumber:
+          type: string
+          description: The bill-to customer number
+          maxLength: 20
+          example: example_value
+        shipToName:
+          type: string
+          description: The ship-to name
+          maxLength: 100
+          example: example_value
+        shipToContact:
+          type: string
+          description: The ship-to contact
+          maxLength: 100
+          example: example_value
+        sellToAddressLine1:
+          type: string
+          maxLength: 100
+          example: example_value
+        sellToAddressLine2:
+          type: string
+          maxLength: 50
+          example: example_value
+        sellToCity:
+          type: string
+          maxLength: 30
+          example: example_value
+        sellToCountry:
+          type: string
+          maxLength: 10
+          example: example_value
+        sellToState:
+          type: string
+          maxLength: 20
+          example: example_value
+        sellToPostCode:
+          type: string
+          maxLength: 20
+          example: example_value
+        currencyId:
+          type: string
+          format: uuid
+          example: '500123'
+        currencyCode:
+          type: string
+          maxLength: 10
+          example: example_value
+        pricesIncludeTax:
+          type: boolean
+          example: true
+        paymentTermsId:
+          type: string
+          format: uuid
+          example: '500123'
+        shipmentMethodId:
+          type: string
+          format: uuid
+          example: '500123'
+        salesperson:
+          type: string
+          maxLength: 20
+          example: example_value
+        requestedDeliveryDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+        discountAmount:
+          type: number
+          format: decimal
+          description: The total discount amount
+          example: 42.5
+        discountAppliedBeforeTax:
+          type: boolean
+          example: true
+        totalAmountExcludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        totalTaxAmount:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        totalAmountIncludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        fullyShipped:
+          type: boolean
+          readOnly: true
+          example: true
+        status:
+          type: string
+          description: The order status
+          enum:
+          - Draft
+          - In Review
+          - Open
+          - Released
+          readOnly: true
+          example: Draft
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        phoneNumber:
+          type: string
+          maxLength: 30
+          example: example_value
+        email:
+          type: string
+          maxLength: 80
+          example: user@example.com
+        salesOrderLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/SalesOrderLine'
+          example: []
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
+  parameters:
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
+    orderby:
+      name: $orderby
+      in: query
+      description: OData order by expression
+      schema:
+        type: string
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    salesOrder_id:
+      name: salesOrder_id
+      in: path
+      required: true
+      description: The unique identifier of the sales order
+      schema:
+        type: string
+        format: uuid
+    skip:
+      name: $skip
+      in: query
+      description: Number of items to skip
+      schema:
+        type: integer
+        minimum: 0
+    expand:
+      name: $expand
+      in: query
+      description: Related entities to expand inline
+      schema:
+        type: string
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    top:
+      name: $top
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        minimum: 0
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Microsoft Entra ID
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Administration Center API Documentation
+  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api

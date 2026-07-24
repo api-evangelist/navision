@@ -1,0 +1,390 @@
+openapi: 3.1.0
+info:
+  title: Business Central Administration Center Accounts Companies API
+  description: REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.
+  version: '2.28'
+  contact:
+    name: Microsoft Dynamics Support
+    email: bcsupport@microsoft.com
+    url: https://dynamics.microsoft.com/support/
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+servers:
+- url: https://api.businesscentral.dynamics.com/admin/v2.28
+  description: Business Central Administration Center
+security:
+- oauth2: []
+- bearerAuth: []
+tags:
+- name: Companies
+  description: Manage automation companies
+paths:
+  /companies:
+    get:
+      summary: List Companies
+      description: Returns a list of companies available for automation.
+      operationId: listCompanies
+      tags:
+      - Companies
+      responses:
+        '200':
+          description: Successfully retrieved companies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+              examples:
+                Listcompanies200Example:
+                  summary: Default listCompanies 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      name: Example Title
+                      displayName: example_value
+                      businessProfileId: '500123'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /companies({company_id})/automationCompanies:
+    get:
+      summary: List Automation Companies
+      description: Returns a list of automation company objects.
+      operationId: listAutomationCompanies
+      tags:
+      - Companies
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      responses:
+        '200':
+          description: Successfully retrieved automation companies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AutomationCompany'
+              examples:
+                Listautomationcompanies200Example:
+                  summary: Default listAutomationCompanies 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      name: Example Title
+                      displayName: example_value
+                      businessProfileId: '500123'
+                      evaluationCompany: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: Create a Company
+      description: Creates a new company in the Business Central tenant.
+      operationId: createAutomationCompany
+      tags:
+      - Companies
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationCompanyCreate'
+            examples:
+              CreateautomationcompanyRequestExample:
+                summary: Default createAutomationCompany request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  displayName: example_value
+                  businessProfileId: '500123'
+      responses:
+        '201':
+          description: Company created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationCompany'
+              examples:
+                Createautomationcompany201Example:
+                  summary: Default createAutomationCompany 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    displayName: example_value
+                    businessProfileId: '500123'
+                    evaluationCompany: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /companies({company_id})/automationCompanies({automationCompany_id}):
+    get:
+      summary: Get an Automation Company
+      description: Retrieves a specific automation company by ID.
+      operationId: getAutomationCompany
+      tags:
+      - Companies
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - name: automationCompany_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
+      responses:
+        '200':
+          description: Successfully retrieved automation company
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationCompany'
+              examples:
+                Getautomationcompany200Example:
+                  summary: Default getAutomationCompany 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    displayName: example_value
+                    businessProfileId: '500123'
+                    evaluationCompany: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      summary: Update an Automation Company
+      description: Updates properties of an automation company (e.g., rename).
+      operationId: updateAutomationCompany
+      tags:
+      - Companies
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - name: automationCompany_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
+      - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationCompanyUpdate'
+            examples:
+              UpdateautomationcompanyRequestExample:
+                summary: Default updateAutomationCompany request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  displayName: example_value
+      responses:
+        '200':
+          description: Company updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationCompany'
+              examples:
+                Updateautomationcompany200Example:
+                  summary: Default updateAutomationCompany 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    displayName: example_value
+                    businessProfileId: '500123'
+                    evaluationCompany: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      summary: Delete an Automation Company
+      description: Deletes a company from the tenant.
+      operationId: deleteAutomationCompany
+      tags:
+      - Companies
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - name: automationCompany_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
+      responses:
+        '204':
+          description: Company deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AutomationCompanyCreate:
+      type: object
+      required:
+      - name
+      - displayName
+      properties:
+        name:
+          type: string
+          description: The name of the new company
+          example: Example Title
+        displayName:
+          type: string
+          description: The display name of the new company
+          example: example_value
+        businessProfileId:
+          type: string
+          example: '500123'
+    AutomationCompany:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        name:
+          type: string
+          description: The company name
+          example: Example Title
+        displayName:
+          type: string
+          description: The company display name
+          example: example_value
+        businessProfileId:
+          type: string
+          description: The business profile ID
+          example: '500123'
+        evaluationCompany:
+          type: boolean
+          description: Whether this is an evaluation company
+          example: true
+    AutomationCompanyUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        displayName:
+          type: string
+          example: example_value
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        name:
+          type: string
+          example: Example Title
+        displayName:
+          type: string
+          example: example_value
+        businessProfileId:
+          type: string
+          example: '500123'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+          example: example_value
+  parameters:
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Microsoft Entra ID
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Administration Center API Documentation
+  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api

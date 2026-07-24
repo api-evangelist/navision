@@ -1,0 +1,161 @@
+openapi: 3.1.0
+info:
+  title: Business Central Administration Center Accounts Payment Methods API
+  description: REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.
+  version: '2.28'
+  contact:
+    name: Microsoft Dynamics Support
+    email: bcsupport@microsoft.com
+    url: https://dynamics.microsoft.com/support/
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+servers:
+- url: https://api.businesscentral.dynamics.com/admin/v2.28
+  description: Business Central Administration Center
+security:
+- oauth2: []
+- bearerAuth: []
+tags:
+- name: Payment Methods
+  description: Manage payment methods
+paths:
+  /companies({company_id})/paymentMethods:
+    get:
+      summary: List Payment Methods
+      description: Returns a list of payment method objects.
+      operationId: listPaymentMethods
+      tags:
+      - Payment Methods
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved payment methods
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PaymentMethod'
+              examples:
+                Listpaymentmethods200Example:
+                  summary: Default listPaymentMethods 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      code: example_value
+                      displayName: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    skip:
+      name: $skip
+      in: query
+      description: Number of items to skip
+      schema:
+        type: integer
+        minimum: 0
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    top:
+      name: $top
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        minimum: 0
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        code:
+          type: string
+          maxLength: 10
+          example: example_value
+        displayName:
+          type: string
+          maxLength: 100
+          example: example_value
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Microsoft Entra ID
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Administration Center API Documentation
+  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api

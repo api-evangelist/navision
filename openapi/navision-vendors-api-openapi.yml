@@ -1,0 +1,649 @@
+openapi: 3.1.0
+info:
+  title: Business Central Administration Center Accounts Vendors API
+  description: REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.
+  version: '2.28'
+  contact:
+    name: Microsoft Dynamics Support
+    email: bcsupport@microsoft.com
+    url: https://dynamics.microsoft.com/support/
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+servers:
+- url: https://api.businesscentral.dynamics.com/admin/v2.28
+  description: Business Central Administration Center
+security:
+- oauth2: []
+- bearerAuth: []
+tags:
+- name: Vendors
+  description: Manage vendor records
+paths:
+  /companies({company_id})/vendors:
+    get:
+      summary: List Vendors
+      description: Returns a list of vendor objects from the specified company.
+      operationId: listVendors
+      tags:
+      - Vendors
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved vendors
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Vendor'
+              examples:
+                Listvendors200Example:
+                  summary: Default listVendors 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - '@odata.etag': example_value
+                      id: abc123
+                      number: example_value
+                      displayName: example_value
+                      addressLine1: example_value
+                      addressLine2: example_value
+                      city: example_value
+                      state: example_value
+                      country: example_value
+                      postalCode: example_value
+                      phoneNumber: example_value
+                      email: user@example.com
+                      website: example_value
+                      taxRegistrationNumber: example_value
+                      currencyId: '500123'
+                      currencyCode: example_value
+                      paymentTermsId: '500123'
+                      paymentMethodId: '500123'
+                      taxLiable: true
+                      blocked: ' '
+                      balance: 42.5
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: Create a Vendor
+      description: Creates a new vendor object in the specified company.
+      operationId: createVendor
+      tags:
+      - Vendors
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendorCreate'
+            examples:
+              CreatevendorRequestExample:
+                summary: Default createVendor request
+                x-microcks-default: true
+                value:
+                  number: example_value
+                  displayName: example_value
+                  addressLine1: example_value
+                  addressLine2: example_value
+                  city: example_value
+                  state: example_value
+                  country: example_value
+                  postalCode: example_value
+                  phoneNumber: example_value
+                  email: user@example.com
+                  website: example_value
+                  taxRegistrationNumber: example_value
+                  currencyCode: example_value
+                  taxLiable: true
+                  blocked: ' '
+      responses:
+        '201':
+          description: Vendor created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+              examples:
+                Createvendor201Example:
+                  summary: Default createVendor 201 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    addressLine1: example_value
+                    addressLine2: example_value
+                    city: example_value
+                    state: example_value
+                    country: example_value
+                    postalCode: example_value
+                    phoneNumber: example_value
+                    email: user@example.com
+                    website: example_value
+                    taxRegistrationNumber: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    paymentTermsId: '500123'
+                    paymentMethodId: '500123'
+                    taxLiable: true
+                    blocked: ' '
+                    balance: 42.5
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /companies({company_id})/vendors({vendor_id}):
+    get:
+      summary: Get a Vendor
+      description: Retrieves a specific vendor by ID.
+      operationId: getVendor
+      tags:
+      - Vendors
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/vendor_id'
+      - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved vendor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+              examples:
+                Getvendor200Example:
+                  summary: Default getVendor 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    addressLine1: example_value
+                    addressLine2: example_value
+                    city: example_value
+                    state: example_value
+                    country: example_value
+                    postalCode: example_value
+                    phoneNumber: example_value
+                    email: user@example.com
+                    website: example_value
+                    taxRegistrationNumber: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    paymentTermsId: '500123'
+                    paymentMethodId: '500123'
+                    taxLiable: true
+                    blocked: ' '
+                    balance: 42.5
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      summary: Update a Vendor
+      description: Updates an existing vendor object.
+      operationId: updateVendor
+      tags:
+      - Vendors
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/vendor_id'
+      - $ref: '#/components/parameters/ifMatch'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendorUpdate'
+            examples:
+              UpdatevendorRequestExample:
+                summary: Default updateVendor request
+                x-microcks-default: true
+                value:
+                  displayName: example_value
+                  addressLine1: example_value
+                  addressLine2: example_value
+                  city: example_value
+                  state: example_value
+                  country: example_value
+                  postalCode: example_value
+                  phoneNumber: example_value
+                  email: user@example.com
+                  website: example_value
+                  taxLiable: true
+                  blocked: ' '
+      responses:
+        '200':
+          description: Vendor updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+              examples:
+                Updatevendor200Example:
+                  summary: Default updateVendor 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.etag': example_value
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    addressLine1: example_value
+                    addressLine2: example_value
+                    city: example_value
+                    state: example_value
+                    country: example_value
+                    postalCode: example_value
+                    phoneNumber: example_value
+                    email: user@example.com
+                    website: example_value
+                    taxRegistrationNumber: example_value
+                    currencyId: '500123'
+                    currencyCode: example_value
+                    paymentTermsId: '500123'
+                    paymentMethodId: '500123'
+                    taxLiable: true
+                    blocked: ' '
+                    balance: 42.5
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      summary: Delete a Vendor
+      description: Deletes a vendor by ID.
+      operationId: deleteVendor
+      tags:
+      - Vendors
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/vendor_id'
+      responses:
+        '204':
+          description: Vendor deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    VendorUpdate:
+      type: object
+      properties:
+        displayName:
+          type: string
+          maxLength: 100
+          example: example_value
+        addressLine1:
+          type: string
+          maxLength: 100
+          example: example_value
+        addressLine2:
+          type: string
+          maxLength: 50
+          example: example_value
+        city:
+          type: string
+          maxLength: 30
+          example: example_value
+        state:
+          type: string
+          maxLength: 20
+          example: example_value
+        country:
+          type: string
+          maxLength: 10
+          example: example_value
+        postalCode:
+          type: string
+          maxLength: 20
+          example: example_value
+        phoneNumber:
+          type: string
+          maxLength: 30
+          example: example_value
+        email:
+          type: string
+          maxLength: 80
+          example: user@example.com
+        website:
+          type: string
+          maxLength: 80
+          example: example_value
+        taxLiable:
+          type: boolean
+          example: true
+        blocked:
+          type: string
+          enum:
+          - ' '
+          - Payment
+          - All
+          example: ' '
+    Vendor:
+      type: object
+      properties:
+        '@odata.etag':
+          type: string
+          example: example_value
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the vendor
+          example: abc123
+        number:
+          type: string
+          description: The vendor number
+          maxLength: 20
+          example: example_value
+        displayName:
+          type: string
+          description: The vendor display name
+          maxLength: 100
+          example: example_value
+        addressLine1:
+          type: string
+          description: First line of the address
+          maxLength: 100
+          example: example_value
+        addressLine2:
+          type: string
+          description: Second line of the address
+          maxLength: 50
+          example: example_value
+        city:
+          type: string
+          description: The city
+          maxLength: 30
+          example: example_value
+        state:
+          type: string
+          description: The state or province code
+          maxLength: 20
+          example: example_value
+        country:
+          type: string
+          description: The country/region code
+          maxLength: 10
+          example: example_value
+        postalCode:
+          type: string
+          description: The postal code
+          maxLength: 20
+          example: example_value
+        phoneNumber:
+          type: string
+          description: The phone number
+          maxLength: 30
+          example: example_value
+        email:
+          type: string
+          description: The email address
+          maxLength: 80
+          example: user@example.com
+        website:
+          type: string
+          description: The website URL
+          maxLength: 80
+          example: example_value
+        taxRegistrationNumber:
+          type: string
+          description: The tax registration number
+          maxLength: 20
+          example: example_value
+        currencyId:
+          type: string
+          format: uuid
+          description: The currency ID
+          example: '500123'
+        currencyCode:
+          type: string
+          description: The currency code
+          maxLength: 10
+          example: example_value
+        paymentTermsId:
+          type: string
+          format: uuid
+          description: The payment terms ID
+          example: '500123'
+        paymentMethodId:
+          type: string
+          format: uuid
+          description: The payment method ID
+          example: '500123'
+        taxLiable:
+          type: boolean
+          description: Whether the vendor is tax liable
+          example: true
+        blocked:
+          type: string
+          description: Whether the vendor is blocked
+          enum:
+          - ' '
+          - Payment
+          - All
+          example: ' '
+        balance:
+          type: number
+          format: decimal
+          description: The vendor balance
+          readOnly: true
+          example: 42.5
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+    VendorCreate:
+      type: object
+      required:
+      - displayName
+      properties:
+        number:
+          type: string
+          maxLength: 20
+          example: example_value
+        displayName:
+          type: string
+          maxLength: 100
+          example: example_value
+        addressLine1:
+          type: string
+          maxLength: 100
+          example: example_value
+        addressLine2:
+          type: string
+          maxLength: 50
+          example: example_value
+        city:
+          type: string
+          maxLength: 30
+          example: example_value
+        state:
+          type: string
+          maxLength: 20
+          example: example_value
+        country:
+          type: string
+          maxLength: 10
+          example: example_value
+        postalCode:
+          type: string
+          maxLength: 20
+          example: example_value
+        phoneNumber:
+          type: string
+          maxLength: 30
+          example: example_value
+        email:
+          type: string
+          maxLength: 80
+          example: user@example.com
+        website:
+          type: string
+          maxLength: 80
+          example: example_value
+        taxRegistrationNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        currencyCode:
+          type: string
+          maxLength: 10
+          example: example_value
+        taxLiable:
+          type: boolean
+          example: true
+        blocked:
+          type: string
+          enum:
+          - ' '
+          - Payment
+          - All
+          example: ' '
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
+  parameters:
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    orderby:
+      name: $orderby
+      in: query
+      description: OData order by expression
+      schema:
+        type: string
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    vendor_id:
+      name: vendor_id
+      in: path
+      required: true
+      description: The unique identifier of the vendor
+      schema:
+        type: string
+        format: uuid
+    skip:
+      name: $skip
+      in: query
+      description: Number of items to skip
+      schema:
+        type: integer
+        minimum: 0
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    top:
+      name: $top
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        minimum: 0
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Microsoft Entra ID
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Administration Center API Documentation
+  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api

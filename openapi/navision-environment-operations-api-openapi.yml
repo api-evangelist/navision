@@ -1,0 +1,270 @@
+openapi: 3.1.0
+info:
+  title: Business Central Administration Center Accounts Environment Operations API
+  description: REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.
+  version: '2.28'
+  contact:
+    name: Microsoft Dynamics Support
+    email: bcsupport@microsoft.com
+    url: https://dynamics.microsoft.com/support/
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+servers:
+- url: https://api.businesscentral.dynamics.com/admin/v2.28
+  description: Business Central Administration Center
+security:
+- oauth2: []
+- bearerAuth: []
+tags:
+- name: Environment Operations
+  description: View and track environment operations
+paths:
+  /environments/{environmentName}/operations:
+    get:
+      summary: List Environment Operations
+      description: Returns a list of operations that have been performed on the environment.
+      operationId: listEnvironmentOperations
+      tags:
+      - Environment Operations
+      parameters:
+      - $ref: '#/components/parameters/environmentName'
+      responses:
+        '200':
+          description: Successfully retrieved operations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EnvironmentOperation'
+              examples:
+                Listenvironmentoperations200Example:
+                  summary: Default listEnvironmentOperations 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      type: create
+                      status: Queued
+                      aadTenantId: '500123'
+                      createdOn: '2026-01-15T10:30:00Z'
+                      startedOn: '2026-01-15T10:30:00Z'
+                      completedOn: '2026-01-15T10:30:00Z'
+                      createdBy: example_value
+                      errorMessage: example_value
+                      parameters: example_value
+                      environmentName: example_value
+                      environmentType: example_value
+                      productFamily: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /applications/{applicationFamily}/environments/operations:
+    get:
+      summary: List Operations on All Environments
+      description: Returns operations that have occurred on all environments for the application family.
+      operationId: listAllEnvironmentOperations
+      tags:
+      - Environment Operations
+      parameters:
+      - $ref: '#/components/parameters/applicationFamily'
+      responses:
+        '200':
+          description: Successfully retrieved operations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EnvironmentOperation'
+              examples:
+                Listallenvironmentoperations200Example:
+                  summary: Default listAllEnvironmentOperations 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      type: create
+                      status: Queued
+                      aadTenantId: '500123'
+                      createdOn: '2026-01-15T10:30:00Z'
+                      startedOn: '2026-01-15T10:30:00Z'
+                      completedOn: '2026-01-15T10:30:00Z'
+                      createdBy: example_value
+                      errorMessage: example_value
+                      parameters: example_value
+                      environmentName: example_value
+                      environmentType: example_value
+                      productFamily: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    environmentName:
+      name: environmentName
+      in: path
+      required: true
+      description: The name of the environment
+      schema:
+        type: string
+    applicationFamily:
+      name: applicationFamily
+      in: path
+      required: true
+      description: The application family (e.g., BusinessCentral)
+      schema:
+        type: string
+        default: BusinessCentral
+  schemas:
+    EnvironmentOperation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Operation ID used for tracking
+          example: abc123
+        type:
+          type: string
+          description: Type of operation
+          enum:
+          - create
+          - copy
+          - delete
+          - softDelete
+          - recover
+          - environmentRename
+          - pitRestore
+          - environmentAppInstall
+          - environmentAppUninstall
+          - environmentAppUpdate
+          - environmentAppHotfix
+          - modify
+          - update
+          - restart
+          - moveToAnotherAadTenant
+          example: create
+        status:
+          type: string
+          description: Status of the operation
+          enum:
+          - Queued
+          - Scheduled
+          - Running
+          - Succeeded
+          - Failed
+          - Canceled
+          - Skipped
+          example: Queued
+        aadTenantId:
+          type: string
+          format: uuid
+          description: Microsoft Entra tenant ID
+          example: '500123'
+        createdOn:
+          type: string
+          format: date-time
+          description: When the operation was created
+          example: '2026-01-15T10:30:00Z'
+        startedOn:
+          type: string
+          format: date-time
+          description: When the operation started executing
+          example: '2026-01-15T10:30:00Z'
+        completedOn:
+          type: string
+          format: date-time
+          description: When the operation completed
+          example: '2026-01-15T10:30:00Z'
+        createdBy:
+          type: string
+          description: Who created the operation
+          example: example_value
+        errorMessage:
+          type: string
+          description: Error message for failed operations
+          example: example_value
+        parameters:
+          type: object
+          description: Operation-specific parameters
+          additionalProperties: true
+          example: example_value
+        environmentName:
+          type: string
+          description: Name of the affected environment
+          example: example_value
+        environmentType:
+          type: string
+          description: Type of the affected environment
+          example: example_value
+        productFamily:
+          type: string
+          description: Product family of the affected environment
+          example: example_value
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: A stable error code describing the type and nature of the error
+          example: example_value
+        message:
+          type: string
+          description: A readable description of the error and cause
+          example: example_value
+        target:
+          type: string
+          description: Information about what part of the request caused the error
+          example: example_value
+        extensionData:
+          type: object
+          description: Additional key/value information about the error
+          additionalProperties: true
+          example: example_value
+        clientError:
+          type: array
+          description: Nested list of error objects with more details
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+          example: []
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Microsoft Entra ID
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Administration Center API Documentation
+  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api

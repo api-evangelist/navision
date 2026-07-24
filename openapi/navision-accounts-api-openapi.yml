@@ -1,0 +1,378 @@
+openapi: 3.1.0
+info:
+  title: Business Central Administration Center Accounts API
+  description: REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.
+  version: '2.28'
+  contact:
+    name: Microsoft Dynamics Support
+    email: bcsupport@microsoft.com
+    url: https://dynamics.microsoft.com/support/
+  license:
+    name: Microsoft APIs Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+servers:
+- url: https://api.businesscentral.dynamics.com/admin/v2.28
+  description: Business Central Administration Center
+security:
+- oauth2: []
+- bearerAuth: []
+tags:
+- name: Accounts
+  description: Manage general ledger accounts
+paths:
+  /companies({company_id})/accounts:
+    get:
+      summary: List Accounts
+      description: Returns a list of general ledger account objects.
+      operationId: listAccounts
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved accounts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Account'
+              examples:
+                Listaccounts200Example:
+                  summary: Default listAccounts 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      number: example_value
+                      displayName: example_value
+                      category: ' '
+                      subCategory: example_value
+                      blocked: true
+                      accountType: Posting
+                      directPosting: true
+                      netChange: 42.5
+                      consolidationTranslationMethod: example_value
+                      consolidationDebitAccount: example_value
+                      consolidationCreditAccount: example_value
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /companies({company_id})/accounts({account_id}):
+    get:
+      summary: Get an Account
+      description: Retrieves a specific account by ID.
+      operationId: getAccount
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: '500123'
+      responses:
+        '200':
+          description: Successfully retrieved account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+              examples:
+                Getaccount200Example:
+                  summary: Default getAccount 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    number: example_value
+                    displayName: example_value
+                    category: ' '
+                    subCategory: example_value
+                    blocked: true
+                    accountType: Posting
+                    directPosting: true
+                    netChange: 42.5
+                    consolidationTranslationMethod: example_value
+                    consolidationDebitAccount: example_value
+                    consolidationCreditAccount: example_value
+                    lastModifiedDateTime: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /companies({company_id})/generalLedgerEntries:
+    get:
+      summary: List General Ledger Entries
+      description: Returns a list of general ledger entries.
+      operationId: listGeneralLedgerEntries
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/company_id'
+      - $ref: '#/components/parameters/top'
+      - $ref: '#/components/parameters/skip'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/orderby'
+      - $ref: '#/components/parameters/select'
+      responses:
+        '200':
+          description: Successfully retrieved general ledger entries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GeneralLedgerEntry'
+              examples:
+                Listgeneralledgerentries200Example:
+                  summary: Default listGeneralLedgerEntries 200 response
+                  x-microcks-default: true
+                  value:
+                    value:
+                    - id: abc123
+                      entryNumber: 10
+                      postingDate: '2026-01-15'
+                      documentNumber: example_value
+                      documentType: example_value
+                      accountId: '500123'
+                      accountNumber: example_value
+                      description: A sample description.
+                      debitAmount: 42.5
+                      creditAmount: 42.5
+                      lastModifiedDateTime: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    orderby:
+      name: $orderby
+      in: query
+      description: OData order by expression
+      schema:
+        type: string
+    skip:
+      name: $skip
+      in: query
+      description: Number of items to skip
+      schema:
+        type: integer
+        minimum: 0
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    top:
+      name: $top
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        minimum: 0
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
+    GeneralLedgerEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        entryNumber:
+          type: integer
+          readOnly: true
+          example: 10
+        postingDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+        documentNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        documentType:
+          type: string
+          example: example_value
+        accountId:
+          type: string
+          format: uuid
+          example: '500123'
+        accountNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        description:
+          type: string
+          maxLength: 100
+          example: A sample description.
+        debitAmount:
+          type: number
+          format: decimal
+          example: 42.5
+        creditAmount:
+          type: number
+          format: decimal
+          example: 42.5
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        number:
+          type: string
+          description: The account number
+          maxLength: 20
+          example: example_value
+        displayName:
+          type: string
+          description: The account display name
+          maxLength: 100
+          example: example_value
+        category:
+          type: string
+          description: The account category
+          enum:
+          - ' '
+          - Assets
+          - Liabilities
+          - Equity
+          - Income
+          - Cost of Goods Sold
+          - Expense
+          example: ' '
+        subCategory:
+          type: string
+          description: The account subcategory
+          maxLength: 80
+          example: example_value
+        blocked:
+          type: boolean
+          description: Whether the account is blocked
+          example: true
+        accountType:
+          type: string
+          description: The account type
+          enum:
+          - Posting
+          - Heading
+          - Total
+          - Begin-Total
+          - End-Total
+          example: Posting
+        directPosting:
+          type: boolean
+          description: Whether direct posting is allowed
+          example: true
+        netChange:
+          type: number
+          format: decimal
+          description: The net change
+          readOnly: true
+          example: 42.5
+        consolidationTranslationMethod:
+          type: string
+          example: example_value
+        consolidationDebitAccount:
+          type: string
+          example: example_value
+        consolidationCreditAccount:
+          type: string
+          example: example_value
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via Microsoft Entra ID
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+        clientCredentials:
+          tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
+          scopes:
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Administration Center API Documentation
+  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
