@@ -3,6 +3,19 @@ description: >-
   API collection for Microsoft Dynamics NAV (formerly Navision), an enterprise resource planning (ERP) solution for
   small and medium-sized businesses. Dynamics NAV has evolved into Dynamics 365 Business Central, which provides modern
   REST, OData, and SOAP web services for business data integration.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Freemium (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://example.com/navision-logo.png
 created: '2024-01-20'
 modified: '2026-05-19'
@@ -17,189 +30,1806 @@ tags:
   - Microsoft
   - Navision
 apis:
-  - name: Dynamics NAV Web Services API
-    description: >-
-      SOAP and OData web services for interacting with Dynamics NAV business data. Supports publishing pages, codeunits,
-      and queries as web services for external system integration.
-    image: https://example.com/nav-webservices-icon.png
-    humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
-    baseURL: https://{server}:{port}/{instance}/api/{version}
-    tags:
-      - Enterprise Resource Planning
-      - OData
-      - SOAP
-      - Web Services
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
-      - type: OpenAPI
-        url: https://example.com/openapi/nav-webservices.yaml
-      - type: Authentication
-        url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
-      - type: GettingStarted
-        url: >-
-          https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
-    contact:
-      - FN: Microsoft Support
-        email: support@microsoft.com
-        url: https://support.microsoft.com/dynamics
-  - name: Dynamics NAV OData API
-    description: >-
-      OData web services for querying and manipulating NAV business entities. Supports both OData v3 and v4 protocols
-      for reading data and writing back to the Dynamics NAV database through exposed pages and queries.
-    image: https://example.com/odata-icon.png
-    humanURL: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
-    baseURL: https://{server}:{port}/{instance}/OData/Company('{company}')
-    tags:
-      - Business Data
-      - Data Integration
-      - OData
-      - Queries
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
-      - type: OpenAPI
-        url: https://example.com/openapi/nav-odata.yaml
-      - type: GettingStarted
-        url: >-
-          https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
-    contact:
-      - FN: Microsoft Support
-        email: support@microsoft.com
-  - name: Dynamics NAV SOAP Web Services
-    description: >-
-      SOAP-based web services for legacy integrations and business logic operations in Dynamics NAV. Exposes pages and
-      codeunits with built-in CRUD operations and supports extension codeunits for custom operations.
-    image: https://example.com/soap-icon.png
-    humanURL: https://learn.microsoft.com/en-us/dynamics-nav/soap-web-services
-    baseURL: https://{server}:{port}/{instance}/WS/{company}/
-    tags:
-      - Business Logic
-      - Codeunits
-      - Legacy Integration
-      - SOAP
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/dynamics-nav/soap-web-service-uris
-      - type: APIReference
-        url: https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-using-a-codeunit-web-service--soap-
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--registering-and-using-a-page-web-service--soap-
-  - name: Business Central API v2.0
-    description: >-
-      Modern RESTful API for Dynamics 365 Business Central, the cloud evolution of Dynamics NAV. Provides a
-      comprehensive set of endpoints for managing customers, items, accounts, sales orders, and other business entities.
-    image: https://example.com/bc-api-icon.png
-    humanURL: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
-    baseURL: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
-    tags:
-      - Business Central
-      - Business Data
-      - Cloud ERP
-      - Connect Apps
-      - REST API
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
-      - type: APIReference
-        url: >-
-          https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
-      - type: Authentication
-        url: >-
-          https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
-      - type: ChangeLog
-        url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
-      - type: OpenAPI
-        url: openapi/business-central-api-v2.yml
-    contact:
-      - FN: Microsoft Dynamics Support
-        email: bcsupport@microsoft.com
-        url: https://dynamics.microsoft.com/support/
-  - name: Business Central Administration Center API
-    description: >-
-      REST API for programmatic administration of Business Central environments. Enables querying and managing
-      production and sandbox environments, setting up notifications, and viewing tenant telemetry.
-    image: https://example.com/bc-admin-icon.png
-    humanURL: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
-    baseURL: https://api.businesscentral.dynamics.com/admin/v2.28
-    tags:
-      - Administration
-      - Cloud ERP
-      - Environment Management
-      - Tenant Management
-    properties:
-      - type: Documentation
-        url: >-
-          https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
-      - type: Authentication
-        url: >-
-          https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
-      - type: OpenAPI
-        url: openapi/admin-center-api.yml
-    contact:
-      - FN: Microsoft Dynamics Support
-        email: bcsupport@microsoft.com
-        url: https://dynamics.microsoft.com/support/
-  - name: Business Central Automation API
-    description: >-
-      API for automating company setup and tenant management in Business Central. Supports creating companies,
-      installing extensions, assigning permissions, and applying RapidStart packages programmatically.
-    image: https://example.com/bc-automation-icon.png
-    humanURL: >-
+- name: Dynamics NAV SOAP Web Services
+  description: >-
+    SOAP-based web services for legacy integrations and business logic operations in Dynamics NAV. Exposes
+    pages and codeunits with built-in CRUD operations and supports extension codeunits for custom operations.
+  image: https://example.com/soap-icon.png
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/soap-web-services
+  baseURL: https://{server}:{port}/{instance}/WS/{company}/
+  tags:
+  - Business Logic
+  - Codeunits
+  - Legacy Integration
+  - SOAP
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/soap-web-service-uris
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-using-a-codeunit-web-service--soap-
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--registering-and-using-a-page-web-service--soap-
+- name: Business Central REST API Web Services
+  description: >-
+    RESTful web services layer for Business Central that provides the preferred integration method. Includes
+    built-in APIs, custom API pages and queries, and supports both on-premises and cloud deployments.
+  image: https://example.com/bc-rest-icon.png
+  humanURL: >-
+    https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/api-overview
+  baseURL: https://api.businesscentral.dynamics.com/v2.0/{environment}/api
+  tags:
+  - Business Central
+  - Custom APIs
+  - Data Integration
+  - REST API
+  - Web Services
+  properties:
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/api-overview
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-get-started
+  contact:
+  - FN: Microsoft Dynamics Support
+    email: bcsupport@microsoft.com
+    url: https://dynamics.microsoft.com/support/
+- aid: navision:navision-accounts-api
+  name: Microsoft Dynamics NAV Accounts API
+  description: Manage general ledger accounts
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-accounts-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
       https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
-    baseURL: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
-    tags:
-      - Automation
-      - Extension Management
-      - Tenant Management
-      - User Management
-    properties:
-      - type: Documentation
-        url: >-
-          https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
-      - type: Authentication
-        url: >-
-          https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
-      - type: OpenAPI
-        url: openapi/automation-api.yml
-    contact:
-      - FN: Microsoft Dynamics Support
-        email: bcsupport@microsoft.com
-        url: https://dynamics.microsoft.com/support/
-  - name: Business Central REST API Web Services
-    description: >-
-      RESTful web services layer for Business Central that provides the preferred integration method. Includes built-in
-      APIs, custom API pages and queries, and supports both on-premises and cloud deployments.
-    image: https://example.com/bc-rest-icon.png
-    humanURL: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/api-overview
-    baseURL: https://api.businesscentral.dynamics.com/v2.0/{environment}/api
-    tags:
-      - Business Central
-      - Custom APIs
-      - Data Integration
-      - REST API
-      - Web Services
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/api-overview
-      - type: APIReference
-        url: >-
-          https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
-      - type: Authentication
-        url: >-
-          https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-get-started
-    contact:
-      - FN: Microsoft Dynamics Support
-        email: bcsupport@microsoft.com
-        url: https://dynamics.microsoft.com/support/
+- aid: navision:navision-app-management-api
+  name: Microsoft Dynamics NAV App Management API
+  description: Manage installed applications
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - App Management
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-app-management-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-available-applications-api
+  name: Microsoft Dynamics NAV Available Applications API
+  description: Query available application versions and countries
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Available Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-available-applications-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-companies-api
+  name: Microsoft Dynamics NAV Companies API
+  description: Manage automation companies
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Companies
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-companies-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-configuration-packages-api
+  name: Microsoft Dynamics NAV Configuration Packages API
+  description: Manage RapidStart configuration packages
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Configuration Packages
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-configuration-packages-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-countries-regions-api
+  name: Microsoft Dynamics NAV Countries/Regions API
+  description: Manage country and region codes
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Countries/Regions
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-countries-regions-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-currency-api
+  name: Microsoft Dynamics NAV Currency API
+  description: Manage currencies and exchange rates
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Currency
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-currency-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-customer-payments-api
+  name: Microsoft Dynamics NAV Customer Payments API
+  description: Manage customer payment journals
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Customer Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-customer-payments-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-customers-api
+  name: Microsoft Dynamics NAV Customers API
+  description: Manage customer records
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-customers-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-dimensions-api
+  name: Microsoft Dynamics NAV Dimensions API
+  description: Manage dimensions and dimension values
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Dimensions
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-dimensions-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-employees-api
+  name: Microsoft Dynamics NAV Employees API
+  description: Manage employee records
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Employees
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-employees-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-environment-operations-api
+  name: Microsoft Dynamics NAV Environment Operations API
+  description: View and track environment operations
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Environment Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-environment-operations-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-environment-settings-api
+  name: Microsoft Dynamics NAV Environment Settings API
+  description: Manage environment settings and configuration
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Environment Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-environment-settings-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-environments-api
+  name: Microsoft Dynamics NAV Environments API
+  description: Manage Business Central environments
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Environments
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-environments-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-extension-deployment-status-api
+  name: Microsoft Dynamics NAV Extension Deployment Status API
+  description: Monitor extension installation progress
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Extension Deployment Status
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-extension-deployment-status-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-extension-upload-api
+  name: Microsoft Dynamics NAV Extension Upload API
+  description: Upload and install per-tenant extensions
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Extension Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-extension-upload-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-extensions-api
+  name: Microsoft Dynamics NAV Extensions API
+  description: Manage installed extensions
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Extensions
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-extensions-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-features-api
+  name: Microsoft Dynamics NAV Features API
+  description: Manage feature flags
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Features
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-features-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-item-categories-api
+  name: Microsoft Dynamics NAV Item Categories API
+  description: Manage item categories
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Item Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-item-categories-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-items-api
+  name: Microsoft Dynamics NAV Items API
+  description: Manage inventory items
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Items
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-items-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-journals-api
+  name: Microsoft Dynamics NAV Journals API
+  description: Manage general journals and journal lines
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Journals
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-journals-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-notifications-api
+  name: Microsoft Dynamics NAV Notifications API
+  description: Manage administrative notifications
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-notifications-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-payment-methods-api
+  name: Microsoft Dynamics NAV Payment Methods API
+  description: Manage payment methods
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Payment Methods
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-payment-methods-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-payment-terms-api
+  name: Microsoft Dynamics NAV Payment Terms API
+  description: Manage payment terms
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Payment Terms
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-payment-terms-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-permission-sets-api
+  name: Microsoft Dynamics NAV Permission Sets API
+  description: Manage permission sets and user permissions
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Permission Sets
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-permission-sets-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-profiles-api
+  name: Microsoft Dynamics NAV Profiles API
+  description: Manage user profiles
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-profiles-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-purchase-invoices-api
+  name: Microsoft Dynamics NAV Purchase Invoices API
+  description: Manage purchase invoices and lines
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Purchase Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-purchase-invoices-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-purchase-orders-api
+  name: Microsoft Dynamics NAV Purchase Orders API
+  description: Manage purchase orders and lines
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Purchase Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-purchase-orders-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-sales-invoices-api
+  name: Microsoft Dynamics NAV Sales Invoices API
+  description: Manage sales invoices and lines
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Sales Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-sales-invoices-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-sales-orders-api
+  name: Microsoft Dynamics NAV Sales Orders API
+  description: Manage sales orders and lines
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Sales Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-sales-orders-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-scheduled-jobs-api
+  name: Microsoft Dynamics NAV Scheduled Jobs API
+  description: View scheduled background jobs
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Scheduled Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-scheduled-jobs-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-security-groups-api
+  name: Microsoft Dynamics NAV Security Groups API
+  description: Manage security groups
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Security Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-security-groups-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-storage-api
+  name: Microsoft Dynamics NAV Storage API
+  description: View storage usage and quotas
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Storage
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-storage-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-support-settings-api
+  name: Microsoft Dynamics NAV Support Settings API
+  description: Manage support settings
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Support Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-support-settings-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-update-management-api
+  name: Microsoft Dynamics NAV Update Management API
+  description: Manage environment updates
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Update Management
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-update-management-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-users-api
+  name: Microsoft Dynamics NAV Users API
+  description: Manage Business Central users
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-users-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-vendor-payments-api
+  name: Microsoft Dynamics NAV Vendor Payments API
+  description: Manage vendor payment journals
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Vendor Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-vendor-payments-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
+- aid: navision:navision-vendors-api
+  name: Microsoft Dynamics NAV Vendors API
+  description: Manage vendor records
+  humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
+  baseURL: https://{server}:{port}/{instance}/api/{version}
+  tags:
+  - Vendors
+  properties:
+  - type: OpenAPI
+    url: openapi/navision-vendors-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview
+  - type: Authentication
+    url: https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth
+  - type: GettingStarted
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps
+  - type: ChangeLog
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  - type: Authentication
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
