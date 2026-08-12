@@ -1834,6 +1834,11 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: IssueTracker
+    url: https://github.com/christianbraeunlich/d365bc-api-postman/issues
+  - type: License
+    name: MIT
+    url: https://github.com/christianbraeunlich/d365bc-api-postman/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/navision-agentic-access.yml
   - type: VulnerabilityDisclosure
@@ -2004,18 +2009,3 @@ common:
   - type: Rules
     url: rules/navision-spectral-rules.yml
     title: Spectral Rules
-  - type: Capabilities
-    url: capabilities/business-operations.yaml
-    title: Business Operations Workflow
-  - type: Capabilities
-    url: capabilities/platform-administration.yaml
-    title: Platform Administration Workflow
-  - type: Capabilities
-    url: capabilities/shared/business-central-v2.yaml
-    title: Business Central v2 Shared Capability
-  - type: Capabilities
-    url: capabilities/shared/admin-center.yaml
-    title: Admin Center Shared Capability
-  - type: Capabilities
-    url: capabilities/shared/automation.yaml
-    title: Automation Shared Capability
