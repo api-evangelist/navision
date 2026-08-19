@@ -20,7 +20,7 @@ image: https://example.com/navision-logo.png
 created: '2024-01-20'
 modified: '2026-05-19'
 url: https://dynamics.microsoft.com/nav-overview/
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 tags:
   - Business Management
   - Dynamics NAV
