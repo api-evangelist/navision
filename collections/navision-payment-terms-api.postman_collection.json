@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "157105d8-67aa-4cce-aa87-3b4cb38e77a8",
+      "name": "Payment Terms",
+      "description": {
+        "content": "Manage payment terms",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f2697638-ade9-4ff6-97e1-5c59930ca976",
+          "name": "List Payment Terms",
+          "request": {
+            "name": "List Payment Terms",
+            "description": {
+              "content": "Returns a list of payment terms objects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "paymentTerms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of items to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression"
+                },
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include in the response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c084c2d-4571-4c5f-8876-4a318c50f5c6",
+              "name": "Successfully retrieved payment terms",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "paymentTerms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": [\n    {\n      \"id\": \"abc123\",\n      \"code\": \"example_value\",\n      \"displayName\": \"example_value\",\n      \"dueDateCalculation\": \"example_value\",\n      \"discountDateCalculation\": \"example_value\",\n      \"discountPercent\": 42.5,\n      \"calculateDiscountOnCreditMemos\": true,\n      \"lastModifiedDateTime\": \"2026-01-15T10:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3de92511-70ee-435e-91be-77601c4d3c38",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "paymentTerms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.businesscentral.dynamics.com/admin/v2.28",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier of the company",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<uuid>",
+      "key": "company_id"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://api.businesscentral.dynamics.com/.default"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "48e77185-07d4-4a45-a4e5-f50ac395b7a1",
+    "name": "Business Central Administration Center Accounts Payment Terms API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.\n\nContact Support:\n Name: Microsoft Dynamics Support\n Email: bcsupport@microsoft.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1148 @@
+{
+  "item": [
+    {
+      "id": "3318b0da-1169-47a4-91be-36eb8a839e22",
+      "name": "Customers",
+      "description": {
+        "content": "Manage customer records",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "14afa1d5-169f-46dc-8902-a7aac093c5b8",
+          "name": "List Customers",
+          "request": {
+            "name": "List Customers",
+            "description": {
+              "content": "Returns a list of customer objects from the specified company.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of items to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression"
+                },
+                {
+                  "disabled": false,
+                  "key": "$orderby",
+                  "value": "<string>",
+                  "description": "OData order by expression"
+                },
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "$expand",
+                  "value": "<string>",
+                  "description": "Related entities to expand inline"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9664fed-23ee-4b95-8529-7d56cac5e79f",
+              "name": "Successfully retrieved customers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"number\": \"example_value\",\n      \"displayName\": \"example_value\",\n      \"type\": \"Person\",\n      \"addressLine1\": \"example_value\",\n      \"addressLine2\": \"example_value\",\n      \"city\": \"example_value\",\n      \"state\": \"example_value\",\n      \"country\": \"example_value\",\n      \"postalCode\": \"example_value\",\n      \"phoneNumber\": \"example_value\",\n      \"email\": \"user@example.com\",\n      \"website\": \"example_value\",\n      \"salespersonCode\": \"example_value\",\n      \"balanceDue\": 42.5,\n      \"creditLimit\": 42.5,\n      \"taxLiable\": true,\n      \"taxAreaId\": \"500123\",\n      \"taxAreaDisplayName\": \"example_value\",\n      \"taxRegistrationNumber\": \"example_value\",\n      \"currencyId\": \"500123\",\n      \"currencyCode\": \"example_value\",\n      \"paymentTermsId\": \"500123\",\n      \"shipmentMethodId\": \"500123\",\n      \"paymentMethodId\": \"500123\",\n      \"blocked\": \" \",\n      \"lastModifiedDateTime\": \"2026-01-15T10:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f09fa690-d7a1-42b4-8290-efca694b8ceb",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd1ec818-02a8-4ad4-af89-71a6e9214219",
+          "name": "Create a Customer",
+          "request": {
+            "name": "Create a Customer",
+            "description": {
+              "content": "Creates a new customer object in the specified company.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"number\": \"<string>\",\n  \"type\": \"<string>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"country\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"email\": \"<string>\",\n  \"website\": \"<string>\",\n  \"taxLiable\": \"<boolean>\",\n  \"taxRegistrationNumber\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"blocked\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12a81d8c-51d6-42e3-8ac6-f8062d308d6e",
+              "name": "Customer created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"number\": \"example_value\",\n  \"displayName\": \"example_value\",\n  \"type\": \"Person\",\n  \"addressLine1\": \"example_value\",\n  \"addressLine2\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"country\": \"example_value\",\n  \"postalCode\": \"example_value\",\n  \"phoneNumber\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"website\": \"example_value\",\n  \"taxLiable\": true,\n  \"taxRegistrationNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"blocked\": \" \"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"number\": \"example_value\",\n  \"displayName\": \"example_value\",\n  \"type\": \"Person\",\n  \"addressLine1\": \"example_value\",\n  \"addressLine2\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"country\": \"example_value\",\n  \"postalCode\": \"example_value\",\n  \"phoneNumber\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"website\": \"example_value\",\n  \"salespersonCode\": \"example_value\",\n  \"balanceDue\": 42.5,\n  \"creditLimit\": 42.5,\n  \"taxLiable\": true,\n  \"taxAreaId\": \"500123\",\n  \"taxAreaDisplayName\": \"example_value\",\n  \"taxRegistrationNumber\": \"example_value\",\n  \"currencyId\": \"500123\",\n  \"currencyCode\": \"example_value\",\n  \"paymentTermsId\": \"500123\",\n  \"shipmentMethodId\": \"500123\",\n  \"paymentMethodId\": \"500123\",\n  \"blocked\": \" \",\n  \"lastModifiedDateTime\": \"2026-01-15T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93c96442-30f1-4cf9-b9c3-cdeead67af87",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"number\": \"example_value\",\n  \"displayName\": \"example_value\",\n  \"type\": \"Person\",\n  \"addressLine1\": \"example_value\",\n  \"addressLine2\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"country\": \"example_value\",\n  \"postalCode\": \"example_value\",\n  \"phoneNumber\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"website\": \"example_value\",\n  \"taxLiable\": true,\n  \"taxRegistrationNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"blocked\": \" \"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "561f0f93-9bd9-43d4-aef8-64df569e8f98",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"number\": \"example_value\",\n  \"displayName\": \"example_value\",\n  \"type\": \"Person\",\n  \"addressLine1\": \"example_value\",\n  \"addressLine2\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"country\": \"example_value\",\n  \"postalCode\": \"example_value\",\n  \"phoneNumber\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"website\": \"example_value\",\n  \"taxLiable\": true,\n  \"taxRegistrationNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"blocked\": \" \"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f2673ae-1599-4269-8a04-bb6fa67f41e3",
+          "name": "Get a Customer",
+          "request": {
+            "name": "Get a Customer",
+            "description": {
+              "content": "Retrieves a specific customer by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "customers({{customer_id}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "$expand",
+                  "value": "<string>",
+                  "description": "Related entities to expand inline"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a57c530-4acd-4ec5-8415-c7f4f27f3ff8",
+              "name": "Successfully retrieved customer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers({{customer_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"number\": \"example_value\",\n  \"displayName\": \"example_value\",\n  \"type\": \"Person\",\n  \"addressLine1\": \"example_value\",\n  \"addressLine2\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"country\": \"example_value\",\n  \"postalCode\": \"example_value\",\n  \"phoneNumber\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"website\": \"example_value\",\n  \"salespersonCode\": \"example_value\",\n  \"balanceDue\": 42.5,\n  \"creditLimit\": 42.5,\n  \"taxLiable\": true,\n  \"taxAreaId\": \"500123\",\n  \"taxAreaDisplayName\": \"example_value\",\n  \"taxRegistrationNumber\": \"example_value\",\n  \"currencyId\": \"500123\",\n  \"currencyCode\": \"example_value\",\n  \"paymentTermsId\": \"500123\",\n  \"shipmentMethodId\": \"500123\",\n  \"paymentMethodId\": \"500123\",\n  \"blocked\": \" \",\n  \"lastModifiedDateTime\": \"2026-01-15T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98b618be-22fe-4c1b-a1b1-001e23cc7e67",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers({{customer_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efa66ff5-aff8-4755-881d-e6adafc5bea9",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers({{customer_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58d253ed-488e-4653-a9ef-453378b10d98",
+          "name": "Update a Customer",
+          "request": {
+            "name": "Update a Customer",
+            "description": {
+              "content": "Updates an existing customer object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "customers({{customer_id}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ETag value for optimistic concurrency control",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"displayName\": \"<string>\",\n  \"type\": \"<string>\",\n  \"addressLine1\": \"<string>\",\n  \"addressLine2\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"country\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"email\": \"<string>\",\n  \"website\": \"<string>\",\n  \"taxLiable\": \"<boolean>\",\n  \"creditLimit\": \"<decimal>\",\n  \"blocked\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae857dc6-f4cd-4ae8-84bd-c8cb99ac4e8a",
+              "name": "Customer updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers({{customer_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ETag value for optimistic concurrency control",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"type\": \"Person\",\n  \"addressLine1\": \"example_value\",\n  \"addressLine2\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"country\": \"example_value\",\n  \"postalCode\": \"example_value\",\n  \"phoneNumber\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"website\": \"example_value\",\n  \"taxLiable\": true,\n  \"creditLimit\": 42.5,\n  \"blocked\": \" \"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"number\": \"example_value\",\n  \"displayName\": \"example_value\",\n  \"type\": \"Person\",\n  \"addressLine1\": \"example_value\",\n  \"addressLine2\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"country\": \"example_value\",\n  \"postalCode\": \"example_value\",\n  \"phoneNumber\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"website\": \"example_value\",\n  \"salespersonCode\": \"example_value\",\n  \"balanceDue\": 42.5,\n  \"creditLimit\": 42.5,\n  \"taxLiable\": true,\n  \"taxAreaId\": \"500123\",\n  \"taxAreaDisplayName\": \"example_value\",\n  \"taxRegistrationNumber\": \"example_value\",\n  \"currencyId\": \"500123\",\n  \"currencyCode\": \"example_value\",\n  \"paymentTermsId\": \"500123\",\n  \"shipmentMethodId\": \"500123\",\n  \"paymentMethodId\": \"500123\",\n  \"blocked\": \" \",\n  \"lastModifiedDateTime\": \"2026-01-15T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb070312-7a22-44e6-956c-ed824b731ee1",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers({{customer_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ETag value for optimistic concurrency control",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"type\": \"Person\",\n  \"addressLine1\": \"example_value\",\n  \"addressLine2\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"country\": \"example_value\",\n  \"postalCode\": \"example_value\",\n  \"phoneNumber\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"website\": \"example_value\",\n  \"taxLiable\": true,\n  \"creditLimit\": 42.5,\n  \"blocked\": \" \"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9aacccca-85cb-4532-981c-0e79adc8c6b1",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers({{customer_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ETag value for optimistic concurrency control",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"type\": \"Person\",\n  \"addressLine1\": \"example_value\",\n  \"addressLine2\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"country\": \"example_value\",\n  \"postalCode\": \"example_value\",\n  \"phoneNumber\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"website\": \"example_value\",\n  \"taxLiable\": true,\n  \"creditLimit\": 42.5,\n  \"blocked\": \" \"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdc14ec8-22db-46f3-a5ee-c0a21f3876d6",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers({{customer_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ETag value for optimistic concurrency control",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"displayName\": \"example_value\",\n  \"type\": \"Person\",\n  \"addressLine1\": \"example_value\",\n  \"addressLine2\": \"example_value\",\n  \"city\": \"example_value\",\n  \"state\": \"example_value\",\n  \"country\": \"example_value\",\n  \"postalCode\": \"example_value\",\n  \"phoneNumber\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"website\": \"example_value\",\n  \"taxLiable\": true,\n  \"creditLimit\": 42.5,\n  \"blocked\": \" \"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "870bf270-e2d2-4fb9-8778-5e396599b6ae",
+          "name": "Delete a Customer",
+          "request": {
+            "name": "Delete a Customer",
+            "description": {
+              "content": "Deletes a customer by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "customers({{customer_id}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac28c2b3-c9d2-4ddb-94f2-6cc322feb140",
+              "name": "Customer deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers({{customer_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "57ab7110-bffd-4547-ac76-fe70c74a333a",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers({{customer_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "443ddd47-79f7-4db6-b77c-1f92da88cf15",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "customers({{customer_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.businesscentral.dynamics.com/admin/v2.28",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier of the company",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<uuid>",
+      "key": "company_id"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier of the customer",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<uuid>",
+      "key": "customer_id"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://api.businesscentral.dynamics.com/.default"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "54c7f716-42a7-49fb-8e69-d75987580e90",
+    "name": "Business Central Administration Center Accounts Customers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.\n\nContact Support:\n Name: Microsoft Dynamics Support\n Email: bcsupport@microsoft.com",
+      "type": "text/plain"
+    }
+  }
+}

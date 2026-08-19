@@ -1,0 +1,192 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Business Central Administration Center Accounts Items API",
+    "version": "2.28"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/items",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression"
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query",
+                "description": "OData order by expression"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include in the response"
+              }
+            ]
+          },
+          "docs": "Returns a list of item objects from the specified company."
+        },
+        {
+          "info": {
+            "name": "Create an Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/items",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new item object in the specified company."
+        },
+        {
+          "info": {
+            "name": "Get an Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/items(:item_id)",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the item"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include in the response"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific item by ID."
+        },
+        {
+          "info": {
+            "name": "Update an Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/items(:item_id)",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the item"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing item object."
+        },
+        {
+          "info": {
+            "name": "Delete an Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/items(:item_id)",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the item"
+              }
+            ]
+          },
+          "docs": "Deletes an item by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1334 @@
+{
+  "item": [
+    {
+      "id": "b7af368d-2cec-4978-8476-3bb3c4c5d3a7",
+      "name": "Sales Orders",
+      "description": {
+        "content": "Manage sales orders and lines",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6c7bc5a7-d821-4745-b8a7-0f54ede46457",
+          "name": "List Sales Orders",
+          "request": {
+            "name": "List Sales Orders",
+            "description": {
+              "content": "Returns a list of sales order objects from the specified company.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "salesOrders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of items to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression"
+                },
+                {
+                  "disabled": false,
+                  "key": "$orderby",
+                  "value": "<string>",
+                  "description": "OData order by expression"
+                },
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "$expand",
+                  "value": "<string>",
+                  "description": "Related entities to expand inline"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "451d80d7-c949-47f9-8c25-4c4dfca7b0e8",
+              "name": "Successfully retrieved sales orders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"number\": \"example_value\",\n      \"externalDocumentNumber\": \"example_value\",\n      \"orderDate\": \"2026-01-15\",\n      \"postingDate\": \"2026-01-15\",\n      \"customerId\": \"500123\",\n      \"customerNumber\": \"example_value\",\n      \"customerName\": \"example_value\",\n      \"billToName\": \"example_value\",\n      \"billToCustomerId\": \"500123\",\n      \"billToCustomerNumber\": \"example_value\",\n      \"shipToName\": \"example_value\",\n      \"shipToContact\": \"example_value\",\n      \"sellToAddressLine1\": \"example_value\",\n      \"sellToAddressLine2\": \"example_value\",\n      \"sellToCity\": \"example_value\",\n      \"sellToCountry\": \"example_value\",\n      \"sellToState\": \"example_value\",\n      \"sellToPostCode\": \"example_value\",\n      \"currencyId\": \"500123\",\n      \"currencyCode\": \"example_value\",\n      \"pricesIncludeTax\": true,\n      \"paymentTermsId\": \"500123\",\n      \"shipmentMethodId\": \"500123\",\n      \"salesperson\": \"example_value\",\n      \"requestedDeliveryDate\": \"2026-01-15\",\n      \"discountAmount\": 42.5,\n      \"discountAppliedBeforeTax\": true,\n      \"totalAmountExcludingTax\": 42.5,\n      \"totalTaxAmount\": 42.5,\n      \"totalAmountIncludingTax\": 42.5,\n      \"fullyShipped\": true,\n      \"status\": \"Draft\",\n      \"lastModifiedDateTime\": \"2026-01-15T10:30:00Z\",\n      \"phoneNumber\": \"example_value\",\n      \"email\": \"user@example.com\",\n      \"salesOrderLines\": [\n        {}\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdd47b08-6eff-487b-b218-e61f648e457d",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7aed2430-146a-4492-a80b-55b2c74f4829",
+          "name": "Create a Sales Order",
+          "request": {
+            "name": "Create a Sales Order",
+            "description": {
+              "content": "Creates a new sales order in the specified company.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "salesOrders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalDocumentNumber\": \"<string>\",\n  \"orderDate\": \"<date>\",\n  \"customerId\": \"<uuid>\",\n  \"customerNumber\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"pricesIncludeTax\": \"<boolean>\",\n  \"requestedDeliveryDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7798d5b5-cc7f-49ef-bf2c-f18260740c10",
+              "name": "Sales order created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalDocumentNumber\": \"example_value\",\n  \"orderDate\": \"2026-01-15\",\n  \"customerId\": \"500123\",\n  \"customerNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedDeliveryDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"number\": \"example_value\",\n  \"externalDocumentNumber\": \"example_value\",\n  \"orderDate\": \"2026-01-15\",\n  \"postingDate\": \"2026-01-15\",\n  \"customerId\": \"500123\",\n  \"customerNumber\": \"example_value\",\n  \"customerName\": \"example_value\",\n  \"billToName\": \"example_value\",\n  \"billToCustomerId\": \"500123\",\n  \"billToCustomerNumber\": \"example_value\",\n  \"shipToName\": \"example_value\",\n  \"shipToContact\": \"example_value\",\n  \"sellToAddressLine1\": \"example_value\",\n  \"sellToAddressLine2\": \"example_value\",\n  \"sellToCity\": \"example_value\",\n  \"sellToCountry\": \"example_value\",\n  \"sellToState\": \"example_value\",\n  \"sellToPostCode\": \"example_value\",\n  \"currencyId\": \"500123\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"paymentTermsId\": \"500123\",\n  \"shipmentMethodId\": \"500123\",\n  \"salesperson\": \"example_value\",\n  \"requestedDeliveryDate\": \"2026-01-15\",\n  \"discountAmount\": 42.5,\n  \"discountAppliedBeforeTax\": true,\n  \"totalAmountExcludingTax\": 42.5,\n  \"totalTaxAmount\": 42.5,\n  \"totalAmountIncludingTax\": 42.5,\n  \"fullyShipped\": true,\n  \"status\": \"Draft\",\n  \"lastModifiedDateTime\": \"2026-01-15T10:30:00Z\",\n  \"phoneNumber\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"salesOrderLines\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"documentId\": \"500123\",\n      \"sequence\": 10,\n      \"itemId\": \"500123\",\n      \"accountId\": \"500123\",\n      \"lineType\": \"Comment\",\n      \"lineObjectNumber\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"description2\": \"example_value\",\n      \"unitOfMeasureId\": \"500123\",\n      \"unitOfMeasureCode\": \"example_value\",\n      \"quantity\": 42.5,\n      \"unitPrice\": 42.5,\n      \"discountAmount\": 42.5,\n      \"discountPercent\": 42.5,\n      \"discountAppliedBeforeTax\": true,\n      \"amountExcludingTax\": 42.5,\n      \"taxCode\": \"example_value\",\n      \"taxPercent\": 42.5,\n      \"totalTaxAmount\": 42.5,\n      \"amountIncludingTax\": 42.5,\n      \"netAmount\": 42.5,\n      \"netTaxAmount\": 42.5,\n      \"netAmountIncludingTax\": 42.5,\n      \"shipmentDate\": \"2026-01-15\",\n      \"shippedQuantity\": 42.5,\n      \"invoicedQuantity\": 42.5,\n      \"invoiceQuantity\": 42.5,\n      \"shipQuantity\": 42.5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56cea9a1-e5a8-44b6-b208-019c4423612f",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalDocumentNumber\": \"example_value\",\n  \"orderDate\": \"2026-01-15\",\n  \"customerId\": \"500123\",\n  \"customerNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedDeliveryDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "713f3651-f9ac-440f-b6fe-bbc323640744",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalDocumentNumber\": \"example_value\",\n  \"orderDate\": \"2026-01-15\",\n  \"customerId\": \"500123\",\n  \"customerNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedDeliveryDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f586da8-5372-4443-9a36-caa08f4922e3",
+          "name": "Get a Sales Order",
+          "request": {
+            "name": "Get a Sales Order",
+            "description": {
+              "content": "Retrieves a specific sales order by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "salesOrders({{salesOrder_id}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "$expand",
+                  "value": "<string>",
+                  "description": "Related entities to expand inline"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3a73049-ecfb-49f0-9431-97604a203a65",
+              "name": "Successfully retrieved sales order",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders({{salesOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"number\": \"example_value\",\n  \"externalDocumentNumber\": \"example_value\",\n  \"orderDate\": \"2026-01-15\",\n  \"postingDate\": \"2026-01-15\",\n  \"customerId\": \"500123\",\n  \"customerNumber\": \"example_value\",\n  \"customerName\": \"example_value\",\n  \"billToName\": \"example_value\",\n  \"billToCustomerId\": \"500123\",\n  \"billToCustomerNumber\": \"example_value\",\n  \"shipToName\": \"example_value\",\n  \"shipToContact\": \"example_value\",\n  \"sellToAddressLine1\": \"example_value\",\n  \"sellToAddressLine2\": \"example_value\",\n  \"sellToCity\": \"example_value\",\n  \"sellToCountry\": \"example_value\",\n  \"sellToState\": \"example_value\",\n  \"sellToPostCode\": \"example_value\",\n  \"currencyId\": \"500123\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"paymentTermsId\": \"500123\",\n  \"shipmentMethodId\": \"500123\",\n  \"salesperson\": \"example_value\",\n  \"requestedDeliveryDate\": \"2026-01-15\",\n  \"discountAmount\": 42.5,\n  \"discountAppliedBeforeTax\": true,\n  \"totalAmountExcludingTax\": 42.5,\n  \"totalTaxAmount\": 42.5,\n  \"totalAmountIncludingTax\": 42.5,\n  \"fullyShipped\": true,\n  \"status\": \"Draft\",\n  \"lastModifiedDateTime\": \"2026-01-15T10:30:00Z\",\n  \"phoneNumber\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"salesOrderLines\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"documentId\": \"500123\",\n      \"sequence\": 10,\n      \"itemId\": \"500123\",\n      \"accountId\": \"500123\",\n      \"lineType\": \"Comment\",\n      \"lineObjectNumber\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"description2\": \"example_value\",\n      \"unitOfMeasureId\": \"500123\",\n      \"unitOfMeasureCode\": \"example_value\",\n      \"quantity\": 42.5,\n      \"unitPrice\": 42.5,\n      \"discountAmount\": 42.5,\n      \"discountPercent\": 42.5,\n      \"discountAppliedBeforeTax\": true,\n      \"amountExcludingTax\": 42.5,\n      \"taxCode\": \"example_value\",\n      \"taxPercent\": 42.5,\n      \"totalTaxAmount\": 42.5,\n      \"amountIncludingTax\": 42.5,\n      \"netAmount\": 42.5,\n      \"netTaxAmount\": 42.5,\n      \"netAmountIncludingTax\": 42.5,\n      \"shipmentDate\": \"2026-01-15\",\n      \"shippedQuantity\": 42.5,\n      \"invoicedQuantity\": 42.5,\n      \"invoiceQuantity\": 42.5,\n      \"shipQuantity\": 42.5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69ea329b-7b45-4c53-b471-532b3b73a84a",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders({{salesOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "177c4dbf-7925-4705-b5bc-67e5818e1c78",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders({{salesOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7df3e40-46df-48f4-a770-826a31b0e2d9",
+          "name": "Update a Sales Order",
+          "request": {
+            "name": "Update a Sales Order",
+            "description": {
+              "content": "Updates an existing sales order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "salesOrders({{salesOrder_id}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ETag value for optimistic concurrency control",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalDocumentNumber\": \"<string>\",\n  \"orderDate\": \"<date>\",\n  \"customerId\": \"<uuid>\",\n  \"customerNumber\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"pricesIncludeTax\": \"<boolean>\",\n  \"requestedDeliveryDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c7d975ba-6794-4f9e-991e-808bc88db623",
+              "name": "Sales order updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders({{salesOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ETag value for optimistic concurrency control",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalDocumentNumber\": \"example_value\",\n  \"orderDate\": \"2026-01-15\",\n  \"customerId\": \"500123\",\n  \"customerNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedDeliveryDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"number\": \"example_value\",\n  \"externalDocumentNumber\": \"example_value\",\n  \"orderDate\": \"2026-01-15\",\n  \"postingDate\": \"2026-01-15\",\n  \"customerId\": \"500123\",\n  \"customerNumber\": \"example_value\",\n  \"customerName\": \"example_value\",\n  \"billToName\": \"example_value\",\n  \"billToCustomerId\": \"500123\",\n  \"billToCustomerNumber\": \"example_value\",\n  \"shipToName\": \"example_value\",\n  \"shipToContact\": \"example_value\",\n  \"sellToAddressLine1\": \"example_value\",\n  \"sellToAddressLine2\": \"example_value\",\n  \"sellToCity\": \"example_value\",\n  \"sellToCountry\": \"example_value\",\n  \"sellToState\": \"example_value\",\n  \"sellToPostCode\": \"example_value\",\n  \"currencyId\": \"500123\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"paymentTermsId\": \"500123\",\n  \"shipmentMethodId\": \"500123\",\n  \"salesperson\": \"example_value\",\n  \"requestedDeliveryDate\": \"2026-01-15\",\n  \"discountAmount\": 42.5,\n  \"discountAppliedBeforeTax\": true,\n  \"totalAmountExcludingTax\": 42.5,\n  \"totalTaxAmount\": 42.5,\n  \"totalAmountIncludingTax\": 42.5,\n  \"fullyShipped\": true,\n  \"status\": \"Draft\",\n  \"lastModifiedDateTime\": \"2026-01-15T10:30:00Z\",\n  \"phoneNumber\": \"example_value\",\n  \"email\": \"user@example.com\",\n  \"salesOrderLines\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"documentId\": \"500123\",\n      \"sequence\": 10,\n      \"itemId\": \"500123\",\n      \"accountId\": \"500123\",\n      \"lineType\": \"Comment\",\n      \"lineObjectNumber\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"description2\": \"example_value\",\n      \"unitOfMeasureId\": \"500123\",\n      \"unitOfMeasureCode\": \"example_value\",\n      \"quantity\": 42.5,\n      \"unitPrice\": 42.5,\n      \"discountAmount\": 42.5,\n      \"discountPercent\": 42.5,\n      \"discountAppliedBeforeTax\": true,\n      \"amountExcludingTax\": 42.5,\n      \"taxCode\": \"example_value\",\n      \"taxPercent\": 42.5,\n      \"totalTaxAmount\": 42.5,\n      \"amountIncludingTax\": 42.5,\n      \"netAmount\": 42.5,\n      \"netTaxAmount\": 42.5,\n      \"netAmountIncludingTax\": 42.5,\n      \"shipmentDate\": \"2026-01-15\",\n      \"shippedQuantity\": 42.5,\n      \"invoicedQuantity\": 42.5,\n      \"invoiceQuantity\": 42.5,\n      \"shipQuantity\": 42.5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a379641f-0a35-4d90-a5e0-774165e94c7c",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders({{salesOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ETag value for optimistic concurrency control",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalDocumentNumber\": \"example_value\",\n  \"orderDate\": \"2026-01-15\",\n  \"customerId\": \"500123\",\n  \"customerNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedDeliveryDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7100486-5252-4536-b72a-9a55d45bb06e",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders({{salesOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ETag value for optimistic concurrency control",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalDocumentNumber\": \"example_value\",\n  \"orderDate\": \"2026-01-15\",\n  \"customerId\": \"500123\",\n  \"customerNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedDeliveryDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d25d501f-554c-4073-a8b8-48f28deb4762",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders({{salesOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ETag value for optimistic concurrency control",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalDocumentNumber\": \"example_value\",\n  \"orderDate\": \"2026-01-15\",\n  \"customerId\": \"500123\",\n  \"customerNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedDeliveryDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0e2f93f-644e-4a5e-a667-b17efaf51787",
+          "name": "Delete a Sales Order",
+          "request": {
+            "name": "Delete a Sales Order",
+            "description": {
+              "content": "Deletes a sales order by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "salesOrders({{salesOrder_id}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c92f630b-46aa-49a2-bd9a-f1031f17a490",
+              "name": "Sales order deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders({{salesOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "107a4ef8-365f-4daa-acd8-18974bf17837",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders({{salesOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "234b9302-7318-448c-a903-de873db50e04",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders({{salesOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3a40f15-022e-4875-b468-b4f88e0b49bc",
+          "name": "List Sales Order Lines",
+          "request": {
+            "name": "List Sales Order Lines",
+            "description": {
+              "content": "Returns a list of sales order line items.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "salesOrders({{salesOrder_id}})",
+                "salesOrderLines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of items to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression"
+                },
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include in the response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a740d3a-dfce-4f5e-933f-71fa42ddc71d",
+              "name": "Successfully retrieved sales order lines",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders({{salesOrder_id}})",
+                    "salesOrderLines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"documentId\": \"500123\",\n      \"sequence\": 10,\n      \"itemId\": \"500123\",\n      \"accountId\": \"500123\",\n      \"lineType\": \"Comment\",\n      \"lineObjectNumber\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"description2\": \"example_value\",\n      \"unitOfMeasureId\": \"500123\",\n      \"unitOfMeasureCode\": \"example_value\",\n      \"quantity\": 42.5,\n      \"unitPrice\": 42.5,\n      \"discountAmount\": 42.5,\n      \"discountPercent\": 42.5,\n      \"discountAppliedBeforeTax\": true,\n      \"amountExcludingTax\": 42.5,\n      \"taxCode\": \"example_value\",\n      \"taxPercent\": 42.5,\n      \"totalTaxAmount\": 42.5,\n      \"amountIncludingTax\": 42.5,\n      \"netAmount\": 42.5,\n      \"netTaxAmount\": 42.5,\n      \"netAmountIncludingTax\": 42.5,\n      \"shipmentDate\": \"2026-01-15\",\n      \"shippedQuantity\": 42.5,\n      \"invoicedQuantity\": 42.5,\n      \"invoiceQuantity\": 42.5,\n      \"shipQuantity\": 42.5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0a4941f-662a-4981-90f8-d64196460195",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "salesOrders({{salesOrder_id}})",
+                    "salesOrderLines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.businesscentral.dynamics.com/admin/v2.28",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier of the company",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<uuid>",
+      "key": "company_id"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier of the sales order",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<uuid>",
+      "key": "salesOrder_id"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://api.businesscentral.dynamics.com/.default"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "595c953a-9d50-40dc-867c-4b9687eaf0a7",
+    "name": "Business Central Administration Center Accounts Sales Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.\n\nContact Support:\n Name: Microsoft Dynamics Support\n Email: bcsupport@microsoft.com",
+      "type": "text/plain"
+    }
+  }
+}

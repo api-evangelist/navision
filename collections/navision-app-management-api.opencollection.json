@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Business Central Administration Center Accounts App Management API",
+    "version": "2.28"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "App Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Installed Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/apps",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Returns a list of apps installed in the specified environment."
+        },
+        {
+          "info": {
+            "name": "Update an App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/apps/:appId/update",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              },
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Schedules an update of the specified app to a newer version."
+        },
+        {
+          "info": {
+            "name": "Install an App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/apps/:appId/install",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              },
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Installs the specified app in the environment."
+        },
+        {
+          "info": {
+            "name": "Uninstall an App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/apps/:appId/uninstall",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              },
+              {
+                "name": "appId",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uninstalls the specified app from the environment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

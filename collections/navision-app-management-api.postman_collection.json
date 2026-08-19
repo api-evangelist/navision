@@ -1,0 +1,933 @@
+{
+  "item": [
+    {
+      "id": "4302fbe4-9a46-4a18-84c0-ab2d25e5b5da",
+      "name": "App Management",
+      "description": {
+        "content": "Manage installed applications",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ab4f8203-e0b8-4f59-b686-d20be316e150",
+          "name": "List Installed Apps",
+          "request": {
+            "name": "List Installed Apps",
+            "description": {
+              "content": "Returns a list of apps installed in the specified environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName",
+                "apps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35c6a936-3af9-4a0e-9ce0-43ebe5f81ed7",
+              "name": "Successfully retrieved installed apps",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": [\n    {\n      \"id\": \"abc123\",\n      \"name\": \"Example Title\",\n      \"publisher\": \"example_value\",\n      \"version\": \"example_value\",\n      \"state\": \"example_value\",\n      \"lastOperationId\": \"500123\",\n      \"lastUpdateAttemptResult\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd6b4e88-9b83-4997-a1da-4e8f6466109b",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f75cea3-cd1c-487f-b30b-e28912c65e39",
+          "name": "Update an App",
+          "request": {
+            "name": "Update an App",
+            "description": {
+              "content": "Schedules an update of the specified app to a newer version.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName",
+                "apps",
+                ":appId",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "appId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetVersion\": \"<string>\",\n  \"allowPreviewVersion\": \"<boolean>\",\n  \"ignoreUpgradeWindow\": \"<boolean>\",\n  \"allowDependencyUpdate\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4d5bfa4e-f454-4aac-ad05-243a071fbbd9",
+              "name": "App update scheduled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "apps",
+                    ":appId",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "appId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetVersion\": \"example_value\",\n  \"allowPreviewVersion\": true,\n  \"ignoreUpgradeWindow\": true,\n  \"allowDependencyUpdate\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"type\": \"create\",\n  \"status\": \"Queued\",\n  \"aadTenantId\": \"500123\",\n  \"createdOn\": \"2026-01-15T10:30:00Z\",\n  \"startedOn\": \"2026-01-15T10:30:00Z\",\n  \"completedOn\": \"2026-01-15T10:30:00Z\",\n  \"createdBy\": \"example_value\",\n  \"errorMessage\": \"example_value\",\n  \"parameters\": \"example_value\",\n  \"environmentName\": \"example_value\",\n  \"environmentType\": \"example_value\",\n  \"productFamily\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8136a03e-911b-4de1-a37c-621e6ec6218a",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "apps",
+                    ":appId",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "appId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetVersion\": \"example_value\",\n  \"allowPreviewVersion\": true,\n  \"ignoreUpgradeWindow\": true,\n  \"allowDependencyUpdate\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": 3758,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c52835fe-97c8-4920-aeeb-c6b71555d9a8",
+          "name": "Install an App",
+          "request": {
+            "name": "Install an App",
+            "description": {
+              "content": "Installs the specified app in the environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName",
+                "apps",
+                ":appId",
+                "install"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "appId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetVersion\": \"<string>\",\n  \"allowPreviewVersion\": \"<boolean>\",\n  \"acceptIsvEula\": \"<boolean>\",\n  \"allowDependencyUpdate\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ab475c4-0ca6-435a-94eb-67ffd5d98481",
+              "name": "App installation scheduled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "apps",
+                    ":appId",
+                    "install"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "appId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetVersion\": \"example_value\",\n  \"allowPreviewVersion\": true,\n  \"acceptIsvEula\": true,\n  \"allowDependencyUpdate\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"type\": \"create\",\n  \"status\": \"Queued\",\n  \"aadTenantId\": \"500123\",\n  \"createdOn\": \"2026-01-15T10:30:00Z\",\n  \"startedOn\": \"2026-01-15T10:30:00Z\",\n  \"completedOn\": \"2026-01-15T10:30:00Z\",\n  \"createdBy\": \"example_value\",\n  \"errorMessage\": \"example_value\",\n  \"parameters\": \"example_value\",\n  \"environmentName\": \"example_value\",\n  \"environmentType\": \"example_value\",\n  \"productFamily\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31b9c220-1979-41da-ba73-f7d08fff4ea2",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "apps",
+                    ":appId",
+                    "install"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "appId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetVersion\": \"example_value\",\n  \"allowPreviewVersion\": true,\n  \"acceptIsvEula\": true,\n  \"allowDependencyUpdate\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": 3758,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5a6cf4c-7e1c-43c1-944d-201c773da11e",
+          "name": "Uninstall an App",
+          "request": {
+            "name": "Uninstall an App",
+            "description": {
+              "content": "Uninstalls the specified app from the environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName",
+                "apps",
+                ":appId",
+                "uninstall"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "appId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deleteData\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "276e6c1c-a0eb-4a02-b99f-ee04e90b2cb5",
+              "name": "App uninstallation scheduled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "apps",
+                    ":appId",
+                    "uninstall"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "appId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deleteData\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"type\": \"create\",\n  \"status\": \"Queued\",\n  \"aadTenantId\": \"500123\",\n  \"createdOn\": \"2026-01-15T10:30:00Z\",\n  \"startedOn\": \"2026-01-15T10:30:00Z\",\n  \"completedOn\": \"2026-01-15T10:30:00Z\",\n  \"createdBy\": \"example_value\",\n  \"errorMessage\": \"example_value\",\n  \"parameters\": \"example_value\",\n  \"environmentName\": \"example_value\",\n  \"environmentType\": \"example_value\",\n  \"productFamily\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65a39aa9-bd4e-4a5e-9465-2c48489355a8",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "apps",
+                    ":appId",
+                    "uninstall"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "appId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deleteData\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": 3758,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.businesscentral.dynamics.com/admin/v2.28",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://api.businesscentral.dynamics.com/.default"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "69a0bafc-8c4c-4142-8c4b-fda5110605ee",
+    "name": "Business Central Administration Center Accounts App Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.\n\nContact Support:\n Name: Microsoft Dynamics Support\n Email: bcsupport@microsoft.com",
+      "type": "text/plain"
+    }
+  }
+}

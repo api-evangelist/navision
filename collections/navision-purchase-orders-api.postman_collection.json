@@ -1,0 +1,1334 @@
+{
+  "item": [
+    {
+      "id": "c8405a7e-4e58-4bc9-a697-94d4e78adf5e",
+      "name": "Purchase Orders",
+      "description": {
+        "content": "Manage purchase orders and lines",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9e3f2de5-5d72-45c5-9dc5-5120101e6b9d",
+          "name": "List Purchase Orders",
+          "request": {
+            "name": "List Purchase Orders",
+            "description": {
+              "content": "Returns a list of purchase order objects from the specified company.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "purchaseOrders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of items to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression"
+                },
+                {
+                  "disabled": false,
+                  "key": "$orderby",
+                  "value": "<string>",
+                  "description": "OData order by expression"
+                },
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "$expand",
+                  "value": "<string>",
+                  "description": "Related entities to expand inline"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dffbce7e-95f8-4440-8ec8-bbab5b35561f",
+              "name": "Successfully retrieved purchase orders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"number\": \"example_value\",\n      \"orderDate\": \"2026-01-15\",\n      \"postingDate\": \"2026-01-15\",\n      \"vendorId\": \"500123\",\n      \"vendorNumber\": \"example_value\",\n      \"vendorName\": \"example_value\",\n      \"payToName\": \"example_value\",\n      \"payToVendorId\": \"500123\",\n      \"payToVendorNumber\": \"example_value\",\n      \"shipToName\": \"example_value\",\n      \"shipToContact\": \"example_value\",\n      \"buyFromAddressLine1\": \"example_value\",\n      \"buyFromAddressLine2\": \"example_value\",\n      \"buyFromCity\": \"example_value\",\n      \"buyFromCountry\": \"example_value\",\n      \"buyFromState\": \"example_value\",\n      \"buyFromPostCode\": \"example_value\",\n      \"currencyId\": \"500123\",\n      \"currencyCode\": \"example_value\",\n      \"pricesIncludeTax\": true,\n      \"paymentTermsId\": \"500123\",\n      \"shipmentMethodId\": \"500123\",\n      \"purchaser\": \"example_value\",\n      \"requestedReceiptDate\": \"2026-01-15\",\n      \"discountAmount\": 42.5,\n      \"discountAppliedBeforeTax\": true,\n      \"totalAmountExcludingTax\": 42.5,\n      \"totalTaxAmount\": 42.5,\n      \"totalAmountIncludingTax\": 42.5,\n      \"fullyReceived\": true,\n      \"status\": \"Draft\",\n      \"lastModifiedDateTime\": \"2026-01-15T10:30:00Z\",\n      \"purchaseOrderLines\": [\n        {}\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf106bb6-39fa-4fe4-90c4-335dd1d3f2a9",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5de033d2-39bc-478b-a7ae-a0013951fd2d",
+          "name": "Create a Purchase Order",
+          "request": {
+            "name": "Create a Purchase Order",
+            "description": {
+              "content": "Creates a new purchase order in the specified company.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "purchaseOrders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderDate\": \"<date>\",\n  \"vendorId\": \"<uuid>\",\n  \"vendorNumber\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"pricesIncludeTax\": \"<boolean>\",\n  \"requestedReceiptDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6cc88460-2349-491a-aef3-c5a3625ba2c1",
+              "name": "Purchase order created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderDate\": \"2026-01-15\",\n  \"vendorId\": \"500123\",\n  \"vendorNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedReceiptDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"number\": \"example_value\",\n  \"orderDate\": \"2026-01-15\",\n  \"postingDate\": \"2026-01-15\",\n  \"vendorId\": \"500123\",\n  \"vendorNumber\": \"example_value\",\n  \"vendorName\": \"example_value\",\n  \"payToName\": \"example_value\",\n  \"payToVendorId\": \"500123\",\n  \"payToVendorNumber\": \"example_value\",\n  \"shipToName\": \"example_value\",\n  \"shipToContact\": \"example_value\",\n  \"buyFromAddressLine1\": \"example_value\",\n  \"buyFromAddressLine2\": \"example_value\",\n  \"buyFromCity\": \"example_value\",\n  \"buyFromCountry\": \"example_value\",\n  \"buyFromState\": \"example_value\",\n  \"buyFromPostCode\": \"example_value\",\n  \"currencyId\": \"500123\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"paymentTermsId\": \"500123\",\n  \"shipmentMethodId\": \"500123\",\n  \"purchaser\": \"example_value\",\n  \"requestedReceiptDate\": \"2026-01-15\",\n  \"discountAmount\": 42.5,\n  \"discountAppliedBeforeTax\": true,\n  \"totalAmountExcludingTax\": 42.5,\n  \"totalTaxAmount\": 42.5,\n  \"totalAmountIncludingTax\": 42.5,\n  \"fullyReceived\": true,\n  \"status\": \"Draft\",\n  \"lastModifiedDateTime\": \"2026-01-15T10:30:00Z\",\n  \"purchaseOrderLines\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"documentId\": \"500123\",\n      \"sequence\": 10,\n      \"itemId\": \"500123\",\n      \"accountId\": \"500123\",\n      \"lineType\": \"Comment\",\n      \"lineObjectNumber\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"description2\": \"example_value\",\n      \"unitOfMeasureId\": \"500123\",\n      \"unitOfMeasureCode\": \"example_value\",\n      \"quantity\": 42.5,\n      \"directUnitCost\": 42.5,\n      \"discountAmount\": 42.5,\n      \"discountPercent\": 42.5,\n      \"discountAppliedBeforeTax\": true,\n      \"amountExcludingTax\": 42.5,\n      \"taxCode\": \"example_value\",\n      \"taxPercent\": 42.5,\n      \"totalTaxAmount\": 42.5,\n      \"amountIncludingTax\": 42.5,\n      \"expectedReceiptDate\": \"2026-01-15\",\n      \"receivedQuantity\": 42.5,\n      \"invoicedQuantity\": 42.5,\n      \"invoiceQuantity\": 42.5,\n      \"receiveQuantity\": 42.5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e655797-7617-42ec-afe5-0f823c33c99d",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderDate\": \"2026-01-15\",\n  \"vendorId\": \"500123\",\n  \"vendorNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedReceiptDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "506448c9-d8a1-4085-a815-e8a4878106f7",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderDate\": \"2026-01-15\",\n  \"vendorId\": \"500123\",\n  \"vendorNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedReceiptDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53d57add-4c3a-4528-8a96-9cb4ae29b0dd",
+          "name": "Get a Purchase Order",
+          "request": {
+            "name": "Get a Purchase Order",
+            "description": {
+              "content": "Retrieves a specific purchase order by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "purchaseOrders({{purchaseOrder_id}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "$expand",
+                  "value": "<string>",
+                  "description": "Related entities to expand inline"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7127a1f8-6b90-48e7-9eab-1e13000c6a77",
+              "name": "Successfully retrieved purchase order",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders({{purchaseOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"number\": \"example_value\",\n  \"orderDate\": \"2026-01-15\",\n  \"postingDate\": \"2026-01-15\",\n  \"vendorId\": \"500123\",\n  \"vendorNumber\": \"example_value\",\n  \"vendorName\": \"example_value\",\n  \"payToName\": \"example_value\",\n  \"payToVendorId\": \"500123\",\n  \"payToVendorNumber\": \"example_value\",\n  \"shipToName\": \"example_value\",\n  \"shipToContact\": \"example_value\",\n  \"buyFromAddressLine1\": \"example_value\",\n  \"buyFromAddressLine2\": \"example_value\",\n  \"buyFromCity\": \"example_value\",\n  \"buyFromCountry\": \"example_value\",\n  \"buyFromState\": \"example_value\",\n  \"buyFromPostCode\": \"example_value\",\n  \"currencyId\": \"500123\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"paymentTermsId\": \"500123\",\n  \"shipmentMethodId\": \"500123\",\n  \"purchaser\": \"example_value\",\n  \"requestedReceiptDate\": \"2026-01-15\",\n  \"discountAmount\": 42.5,\n  \"discountAppliedBeforeTax\": true,\n  \"totalAmountExcludingTax\": 42.5,\n  \"totalTaxAmount\": 42.5,\n  \"totalAmountIncludingTax\": 42.5,\n  \"fullyReceived\": true,\n  \"status\": \"Draft\",\n  \"lastModifiedDateTime\": \"2026-01-15T10:30:00Z\",\n  \"purchaseOrderLines\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"documentId\": \"500123\",\n      \"sequence\": 10,\n      \"itemId\": \"500123\",\n      \"accountId\": \"500123\",\n      \"lineType\": \"Comment\",\n      \"lineObjectNumber\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"description2\": \"example_value\",\n      \"unitOfMeasureId\": \"500123\",\n      \"unitOfMeasureCode\": \"example_value\",\n      \"quantity\": 42.5,\n      \"directUnitCost\": 42.5,\n      \"discountAmount\": 42.5,\n      \"discountPercent\": 42.5,\n      \"discountAppliedBeforeTax\": true,\n      \"amountExcludingTax\": 42.5,\n      \"taxCode\": \"example_value\",\n      \"taxPercent\": 42.5,\n      \"totalTaxAmount\": 42.5,\n      \"amountIncludingTax\": 42.5,\n      \"expectedReceiptDate\": \"2026-01-15\",\n      \"receivedQuantity\": 42.5,\n      \"invoicedQuantity\": 42.5,\n      \"invoiceQuantity\": 42.5,\n      \"receiveQuantity\": 42.5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccb67d67-7132-4ad5-bcb9-88afaadd8388",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders({{purchaseOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e0f8693-be42-48ab-80c4-d57c72c7914b",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders({{purchaseOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3a8849a-74d6-49ee-a10b-8384e355ef34",
+          "name": "Update a Purchase Order",
+          "request": {
+            "name": "Update a Purchase Order",
+            "description": {
+              "content": "Updates an existing purchase order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "purchaseOrders({{purchaseOrder_id}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ETag value for optimistic concurrency control",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderDate\": \"<date>\",\n  \"vendorId\": \"<uuid>\",\n  \"vendorNumber\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"pricesIncludeTax\": \"<boolean>\",\n  \"requestedReceiptDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0cf09bc7-172e-4c59-bfea-76054eb0d1c8",
+              "name": "Purchase order updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders({{purchaseOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ETag value for optimistic concurrency control",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderDate\": \"2026-01-15\",\n  \"vendorId\": \"500123\",\n  \"vendorNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedReceiptDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.etag\": \"example_value\",\n  \"id\": \"abc123\",\n  \"number\": \"example_value\",\n  \"orderDate\": \"2026-01-15\",\n  \"postingDate\": \"2026-01-15\",\n  \"vendorId\": \"500123\",\n  \"vendorNumber\": \"example_value\",\n  \"vendorName\": \"example_value\",\n  \"payToName\": \"example_value\",\n  \"payToVendorId\": \"500123\",\n  \"payToVendorNumber\": \"example_value\",\n  \"shipToName\": \"example_value\",\n  \"shipToContact\": \"example_value\",\n  \"buyFromAddressLine1\": \"example_value\",\n  \"buyFromAddressLine2\": \"example_value\",\n  \"buyFromCity\": \"example_value\",\n  \"buyFromCountry\": \"example_value\",\n  \"buyFromState\": \"example_value\",\n  \"buyFromPostCode\": \"example_value\",\n  \"currencyId\": \"500123\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"paymentTermsId\": \"500123\",\n  \"shipmentMethodId\": \"500123\",\n  \"purchaser\": \"example_value\",\n  \"requestedReceiptDate\": \"2026-01-15\",\n  \"discountAmount\": 42.5,\n  \"discountAppliedBeforeTax\": true,\n  \"totalAmountExcludingTax\": 42.5,\n  \"totalTaxAmount\": 42.5,\n  \"totalAmountIncludingTax\": 42.5,\n  \"fullyReceived\": true,\n  \"status\": \"Draft\",\n  \"lastModifiedDateTime\": \"2026-01-15T10:30:00Z\",\n  \"purchaseOrderLines\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"documentId\": \"500123\",\n      \"sequence\": 10,\n      \"itemId\": \"500123\",\n      \"accountId\": \"500123\",\n      \"lineType\": \"Comment\",\n      \"lineObjectNumber\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"description2\": \"example_value\",\n      \"unitOfMeasureId\": \"500123\",\n      \"unitOfMeasureCode\": \"example_value\",\n      \"quantity\": 42.5,\n      \"directUnitCost\": 42.5,\n      \"discountAmount\": 42.5,\n      \"discountPercent\": 42.5,\n      \"discountAppliedBeforeTax\": true,\n      \"amountExcludingTax\": 42.5,\n      \"taxCode\": \"example_value\",\n      \"taxPercent\": 42.5,\n      \"totalTaxAmount\": 42.5,\n      \"amountIncludingTax\": 42.5,\n      \"expectedReceiptDate\": \"2026-01-15\",\n      \"receivedQuantity\": 42.5,\n      \"invoicedQuantity\": 42.5,\n      \"invoiceQuantity\": 42.5,\n      \"receiveQuantity\": 42.5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14891907-9f2b-4b2b-866f-38b2f3155878",
+              "name": "Bad request - invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders({{purchaseOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ETag value for optimistic concurrency control",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderDate\": \"2026-01-15\",\n  \"vendorId\": \"500123\",\n  \"vendorNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedReceiptDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b5f9f72-34af-48b3-8940-240971bb22f6",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders({{purchaseOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ETag value for optimistic concurrency control",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderDate\": \"2026-01-15\",\n  \"vendorId\": \"500123\",\n  \"vendorNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedReceiptDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f3fceab-bf96-402c-8bee-99a83fcd6fb6",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders({{purchaseOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ETag value for optimistic concurrency control",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderDate\": \"2026-01-15\",\n  \"vendorId\": \"500123\",\n  \"vendorNumber\": \"example_value\",\n  \"currencyCode\": \"example_value\",\n  \"pricesIncludeTax\": true,\n  \"requestedReceiptDate\": \"2026-01-15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4540daaf-2070-4b5e-853e-18c36c6319f1",
+          "name": "Delete a Purchase Order",
+          "request": {
+            "name": "Delete a Purchase Order",
+            "description": {
+              "content": "Deletes a purchase order by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "purchaseOrders({{purchaseOrder_id}})"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70b0d724-e5b2-4f6a-aee8-4f5794d9e055",
+              "name": "Purchase order deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders({{purchaseOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ba9e5902-87ec-42ed-8756-99b2d7af6f1e",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders({{purchaseOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4807dc20-c14f-4e16-8cfe-9d27c65e4bfc",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders({{purchaseOrder_id}})"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c3eab26-0265-4713-b9da-9d9dfa6544ea",
+          "name": "List Purchase Order Lines",
+          "request": {
+            "name": "List Purchase Order Lines",
+            "description": {
+              "content": "Returns a list of purchase order line items.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies({{company_id}})",
+                "purchaseOrders({{purchaseOrder_id}})",
+                "purchaseOrderLines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of items to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression"
+                },
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include in the response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54c467f7-b65b-4fa0-b496-8ff94982193f",
+              "name": "Successfully retrieved purchase order lines",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders({{purchaseOrder_id}})",
+                    "purchaseOrderLines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": [\n    {\n      \"@odata.etag\": \"example_value\",\n      \"id\": \"abc123\",\n      \"documentId\": \"500123\",\n      \"sequence\": 10,\n      \"itemId\": \"500123\",\n      \"accountId\": \"500123\",\n      \"lineType\": \"Comment\",\n      \"lineObjectNumber\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"description2\": \"example_value\",\n      \"unitOfMeasureId\": \"500123\",\n      \"unitOfMeasureCode\": \"example_value\",\n      \"quantity\": 42.5,\n      \"directUnitCost\": 42.5,\n      \"discountAmount\": 42.5,\n      \"discountPercent\": 42.5,\n      \"discountAppliedBeforeTax\": true,\n      \"amountExcludingTax\": 42.5,\n      \"taxCode\": \"example_value\",\n      \"taxPercent\": 42.5,\n      \"totalTaxAmount\": 42.5,\n      \"amountIncludingTax\": 42.5,\n      \"expectedReceiptDate\": \"2026-01-15\",\n      \"receivedQuantity\": 42.5,\n      \"invoicedQuantity\": 42.5,\n      \"invoiceQuantity\": 42.5,\n      \"receiveQuantity\": 42.5\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b3c1397-46ad-49de-a7ac-ffaff7057a21",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies({{company_id}})",
+                    "purchaseOrders({{purchaseOrder_id}})",
+                    "purchaseOrderLines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.businesscentral.dynamics.com/admin/v2.28",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier of the company",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<uuid>",
+      "key": "company_id"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The unique identifier of the purchase order",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<uuid>",
+      "key": "purchaseOrder_id"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://api.businesscentral.dynamics.com/.default"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "54fb33c3-292e-42d1-9116-f8eaf0c4bcc4",
+    "name": "Business Central Administration Center Accounts Purchase Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.\n\nContact Support:\n Name: Microsoft Dynamics Support\n Email: bcsupport@microsoft.com",
+      "type": "text/plain"
+    }
+  }
+}

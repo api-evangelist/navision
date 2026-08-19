@@ -1,0 +1,2381 @@
+{
+  "item": [
+    {
+      "id": "0ad82e8f-6a77-4cde-9cf9-054bd7975a5a",
+      "name": "Environments",
+      "description": {
+        "content": "Manage Business Central environments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "73a1d341-ef8b-4324-aa4a-a171697f98cb",
+          "name": "List All Environments",
+          "request": {
+            "name": "List All Environments",
+            "description": {
+              "content": "Returns a list of all environments across all application families for the tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                "environments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "988efc8d-dc5a-4011-a0c3-50b5049bf4b2",
+              "name": "Successfully retrieved environments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": [\n    {\n      \"friendlyName\": \"example_value\",\n      \"type\": \"Production\",\n      \"name\": \"Example Title\",\n      \"countryCode\": \"example_value\",\n      \"applicationFamily\": \"example_value\",\n      \"aadTenantId\": \"500123\",\n      \"status\": \"NotReady\",\n      \"webClientLoginUrl\": \"https://www.example.com\",\n      \"webServiceUrl\": \"https://www.example.com\",\n      \"locationName\": \"example_value\",\n      \"geoName\": \"example_value\",\n      \"ringName\": \"example_value\",\n      \"appInsightsKey\": \"example_value\",\n      \"softDeletedOn\": \"2026-01-15T10:30:00Z\",\n      \"hardDeletePendingOn\": \"2026-01-15T10:30:00Z\",\n      \"deleteReason\": \"example_value\",\n      \"appSourceAppsUpdateCadence\": \"example_value\",\n      \"versionDetails\": {\n        \"version\": \"example_value\",\n        \"gracePeriodStartDate\": \"2026-01-15T10:30:00Z\",\n        \"enforcedUpdatePeriodStartDate\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fab8f950-0180-4681-85d3-7b86df1cbc56",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6117ff45-cad6-48ae-b10d-ec84b3a6af15",
+          "name": "List Environments by Application Family",
+          "request": {
+            "name": "List Environments by Application Family",
+            "description": {
+              "content": "Returns a list of environments for the specified application family.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd7ac019-28bc-4273-b673-2403caa97f2e",
+              "name": "Successfully retrieved environments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": [\n    {\n      \"friendlyName\": \"example_value\",\n      \"type\": \"Production\",\n      \"name\": \"Example Title\",\n      \"countryCode\": \"example_value\",\n      \"applicationFamily\": \"example_value\",\n      \"aadTenantId\": \"500123\",\n      \"status\": \"NotReady\",\n      \"webClientLoginUrl\": \"https://www.example.com\",\n      \"webServiceUrl\": \"https://www.example.com\",\n      \"locationName\": \"example_value\",\n      \"geoName\": \"example_value\",\n      \"ringName\": \"example_value\",\n      \"appInsightsKey\": \"example_value\",\n      \"softDeletedOn\": \"2026-01-15T10:30:00Z\",\n      \"hardDeletePendingOn\": \"2026-01-15T10:30:00Z\",\n      \"deleteReason\": \"example_value\",\n      \"appSourceAppsUpdateCadence\": \"example_value\",\n      \"versionDetails\": {\n        \"version\": \"example_value\",\n        \"gracePeriodStartDate\": \"2026-01-15T10:30:00Z\",\n        \"enforcedUpdatePeriodStartDate\": \"2026-01-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e68863b-370f-4fe8-8a98-c0acb240bf3a",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": 5972.510884124944\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1429357-eef2-49e2-9bbc-603acefe51e1",
+              "name": "Application family not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": \"example_value\",\n  \"clientError\": [\n    {\n      \"code\": \"example_value\",\n      \"message\": \"example_value\",\n      \"target\": \"example_value\",\n      \"extensionData\": \"example_value\",\n      \"clientError\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28b49f85-eb35-426f-858f-ce308c253055",
+          "name": "Get an Environment",
+          "request": {
+            "name": "Get an Environment",
+            "description": {
+              "content": "Returns the properties for the specified environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b0635b57-cd96-45c0-a79c-eb030802973c",
+              "name": "Successfully retrieved environment",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"friendlyName\": \"example_value\",\n  \"type\": \"Production\",\n  \"name\": \"Example Title\",\n  \"countryCode\": \"example_value\",\n  \"applicationFamily\": \"example_value\",\n  \"aadTenantId\": \"500123\",\n  \"status\": \"NotReady\",\n  \"webClientLoginUrl\": \"https://www.example.com\",\n  \"webServiceUrl\": \"https://www.example.com\",\n  \"locationName\": \"example_value\",\n  \"geoName\": \"example_value\",\n  \"ringName\": \"example_value\",\n  \"appInsightsKey\": \"example_value\",\n  \"softDeletedOn\": \"2026-01-15T10:30:00Z\",\n  \"hardDeletePendingOn\": \"2026-01-15T10:30:00Z\",\n  \"deleteReason\": \"example_value\",\n  \"appSourceAppsUpdateCadence\": \"example_value\",\n  \"versionDetails\": {\n    \"version\": \"example_value\",\n    \"gracePeriodStartDate\": \"2026-01-15T10:30:00Z\",\n    \"enforcedUpdatePeriodStartDate\": \"2026-01-15T10:30:00Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1280762f-19d3-4817-9e06-8e00ec699dcd",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": 5972.510884124944\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fb18fc4-b667-428a-8621-5e8150eec7a5",
+              "name": "Environment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": \"example_value\",\n  \"clientError\": [\n    {\n      \"code\": \"example_value\",\n      \"message\": \"example_value\",\n      \"target\": \"example_value\",\n      \"extensionData\": \"example_value\",\n      \"clientError\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20c1cfb4-b282-4d20-9de7-6a8c5e0832d3",
+          "name": "Create a New Environment",
+          "request": {
+            "name": "Create a New Environment",
+            "description": {
+              "content": "Creates a new environment with sample data. The operation is asynchronous; poll the environment operations endpoint to track status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"environmentType\": \"<string>\",\n  \"countryCode\": \"<string>\",\n  \"ringName\": \"<string>\",\n  \"applicationVersion\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "559ab9ea-97b7-477e-8f5a-e008b9bf80ff",
+              "name": "Environment creation initiated (API v2.8 and earlier)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environmentType\": \"Production\",\n  \"countryCode\": \"example_value\",\n  \"ringName\": \"example_value\",\n  \"applicationVersion\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"friendlyName\": \"example_value\",\n  \"type\": \"Production\",\n  \"name\": \"Example Title\",\n  \"countryCode\": \"example_value\",\n  \"applicationFamily\": \"example_value\",\n  \"aadTenantId\": \"500123\",\n  \"status\": \"NotReady\",\n  \"webClientLoginUrl\": \"https://www.example.com\",\n  \"webServiceUrl\": \"https://www.example.com\",\n  \"locationName\": \"example_value\",\n  \"geoName\": \"example_value\",\n  \"ringName\": \"example_value\",\n  \"appInsightsKey\": \"example_value\",\n  \"softDeletedOn\": \"2026-01-15T10:30:00Z\",\n  \"hardDeletePendingOn\": \"2026-01-15T10:30:00Z\",\n  \"deleteReason\": \"example_value\",\n  \"appSourceAppsUpdateCadence\": \"example_value\",\n  \"versionDetails\": {\n    \"version\": \"example_value\",\n    \"gracePeriodStartDate\": \"2026-01-15T10:30:00Z\",\n    \"enforcedUpdatePeriodStartDate\": \"2026-01-15T10:30:00Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a9409c5-5772-4851-9260-8105ee878298",
+              "name": "Environment creation scheduled (API v2.9 and later)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environmentType\": \"Production\",\n  \"countryCode\": \"example_value\",\n  \"ringName\": \"example_value\",\n  \"applicationVersion\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"type\": \"create\",\n  \"status\": \"Queued\",\n  \"aadTenantId\": \"500123\",\n  \"createdOn\": \"2026-01-15T10:30:00Z\",\n  \"startedOn\": \"2026-01-15T10:30:00Z\",\n  \"completedOn\": \"2026-01-15T10:30:00Z\",\n  \"createdBy\": \"example_value\",\n  \"errorMessage\": \"example_value\",\n  \"parameters\": \"example_value\",\n  \"environmentName\": \"example_value\",\n  \"environmentType\": \"example_value\",\n  \"productFamily\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86e5dcf0-f451-4071-8b27-7c436d2f6bf0",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environmentType\": \"Production\",\n  \"countryCode\": \"example_value\",\n  \"ringName\": \"example_value\",\n  \"applicationVersion\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": \"example_value\",\n  \"clientError\": [\n    {\n      \"code\": \"example_value\",\n      \"message\": \"example_value\",\n      \"target\": \"example_value\",\n      \"extensionData\": \"example_value\",\n      \"clientError\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e9a8236-1dab-45f1-bcb8-54d9852ed1e2",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environmentType\": \"Production\",\n  \"countryCode\": \"example_value\",\n  \"ringName\": \"example_value\",\n  \"applicationVersion\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": 5972.510884124944\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fc246b9-38f4-4f55-8340-5c2d06ee2f9d",
+              "name": "Environment already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environmentType\": \"Production\",\n  \"countryCode\": \"example_value\",\n  \"ringName\": \"example_value\",\n  \"applicationVersion\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": \"example_value\",\n  \"clientError\": [\n    {\n      \"code\": \"example_value\",\n      \"message\": \"example_value\",\n      \"target\": \"example_value\",\n      \"extensionData\": \"example_value\",\n      \"clientError\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9704aea6-7b1a-4c17-b5f8-5b547a4cc937",
+          "name": "Delete an Environment",
+          "request": {
+            "name": "Delete an Environment",
+            "description": {
+              "content": "Soft deletes the specified environment. The environment is retained for 14 days during which it can be recovered. Environments with status Creating Failed or Removing Failed are permanently deleted immediately.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "717bc423-cd43-4c63-821c-ae50cbf1d931",
+              "name": "Delete operation scheduled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"type\": \"create\",\n  \"status\": \"Queued\",\n  \"aadTenantId\": \"500123\",\n  \"createdOn\": \"2026-01-15T10:30:00Z\",\n  \"startedOn\": \"2026-01-15T10:30:00Z\",\n  \"completedOn\": \"2026-01-15T10:30:00Z\",\n  \"createdBy\": \"example_value\",\n  \"errorMessage\": \"example_value\",\n  \"parameters\": \"example_value\",\n  \"environmentName\": \"example_value\",\n  \"environmentType\": \"example_value\",\n  \"productFamily\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e7d5f6a-273d-47ad-b662-195d7f9f297d",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": 5972.510884124944\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98475299-54e9-48ca-a1c2-e66f0c456d5a",
+              "name": "Environment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": \"example_value\",\n  \"clientError\": [\n    {\n      \"code\": \"example_value\",\n      \"message\": \"example_value\",\n      \"target\": \"example_value\",\n      \"extensionData\": \"example_value\",\n      \"clientError\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28c704c0-eaf5-49e3-a3e2-50ffd7da46d2",
+          "name": "Copy an Environment",
+          "request": {
+            "name": "Copy an Environment",
+            "description": {
+              "content": "Creates a new environment as a copy of an existing environment's data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName",
+                "copy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"environmentName\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3a937a57-1719-485f-af91-4d7d7b9f8ed3",
+              "name": "Copy initiated (API v2.8 and earlier)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "copy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environmentName\": \"example_value\",\n  \"type\": \"Production\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"friendlyName\": \"example_value\",\n  \"type\": \"Production\",\n  \"name\": \"Example Title\",\n  \"countryCode\": \"example_value\",\n  \"applicationFamily\": \"example_value\",\n  \"aadTenantId\": \"500123\",\n  \"status\": \"NotReady\",\n  \"webClientLoginUrl\": \"https://www.example.com\",\n  \"webServiceUrl\": \"https://www.example.com\",\n  \"locationName\": \"example_value\",\n  \"geoName\": \"example_value\",\n  \"ringName\": \"example_value\",\n  \"appInsightsKey\": \"example_value\",\n  \"softDeletedOn\": \"2026-01-15T10:30:00Z\",\n  \"hardDeletePendingOn\": \"2026-01-15T10:30:00Z\",\n  \"deleteReason\": \"example_value\",\n  \"appSourceAppsUpdateCadence\": \"example_value\",\n  \"versionDetails\": {\n    \"version\": \"example_value\",\n    \"gracePeriodStartDate\": \"2026-01-15T10:30:00Z\",\n    \"enforcedUpdatePeriodStartDate\": \"2026-01-15T10:30:00Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7619558c-f4e1-4b6f-a51c-a2e7cb1a1935",
+              "name": "Copy operation scheduled (API v2.9 and later)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "copy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environmentName\": \"example_value\",\n  \"type\": \"Production\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"type\": \"create\",\n  \"status\": \"Queued\",\n  \"aadTenantId\": \"500123\",\n  \"createdOn\": \"2026-01-15T10:30:00Z\",\n  \"startedOn\": \"2026-01-15T10:30:00Z\",\n  \"completedOn\": \"2026-01-15T10:30:00Z\",\n  \"createdBy\": \"example_value\",\n  \"errorMessage\": \"example_value\",\n  \"parameters\": \"example_value\",\n  \"environmentName\": \"example_value\",\n  \"environmentType\": \"example_value\",\n  \"productFamily\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0dc195b-2c8b-47ca-8fc5-18a6242e78c1",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "copy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environmentName\": \"example_value\",\n  \"type\": \"Production\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": \"example_value\",\n  \"clientError\": [\n    {\n      \"code\": \"example_value\",\n      \"message\": \"example_value\",\n      \"target\": \"example_value\",\n      \"extensionData\": \"example_value\",\n      \"clientError\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b98c8ba6-c3e1-4746-990d-ee17de60bb25",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "copy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"environmentName\": \"example_value\",\n  \"type\": \"Production\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": 5972.510884124944\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f69245d-d2b0-4526-accc-b7a186b39141",
+          "name": "Rename an Environment",
+          "request": {
+            "name": "Rename an Environment",
+            "description": {
+              "content": "Schedules a rename operation on an environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName",
+                "rename"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"NewEnvironmentName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8a6ec948-1f7e-4be8-bf94-28cb972a4583",
+              "name": "Rename operation scheduled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "rename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"NewEnvironmentName\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"type\": \"create\",\n  \"status\": \"Queued\",\n  \"aadTenantId\": \"500123\",\n  \"createdOn\": \"2026-01-15T10:30:00Z\",\n  \"startedOn\": \"2026-01-15T10:30:00Z\",\n  \"completedOn\": \"2026-01-15T10:30:00Z\",\n  \"createdBy\": \"example_value\",\n  \"errorMessage\": \"example_value\",\n  \"parameters\": \"example_value\",\n  \"environmentName\": \"example_value\",\n  \"environmentType\": \"example_value\",\n  \"productFamily\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0519076b-ede8-4f20-9364-63bd5246ed87",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "rename"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"NewEnvironmentName\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": 5972.510884124944\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4812d1ac-fb65-44e9-a525-78e08458262a",
+          "name": "Restore an Environment",
+          "request": {
+            "name": "Restore an Environment",
+            "description": {
+              "content": "Restores an existing environment from a point in time in the past.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName",
+                "restore"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"EnvironmentName\": \"<string>\",\n  \"EnvironmentType\": \"<string>\",\n  \"PointInTime\": \"<dateTime>\",\n  \"SkipInstallingPTEs\": false,\n  \"SkipInstallingThirdPartyGlobalApps\": false,\n  \"SkipEnvironmentCleanup\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7b5094f8-650c-4987-bf6a-40e0d0d237bd",
+              "name": "Restore operation scheduled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EnvironmentName\": \"example_value\",\n  \"EnvironmentType\": \"Production\",\n  \"PointInTime\": \"2026-01-15T10:30:00Z\",\n  \"SkipInstallingPTEs\": true,\n  \"SkipInstallingThirdPartyGlobalApps\": true,\n  \"SkipEnvironmentCleanup\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"type\": \"create\",\n  \"status\": \"Queued\",\n  \"aadTenantId\": \"500123\",\n  \"createdOn\": \"2026-01-15T10:30:00Z\",\n  \"startedOn\": \"2026-01-15T10:30:00Z\",\n  \"completedOn\": \"2026-01-15T10:30:00Z\",\n  \"createdBy\": \"example_value\",\n  \"errorMessage\": \"example_value\",\n  \"parameters\": \"example_value\",\n  \"environmentName\": \"example_value\",\n  \"environmentType\": \"example_value\",\n  \"productFamily\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63861426-d0da-49cd-b123-8c7c54c28870",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"EnvironmentName\": \"example_value\",\n  \"EnvironmentType\": \"Production\",\n  \"PointInTime\": \"2026-01-15T10:30:00Z\",\n  \"SkipInstallingPTEs\": true,\n  \"SkipInstallingThirdPartyGlobalApps\": true,\n  \"SkipEnvironmentCleanup\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": 5972.510884124944\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "163b6ab2-70ac-4bf4-9103-4ecd37340a14",
+          "name": "Recover a Deleted Environment",
+          "request": {
+            "name": "Recover a Deleted Environment",
+            "description": {
+              "content": "Recovers a soft-deleted environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName",
+                "recover"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1fbc1f4-2ca2-46d4-997f-ac219c83b796",
+              "name": "Recovery operation scheduled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "recover"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"type\": \"create\",\n  \"status\": \"Queued\",\n  \"aadTenantId\": \"500123\",\n  \"createdOn\": \"2026-01-15T10:30:00Z\",\n  \"startedOn\": \"2026-01-15T10:30:00Z\",\n  \"completedOn\": \"2026-01-15T10:30:00Z\",\n  \"createdBy\": \"example_value\",\n  \"errorMessage\": \"example_value\",\n  \"parameters\": \"example_value\",\n  \"environmentName\": \"example_value\",\n  \"environmentType\": \"example_value\",\n  \"productFamily\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "484c8fe0-2beb-42fa-84a2-117d72836f77",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "recover"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": 5972.510884124944\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f714835b-0368-4409-8b65-5d9ea8ba28a3",
+          "name": "Get Available Restore Periods",
+          "request": {
+            "name": "Get Available Restore Periods",
+            "description": {
+              "content": "Returns an ordered list of available restore periods for the environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName",
+                "availableRestorePeriods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cad9818-c2c6-411e-87b1-842811525b79",
+              "name": "Successfully retrieved restore periods",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "availableRestorePeriods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": [\n    {\n      \"from\": \"2026-01-15T10:30:00Z\",\n      \"to\": \"2026-01-15T10:30:00Z\",\n      \"correspondingApplicationPackageVersion\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13951cdd-cd8d-4950-94b1-fb50579512a2",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "availableRestorePeriods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": 5972.510884124944\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.businesscentral.dynamics.com/admin/v2.28",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://api.businesscentral.dynamics.com/.default"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "30d45feb-763e-4c1e-87d8-d856959dcce1",
+    "name": "Business Central Administration Center Accounts Environments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.\n\nContact Support:\n Name: Microsoft Dynamics Support\n Email: bcsupport@microsoft.com",
+      "type": "text/plain"
+    }
+  }
+}

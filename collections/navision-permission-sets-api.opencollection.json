@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Business Central Administration Center Accounts Permission Sets API",
+    "version": "2.28"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Permission Sets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List User Permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/users(:user_id)/userPermissions",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user security ID"
+              }
+            ]
+          },
+          "docs": "Returns permission sets assigned to the user."
+        },
+        {
+          "info": {
+            "name": "Assign a Permission Set to a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/users(:user_id)/userPermissions",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user security ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns a permission set to the specified user."
+        },
+        {
+          "info": {
+            "name": "List Permission Sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/permissionSets",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              }
+            ]
+          },
+          "docs": "Returns a list of available permission sets."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

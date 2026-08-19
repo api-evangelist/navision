@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Business Central Administration Center Accounts Notifications API",
+    "version": "2.28"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notification Recipients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/notifications",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Returns a list of notification recipients for the environment."
+        },
+        {
+          "info": {
+            "name": "Add a Notification Recipient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/:environmentName/notifications",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              },
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new notification recipient for the environment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,437 @@
+{
+  "item": [
+    {
+      "id": "8792fa38-4e68-4f29-bc74-ebb03efec305",
+      "name": "Update Management",
+      "description": {
+        "content": "Manage environment updates",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "985fb38c-48a7-4785-94df-4519152e9b77",
+          "name": "Set Update Settings",
+          "request": {
+            "name": "Set Update Settings",
+            "description": {
+              "content": "Sets the update window and other update-related settings for the environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName",
+                "settings",
+                "upgrade"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"preferredStartTimeUtc\": \"<time>\",\n  \"preferredEndTimeUtc\": \"<time>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7ffaf54a-7ab3-4fe4-9f73-9a2719a4e1fa",
+              "name": "Update settings applied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "settings",
+                    "upgrade"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"preferredStartTimeUtc\": \"example_value\",\n  \"preferredEndTimeUtc\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "feb7db35-11ea-4eab-97e0-be96f4c8dac5",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "settings",
+                    "upgrade"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"preferredStartTimeUtc\": \"example_value\",\n  \"preferredEndTimeUtc\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": 3100,\n    \"key_1\": true,\n    \"key_2\": 4950\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ef999e9-388e-42bb-bad5-6a631552ae87",
+          "name": "Get Scheduled Upgrade",
+          "request": {
+            "name": "Get Scheduled Upgrade",
+            "description": {
+              "content": "Returns information about any pending scheduled upgrade for the environment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "applications",
+                ":applicationFamily",
+                "environments",
+                ":environmentName",
+                "scheduledUpgrade"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "BusinessCentral",
+                  "key": "applicationFamily",
+                  "description": "(Required) The application family (e.g., BusinessCentral)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environmentName",
+                  "description": "(Required) The name of the environment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54bb4d77-e5ae-4e83-83ca-d3529e0f7431",
+              "name": "Successfully retrieved scheduled upgrade information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "scheduledUpgrade"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"environmentName\": \"example_value\",\n  \"upgradeIsScheduled\": true,\n  \"scheduledDate\": \"2026-01-15T10:30:00Z\",\n  \"registeredDate\": \"2026-01-15T10:30:00Z\",\n  \"targetVersion\": \"example_value\",\n  \"canTenantSelectDate\": true,\n  \"ignoreUpgradeWindow\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4cd6364-b044-4c28-9699-50e9a7135f7a",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "applications",
+                    ":applicationFamily",
+                    "environments",
+                    ":environmentName",
+                    "scheduledUpgrade"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "BusinessCentral",
+                      "key": "applicationFamily",
+                      "description": "(Required) The application family (e.g., BusinessCentral)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environmentName",
+                      "description": "(Required) The name of the environment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"example_value\",\n  \"message\": \"example_value\",\n  \"target\": \"example_value\",\n  \"extensionData\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": 1241\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.businesscentral.dynamics.com/admin/v2.28",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://api.businesscentral.dynamics.com/.default"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c3be1962-f010-450c-bff2-46b6e5d31583",
+    "name": "Business Central Administration Center Accounts Update Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.\n\nContact Support:\n Name: Microsoft Dynamics Support\n Email: bcsupport@microsoft.com",
+      "type": "text/plain"
+    }
+  }
+}

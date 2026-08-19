@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Business Central Administration Center Accounts Companies API",
+    "version": "2.28"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies"
+          },
+          "docs": "Returns a list of companies available for automation."
+        },
+        {
+          "info": {
+            "name": "List Automation Companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/automationCompanies",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              }
+            ]
+          },
+          "docs": "Returns a list of automation company objects."
+        },
+        {
+          "info": {
+            "name": "Create a Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/automationCompanies",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new company in the Business Central tenant."
+        },
+        {
+          "info": {
+            "name": "Get an Automation Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/automationCompanies(:automationCompany_id)",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "automationCompany_id",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific automation company by ID."
+        },
+        {
+          "info": {
+            "name": "Update an Automation Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/automationCompanies(:automationCompany_id)",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "automationCompany_id",
+                "value": "500123",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates properties of an automation company (e.g., rename)."
+        },
+        {
+          "info": {
+            "name": "Delete an Automation Company",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/automationCompanies(:automationCompany_id)",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "automationCompany_id",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a company from the tenant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

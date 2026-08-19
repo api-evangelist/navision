@@ -1,0 +1,253 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Business Central Administration Center Accounts Purchase Orders API",
+    "version": "2.28"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Purchase Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Purchase Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/purchaseOrders",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression"
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query",
+                "description": "OData order by expression"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include in the response"
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query",
+                "description": "Related entities to expand inline"
+              }
+            ]
+          },
+          "docs": "Returns a list of purchase order objects from the specified company."
+        },
+        {
+          "info": {
+            "name": "Create a Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/purchaseOrders",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new purchase order in the specified company."
+        },
+        {
+          "info": {
+            "name": "Get a Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/purchaseOrders(:purchaseOrder_id)",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "purchaseOrder_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the purchase order"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include in the response"
+              },
+              {
+                "name": "$expand",
+                "value": "",
+                "type": "query",
+                "description": "Related entities to expand inline"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific purchase order by ID."
+        },
+        {
+          "info": {
+            "name": "Update a Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/purchaseOrders(:purchaseOrder_id)",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "purchaseOrder_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the purchase order"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing purchase order."
+        },
+        {
+          "info": {
+            "name": "Delete a Purchase Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/purchaseOrders(:purchaseOrder_id)",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "purchaseOrder_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the purchase order"
+              }
+            ]
+          },
+          "docs": "Deletes a purchase order by ID."
+        },
+        {
+          "info": {
+            "name": "List Purchase Order Lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/purchaseOrders(:purchaseOrder_id)/purchaseOrderLines",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "purchaseOrder_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the purchase order"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include in the response"
+              }
+            ]
+          },
+          "docs": "Returns a list of purchase order line items."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

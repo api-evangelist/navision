@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Business Central Administration Center Accounts Configuration Packages API",
+    "version": "2.28"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration Packages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Configuration Packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/configurationPackages",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              }
+            ]
+          },
+          "docs": "Returns a list of RapidStart configuration packages."
+        },
+        {
+          "info": {
+            "name": "Create a Configuration Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/configurationPackages",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new RapidStart configuration package record."
+        },
+        {
+          "info": {
+            "name": "Upload Rapidstart Package File",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/configurationPackages(:package_id)/file(':code')/content",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "package_id",
+                "value": "500123",
+                "type": "path"
+              },
+              {
+                "name": "code",
+                "value": "example_value",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Uploads the RapidStart package file content."
+        },
+        {
+          "info": {
+            "name": "Import a Configuration Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/configurationPackages(:package_id)/Microsoft.NAV.import",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "package_id",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Imports the uploaded RapidStart configuration package."
+        },
+        {
+          "info": {
+            "name": "Apply a Configuration Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/companies(:company_id)/configurationPackages(:package_id)/Microsoft.NAV.apply",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the company"
+              },
+              {
+                "name": "package_id",
+                "value": "500123",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Applies the imported RapidStart configuration package."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

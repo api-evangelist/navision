@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Business Central Administration Center Accounts Environment Operations API",
+    "version": "2.28"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Environment Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Environment Operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/environments/:environmentName/operations",
+            "params": [
+              {
+                "name": "environmentName",
+                "value": "",
+                "type": "path",
+                "description": "The name of the environment"
+              }
+            ]
+          },
+          "docs": "Returns a list of operations that have been performed on the environment."
+        },
+        {
+          "info": {
+            "name": "List Operations on All Environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.businesscentral.dynamics.com/admin/v2.28/applications/:applicationFamily/environments/operations",
+            "params": [
+              {
+                "name": "applicationFamily",
+                "value": "",
+                "type": "path",
+                "description": "The application family (e.g., BusinessCentral)"
+              }
+            ]
+          },
+          "docs": "Returns operations that have occurred on all environments for the application family."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
