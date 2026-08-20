@@ -88,6 +88,8 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
   baseURL: https://{server}:{port}/{instance}/api/{version}
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -962,6 +964,8 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
   baseURL: https://{server}:{port}/{instance}/api/{version}
   tags:
+  - Item
+  tags_raw:
   - Items
   properties:
   - type: OpenAPI
@@ -1054,6 +1058,8 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
   baseURL: https://{server}:{port}/{instance}/api/{version}
   tags:
+  - Notification
+  tags_raw:
   - Notifications
   properties:
   - type: OpenAPI
@@ -1192,6 +1198,8 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
   baseURL: https://{server}:{port}/{instance}/api/{version}
   tags:
+  - PermissionSets
+  tags_raw:
   - Permission Sets
   properties:
   - type: OpenAPI
@@ -1698,6 +1706,8 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
   baseURL: https://{server}:{port}/{instance}/api/{version}
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
