@@ -11,8 +11,11 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: businessCentralApi
-  url: ../openapi/business-central-api-v2.yml
+- name: customersApi
+  url: ../openapi/navision-customers-api-openapi.yml
+  type: openapi
+- name: salesInvoicesApi
+  url: ../openapi/navision-sales-invoices-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-sales-invoice-for-customer

@@ -11,8 +11,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: businessCentralApi
-  url: ../openapi/business-central-api-v2.yml
+- name: companiesApi
+  url: ../openapi/navision-companies-api-openapi.yml
+  type: openapi
+- name: vendorsApi
+  url: ../openapi/navision-vendors-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: onboard-vendor

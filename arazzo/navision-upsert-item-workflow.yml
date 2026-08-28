@@ -11,8 +11,8 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: businessCentralApi
-  url: ../openapi/business-central-api-v2.yml
+- name: itemsApi
+  url: ../openapi/navision-items-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: upsert-item

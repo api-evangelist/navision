@@ -11,8 +11,11 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: businessCentralApi
-  url: ../openapi/business-central-api-v2.yml
+- name: customersApi
+  url: ../openapi/navision-customers-api-openapi.yml
+  type: openapi
+- name: salesOrdersApi
+  url: ../openapi/navision-sales-orders-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-sales-order-for-customer

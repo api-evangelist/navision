@@ -10,8 +10,11 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: businessCentralApi
-  url: ../openapi/business-central-api-v2.yml
+- name: companiesApi
+  url: ../openapi/navision-companies-api-openapi.yml
+  type: openapi
+- name: journalsApi
+  url: ../openapi/navision-journals-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-journal-and-read-lines
