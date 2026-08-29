@@ -3,6 +3,20 @@ description: >-
   API collection for Microsoft Dynamics NAV (formerly Navision), an enterprise resource planning (ERP) solution for
   small and medium-sized businesses. Dynamics NAV has evolved into Dynamics 365 Business Central, which provides modern
   REST, OData, and SOAP web services for business data integration.
+deliveryModel:
+  model: open-core
+  license: MIT
+  open_source: true
+  commercial: true
+  callable_host: true
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -1844,6 +1858,9 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: CapabilityMap
+    url: capabilities/navision-capability-edges.yml
+    name: Microsoft Dynamics NAV Business Capability Map
   - type: IssueTracker
     url: https://github.com/christianbraeunlich/d365bc-api-postman/issues
   - type: License
