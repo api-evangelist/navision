@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Business Central Administration Center Accounts Features API
-  description: REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.
-  version: '2.28'
+  title: Business Central Automation API v2.0 Features API
+  description: API for automating company setup and tenant management in Dynamics 365 Business Central. Supports creating companies, installing and managing extensions, assigning permission sets to users, uploading and applying RapidStart packages, managing user groups and security groups, and activating features programmatically.
+  version: '2.0'
   contact:
     name: Microsoft Dynamics Support
     email: bcsupport@microsoft.com
@@ -12,8 +12,24 @@ info:
     url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
   termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
 servers:
-- url: https://api.businesscentral.dynamics.com/admin/v2.28
-  description: Business Central Administration Center
+- url: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0
+  description: Business Central Online Automation API
+  variables:
+    environment:
+      default: production
+      description: The name of the Business Central environment
+- url: https://{server}:{port}/{instance}/api/microsoft/automation/v2.0
+  description: Business Central On-Premises Automation API
+  variables:
+    server:
+      default: localhost
+      description: The on-premises server hostname
+    port:
+      default: '7048'
+      description: The OData services port
+    instance:
+      default: BC
+      description: The Business Central server instance name
 security:
 - oauth2: []
 - bearerAuth: []
@@ -185,15 +201,15 @@ components:
           authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
           tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
           scopes:
-            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Automation APIs
         clientCredentials:
           tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
           scopes:
-            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+            https://api.businesscentral.dynamics.com/.default: Access Business Central Automation APIs
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
 externalDocs:
-  description: Administration Center API Documentation
-  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  description: Automation API Documentation
+  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis

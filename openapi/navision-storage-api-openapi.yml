@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Business Central Administration Center Accounts Storage API
+  title: Business Central Administration Center Storage API
   description: REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.
   version: '2.28'
   contact:
@@ -119,13 +119,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     environmentName:
       name: environmentName
@@ -215,6 +208,13 @@ components:
           format: int64
           description: Used database storage in kilobytes
           example: 10
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

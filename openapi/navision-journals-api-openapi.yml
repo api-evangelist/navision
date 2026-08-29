@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Business Central Administration Center Accounts Journals API
-  description: REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.
-  version: '2.28'
+  title: Dynamics 365 Business Central API v2.0 Journals API
+  description: Modern RESTful API for Microsoft Dynamics 365 Business Central, the cloud evolution of Dynamics NAV. Provides a comprehensive set of endpoints for managing customers, vendors, items, sales orders, purchase orders, accounts, journals, and other business entities. Supports OData query parameters for filtering, sorting, and pagination.
+  version: '2.0'
   contact:
     name: Microsoft Dynamics Support
     email: bcsupport@microsoft.com
@@ -12,8 +12,24 @@ info:
     url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
   termsOfService: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
 servers:
-- url: https://api.businesscentral.dynamics.com/admin/v2.28
-  description: Business Central Administration Center
+- url: https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0
+  description: Business Central Online (Common Endpoint)
+  variables:
+    environment:
+      default: production
+      description: The name of the Business Central environment
+- url: https://{server}:{port}/{instance}/api/v2.0
+  description: Business Central On-Premises
+  variables:
+    server:
+      default: localhost
+      description: The on-premises server hostname
+    port:
+      default: '7048'
+      description: The OData services port
+    instance:
+      default: BC
+      description: The Business Central server instance name
 security:
 - oauth2: []
 - bearerAuth: []
@@ -173,68 +189,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    filter:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    skip:
-      name: $skip
-      in: query
-      description: Number of items to skip
-      schema:
-        type: integer
-        minimum: 0
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
-    select:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include in the response
-      schema:
-        type: string
-    top:
-      name: $top
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        minimum: 0
-  responses:
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: A stable error code
-            message:
-              type: string
-              description: A human-readable error message
-          example: example_value
     JournalLine:
       type: object
       properties:
@@ -310,6 +265,24 @@ components:
           format: date-time
           readOnly: true
           example: '2026-01-15T10:30:00Z'
+    JournalCreate:
+      type: object
+      required:
+      - code
+      - displayName
+      properties:
+        code:
+          type: string
+          maxLength: 10
+          example: example_value
+        displayName:
+          type: string
+          maxLength: 100
+          example: example_value
+        templateDisplayName:
+          type: string
+          maxLength: 100
+          example: example_value
     Journal:
       type: object
       properties:
@@ -342,24 +315,67 @@ components:
           type: string
           maxLength: 20
           example: example_value
-    JournalCreate:
+    ErrorResponse:
       type: object
-      required:
-      - code
-      - displayName
       properties:
-        code:
-          type: string
-          maxLength: 10
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
           example: example_value
-        displayName:
-          type: string
-          maxLength: 100
-          example: example_value
-        templateDisplayName:
-          type: string
-          maxLength: 100
-          example: example_value
+  parameters:
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    top:
+      name: $top
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        minimum: 0
+    skip:
+      name: $skip
+      in: query
+      description: Number of items to skip
+      schema:
+        type: integer
+        minimum: 0
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2
@@ -369,15 +385,16 @@ components:
           authorizationUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/authorize
           tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
           scopes:
-            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+            https://api.businesscentral.dynamics.com/.default: Access Business Central APIs
         clientCredentials:
           tokenUrl: https://login.microsoftonline.com/{tenantId}/oauth2/v2.0/token
           scopes:
-            https://api.businesscentral.dynamics.com/.default: Access Business Central Admin APIs
+            https://api.businesscentral.dynamics.com/.default: Access Business Central APIs
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+      description: Bearer token obtained from Microsoft Entra ID
 externalDocs:
-  description: Administration Center API Documentation
-  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api
+  description: Business Central API v2.0 Documentation
+  url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/
