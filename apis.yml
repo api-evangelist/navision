@@ -1212,7 +1212,7 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
   baseURL: https://{server}:{port}/{instance}/api/{version}
   tags:
-  - PermissionSets
+  - Permission Sets
   tags_raw:
   - Permission Sets
   properties:
