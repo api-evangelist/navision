@@ -1,4 +1,5 @@
 name: Microsoft Dynamics NAV
+x-parent: microsoft-dynamics-365
 description: >-
   API collection for Microsoft Dynamics NAV (formerly Navision), an enterprise resource planning (ERP) solution for
   small and medium-sized businesses. Dynamics NAV has evolved into Dynamics 365 Business Central, which provides modern
@@ -1858,6 +1859,8 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: Website
+    url: https://www.microsoft.com/
   - type: CapabilityMap
     url: capabilities/navision-capability-edges.yml
     name: Microsoft Dynamics NAV Business Capability Map
