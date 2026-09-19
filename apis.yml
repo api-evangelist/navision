@@ -703,6 +703,8 @@ apis:
   humanURL: https://learn.microsoft.com/en-us/dynamics-nav/web-services
   baseURL: https://{server}:{port}/{instance}/api/{version}
   tags:
+  - Environment
+  tags_raw:
   - Environments
   properties:
   - type: OpenAPI
