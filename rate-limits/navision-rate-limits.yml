@@ -1,140 +1,21 @@
-specification: API Commons Rate Limits
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
-provider: Microsoft Dynamics NAV
-providerId: navision
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: true
-tags:
-  - Rate Limiting
-  - ERP
-  - Microsoft
-  - Navision
-  - Dynamics NAV
-description: Microsoft Dynamics NAV's modern successor — Dynamics 365 Business Central — publishes operational
-  limits per environment and per user for OData v4, REST API, and SOAP endpoints. Production environments
-  allow 600 requests/min/environment (legacy) and 6,000 requests per 5-minute sliding window per user.
-  Sandbox environments are capped at 300 requests/min. Throttling returns HTTP 429 with retry guidance;
-  504/503 may indicate queueing or timeout.
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/dynamics-rate-limits
 sources:
-  - https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/operational-limits-online
-  - https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/dynamics-rate-limits
-responseCodes:
-  throttled: 429
-  payloadTooLarge: 413
-  requestTimeout: 408
-  serviceUnavailable: 503
+- https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/dynamics-rate-limits
+provenance:
+  tool: planning/api-economics/harvest_ratelimits.py
+  run: 20260920T133210
+  grounding: every limit_text was found verbatim in the fetched page text
+published: true
+note: Page describes throttling conceptually; states HTTP 429 on exceeding request limits and 504 Gateway
+  Timeout for requests exceeding the 10-minute execution time. No numeric request-per-time-window rate
+  limits are given.
+limit_count: 1
 limits:
-  - name: OData speed (rate) — per user
-    scope: user
-    metric: requests_per_5_minutes
-    limit: 6000
-    timeFrame: minute
-    notes: 5-minute sliding window. Distribute load across multiple users / service principals.
-  - name: OData speed (rate) — production (legacy per-environment)
-    scope: environment
-    metric: requests_per_minute
-    limit: 600
-    timeFrame: minute
-    notes: Legacy per-environment limit superseded by per-user limits in late 2023.
-  - name: OData speed (rate) — sandbox (legacy per-environment)
-    scope: environment
-    metric: requests_per_minute
-    limit: 300
-    timeFrame: minute
-  - name: OData max concurrent requests — per user
-    scope: user
-    metric: concurrent_requests
-    limit: 5
-  - name: OData max connections — per user
-    scope: user
-    metric: concurrent_requests
-    limit: 100
-    notes: Includes processed and queued requests; exceeds returns 429.
-  - name: OData max request queue size — per user
-    scope: user
-    metric: queued_requests
-    limit: 95
-  - name: OData max page size
-    scope: environment
-    metric: entities_per_response
-    limit: 20000
-    notes: Returns 413 Request Entity Too Large.
-  - name: OData max body size
-    scope: environment
-    metric: mb_per_request
-    limit: 350
-  - name: OData max batch size
-    scope: environment
-    metric: operations_per_batch
-    limit: 100
-  - name: OData operation timeout
-    scope: environment
-    metric: minutes
-    limit: 8
-    notes: Returns 408 Request Timeout.
-  - name: SOAP speed (rate) — per user
-    scope: user
-    metric: requests_per_5_minutes
-    limit: 6000
-    timeFrame: minute
-    notes: SOAP endpoints scheduled for deprecation; prefer OData / REST API.
-  - name: SOAP max concurrent requests
-    scope: environment
-    metric: concurrent_requests
-    limit: 5
-  - name: SOAP max connections
-    scope: environment
-    metric: concurrent_requests
-    limit: 100
-  - name: SOAP max message size
-    scope: environment
-    metric: kb_per_request
-    limit: 65536
-  - name: Webhook subscriptions
-    scope: environment
-    metric: subscriptions
-    limit: 200
-  - name: Max file upload size
-    scope: environment
-    metric: mb_per_file
-    limit: 350
-  - name: Companies per environment
-    scope: environment
-    metric: companies
-    limit: 300
-  - name: Background sessions concurrency
-    scope: environment
-    metric: concurrent_sessions
-    limit: 10
-  - name: Background sessions queue length
-    scope: environment
-    metric: queued_sessions
-    limit: 100
-  - name: Scheduled tasks (per user)
-    scope: user
-    metric: concurrent_tasks
-    limit: 5
-policies:
-  - name: 429 throttling and retry
-    description: Exceeding rate or queue limits returns HTTP 429 Too Many Requests. Implement retry logic
-      with exponential backoff; honor Retry-After when present.
-  - name: 503 queue timeout
-    description: When the concurrent-request queue is saturated, requests wait up to 8 minutes; if not
-      processed they return 503 Service Temporarily Unavailable.
-  - name: Per-user fan-out
-    description: Per-user limits are strict. Spread workload across multiple users or service principals
-      using round-robin to scale beyond a single user's quota.
-  - name: SOAP deprecation
-    description: SOAP endpoints have reduced throughput targets and are slated for deprecation; migrate
-      to REST API or OData v4.
-  - name: Sandbox vs production
-    description: Sandbox environments have lower legacy per-environment caps (300 vs 600 rpm). Do not
-      load-test in sandbox.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- name: Request execution time limit
+  limit_text: Request execution time is limited to 10 minutes
+  limit: 10
+  scope: unclear
+exceeded_status: 429
