@@ -1,136 +1,49 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Microsoft Dynamics NAV
-providerId: navision
-created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: true
-tags:
-  - Business Management
-  - Dynamics NAV
-  - ERP
-  - Finance
-  - Microsoft
-  - Navision
-description: Microsoft Dynamics NAV (Navision) is the predecessor to Microsoft Dynamics 365 Business
-  Central, which is the active commercial offering. Pricing is per-user-per-month subscription with two
-  full-user SKUs (Essentials, Premium) and a limited-access Team Members SKU. Annual commitment is required.
-  Copilot Credits are sold separately. The legacy on-premises Dynamics NAV product is no longer sold;
-  customers receive a 30-day free trial.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.microsoft.com/en-us/dynamics-365/products/business-central/pricing
 sources:
-  - https://www.microsoft.com/en-us/dynamics-365/products/business-central/pricing
-  - https://www.microsoft.com/dynamics-365/
+- https://www.microsoft.com/en-us/dynamics-365/products/business-central/pricing
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: per-seat
+published: true
+note: Per-user subscription pricing for Business Central; Copilot Credits priced elsewhere (no numbers
+  shown except a $200.00 Azure free account credit). Prices stated as informational only.
+plan_count: 6
+currency: USD
 plans:
-  - id: navision-trial
-    name: Free Trial
-    type: freemium
-    description: 30-day free trial of Dynamics 365 Business Central.
-    entries:
-      - label: Trial period
-        name: trial
-        type: flat
-        metric: month
-        limit: 1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Connect finance, sales, service, and operations
-      - name: Single easy-to-use solution
-  - id: navision-team-members
-    name: Business Central Team Members
-    type: subscription
-    description: Limited-access SKU for users who only read data, approve workflows, or update select
-      information.
-    entries:
-      - label: Team Member subscription
-        name: team_members_seat
-        type: subscription
-        metric: seat
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '8.00'
-        userMultiplied: true
-    elements:
-      - name: Read data
-      - name: Approve workflows
-      - name: Create or update select information
-      - name: Annual commitment required
-  - id: navision-essentials
-    name: Business Central Essentials
-    type: subscription
-    description: Full-user SKU covering finance, sales, fulfillment, purchasing, inventory, supply chain
-      planning, project management, warehouse management, and service order management.
-    entries:
-      - label: Essentials subscription
-        name: essentials_seat
-        type: subscription
-        metric: seat
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '80.00'
-        userMultiplied: true
-    elements:
-      - name: Finance
-      - name: Sales
-      - name: Fulfillment
-      - name: Purchasing
-      - name: Inventory
-      - name: Supply chain planning
-      - name: Project management
-      - name: Warehouse management
-      - name: Service order management
-      - name: Multiple environments / companies
-      - name: Microsoft Copilot included (credits separate)
-      - name: Annual commitment required
-  - id: navision-premium
-    name: Business Central Premium
-    type: subscription
-    description: Full-user SKU adding service management and manufacturing on top of Essentials.
-    entries:
-      - label: Premium subscription
-        name: premium_seat
-        type: subscription
-        metric: seat
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: '110.00'
-        userMultiplied: true
-    elements:
-      - name: All Essentials features
-      - name: Service management
-      - name: Manufacturing
-      - name: Microsoft Copilot included (credits separate)
-      - name: Annual commitment required
-  - id: navision-copilot-credits
-    name: Microsoft Copilot Credits
-    type: usage-based
-    description: Copilot AI agent capacity is sold separately and billed via consumed credits.
-    entries:
-      - label: Copilot Credits
-        name: copilot_credits
-        type: metered
-        metric: credit
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: see Microsoft Copilot Credit pricing
-        userMultiplied: false
-    elements:
-      - name: Required for AI agents in Business Central
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- name: Dynamics 365 Business Central free trial
+  price_text: Free
+  period: none
+  included_quota: Get a free 30-day trial.
+- name: Dynamics 365 Business Central Essentials
+  price_text: $80.00 user/month, paid yearly
+  price: 80
+  currency: USD
+  period: month
+  unit: user
+- name: Dynamics 365 Business Central Premium
+  price_text: $110.00 user/month, paid yearly
+  price: 110
+  currency: USD
+  period: month
+  unit: user
+- name: Dynamics 365 Business Central Team Members
+  price_text: $8.00 user/month, paid yearly
+  price: 8
+  currency: USD
+  period: month
+  unit: user
+- name: Microsoft Copilot Studio pre-purchase plan
+  price_text: Pre-purchase plan
+  period: none
+  unit: Copilot Credit Commit Units
+  overage: Save up to 20% with an upfront purchase of Copilot Credit Commit Units
+- name: Microsoft Copilot Studio pay-as-you-go
+  price_text: Pay-as-you-go
+  period: per-use
+  unit: Copilot Credits
