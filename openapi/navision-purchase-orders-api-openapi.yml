@@ -505,125 +505,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PurchaseOrderLine:
-      type: object
-      properties:
-        '@odata.etag':
-          type: string
-          example: example_value
-        id:
-          type: string
-          format: uuid
-          example: abc123
-        documentId:
-          type: string
-          format: uuid
-          example: '500123'
-        sequence:
-          type: integer
-          example: 10
-        itemId:
-          type: string
-          format: uuid
-          example: '500123'
-        accountId:
-          type: string
-          format: uuid
-          example: '500123'
-        lineType:
-          type: string
-          enum:
-          - Comment
-          - Account
-          - Item
-          - Fixed Asset
-          - Charge
-          example: Comment
-        lineObjectNumber:
-          type: string
-          maxLength: 20
-          example: example_value
-        description:
-          type: string
-          maxLength: 100
-          example: A sample description.
-        description2:
-          type: string
-          maxLength: 50
-          example: example_value
-        unitOfMeasureId:
-          type: string
-          format: uuid
-          example: '500123'
-        unitOfMeasureCode:
-          type: string
-          maxLength: 10
-          example: example_value
-        quantity:
-          type: number
-          format: decimal
-          example: 42.5
-        directUnitCost:
-          type: number
-          format: decimal
-          example: 42.5
-        discountAmount:
-          type: number
-          format: decimal
-          example: 42.5
-        discountPercent:
-          type: number
-          format: decimal
-          example: 42.5
-        discountAppliedBeforeTax:
-          type: boolean
-          example: true
-        amountExcludingTax:
-          type: number
-          format: decimal
-          readOnly: true
-          example: 42.5
-        taxCode:
-          type: string
-          maxLength: 20
-          example: example_value
-        taxPercent:
-          type: number
-          format: decimal
-          readOnly: true
-          example: 42.5
-        totalTaxAmount:
-          type: number
-          format: decimal
-          readOnly: true
-          example: 42.5
-        amountIncludingTax:
-          type: number
-          format: decimal
-          readOnly: true
-          example: 42.5
-        expectedReceiptDate:
-          type: string
-          format: date
-          example: '2026-01-15'
-        receivedQuantity:
-          type: number
-          format: decimal
-          readOnly: true
-          example: 42.5
-        invoicedQuantity:
-          type: number
-          format: decimal
-          readOnly: true
-          example: 42.5
-        invoiceQuantity:
-          type: number
-          format: decimal
-          example: 42.5
-        receiveQuantity:
-          type: number
-          format: decimal
-          example: 42.5
     ErrorResponse:
       type: object
       properties:
@@ -637,32 +518,6 @@ components:
               type: string
               description: A human-readable error message
           example: example_value
-    PurchaseOrderCreate:
-      type: object
-      properties:
-        orderDate:
-          type: string
-          format: date
-          example: '2026-01-15'
-        vendorId:
-          type: string
-          format: uuid
-          example: '500123'
-        vendorNumber:
-          type: string
-          maxLength: 20
-          example: example_value
-        currencyCode:
-          type: string
-          maxLength: 10
-          example: example_value
-        pricesIncludeTax:
-          type: boolean
-          example: true
-        requestedReceiptDate:
-          type: string
-          format: date
-          example: '2026-01-15'
     PurchaseOrder:
       type: object
       properties:
@@ -846,54 +701,152 @@ components:
           type: string
           format: date
           example: '2026-01-15'
+    PurchaseOrderCreate:
+      type: object
+      properties:
+        orderDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+        vendorId:
+          type: string
+          format: uuid
+          example: '500123'
+        vendorNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        currencyCode:
+          type: string
+          maxLength: 10
+          example: example_value
+        pricesIncludeTax:
+          type: boolean
+          example: true
+        requestedReceiptDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+    PurchaseOrderLine:
+      type: object
+      properties:
+        '@odata.etag':
+          type: string
+          example: example_value
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        documentId:
+          type: string
+          format: uuid
+          example: '500123'
+        sequence:
+          type: integer
+          example: 10
+        itemId:
+          type: string
+          format: uuid
+          example: '500123'
+        accountId:
+          type: string
+          format: uuid
+          example: '500123'
+        lineType:
+          type: string
+          enum:
+          - Comment
+          - Account
+          - Item
+          - Fixed Asset
+          - Charge
+          example: Comment
+        lineObjectNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        description:
+          type: string
+          maxLength: 100
+          example: A sample description.
+        description2:
+          type: string
+          maxLength: 50
+          example: example_value
+        unitOfMeasureId:
+          type: string
+          format: uuid
+          example: '500123'
+        unitOfMeasureCode:
+          type: string
+          maxLength: 10
+          example: example_value
+        quantity:
+          type: number
+          format: decimal
+          example: 42.5
+        directUnitCost:
+          type: number
+          format: decimal
+          example: 42.5
+        discountAmount:
+          type: number
+          format: decimal
+          example: 42.5
+        discountPercent:
+          type: number
+          format: decimal
+          example: 42.5
+        discountAppliedBeforeTax:
+          type: boolean
+          example: true
+        amountExcludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        taxCode:
+          type: string
+          maxLength: 20
+          example: example_value
+        taxPercent:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        totalTaxAmount:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        amountIncludingTax:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        expectedReceiptDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+        receivedQuantity:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        invoicedQuantity:
+          type: number
+          format: decimal
+          readOnly: true
+          example: 42.5
+        invoiceQuantity:
+          type: number
+          format: decimal
+          example: 42.5
+        receiveQuantity:
+          type: number
+          format: decimal
+          example: 42.5
   parameters:
-    select:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include in the response
-      schema:
-        type: string
-    top:
-      name: $top
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        minimum: 0
-    ifMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: ETag value for optimistic concurrency control
-      schema:
-        type: string
-    skip:
-      name: $skip
-      in: query
-      description: Number of items to skip
-      schema:
-        type: integer
-        minimum: 0
-    filter:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
-    orderby:
-      name: $orderby
-      in: query
-      description: OData order by expression
-      schema:
-        type: string
     purchaseOrder_id:
       name: purchaseOrder_id
       in: path
@@ -908,9 +861,56 @@ components:
       description: Related entities to expand inline
       schema:
         type: string
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    orderby:
+      name: $orderby
+      in: query
+      description: OData order by expression
+      schema:
+        type: string
+    top:
+      name: $top
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        minimum: 0
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    skip:
+      name: $skip
+      in: query
+      description: Number of items to skip
+      schema:
+        type: integer
+        minimum: 0
   responses:
-    NotFound:
-      description: Resource not found
+    BadRequest:
+      description: Bad request - invalid input
       content:
         application/json:
           schema:
@@ -921,8 +921,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:

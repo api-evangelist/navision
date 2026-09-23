@@ -347,14 +347,16 @@ paths:
           description: The Business Central server instance name
 components:
   schemas:
-    AutomationCompanyUpdate:
+    ErrorResponse:
       type: object
       properties:
-        name:
-          type: string
-          example: Example Title
-        displayName:
-          type: string
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
           example: example_value
     AutomationCompanyCreate:
       type: object
@@ -373,6 +375,15 @@ components:
         businessProfileId:
           type: string
           example: '500123'
+    AutomationCompanyUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        displayName:
+          type: string
+          example: example_value
     Company:
       type: object
       properties:
@@ -389,17 +400,6 @@ components:
         businessProfileId:
           type: string
           example: '500123'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-          example: example_value
     AutomationCompany:
       type: object
       properties:
@@ -423,6 +423,19 @@ components:
           type: boolean
           description: Whether this is an evaluation company
           example: true
+    ErrorResponse_2:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
     Company_2:
       type: object
       properties:
@@ -447,22 +460,9 @@ components:
           type: string
           description: The business profile ID
           example: '500123'
-    ErrorResponse_2:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: A stable error code
-            message:
-              type: string
-              description: A human-readable error message
-          example: example_value
   responses:
-    NotFound:
-      description: Resource not found
+    BadRequest:
+      description: Bad request - invalid input
       content:
         application/json:
           schema:
@@ -473,20 +473,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    ifMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: ETag value for optimistic concurrency control
-      schema:
-        type: string
     company_id:
       name: company_id
       in: path
@@ -495,10 +488,23 @@ components:
       schema:
         type: string
         format: uuid
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
     select:
       name: $select
       in: query
       description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
       schema:
         type: string
     top:
@@ -515,12 +521,6 @@ components:
       schema:
         type: integer
         minimum: 0
-    filter:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
   securitySchemes:
     oauth2:
       type: oauth2

@@ -349,70 +349,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CustomerUpdate:
+    ErrorResponse:
       type: object
       properties:
-        displayName:
-          type: string
-          maxLength: 100
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
           example: example_value
-        type:
-          type: string
-          enum:
-          - Person
-          - Company
-          example: Person
-        addressLine1:
-          type: string
-          maxLength: 100
-          example: example_value
-        addressLine2:
-          type: string
-          maxLength: 50
-          example: example_value
-        city:
-          type: string
-          maxLength: 30
-          example: example_value
-        state:
-          type: string
-          maxLength: 20
-          example: example_value
-        country:
-          type: string
-          maxLength: 10
-          example: example_value
-        postalCode:
-          type: string
-          maxLength: 20
-          example: example_value
-        phoneNumber:
-          type: string
-          maxLength: 30
-          example: example_value
-        email:
-          type: string
-          maxLength: 80
-          example: user@example.com
-        website:
-          type: string
-          maxLength: 80
-          example: example_value
-        taxLiable:
-          type: boolean
-          example: true
-        creditLimit:
-          type: number
-          format: decimal
-          example: 42.5
-        blocked:
-          type: string
-          enum:
-          - ' '
-          - Ship
-          - Invoice
-          - All
-          example: ' '
     CustomerCreate:
       type: object
       required:
@@ -487,19 +436,70 @@ components:
           - Invoice
           - All
           example: ' '
-    ErrorResponse:
+    CustomerUpdate:
       type: object
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: A stable error code
-            message:
-              type: string
-              description: A human-readable error message
+        displayName:
+          type: string
+          maxLength: 100
           example: example_value
+        type:
+          type: string
+          enum:
+          - Person
+          - Company
+          example: Person
+        addressLine1:
+          type: string
+          maxLength: 100
+          example: example_value
+        addressLine2:
+          type: string
+          maxLength: 50
+          example: example_value
+        city:
+          type: string
+          maxLength: 30
+          example: example_value
+        state:
+          type: string
+          maxLength: 20
+          example: example_value
+        country:
+          type: string
+          maxLength: 10
+          example: example_value
+        postalCode:
+          type: string
+          maxLength: 20
+          example: example_value
+        phoneNumber:
+          type: string
+          maxLength: 30
+          example: example_value
+        email:
+          type: string
+          maxLength: 80
+          example: user@example.com
+        website:
+          type: string
+          maxLength: 80
+          example: example_value
+        taxLiable:
+          type: boolean
+          example: true
+        creditLimit:
+          type: number
+          format: decimal
+          example: 42.5
+        blocked:
+          type: string
+          enum:
+          - ' '
+          - Ship
+          - Invoice
+          - All
+          example: ' '
     Customer:
       type: object
       properties:
@@ -650,27 +650,12 @@ components:
           readOnly: true
           example: '2026-01-15T10:30:00Z'
   parameters:
-    select:
-      name: $select
+    expand:
+      name: $expand
       in: query
-      description: Comma-separated list of properties to include in the response
+      description: Related entities to expand inline
       schema:
         type: string
-    customer_id:
-      name: customer_id
-      in: path
-      required: true
-      description: The unique identifier of the customer
-      schema:
-        type: string
-        format: uuid
-    top:
-      name: $top
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        minimum: 0
     ifMatch:
       name: If-Match
       in: header
@@ -678,17 +663,16 @@ components:
       description: ETag value for optimistic concurrency control
       schema:
         type: string
-    skip:
-      name: $skip
-      in: query
-      description: Number of items to skip
-      schema:
-        type: integer
-        minimum: 0
     filter:
       name: $filter
       in: query
       description: OData filter expression
+      schema:
+        type: string
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
       schema:
         type: string
     orderby:
@@ -705,15 +689,31 @@ components:
       schema:
         type: string
         format: uuid
-    expand:
-      name: $expand
+    top:
+      name: $top
       in: query
-      description: Related entities to expand inline
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        minimum: 0
+    customer_id:
+      name: customer_id
+      in: path
+      required: true
+      description: The unique identifier of the customer
       schema:
         type: string
+        format: uuid
+    skip:
+      name: $skip
+      in: query
+      description: Number of items to skip
+      schema:
+        type: integer
+        minimum: 0
   responses:
-    NotFound:
-      description: Resource not found
+    BadRequest:
+      description: Bad request - invalid input
       content:
         application/json:
           schema:
@@ -724,8 +724,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:

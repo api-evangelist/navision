@@ -316,46 +316,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ItemUpdate:
+    ErrorResponse:
       type: object
       properties:
-        displayName:
-          type: string
-          maxLength: 100
-          example: example_value
-        type:
-          type: string
-          enum:
-          - Inventory
-          - Service
-          - Non-Inventory
-          example: Inventory
-        itemCategoryCode:
-          type: string
-          maxLength: 20
-          example: example_value
-        blocked:
-          type: boolean
-          example: true
-        gtin:
-          type: string
-          maxLength: 14
-          example: example_value
-        unitPrice:
-          type: number
-          format: decimal
-          example: 42.5
-        unitCost:
-          type: number
-          format: decimal
-          example: 42.5
-        taxGroupCode:
-          type: string
-          maxLength: 20
-          example: example_value
-        baseUnitOfMeasureCode:
-          type: string
-          maxLength: 10
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
           example: example_value
     Item:
       type: object
@@ -471,6 +443,47 @@ components:
           format: date-time
           readOnly: true
           example: '2026-01-15T10:30:00Z'
+    ItemUpdate:
+      type: object
+      properties:
+        displayName:
+          type: string
+          maxLength: 100
+          example: example_value
+        type:
+          type: string
+          enum:
+          - Inventory
+          - Service
+          - Non-Inventory
+          example: Inventory
+        itemCategoryCode:
+          type: string
+          maxLength: 20
+          example: example_value
+        blocked:
+          type: boolean
+          example: true
+        gtin:
+          type: string
+          maxLength: 14
+          example: example_value
+        unitPrice:
+          type: number
+          format: decimal
+          example: 42.5
+        unitCost:
+          type: number
+          format: decimal
+          example: 42.5
+        taxGroupCode:
+          type: string
+          maxLength: 20
+          example: example_value
+        baseUnitOfMeasureCode:
+          type: string
+          maxLength: 10
+          example: example_value
     ItemCreate:
       type: object
       required:
@@ -518,26 +531,15 @@ components:
           type: string
           maxLength: 10
           example: example_value
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: A stable error code
-            message:
-              type: string
-              description: A human-readable error message
-          example: example_value
   parameters:
-    select:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include in the response
+    item_id:
+      name: item_id
+      in: path
+      required: true
+      description: The unique identifier of the item
       schema:
         type: string
+        format: uuid
     ifMatch:
       name: If-Match
       in: header
@@ -545,24 +547,16 @@ components:
       description: ETag value for optimistic concurrency control
       schema:
         type: string
-    skip:
-      name: $skip
-      in: query
-      description: Number of items to skip
-      schema:
-        type: integer
-        minimum: 0
-    top:
-      name: $top
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        minimum: 0
     filter:
       name: $filter
       in: query
       description: OData filter expression
+      schema:
+        type: string
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
       schema:
         type: string
     orderby:
@@ -579,17 +573,23 @@ components:
       schema:
         type: string
         format: uuid
-    item_id:
-      name: item_id
-      in: path
-      required: true
-      description: The unique identifier of the item
+    top:
+      name: $top
+      in: query
+      description: Maximum number of items to return
       schema:
-        type: string
-        format: uuid
+        type: integer
+        minimum: 0
+    skip:
+      name: $skip
+      in: query
+      description: Number of items to skip
+      schema:
+        type: integer
+        minimum: 0
   responses:
-    NotFound:
-      description: Resource not found
+    BadRequest:
+      description: Bad request - invalid input
       content:
         application/json:
           schema:
@@ -600,8 +600,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:

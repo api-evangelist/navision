@@ -199,6 +199,13 @@ components:
           - Add
           - Force Sync
           example: Add
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     company_id:
       name: company_id
@@ -215,13 +222,6 @@ components:
       description: ETag value for optimistic concurrency control
       schema:
         type: string
-  responses:
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Business Central Administration Center Environment Operations API
+  title: Business Central Administration Center Environment…
   description: REST API for programmatic administration of Dynamics 365 Business Central environments. Enables querying and managing production and sandbox environments, setting up administrative notifications, viewing tenant telemetry, managing apps, scheduling updates, and performing environment operations such as copy, rename, restore, and delete.
   version: '2.28'
   contact:
@@ -112,23 +112,33 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    environmentName:
-      name: environmentName
-      in: path
-      required: true
-      description: The name of the environment
-      schema:
-        type: string
-    applicationFamily:
-      name: applicationFamily
-      in: path
-      required: true
-      description: The application family (e.g., BusinessCentral)
-      schema:
-        type: string
-        default: BusinessCentral
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: A stable error code describing the type and nature of the error
+          example: example_value
+        message:
+          type: string
+          description: A readable description of the error and cause
+          example: example_value
+        target:
+          type: string
+          description: Information about what part of the request caused the error
+          example: example_value
+        extensionData:
+          type: object
+          description: Additional key/value information about the error
+          additionalProperties: true
+          example: example_value
+        clientError:
+          type: array
+          description: Nested list of error objects with more details
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+          example: []
     EnvironmentOperation:
       type: object
       properties:
@@ -214,32 +224,6 @@ components:
           type: string
           description: Product family of the affected environment
           example: example_value
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: string
-          description: A stable error code describing the type and nature of the error
-          example: example_value
-        message:
-          type: string
-          description: A readable description of the error and cause
-          example: example_value
-        target:
-          type: string
-          description: Information about what part of the request caused the error
-          example: example_value
-        extensionData:
-          type: object
-          description: Additional key/value information about the error
-          additionalProperties: true
-          example: example_value
-        clientError:
-          type: array
-          description: Nested list of error objects with more details
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-          example: []
   responses:
     Unauthorized:
       description: Unauthorized - authentication required
@@ -247,6 +231,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    environmentName:
+      name: environmentName
+      in: path
+      required: true
+      description: The name of the environment
+      schema:
+        type: string
+    applicationFamily:
+      name: applicationFamily
+      in: path
+      required: true
+      description: The application family (e.g., BusinessCentral)
+      schema:
+        type: string
+        default: BusinessCentral
   securitySchemes:
     oauth2:
       type: oauth2

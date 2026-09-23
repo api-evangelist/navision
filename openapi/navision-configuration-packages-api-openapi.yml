@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Business Central Automation API v2.0 Configuration Packages API
+  title: Business Central Automation API v2.0 Configuration Packages…
   description: API for automating company setup and tenant management in Dynamics 365 Business Central. Supports creating companies, installing and managing extensions, assigning permission sets to users, uploading and applying RapidStart packages, managing user groups and security groups, and activating features programmatically.
   version: '2.0'
   contact:
@@ -233,29 +233,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    ifMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: ETag value for optimistic concurrency control
-      schema:
-        type: string
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
-  responses:
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     ErrorResponse:
       type: object
@@ -325,6 +302,29 @@ components:
           - Completed
           - Error
           example: ' '
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

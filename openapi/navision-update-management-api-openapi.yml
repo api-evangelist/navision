@@ -87,36 +87,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    environmentName:
-      name: environmentName
-      in: path
-      required: true
-      description: The name of the environment
-      schema:
-        type: string
-    applicationFamily:
-      name: applicationFamily
-      in: path
-      required: true
-      description: The application family (e.g., BusinessCentral)
-      schema:
-        type: string
-        default: BusinessCentral
   schemas:
-    UpdateSettings:
-      type: object
-      properties:
-        preferredStartTimeUtc:
-          type: string
-          format: time
-          description: Preferred start time for the update window (UTC)
-          example: example_value
-        preferredEndTimeUtc:
-          type: string
-          format: time
-          description: Preferred end time for the update window (UTC)
-          example: example_value
     ErrorResponse:
       type: object
       properties:
@@ -169,6 +140,19 @@ components:
         ignoreUpgradeWindow:
           type: boolean
           example: true
+    UpdateSettings:
+      type: object
+      properties:
+        preferredStartTimeUtc:
+          type: string
+          format: time
+          description: Preferred start time for the update window (UTC)
+          example: example_value
+        preferredEndTimeUtc:
+          type: string
+          format: time
+          description: Preferred end time for the update window (UTC)
+          example: example_value
   responses:
     Unauthorized:
       description: Unauthorized - authentication required
@@ -176,6 +160,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    environmentName:
+      name: environmentName
+      in: path
+      required: true
+      description: The name of the environment
+      schema:
+        type: string
+    applicationFamily:
+      name: applicationFamily
+      in: path
+      required: true
+      description: The application family (e.g., BusinessCentral)
+      schema:
+        type: string
+        default: BusinessCentral
   securitySchemes:
     oauth2:
       type: oauth2

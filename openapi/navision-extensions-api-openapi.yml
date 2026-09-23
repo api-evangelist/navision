@@ -153,6 +153,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+          example: example_value
     Extension:
       type: object
       properties:
@@ -202,26 +213,14 @@ components:
           - Dev
           - PTE
           example: Global
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-          example: example_value
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    extension_id:
-      name: extension_id
-      in: path
-      required: true
-      description: The package ID of the extension
-      schema:
-        type: string
-        format: uuid
     company_id:
       name: company_id
       in: path
@@ -230,13 +229,14 @@ components:
       schema:
         type: string
         format: uuid
-  responses:
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    extension_id:
+      name: extension_id
+      in: path
+      required: true
+      description: The package ID of the extension
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     oauth2:
       type: oauth2

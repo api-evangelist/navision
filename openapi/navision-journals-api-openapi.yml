@@ -190,6 +190,69 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
+    Journal:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        code:
+          type: string
+          maxLength: 10
+          example: example_value
+        displayName:
+          type: string
+          maxLength: 100
+          example: example_value
+        templateDisplayName:
+          type: string
+          maxLength: 100
+          example: example_value
+        lastModifiedDateTime:
+          type: string
+          format: date-time
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        balancingAccountId:
+          type: string
+          format: uuid
+          example: '500123'
+        balancingAccountNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+    JournalCreate:
+      type: object
+      required:
+      - code
+      - displayName
+      properties:
+        code:
+          type: string
+          maxLength: 10
+          example: example_value
+        displayName:
+          type: string
+          maxLength: 100
+          example: example_value
+        templateDisplayName:
+          type: string
+          maxLength: 100
+          example: example_value
     JournalLine:
       type: object
       properties:
@@ -265,76 +328,40 @@ components:
           format: date-time
           readOnly: true
           example: '2026-01-15T10:30:00Z'
-    JournalCreate:
-      type: object
-      required:
-      - code
-      - displayName
-      properties:
-        code:
-          type: string
-          maxLength: 10
-          example: example_value
-        displayName:
-          type: string
-          maxLength: 100
-          example: example_value
-        templateDisplayName:
-          type: string
-          maxLength: 100
-          example: example_value
-    Journal:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: abc123
-        code:
-          type: string
-          maxLength: 10
-          example: example_value
-        displayName:
-          type: string
-          maxLength: 100
-          example: example_value
-        templateDisplayName:
-          type: string
-          maxLength: 100
-          example: example_value
-        lastModifiedDateTime:
-          type: string
-          format: date-time
-          readOnly: true
-          example: '2026-01-15T10:30:00Z'
-        balancingAccountId:
-          type: string
-          format: uuid
-          example: '500123'
-        balancingAccountNumber:
-          type: string
-          maxLength: 20
-          example: example_value
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: A stable error code
-            message:
-              type: string
-              description: A human-readable error message
-          example: example_value
+  responses:
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
     select:
       name: $select
       in: query
       description: Comma-separated list of properties to include in the response
       schema:
         type: string
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
     top:
       name: $top
       in: query
@@ -349,33 +376,6 @@ components:
       schema:
         type: integer
         minimum: 0
-    filter:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
-  responses:
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

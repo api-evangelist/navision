@@ -53,7 +53,8 @@
     "admin-center-api.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "automation-api.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "business-central-api-v2.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tag 'Companies' spans 2 source specs (automation-api.yml, business-central-api-v2.yml): per-path servers applied"
+    "tag 'Companies' spans 2 source specs (automation-api.yml, business-central-api-v2.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "navision-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",

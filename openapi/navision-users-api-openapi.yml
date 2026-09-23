@@ -188,44 +188,31 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    ifMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: ETag value for optimistic concurrency control
-      schema:
-        type: string
-    user_id:
-      name: user_id
-      in: path
-      required: true
-      description: The user security ID
-      schema:
-        type: string
-        format: uuid
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+          example: example_value
+    UserUpdate:
+      type: object
+      properties:
+        state:
+          type: string
+          enum:
+          - Enabled
+          - Disabled
+          example: Enabled
+        expiryDate:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
     User:
       type: object
       properties:
@@ -254,30 +241,43 @@ components:
           format: date-time
           description: The user expiry date
           example: '2026-01-15T10:30:00Z'
-    UserUpdate:
-      type: object
-      properties:
-        state:
-          type: string
-          enum:
-          - Enabled
-          - Disabled
-          example: Enabled
-        expiryDate:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-          example: example_value
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    user_id:
+      name: user_id
+      in: path
+      required: true
+      description: The user security ID
+      schema:
+        type: string
+        format: uuid
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2
