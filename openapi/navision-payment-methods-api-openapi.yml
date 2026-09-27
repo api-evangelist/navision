@@ -113,18 +113,6 @@ components:
           readOnly: true
           example: '2026-01-15T10:30:00Z'
   parameters:
-    select:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include in the response
-      schema:
-        type: string
-    filter:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
     company_id:
       name: company_id
       in: path
@@ -133,6 +121,12 @@ components:
       schema:
         type: string
         format: uuid
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
     top:
       name: $top
       in: query
@@ -147,6 +141,12 @@ components:
       schema:
         type: integer
         minimum: 0
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Unauthorized - authentication required

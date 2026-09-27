@@ -150,19 +150,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: A stable error code
-            message:
-              type: string
-              description: A human-readable error message
-          example: example_value
     PurchaseInvoice:
       type: object
       properties:
@@ -236,6 +223,19 @@ components:
           format: date-time
           readOnly: true
           example: '2026-01-15T10:30:00Z'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
     PurchaseInvoiceCreate:
       type: object
       properties:
@@ -258,31 +258,20 @@ components:
         pricesIncludeTax:
           type: boolean
           example: true
+  responses:
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    expand:
-      name: $expand
-      in: query
-      description: Related entities to expand inline
-      schema:
-        type: string
-    select:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include in the response
-      schema:
-        type: string
-    filter:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    orderby:
-      name: $orderby
-      in: query
-      description: OData order by expression
-      schema:
-        type: string
     company_id:
       name: company_id
       in: path
@@ -291,6 +280,24 @@ components:
       schema:
         type: string
         format: uuid
+    expand:
+      name: $expand
+      in: query
+      description: Related entities to expand inline
+      schema:
+        type: string
+    orderby:
+      name: $orderby
+      in: query
+      description: OData order by expression
+      schema:
+        type: string
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
     top:
       name: $top
       in: query
@@ -305,19 +312,12 @@ components:
       schema:
         type: integer
         minimum: 0
-  responses:
-    BadRequest:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

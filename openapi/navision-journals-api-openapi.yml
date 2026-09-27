@@ -342,18 +342,6 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    filter:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    select:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include in the response
-      schema:
-        type: string
     company_id:
       name: company_id
       in: path
@@ -362,6 +350,12 @@ components:
       schema:
         type: string
         format: uuid
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
     top:
       name: $top
       in: query
@@ -376,6 +370,12 @@ components:
       schema:
         type: integer
         minimum: 0
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

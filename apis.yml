@@ -2045,3 +2045,9 @@ common:
   - type: Rules
     url: rules/navision-spectral-rules.yml
     title: Spectral Rules
+x-status: deprecated
+x-status-basis: 'learn.microsoft.com/en-us/lifecycle/products/dynamics-nav-2018 (fetched 2026-09-24): Dynamics NAV 2018 follows the Fixed Lifecycle Policy; mainstream support ended 2023-01-11 and extended support ends 2028-01-12. NAV 2018 is the last NAV release; Microsoft documents the upgrade and migration path from Dynamics NAV to Business Central. roadmap#752'
+x-mainstream-end: '2023-01-11'
+x-sunset-date: '2028-01-12'
+x-successor: Microsoft Dynamics 365 Business Central
+x-successor-url: https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/migrate-nav

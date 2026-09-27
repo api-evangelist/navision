@@ -320,6 +320,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
     VendorUpdate:
       type: object
       properties:
@@ -373,19 +386,73 @@ components:
           - Payment
           - All
           example: ' '
-    ErrorResponse:
+    VendorCreate:
       type: object
+      required:
+      - displayName
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: A stable error code
-            message:
-              type: string
-              description: A human-readable error message
+        number:
+          type: string
+          maxLength: 20
           example: example_value
+        displayName:
+          type: string
+          maxLength: 100
+          example: example_value
+        addressLine1:
+          type: string
+          maxLength: 100
+          example: example_value
+        addressLine2:
+          type: string
+          maxLength: 50
+          example: example_value
+        city:
+          type: string
+          maxLength: 30
+          example: example_value
+        state:
+          type: string
+          maxLength: 20
+          example: example_value
+        country:
+          type: string
+          maxLength: 10
+          example: example_value
+        postalCode:
+          type: string
+          maxLength: 20
+          example: example_value
+        phoneNumber:
+          type: string
+          maxLength: 30
+          example: example_value
+        email:
+          type: string
+          maxLength: 80
+          example: user@example.com
+        website:
+          type: string
+          maxLength: 80
+          example: example_value
+        taxRegistrationNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        currencyCode:
+          type: string
+          maxLength: 10
+          example: example_value
+        taxLiable:
+          type: boolean
+          example: true
+        blocked:
+          type: string
+          enum:
+          - ' '
+          - Payment
+          - All
+          example: ' '
     Vendor:
       type: object
       properties:
@@ -500,82 +567,9 @@ components:
           format: date-time
           readOnly: true
           example: '2026-01-15T10:30:00Z'
-    VendorCreate:
-      type: object
-      required:
-      - displayName
-      properties:
-        number:
-          type: string
-          maxLength: 20
-          example: example_value
-        displayName:
-          type: string
-          maxLength: 100
-          example: example_value
-        addressLine1:
-          type: string
-          maxLength: 100
-          example: example_value
-        addressLine2:
-          type: string
-          maxLength: 50
-          example: example_value
-        city:
-          type: string
-          maxLength: 30
-          example: example_value
-        state:
-          type: string
-          maxLength: 20
-          example: example_value
-        country:
-          type: string
-          maxLength: 10
-          example: example_value
-        postalCode:
-          type: string
-          maxLength: 20
-          example: example_value
-        phoneNumber:
-          type: string
-          maxLength: 30
-          example: example_value
-        email:
-          type: string
-          maxLength: 80
-          example: user@example.com
-        website:
-          type: string
-          maxLength: 80
-          example: example_value
-        taxRegistrationNumber:
-          type: string
-          maxLength: 20
-          example: example_value
-        currencyCode:
-          type: string
-          maxLength: 10
-          example: example_value
-        taxLiable:
-          type: boolean
-          example: true
-        blocked:
-          type: string
-          enum:
-          - ' '
-          - Payment
-          - All
-          example: ' '
   responses:
     BadRequest:
       description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - authentication required
       content:
         application/json:
           schema:
@@ -586,32 +580,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    ifMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: ETag value for optimistic concurrency control
-      schema:
-        type: string
-    filter:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    select:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include in the response
-      schema:
-        type: string
-    orderby:
-      name: $orderby
-      in: query
-      description: OData order by expression
-      schema:
-        type: string
     company_id:
       name: company_id
       in: path
@@ -620,6 +595,12 @@ components:
       schema:
         type: string
         format: uuid
+    orderby:
+      name: $orderby
+      in: query
+      description: OData order by expression
+      schema:
+        type: string
     vendor_id:
       name: vendor_id
       in: path
@@ -628,6 +609,12 @@ components:
       schema:
         type: string
         format: uuid
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
     top:
       name: $top
       in: query
@@ -642,6 +629,19 @@ components:
       schema:
         type: integer
         minimum: 0
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

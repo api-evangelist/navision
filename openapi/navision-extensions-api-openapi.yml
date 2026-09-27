@@ -152,6 +152,23 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    extension_id:
+      name: extension_id
+      in: path
+      required: true
+      description: The package ID of the extension
+      schema:
+        type: string
+        format: uuid
   schemas:
     ErrorResponse:
       type: object
@@ -220,23 +237,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
-    extension_id:
-      name: extension_id
-      in: path
-      required: true
-      description: The package ID of the extension
-      schema:
-        type: string
-        format: uuid
   securitySchemes:
     oauth2:
       type: oauth2

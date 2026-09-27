@@ -531,6 +531,49 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    SalesOrderUpdate:
+      type: object
+      properties:
+        externalDocumentNumber:
+          type: string
+          maxLength: 35
+          example: example_value
+        orderDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+        customerId:
+          type: string
+          format: uuid
+          example: '500123'
+        customerNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        currencyCode:
+          type: string
+          maxLength: 10
+          example: example_value
+        pricesIncludeTax:
+          type: boolean
+          example: true
+        requestedDeliveryDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
     SalesOrderLine:
       type: object
       properties:
@@ -666,79 +709,6 @@ components:
           type: number
           format: decimal
           example: 42.5
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: A stable error code
-            message:
-              type: string
-              description: A human-readable error message
-          example: example_value
-    SalesOrderCreate:
-      type: object
-      properties:
-        externalDocumentNumber:
-          type: string
-          maxLength: 35
-          example: example_value
-        orderDate:
-          type: string
-          format: date
-          example: '2026-01-15'
-        customerId:
-          type: string
-          format: uuid
-          example: '500123'
-        customerNumber:
-          type: string
-          maxLength: 20
-          example: example_value
-        currencyCode:
-          type: string
-          maxLength: 10
-          example: example_value
-        pricesIncludeTax:
-          type: boolean
-          example: true
-        requestedDeliveryDate:
-          type: string
-          format: date
-          example: '2026-01-15'
-    SalesOrderUpdate:
-      type: object
-      properties:
-        externalDocumentNumber:
-          type: string
-          maxLength: 35
-          example: example_value
-        orderDate:
-          type: string
-          format: date
-          example: '2026-01-15'
-        customerId:
-          type: string
-          format: uuid
-          example: '500123'
-        customerNumber:
-          type: string
-          maxLength: 20
-          example: example_value
-        currencyCode:
-          type: string
-          maxLength: 10
-          example: example_value
-        pricesIncludeTax:
-          type: boolean
-          example: true
-        requestedDeliveryDate:
-          type: string
-          format: date
-          example: '2026-01-15'
     SalesOrder:
       type: object
       properties:
@@ -916,32 +886,64 @@ components:
           items:
             $ref: '#/components/schemas/SalesOrderLine'
           example: []
+    SalesOrderCreate:
+      type: object
+      properties:
+        externalDocumentNumber:
+          type: string
+          maxLength: 35
+          example: example_value
+        orderDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+        customerId:
+          type: string
+          format: uuid
+          example: '500123'
+        customerNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        currencyCode:
+          type: string
+          maxLength: 10
+          example: example_value
+        pricesIncludeTax:
+          type: boolean
+          example: true
+        requestedDeliveryDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+  responses:
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    expand:
-      name: $expand
-      in: query
-      description: Related entities to expand inline
-      schema:
-        type: string
-    ifMatch:
-      name: If-Match
-      in: header
+    salesOrder_id:
+      name: salesOrder_id
+      in: path
       required: true
-      description: ETag value for optimistic concurrency control
+      description: The unique identifier of the sales order
       schema:
         type: string
-    filter:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    select:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include in the response
-      schema:
-        type: string
+        format: uuid
     orderby:
       name: $orderby
       in: query
@@ -956,6 +958,18 @@ components:
       schema:
         type: string
         format: uuid
+    expand:
+      name: $expand
+      in: query
+      description: Related entities to expand inline
+      schema:
+        type: string
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
     top:
       name: $top
       in: query
@@ -963,14 +977,6 @@ components:
       schema:
         type: integer
         minimum: 0
-    salesOrder_id:
-      name: salesOrder_id
-      in: path
-      required: true
-      description: The unique identifier of the sales order
-      schema:
-        type: string
-        format: uuid
     skip:
       name: $skip
       in: query
@@ -978,25 +984,19 @@ components:
       schema:
         type: integer
         minimum: 0
-  responses:
-    BadRequest:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

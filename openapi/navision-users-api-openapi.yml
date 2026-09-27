@@ -200,19 +200,6 @@ components:
             message:
               type: string
           example: example_value
-    UserUpdate:
-      type: object
-      properties:
-        state:
-          type: string
-          enum:
-          - Enabled
-          - Disabled
-          example: Enabled
-        expiryDate:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
     User:
       type: object
       properties:
@@ -241,19 +228,19 @@ components:
           format: date-time
           description: The user expiry date
           example: '2026-01-15T10:30:00Z'
-  responses:
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    UserUpdate:
+      type: object
+      properties:
+        state:
+          type: string
+          enum:
+          - Enabled
+          - Disabled
+          example: Enabled
+        expiryDate:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
   parameters:
     company_id:
       name: company_id
@@ -278,6 +265,19 @@ components:
       description: ETag value for optimistic concurrency control
       schema:
         type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2
