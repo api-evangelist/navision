@@ -81,19 +81,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: A stable error code
-            message:
-              type: string
-              description: A human-readable error message
-          example: example_value
     VendorPaymentJournal:
       type: object
       properties:
@@ -122,19 +109,30 @@ components:
           type: string
           maxLength: 20
           example: example_value
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
   parameters:
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
     filter:
       name: $filter
       in: query
       description: OData filter expression
+      schema:
+        type: string
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
       schema:
         type: string
     top:
@@ -144,6 +142,14 @@ components:
       schema:
         type: integer
         minimum: 0
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
     skip:
       name: $skip
       in: query
@@ -151,12 +157,6 @@ components:
       schema:
         type: integer
         minimum: 0
-    select:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include in the response
-      schema:
-        type: string
   responses:
     Unauthorized:
       description: Unauthorized - authentication required

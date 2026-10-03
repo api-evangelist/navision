@@ -152,35 +152,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
-    extension_id:
-      name: extension_id
-      in: path
-      required: true
-      description: The package ID of the extension
-      schema:
-        type: string
-        format: uuid
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-          example: example_value
     Extension:
       type: object
       properties:
@@ -230,6 +202,34 @@ components:
           - Dev
           - PTE
           example: Global
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+          example: example_value
+  parameters:
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    extension_id:
+      name: extension_id
+      in: path
+      required: true
+      description: The package ID of the extension
+      schema:
+        type: string
+        format: uuid
   responses:
     Unauthorized:
       description: Unauthorized - authentication required

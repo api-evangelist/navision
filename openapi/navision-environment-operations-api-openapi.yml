@@ -225,13 +225,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
           example: []
   parameters:
-    environmentName:
-      name: environmentName
-      in: path
-      required: true
-      description: The name of the environment
-      schema:
-        type: string
     applicationFamily:
       name: applicationFamily
       in: path
@@ -240,6 +233,13 @@ components:
       schema:
         type: string
         default: BusinessCentral
+    environmentName:
+      name: environmentName
+      in: path
+      required: true
+      description: The name of the environment
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Unauthorized - authentication required

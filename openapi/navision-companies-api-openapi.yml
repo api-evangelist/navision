@@ -347,43 +347,6 @@ paths:
           description: The Business Central server instance name
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-          example: example_value
-    AutomationCompanyCreate:
-      type: object
-      required:
-      - name
-      - displayName
-      properties:
-        name:
-          type: string
-          description: The name of the new company
-          example: Example Title
-        displayName:
-          type: string
-          description: The display name of the new company
-          example: example_value
-        businessProfileId:
-          type: string
-          example: '500123'
-    AutomationCompanyUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Example Title
-        displayName:
-          type: string
-          example: example_value
     AutomationCompany:
       type: object
       properties:
@@ -407,6 +370,43 @@ components:
           type: boolean
           description: Whether this is an evaluation company
           example: true
+    AutomationCompanyUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Example Title
+        displayName:
+          type: string
+          example: example_value
+    AutomationCompanyCreate:
+      type: object
+      required:
+      - name
+      - displayName
+      properties:
+        name:
+          type: string
+          description: The name of the new company
+          example: Example Title
+        displayName:
+          type: string
+          description: The display name of the new company
+          example: example_value
+        businessProfileId:
+          type: string
+          example: '500123'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+          example: example_value
     Company:
       type: object
       properties:
@@ -480,6 +480,13 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
     company_id:
       name: company_id
       in: path
@@ -488,17 +495,16 @@ components:
       schema:
         type: string
         format: uuid
-    ifMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: ETag value for optimistic concurrency control
-      schema:
-        type: string
     filter:
       name: $filter
       in: query
       description: OData filter expression
+      schema:
+        type: string
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
       schema:
         type: string
     top:
@@ -515,12 +521,6 @@ components:
       schema:
         type: integer
         minimum: 0
-    select:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include in the response
-      schema:
-        type: string
   securitySchemes:
     oauth2:
       type: oauth2

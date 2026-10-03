@@ -315,20 +315,26 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: A stable error code
-            message:
-              type: string
-              description: A human-readable error message
-          example: example_value
     ItemCreate:
       type: object
       required:
@@ -490,6 +496,19 @@ components:
           format: date-time
           readOnly: true
           example: '2026-01-15T10:30:00Z'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
     ItemUpdate:
       type: object
       properties:
@@ -531,38 +550,11 @@ components:
           type: string
           maxLength: 10
           example: example_value
-  responses:
-    BadRequest:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
-    orderby:
-      name: $orderby
+    select:
+      name: $select
       in: query
-      description: OData order by expression
+      description: Comma-separated list of properties to include in the response
       schema:
         type: string
     filter:
@@ -571,6 +563,13 @@ components:
       description: OData filter expression
       schema:
         type: string
+    top:
+      name: $top
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        minimum: 0
     item_id:
       name: item_id
       in: path
@@ -579,13 +578,21 @@ components:
       schema:
         type: string
         format: uuid
-    top:
-      name: $top
-      in: query
-      description: Maximum number of items to return
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
       schema:
-        type: integer
-        minimum: 0
+        type: string
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
     skip:
       name: $skip
       in: query
@@ -593,17 +600,10 @@ components:
       schema:
         type: integer
         minimum: 0
-    select:
-      name: $select
+    orderby:
+      name: $orderby
       in: query
-      description: Comma-separated list of properties to include in the response
-      schema:
-        type: string
-    ifMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: ETag value for optimistic concurrency control
+      description: OData order by expression
       schema:
         type: string
   securitySchemes:

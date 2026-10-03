@@ -119,33 +119,23 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    applicationFamily:
+      name: applicationFamily
+      in: path
+      required: true
+      description: The application family (e.g., BusinessCentral)
+      schema:
+        type: string
+        default: BusinessCentral
+    environmentName:
+      name: environmentName
+      in: path
+      required: true
+      description: The name of the environment
+      schema:
+        type: string
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: string
-          description: A stable error code describing the type and nature of the error
-          example: example_value
-        message:
-          type: string
-          description: A readable description of the error and cause
-          example: example_value
-        target:
-          type: string
-          description: Information about what part of the request caused the error
-          example: example_value
-        extensionData:
-          type: object
-          description: Additional key/value information about the error
-          additionalProperties: true
-          example: example_value
-        clientError:
-          type: array
-          description: Nested list of error objects with more details
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-          example: []
     UsedStorage:
       type: object
       properties:
@@ -192,22 +182,32 @@ components:
               type: integer
               description: Total allowed storage
           example: example_value
-  parameters:
-    environmentName:
-      name: environmentName
-      in: path
-      required: true
-      description: The name of the environment
-      schema:
-        type: string
-    applicationFamily:
-      name: applicationFamily
-      in: path
-      required: true
-      description: The application family (e.g., BusinessCentral)
-      schema:
-        type: string
-        default: BusinessCentral
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: A stable error code describing the type and nature of the error
+          example: example_value
+        message:
+          type: string
+          description: A readable description of the error and cause
+          example: example_value
+        target:
+          type: string
+          description: Information about what part of the request caused the error
+          example: example_value
+        extensionData:
+          type: object
+          description: Additional key/value information about the error
+          additionalProperties: true
+          example: example_value
+        clientError:
+          type: array
+          description: Nested list of error objects with more details
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+          example: []
   responses:
     Unauthorized:
       description: Unauthorized - authentication required

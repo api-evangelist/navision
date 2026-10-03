@@ -149,7 +149,89 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    top:
+      name: $top
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        minimum: 0
+    expand:
+      name: $expand
+      in: query
+      description: Related entities to expand inline
+      schema:
+        type: string
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    skip:
+      name: $skip
+      in: query
+      description: Number of items to skip
+      schema:
+        type: integer
+        minimum: 0
+    orderby:
+      name: $orderby
+      in: query
+      description: OData order by expression
+      schema:
+        type: string
   schemas:
+    PurchaseInvoiceCreate:
+      type: object
+      properties:
+        invoiceDate:
+          type: string
+          format: date
+          example: '2026-01-15'
+        vendorId:
+          type: string
+          format: uuid
+          example: '500123'
+        vendorNumber:
+          type: string
+          maxLength: 20
+          example: example_value
+        currencyCode:
+          type: string
+          maxLength: 10
+          example: example_value
+        pricesIncludeTax:
+          type: boolean
+          example: true
     PurchaseInvoice:
       type: object
       properties:
@@ -236,88 +318,6 @@ components:
               type: string
               description: A human-readable error message
           example: example_value
-    PurchaseInvoiceCreate:
-      type: object
-      properties:
-        invoiceDate:
-          type: string
-          format: date
-          example: '2026-01-15'
-        vendorId:
-          type: string
-          format: uuid
-          example: '500123'
-        vendorNumber:
-          type: string
-          maxLength: 20
-          example: example_value
-        currencyCode:
-          type: string
-          maxLength: 10
-          example: example_value
-        pricesIncludeTax:
-          type: boolean
-          example: true
-  responses:
-    BadRequest:
-      description: Bad request - invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
-    expand:
-      name: $expand
-      in: query
-      description: Related entities to expand inline
-      schema:
-        type: string
-    orderby:
-      name: $orderby
-      in: query
-      description: OData order by expression
-      schema:
-        type: string
-    filter:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    top:
-      name: $top
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        minimum: 0
-    skip:
-      name: $skip
-      in: query
-      description: Number of items to skip
-      schema:
-        type: integer
-        minimum: 0
-    select:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include in the response
-      schema:
-        type: string
   securitySchemes:
     oauth2:
       type: oauth2

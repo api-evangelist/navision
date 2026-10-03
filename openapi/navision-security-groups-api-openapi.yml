@@ -74,27 +74,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-          example: example_value
     SecurityGroup:
       type: object
       properties:
@@ -115,6 +95,26 @@ components:
           type: string
           description: The security group display name
           example: example_value
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+          example: example_value
+  parameters:
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
   responses:
     Unauthorized:
       description: Unauthorized - authentication required

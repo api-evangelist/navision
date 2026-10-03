@@ -166,6 +166,34 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    PermissionSet:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        roleId:
+          type: string
+          description: The permission set role ID
+          example: '500123'
+        displayName:
+          type: string
+          description: The permission set display name
+          example: example_value
+        scope:
+          type: string
+          enum:
+          - System
+          - Tenant
+          example: System
+        appId:
+          type: string
+          format: uuid
+          example: '500123'
+        extensionName:
+          type: string
+          example: example_value
     ErrorResponse:
       type: object
       properties:
@@ -206,48 +234,20 @@ components:
           type: string
           format: uuid
           example: '500123'
-    PermissionSet:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: abc123
-        roleId:
-          type: string
-          description: The permission set role ID
-          example: '500123'
-        displayName:
-          type: string
-          description: The permission set display name
-          example: example_value
-        scope:
-          type: string
-          enum:
-          - System
-          - Tenant
-          example: System
-        appId:
-          type: string
-          format: uuid
-          example: '500123'
-        extensionName:
-          type: string
-          example: example_value
   parameters:
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
     user_id:
       name: user_id
       in: path
       required: true
       description: The user security ID
+      schema:
+        type: string
+        format: uuid
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
       schema:
         type: string
         format: uuid
