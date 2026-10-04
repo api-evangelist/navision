@@ -214,19 +214,19 @@ components:
               type: string
           example: example_value
   parameters:
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
     extension_id:
       name: extension_id
       in: path
       required: true
       description: The package ID of the extension
+      schema:
+        type: string
+        format: uuid
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
       schema:
         type: string
         format: uuid

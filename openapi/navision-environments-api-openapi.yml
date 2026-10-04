@@ -702,6 +702,84 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    RestorePeriod:
+      type: object
+      properties:
+        from:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        to:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        correspondingApplicationPackageVersion:
+          type: string
+          example: example_value
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: A stable error code describing the type and nature of the error
+          example: example_value
+        message:
+          type: string
+          description: A readable description of the error and cause
+          example: example_value
+        target:
+          type: string
+          description: Information about what part of the request caused the error
+          example: example_value
+        extensionData:
+          type: object
+          description: Additional key/value information about the error
+          additionalProperties: true
+          example: example_value
+        clientError:
+          type: array
+          description: Nested list of error objects with more details
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+          example: []
+    RestoreEnvironmentRequest:
+      type: object
+      required:
+      - EnvironmentName
+      - EnvironmentType
+      - PointInTime
+      properties:
+        EnvironmentName:
+          type: string
+          description: Name of the new restored environment
+          example: example_value
+        EnvironmentType:
+          type: string
+          description: Type of the new environment
+          enum:
+          - Production
+          - Sandbox
+          example: Production
+        PointInTime:
+          type: string
+          format: date-time
+          description: Point in time to restore to (ISO 8601 UTC)
+          example: '2026-01-15T10:30:00Z'
+        SkipInstallingPTEs:
+          type: boolean
+          description: Whether to uninstall per-tenant extensions
+          default: false
+          example: true
+        SkipInstallingThirdPartyGlobalApps:
+          type: boolean
+          description: Whether to uninstall third-party AppSource apps
+          default: false
+          example: true
+        SkipEnvironmentCleanup:
+          type: boolean
+          description: Whether to skip execution of cleanup codeunits
+          default: false
+          example: true
     EnvironmentOperation:
       type: object
       properties:
@@ -787,20 +865,23 @@ components:
           type: string
           description: Product family of the affected environment
           example: example_value
-    RestorePeriod:
+    CopyEnvironmentRequest:
       type: object
+      required:
+      - environmentName
+      - type
       properties:
-        from:
+        environmentName:
           type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        to:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        correspondingApplicationPackageVersion:
-          type: string
+          description: Name for the new environment
           example: example_value
+        type:
+          type: string
+          description: Type of environment to create
+          enum:
+          - Production
+          - Sandbox
+          example: Production
     CreateEnvironmentRequest:
       type: object
       required:
@@ -826,87 +907,6 @@ components:
           type: string
           description: Application version (e.g., 26.0.0.0)
           example: example_value
-    CopyEnvironmentRequest:
-      type: object
-      required:
-      - environmentName
-      - type
-      properties:
-        environmentName:
-          type: string
-          description: Name for the new environment
-          example: example_value
-        type:
-          type: string
-          description: Type of environment to create
-          enum:
-          - Production
-          - Sandbox
-          example: Production
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: string
-          description: A stable error code describing the type and nature of the error
-          example: example_value
-        message:
-          type: string
-          description: A readable description of the error and cause
-          example: example_value
-        target:
-          type: string
-          description: Information about what part of the request caused the error
-          example: example_value
-        extensionData:
-          type: object
-          description: Additional key/value information about the error
-          additionalProperties: true
-          example: example_value
-        clientError:
-          type: array
-          description: Nested list of error objects with more details
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-          example: []
-    RestoreEnvironmentRequest:
-      type: object
-      required:
-      - EnvironmentName
-      - EnvironmentType
-      - PointInTime
-      properties:
-        EnvironmentName:
-          type: string
-          description: Name of the new restored environment
-          example: example_value
-        EnvironmentType:
-          type: string
-          description: Type of the new environment
-          enum:
-          - Production
-          - Sandbox
-          example: Production
-        PointInTime:
-          type: string
-          format: date-time
-          description: Point in time to restore to (ISO 8601 UTC)
-          example: '2026-01-15T10:30:00Z'
-        SkipInstallingPTEs:
-          type: boolean
-          description: Whether to uninstall per-tenant extensions
-          default: false
-          example: true
-        SkipInstallingThirdPartyGlobalApps:
-          type: boolean
-          description: Whether to uninstall third-party AppSource apps
-          default: false
-          example: true
-        SkipEnvironmentCleanup:
-          type: boolean
-          description: Whether to skip execution of cleanup codeunits
-          default: false
-          example: true
     Environment:
       type: object
       properties:
@@ -1015,6 +1015,13 @@ components:
               description: When the enforced update period starts
           example: example_value
   parameters:
+    environmentName:
+      name: environmentName
+      in: path
+      required: true
+      description: The name of the environment
+      schema:
+        type: string
     applicationFamily:
       name: applicationFamily
       in: path
@@ -1023,13 +1030,6 @@ components:
       schema:
         type: string
         default: BusinessCentral
-    environmentName:
-      name: environmentName
-      in: path
-      required: true
-      description: The name of the environment
-      schema:
-        type: string
   responses:
     Unauthorized:
       description: Unauthorized - authentication required

@@ -166,6 +166,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+          example: example_value
     PermissionSet:
       type: object
       properties:
@@ -193,17 +204,6 @@ components:
           example: '500123'
         extensionName:
           type: string
-          example: example_value
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
           example: example_value
     UserPermission:
       type: object

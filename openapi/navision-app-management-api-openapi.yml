@@ -249,6 +249,96 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    AppUpdateRequest:
+      type: object
+      properties:
+        targetVersion:
+          type: string
+          description: Target version to update to
+          example: example_value
+        allowPreviewVersion:
+          type: boolean
+          description: Whether to allow preview versions
+          example: true
+        ignoreUpgradeWindow:
+          type: boolean
+          description: Whether to ignore the update window
+          example: true
+        allowDependencyUpdate:
+          type: boolean
+          description: Whether to also update dependent apps
+          example: true
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: A stable error code describing the type and nature of the error
+          example: example_value
+        message:
+          type: string
+          description: A readable description of the error and cause
+          example: example_value
+        target:
+          type: string
+          description: Information about what part of the request caused the error
+          example: example_value
+        extensionData:
+          type: object
+          description: Additional key/value information about the error
+          additionalProperties: true
+          example: example_value
+        clientError:
+          type: array
+          description: Nested list of error objects with more details
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+          example: []
+    AppInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        name:
+          type: string
+          example: Example Title
+        publisher:
+          type: string
+          example: example_value
+        version:
+          type: string
+          example: example_value
+        state:
+          type: string
+          example: example_value
+        lastOperationId:
+          type: string
+          format: uuid
+          example: '500123'
+        lastUpdateAttemptResult:
+          type: string
+          example: example_value
+    AppInstallRequest:
+      type: object
+      properties:
+        targetVersion:
+          type: string
+          description: Version to install
+          example: example_value
+        allowPreviewVersion:
+          type: boolean
+          description: Whether to allow preview versions
+          example: true
+        acceptIsvEula:
+          type: boolean
+          description: Whether the ISV EULA is accepted
+          example: true
+        allowDependencyUpdate:
+          type: boolean
+          description: Whether to also update dependent apps
+          example: true
     EnvironmentOperation:
       type: object
       properties:
@@ -334,97 +424,14 @@ components:
           type: string
           description: Product family of the affected environment
           example: example_value
-    AppInfo:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: abc123
-        name:
-          type: string
-          example: Example Title
-        publisher:
-          type: string
-          example: example_value
-        version:
-          type: string
-          example: example_value
-        state:
-          type: string
-          example: example_value
-        lastOperationId:
-          type: string
-          format: uuid
-          example: '500123'
-        lastUpdateAttemptResult:
-          type: string
-          example: example_value
-    AppInstallRequest:
-      type: object
-      properties:
-        targetVersion:
-          type: string
-          description: Version to install
-          example: example_value
-        allowPreviewVersion:
-          type: boolean
-          description: Whether to allow preview versions
-          example: true
-        acceptIsvEula:
-          type: boolean
-          description: Whether the ISV EULA is accepted
-          example: true
-        allowDependencyUpdate:
-          type: boolean
-          description: Whether to also update dependent apps
-          example: true
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: string
-          description: A stable error code describing the type and nature of the error
-          example: example_value
-        message:
-          type: string
-          description: A readable description of the error and cause
-          example: example_value
-        target:
-          type: string
-          description: Information about what part of the request caused the error
-          example: example_value
-        extensionData:
-          type: object
-          description: Additional key/value information about the error
-          additionalProperties: true
-          example: example_value
-        clientError:
-          type: array
-          description: Nested list of error objects with more details
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-          example: []
-    AppUpdateRequest:
-      type: object
-      properties:
-        targetVersion:
-          type: string
-          description: Target version to update to
-          example: example_value
-        allowPreviewVersion:
-          type: boolean
-          description: Whether to allow preview versions
-          example: true
-        ignoreUpgradeWindow:
-          type: boolean
-          description: Whether to ignore the update window
-          example: true
-        allowDependencyUpdate:
-          type: boolean
-          description: Whether to also update dependent apps
-          example: true
   parameters:
+    environmentName:
+      name: environmentName
+      in: path
+      required: true
+      description: The name of the environment
+      schema:
+        type: string
     applicationFamily:
       name: applicationFamily
       in: path
@@ -433,13 +440,6 @@ components:
       schema:
         type: string
         default: BusinessCentral
-    environmentName:
-      name: environmentName
-      in: path
-      required: true
-      description: The name of the environment
-      schema:
-        type: string
   responses:
     Unauthorized:
       description: Unauthorized - authentication required

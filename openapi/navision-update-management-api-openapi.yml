@@ -87,49 +87,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    applicationFamily:
-      name: applicationFamily
-      in: path
-      required: true
-      description: The application family (e.g., BusinessCentral)
-      schema:
-        type: string
-        default: BusinessCentral
-    environmentName:
-      name: environmentName
-      in: path
-      required: true
-      description: The name of the environment
-      schema:
-        type: string
   schemas:
-    ScheduledUpgrade:
-      type: object
-      properties:
-        environmentName:
-          type: string
-          example: example_value
-        upgradeIsScheduled:
-          type: boolean
-          example: true
-        scheduledDate:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        registeredDate:
-          type: string
-          format: date-time
-          example: '2026-01-15T10:30:00Z'
-        targetVersion:
-          type: string
-          example: example_value
-        canTenantSelectDate:
-          type: boolean
-          example: true
-        ignoreUpgradeWindow:
-          type: boolean
-          example: true
     ErrorResponse:
       type: object
       properties:
@@ -169,6 +127,48 @@ components:
           format: time
           description: Preferred end time for the update window (UTC)
           example: example_value
+    ScheduledUpgrade:
+      type: object
+      properties:
+        environmentName:
+          type: string
+          example: example_value
+        upgradeIsScheduled:
+          type: boolean
+          example: true
+        scheduledDate:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        registeredDate:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        targetVersion:
+          type: string
+          example: example_value
+        canTenantSelectDate:
+          type: boolean
+          example: true
+        ignoreUpgradeWindow:
+          type: boolean
+          example: true
+  parameters:
+    environmentName:
+      name: environmentName
+      in: path
+      required: true
+      description: The name of the environment
+      schema:
+        type: string
+    applicationFamily:
+      name: applicationFamily
+      in: path
+      required: true
+      description: The application family (e.g., BusinessCentral)
+      schema:
+        type: string
+        default: BusinessCentral
   responses:
     Unauthorized:
       description: Unauthorized - authentication required

@@ -82,6 +82,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
     Currency:
       type: object
       properties:
@@ -113,39 +126,7 @@ components:
           format: date-time
           readOnly: true
           example: '2026-01-15T10:30:00Z'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: A stable error code
-            message:
-              type: string
-              description: A human-readable error message
-          example: example_value
   parameters:
-    filter:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    select:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include in the response
-      schema:
-        type: string
-    top:
-      name: $top
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        minimum: 0
     company_id:
       name: company_id
       in: path
@@ -161,6 +142,25 @@ components:
       schema:
         type: integer
         minimum: 0
+    top:
+      name: $top
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        minimum: 0
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Unauthorized - authentication required
