@@ -1861,6 +1861,8 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: FinOps
+    url: finops/navision-finops.yml
   - type: RateLimits
     url: rate-limits/navision-rate-limits.yml
   - type: Plans
