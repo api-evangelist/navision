@@ -52,3 +52,60 @@ plans:
   price_text: Pay-as-you-go
   period: per-use
   unit: Copilot Credits
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  - seat
+  units:
+  - credit
+  - seat
+  plans:
+  - name: Dynamics 365 Business Central free trial
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Dynamics 365 Business Central Essentials
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Dynamics 365 Business Central Premium
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Dynamics 365 Business Central Team Members
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Microsoft Copilot Studio pre-purchase plan
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - none
+  - name: Microsoft Copilot Studio pay-as-you-go
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - other
