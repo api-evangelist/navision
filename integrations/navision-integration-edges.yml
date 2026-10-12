@@ -1,0 +1,18 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/navision/integrations
+- https://zapier.com/apps/microsoft-dynamics-nav/integrations
+- https://n8n.io/integrations/navision/
+- https://composio.dev/toolkits/navision
+- https://monid.ai/tools/navision
+checked:
+- https://composio.dev/toolkits/navision
+- https://monid.ai/tools/navision
+- https://n8n.io/integrations/navision/
+- https://zapier.com/apps/microsoft-dynamics-nav/integrations
+- https://zapier.com/apps/navision/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
