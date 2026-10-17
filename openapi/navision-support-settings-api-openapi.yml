@@ -53,7 +53,48 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    applicationFamily:
+      name: applicationFamily
+      in: path
+      required: true
+      description: The application family (e.g., BusinessCentral)
+      schema:
+        type: string
+        default: BusinessCentral
+    environmentName:
+      name: environmentName
+      in: path
+      required: true
+      description: The name of the environment
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    SupportSettings:
+      type: object
+      properties:
+        appId:
+          type: string
+          format: uuid
+          example: '500123'
+        supportUrl:
+          type: string
+          format: uri
+          example: https://www.example.com
+        supportEmail:
+          type: string
+          format: email
+          example: user@example.com
+        supportPhone:
+          type: string
+          example: example_value
     ErrorResponse:
       type: object
       properties:
@@ -80,47 +121,6 @@ components:
           items:
             $ref: '#/components/schemas/ErrorResponse'
           example: []
-    SupportSettings:
-      type: object
-      properties:
-        appId:
-          type: string
-          format: uuid
-          example: '500123'
-        supportUrl:
-          type: string
-          format: uri
-          example: https://www.example.com
-        supportEmail:
-          type: string
-          format: email
-          example: user@example.com
-        supportPhone:
-          type: string
-          example: example_value
-  parameters:
-    environmentName:
-      name: environmentName
-      in: path
-      required: true
-      description: The name of the environment
-      schema:
-        type: string
-    applicationFamily:
-      name: applicationFamily
-      in: path
-      required: true
-      description: The application family (e.g., BusinessCentral)
-      schema:
-        type: string
-        default: BusinessCentral
-  responses:
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2

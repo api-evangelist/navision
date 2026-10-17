@@ -119,7 +119,52 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    applicationFamily:
+      name: applicationFamily
+      in: path
+      required: true
+      description: The application family (e.g., BusinessCentral)
+      schema:
+        type: string
+        default: BusinessCentral
+    environmentName:
+      name: environmentName
+      in: path
+      required: true
+      description: The name of the environment
+      schema:
+        type: string
   schemas:
+    Quotas:
+      type: object
+      properties:
+        environmentsCount:
+          type: object
+          properties:
+            production:
+              type: integer
+              description: Maximum number of production environments
+            sandbox:
+              type: integer
+              description: Maximum number of sandbox environments
+          example: example_value
+        storageInKilobytes:
+          type: object
+          properties:
+            default:
+              type: integer
+              description: Default storage allowance
+            userLicenses:
+              type: integer
+              description: Storage based on user licenses
+            additionalCapacity:
+              type: integer
+              description: Storage from purchased add-ons
+            total:
+              type: integer
+              description: Total allowed storage
+          example: example_value
     ErrorResponse:
       type: object
       properties:
@@ -163,51 +208,6 @@ components:
           format: int64
           description: Used database storage in kilobytes
           example: 10
-    Quotas:
-      type: object
-      properties:
-        environmentsCount:
-          type: object
-          properties:
-            production:
-              type: integer
-              description: Maximum number of production environments
-            sandbox:
-              type: integer
-              description: Maximum number of sandbox environments
-          example: example_value
-        storageInKilobytes:
-          type: object
-          properties:
-            default:
-              type: integer
-              description: Default storage allowance
-            userLicenses:
-              type: integer
-              description: Storage based on user licenses
-            additionalCapacity:
-              type: integer
-              description: Storage from purchased add-ons
-            total:
-              type: integer
-              description: Total allowed storage
-          example: example_value
-  parameters:
-    environmentName:
-      name: environmentName
-      in: path
-      required: true
-      description: The name of the environment
-      schema:
-        type: string
-    applicationFamily:
-      name: applicationFamily
-      in: path
-      required: true
-      description: The application family (e.g., BusinessCentral)
-      schema:
-        type: string
-        default: BusinessCentral
   responses:
     Unauthorized:
       description: Unauthorized - authentication required

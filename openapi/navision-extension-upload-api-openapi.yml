@@ -142,34 +142,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    ifMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: ETag value for optimistic concurrency control
-      schema:
-        type: string
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-          example: example_value
     ExtensionUpload:
       type: object
       properties:
@@ -195,6 +168,17 @@ components:
         status:
           type: string
           readOnly: true
+          example: example_value
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
           example: example_value
     ExtensionUploadCreate:
       type: object
@@ -222,6 +206,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

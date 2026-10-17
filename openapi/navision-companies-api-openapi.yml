@@ -346,49 +346,23 @@ paths:
           default: BC
           description: The Business Central server instance name
 components:
-  parameters:
-    ifMatch:
-      name: If-Match
-      in: header
-      required: true
-      description: ETag value for optimistic concurrency control
-      schema:
-        type: string
-    company_id:
-      name: company_id
-      in: path
-      required: true
-      description: The unique identifier of the company
-      schema:
-        type: string
-        format: uuid
-    skip:
-      name: $skip
-      in: query
-      description: Number of items to skip
-      schema:
-        type: integer
-        minimum: 0
-    top:
-      name: $top
-      in: query
-      description: Maximum number of items to return
-      schema:
-        type: integer
-        minimum: 0
-    select:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to include in the response
-      schema:
-        type: string
-    filter:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
   schemas:
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: abc123
+        name:
+          type: string
+          example: Example Title
+        displayName:
+          type: string
+          example: example_value
+        businessProfileId:
+          type: string
+          example: '500123'
     ErrorResponse:
       type: object
       properties:
@@ -423,31 +397,6 @@ components:
           type: boolean
           description: Whether this is an evaluation company
           example: true
-    Company:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          example: abc123
-        name:
-          type: string
-          example: Example Title
-        displayName:
-          type: string
-          example: example_value
-        businessProfileId:
-          type: string
-          example: '500123'
-    AutomationCompanyUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Example Title
-        displayName:
-          type: string
-          example: example_value
     AutomationCompanyCreate:
       type: object
       required:
@@ -465,18 +414,14 @@ components:
         businessProfileId:
           type: string
           example: '500123'
-    ErrorResponse_2:
+    AutomationCompanyUpdate:
       type: object
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: A stable error code
-            message:
-              type: string
-              description: A human-readable error message
+        name:
+          type: string
+          example: Example Title
+        displayName:
+          type: string
           example: example_value
     Company_2:
       type: object
@@ -502,15 +447,22 @@ components:
           type: string
           description: The business profile ID
           example: '500123'
+    ErrorResponse_2:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: A stable error code
+            message:
+              type: string
+              description: A human-readable error message
+          example: example_value
   responses:
     NotFound:
       description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - invalid input
       content:
         application/json:
           schema:
@@ -521,6 +473,54 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request - invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    company_id:
+      name: company_id
+      in: path
+      required: true
+      description: The unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: ETag value for optimistic concurrency control
+      schema:
+        type: string
+    select:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to include in the response
+      schema:
+        type: string
+    skip:
+      name: $skip
+      in: query
+      description: Number of items to skip
+      schema:
+        type: integer
+        minimum: 0
+    top:
+      name: $top
+      in: query
+      description: Maximum number of items to return
+      schema:
+        type: integer
+        minimum: 0
+    filter:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

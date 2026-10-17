@@ -77,14 +77,18 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+          example: example_value
     ScheduledJob:
       type: object
       properties:
@@ -116,17 +120,6 @@ components:
           type: string
           format: date-time
           example: '2026-01-15T10:30:00Z'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-          example: example_value
   parameters:
     company_id:
       name: company_id
@@ -136,6 +129,13 @@ components:
       schema:
         type: string
         format: uuid
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     oauth2:
       type: oauth2
