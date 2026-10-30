@@ -1,4 +1,4 @@
-# Microsoft Dynamics NAV (navision)
+# Microsoft Dynamics NAV
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,259 +64,289 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
+> **No longer operating.** This company or product has shut down, been discontinued, or been deprecated. This profile is kept as a historical record and is not maintained or rated.
+
 API collection for Microsoft Dynamics NAV (formerly Navision), an enterprise resource planning (ERP) solution for small and medium-sized businesses. Dynamics NAV has evolved into Dynamics 365 Business Central, which provides modern REST, OData, and SOAP web services for business data integration.
 
-**APIs.json:** [https://dynamics.microsoft.com/nav-overview/](https://dynamics.microsoft.com/nav-overview/)
+**Areas:** Business Management · Dynamics NAV · ERP · Finance · Inventory · Microsoft · Navision
 
-## Tags
+## Microsoft Dynamics NAV on APIs.io (historical record)
 
-- Business Management
-- Dynamics NAV
-- ERP
-- Finance
-- Inventory
-- Microsoft
-- Navision
+Everything profiled for Microsoft Dynamics NAV is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/navision/](https://apis.io/providers/navision/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (40)
 
-- **Created:** 2024-01-20
-- **Modified:** 2026-05-19
+- [Dynamics NAV SOAP Web Services](https://apis.io/apis/navision/dynamics-nav-soap-web-services/) — SOAP-based web services for legacy integrations and business logic operations in Dynamics NAV. Exposes pages and codeunits with built-in CRUD operations and…
+- [Business Central REST API Web Services](https://apis.io/apis/navision/business-central-rest-api-web-services/) — RESTful web services layer for Business Central that provides the preferred integration method. Includes built-in APIs, custom API pages and queries, and…
+- [Microsoft Dynamics NAV Accounts API](https://apis.io/apis/navision/navision-accounts-api/) — Manage general ledger accounts
+- [Microsoft Dynamics NAV App Management API](https://apis.io/apis/navision/navision-app-management-api/) — Manage installed applications
+- [Microsoft Dynamics NAV Available Applications API](https://apis.io/apis/navision/navision-available-applications-api/) — Query available application versions and countries
+- [Microsoft Dynamics NAV Companies API](https://apis.io/apis/navision/navision-companies-api/) — Manage automation companies
+- [Microsoft Dynamics NAV Configuration Packages API](https://apis.io/apis/navision/navision-configuration-packages-api/) — Manage RapidStart configuration packages
+- [Microsoft Dynamics NAV Countries/Regions API](https://apis.io/apis/navision/navision-countries-regions-api/) — Manage country and region codes
+- [Microsoft Dynamics NAV Currency API](https://apis.io/apis/navision/navision-currency-api/) — Manage currencies and exchange rates
+- [Microsoft Dynamics NAV Customer Payments API](https://apis.io/apis/navision/navision-customer-payments-api/) — Manage customer payment journals
+- [Microsoft Dynamics NAV Customers API](https://apis.io/apis/navision/navision-customers-api/) — Manage customer records
+- [Microsoft Dynamics NAV Dimensions API](https://apis.io/apis/navision/navision-dimensions-api/) — Manage dimensions and dimension values
+- [Microsoft Dynamics NAV Employees API](https://apis.io/apis/navision/navision-employees-api/) — Manage employee records
+- [Microsoft Dynamics NAV Environment Operations API](https://apis.io/apis/navision/navision-environment-operations-api/) — View and track environment operations
+- [Microsoft Dynamics NAV Environment Settings API](https://apis.io/apis/navision/navision-environment-settings-api/) — Manage environment settings and configuration
+- [Microsoft Dynamics NAV Environments API](https://apis.io/apis/navision/navision-environments-api/) — Manage Business Central environments
+- [Microsoft Dynamics NAV Extension Deployment Status API](https://apis.io/apis/navision/navision-extension-deployment-status-api/) — Monitor extension installation progress
+- [Microsoft Dynamics NAV Extension Upload API](https://apis.io/apis/navision/navision-extension-upload-api/) — Upload and install per-tenant extensions
+- [Microsoft Dynamics NAV Extensions API](https://apis.io/apis/navision/navision-extensions-api/) — Manage installed extensions
+- [Microsoft Dynamics NAV Features API](https://apis.io/apis/navision/navision-features-api/) — Manage feature flags
+- [Microsoft Dynamics NAV Item Categories API](https://apis.io/apis/navision/navision-item-categories-api/) — Manage item categories
+- [Microsoft Dynamics NAV Items API](https://apis.io/apis/navision/navision-items-api/) — Manage inventory items
+- [Microsoft Dynamics NAV Journals API](https://apis.io/apis/navision/navision-journals-api/) — Manage general journals and journal lines
+- [Microsoft Dynamics NAV Notifications API](https://apis.io/apis/navision/navision-notifications-api/) — Manage administrative notifications
+- [Microsoft Dynamics NAV Payment Methods API](https://apis.io/apis/navision/navision-payment-methods-api/) — Manage payment methods
+- [Microsoft Dynamics NAV Payment Terms API](https://apis.io/apis/navision/navision-payment-terms-api/) — Manage payment terms
+- [Microsoft Dynamics NAV Permission Sets API](https://apis.io/apis/navision/navision-permission-sets-api/) — Manage permission sets and user permissions
+- [Microsoft Dynamics NAV Profiles API](https://apis.io/apis/navision/navision-profiles-api/) — Manage user profiles
+- [Microsoft Dynamics NAV Purchase Invoices API](https://apis.io/apis/navision/navision-purchase-invoices-api/) — Manage purchase invoices and lines
+- [Microsoft Dynamics NAV Purchase Orders API](https://apis.io/apis/navision/navision-purchase-orders-api/) — Manage purchase orders and lines
+- [Microsoft Dynamics NAV Sales Invoices API](https://apis.io/apis/navision/navision-sales-invoices-api/) — Manage sales invoices and lines
+- [Microsoft Dynamics NAV Sales Orders API](https://apis.io/apis/navision/navision-sales-orders-api/) — Manage sales orders and lines
+- [Microsoft Dynamics NAV Scheduled Jobs API](https://apis.io/apis/navision/navision-scheduled-jobs-api/) — View scheduled background jobs
+- [Microsoft Dynamics NAV Security Groups API](https://apis.io/apis/navision/navision-security-groups-api/) — Manage security groups
+- [Microsoft Dynamics NAV Storage API](https://apis.io/apis/navision/navision-storage-api/) — View storage usage and quotas
+- [Microsoft Dynamics NAV Support Settings API](https://apis.io/apis/navision/navision-support-settings-api/) — Manage support settings
+- [Microsoft Dynamics NAV Update Management API](https://apis.io/apis/navision/navision-update-management-api/) — Manage environment updates
+- [Microsoft Dynamics NAV Users API](https://apis.io/apis/navision/navision-users-api/) — Manage Business Central users
+- [Microsoft Dynamics NAV Vendor Payments API](https://apis.io/apis/navision/navision-vendor-payments-api/) — Manage vendor payment journals
+- [Microsoft Dynamics NAV Vendors API](https://apis.io/apis/navision/navision-vendors-api/) — Manage vendor records
 
-## APIs
+### Published properties
 
-### Dynamics NAV Web Services API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-SOAP and OData web services for interacting with Dynamics NAV business data. Supports publishing pages, codeunits, and queries as web services for external system integration.
+#### Arazzo workflows (8)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/dynamics-nav/web-services](https://learn.microsoft.com/en-us/dynamics-nav/web-services)
-- **Base URL:** `https://{server}:{port}/{instance}/api/{version}`
+Multi-step workflows that chain operations into a business task.
 
-#### Tags
+- [Business Central Create a Journal and Read Its Lines](https://apis.io/arazzos/navision/navision-create-journal-and-read-lines-workflow/)
+- [Business Central Create a Purchase Invoice for a Vendor](https://apis.io/arazzos/navision/navision-create-purchase-invoice-for-vendor-workflow/)
+- [Business Central Create a Purchase Order for a Vendor](https://apis.io/arazzos/navision/navision-create-purchase-order-for-vendor-workflow/)
+- [Business Central Create a Sales Invoice for a Customer](https://apis.io/arazzos/navision/navision-create-sales-invoice-for-customer-workflow/)
+- [Business Central Create a Sales Order for a Customer](https://apis.io/arazzos/navision/navision-create-sales-order-for-customer-workflow/)
+- [Business Central Onboard a Customer](https://apis.io/arazzos/navision/navision-onboard-customer-workflow/)
+- [Business Central Onboard a Vendor](https://apis.io/arazzos/navision/navision-onboard-vendor-workflow/)
+- [Business Central Upsert an Item](https://apis.io/arazzos/navision/navision-upsert-item-workflow/)
 
-- Enterprise Resource Planning
-- OData
-- SOAP
-- Web Services
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://learn.microsoft.com/en-us/dynamics-nav/microsoft-dynamics-nav-web-services-overview)
-- [OpenAPI](https://example.com/openapi/nav-webservices.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Authentication](https://learn.microsoft.com/en-us/dynamics-nav/web-services-authentication)
-- [Getting Started](https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-)
-- [Postman Collection](collections/admin-center-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/admin-center-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/automation-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/automation-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/business-central-api-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/business-central-api-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Navision Agentic Access](https://apis.io/agentic-access/navision/navision-agentic-access/)
 
-### Dynamics NAV OData API
+#### JSON Schema (146)
 
-OData web services for querying and manipulating NAV business entities. Supports both OData v3 and v4 protocols for reading data and writing back to the Dynamics NAV database through exposed pages and queries.
+The data models the API reads and writes.
 
-- **Human URL:** [https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services](https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services)
-- **Base URL:** `https://{server}:{port}/{instance}/OData/Company('{company}')`
+- [AppInfo](https://apis.io/schemas/navision/admin-center-app-info/)
+- [AppInstallRequest](https://apis.io/schemas/navision/admin-center-app-install-request/)
+- [AppUpdateRequest](https://apis.io/schemas/navision/admin-center-app-update-request/)
+- [CopyEnvironmentRequest](https://apis.io/schemas/navision/admin-center-copy-environment-request/)
+- [CreateEnvironmentRequest](https://apis.io/schemas/navision/admin-center-create-environment-request/)
+- [Environment](https://apis.io/schemas/navision/admin-center-environment/)
+- [EnvironmentOperation](https://apis.io/schemas/navision/admin-center-environment-operation/)
+- [EnvironmentSettings](https://apis.io/schemas/navision/admin-center-environment-settings/)
+- [ErrorResponse](https://apis.io/schemas/navision/admin-center-error-response/)
+- [NotificationRecipient](https://apis.io/schemas/navision/admin-center-notification-recipient/)
+- [Quotas](https://apis.io/schemas/navision/admin-center-quotas/)
+- [RestoreEnvironmentRequest](https://apis.io/schemas/navision/admin-center-restore-environment-request/)
+- [RestorePeriod](https://apis.io/schemas/navision/admin-center-restore-period/)
+- [ScheduledUpgrade](https://apis.io/schemas/navision/admin-center-scheduled-upgrade/)
+- [SupportSettings](https://apis.io/schemas/navision/admin-center-support-settings/)
+- [UpdateSettings](https://apis.io/schemas/navision/admin-center-update-settings/)
+- [UsedStorage](https://apis.io/schemas/navision/admin-center-used-storage/)
+- [AutomationCompany](https://apis.io/schemas/navision/automation-automation-company/)
+- [AutomationCompanyCreate](https://apis.io/schemas/navision/automation-automation-company-create/)
+- [AutomationCompanyUpdate](https://apis.io/schemas/navision/automation-automation-company-update/)
+- [Company](https://apis.io/schemas/navision/automation-company/)
+- [ConfigurationPackage](https://apis.io/schemas/navision/automation-configuration-package/)
+- [ErrorResponse](https://apis.io/schemas/navision/automation-error-response/)
+- [Extension](https://apis.io/schemas/navision/automation-extension/)
+- [ExtensionDeploymentStatus](https://apis.io/schemas/navision/automation-extension-deployment-status/)
+- …and 121 more published on APIs.io
 
-#### Tags
+#### JSON Structure (73)
 
-- Business Data
-- Data Integration
-- OData
-- Queries
+Data models expressed in JSON Structure.
 
-#### Properties
+- [Admin Center App Info Structure](https://apis.io/json-structure/navision/admin-center-app-info-structure/)
+- [Admin Center App Install Request Structure](https://apis.io/json-structure/navision/admin-center-app-install-request-structure/)
+- [Admin Center App Update Request Structure](https://apis.io/json-structure/navision/admin-center-app-update-request-structure/)
+- [Admin Center Copy Environment Request Structure](https://apis.io/json-structure/navision/admin-center-copy-environment-request-structure/)
+- [Admin Center Create Environment Request Structure](https://apis.io/json-structure/navision/admin-center-create-environment-request-structure/)
+- [Admin Center Environment Operation Structure](https://apis.io/json-structure/navision/admin-center-environment-operation-structure/)
+- [Admin Center Environment Settings Structure](https://apis.io/json-structure/navision/admin-center-environment-settings-structure/)
+- [Admin Center Environment Structure](https://apis.io/json-structure/navision/admin-center-environment-structure/)
+- [Admin Center Error Response Structure](https://apis.io/json-structure/navision/admin-center-error-response-structure/)
+- [Admin Center Notification Recipient Structure](https://apis.io/json-structure/navision/admin-center-notification-recipient-structure/)
+- [Admin Center Quotas Structure](https://apis.io/json-structure/navision/admin-center-quotas-structure/)
+- [Admin Center Restore Environment Request Structure](https://apis.io/json-structure/navision/admin-center-restore-environment-request-structure/)
+- [Admin Center Restore Period Structure](https://apis.io/json-structure/navision/admin-center-restore-period-structure/)
+- [Admin Center Scheduled Upgrade Structure](https://apis.io/json-structure/navision/admin-center-scheduled-upgrade-structure/)
+- [Admin Center Support Settings Structure](https://apis.io/json-structure/navision/admin-center-support-settings-structure/)
+- [Admin Center Update Settings Structure](https://apis.io/json-structure/navision/admin-center-update-settings-structure/)
+- [Admin Center Used Storage Structure](https://apis.io/json-structure/navision/admin-center-used-storage-structure/)
+- [Automation Automation Company Create Structure](https://apis.io/json-structure/navision/automation-automation-company-create-structure/)
+- [Automation Automation Company Structure](https://apis.io/json-structure/navision/automation-automation-company-structure/)
+- [Automation Automation Company Update Structure](https://apis.io/json-structure/navision/automation-automation-company-update-structure/)
+- [Automation Company Structure](https://apis.io/json-structure/navision/automation-company-structure/)
+- [Automation Configuration Package Structure](https://apis.io/json-structure/navision/automation-configuration-package-structure/)
+- [Automation Error Response Structure](https://apis.io/json-structure/navision/automation-error-response-structure/)
+- [Automation Extension Deployment Status Structure](https://apis.io/json-structure/navision/automation-extension-deployment-status-structure/)
+- [Automation Extension Structure](https://apis.io/json-structure/navision/automation-extension-structure/)
+- …and 48 more published on APIs.io
 
-- [Documentation](https://learn.microsoft.com/en-us/dynamics-nav/odata-web-services)
-- [OpenAPI](https://example.com/openapi/nav-odata.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Getting Started](https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-interacting-with-a-page-web-service--odata-)
-- [Postman Collection](collections/admin-center-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/admin-center-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/automation-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/automation-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/business-central-api-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/business-central-api-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### JSON-LD (4)
 
-### Dynamics NAV SOAP Web Services
+Linked-data contexts for the provider's vocabulary.
 
-SOAP-based web services for legacy integrations and business logic operations in Dynamics NAV. Exposes pages and codeunits with built-in CRUD operations and supports extension codeunits for custom operations.
+- [Admin Center Context](https://apis.io/jsonld/navision/admin-center-context/)
+- [Automation Context](https://apis.io/jsonld/navision/automation-context/)
+- [Business Central V2 Context](https://apis.io/jsonld/navision/business-central-v2-context/)
+- [context Context](https://apis.io/jsonld/navision/context/)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/dynamics-nav/soap-web-services](https://learn.microsoft.com/en-us/dynamics-nav/soap-web-services)
-- **Base URL:** `https://{server}:{port}/{instance}/WS/{company}/`
+#### Vocabulary (1)
 
-#### Tags
+The provider's domain terms, defined.
 
-- Business Logic
-- Codeunits
-- Legacy Integration
-- SOAP
+- [Microsoft Dynamics NAV Domain Vocabulary](https://apis.io/vocabularies/navision/navision-vocabulary/)
 
-#### Properties
+#### Examples (164)
 
-- [Documentation](https://learn.microsoft.com/en-us/dynamics-nav/soap-web-service-uris)
-- [API Reference](https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--creating-and-using-a-codeunit-web-service--soap-)
-- [Getting Started](https://learn.microsoft.com/en-us/dynamics-nav/walkthrough--registering-and-using-a-page-web-service--soap-)
-- [Postman Collection](collections/admin-center-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/admin-center-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/automation-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/automation-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/business-central-api-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/business-central-api-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Example requests and responses.
 
-### Business Central API v2.0
+- [Admin Center App Info Example](https://apis.io/examples/navision/admin-center-app-info-example/)
+- [Admin Center App Install Request Example](https://apis.io/examples/navision/admin-center-app-install-request-example/)
+- [Admin Center App Update Request Example](https://apis.io/examples/navision/admin-center-app-update-request-example/)
+- [Admin Center Copy Environment Request Example](https://apis.io/examples/navision/admin-center-copy-environment-request-example/)
+- [Admin Center Create Environment Request Example](https://apis.io/examples/navision/admin-center-create-environment-request-example/)
+- [Admin Center Environment Example](https://apis.io/examples/navision/admin-center-environment-example/)
+- [Admin Center Environment Operation Example](https://apis.io/examples/navision/admin-center-environment-operation-example/)
+- [Admin Center Environment Settings Example](https://apis.io/examples/navision/admin-center-environment-settings-example/)
+- [Admin Center Error Response Example](https://apis.io/examples/navision/admin-center-error-response-example/)
+- [Admin Center Notification Recipient Example](https://apis.io/examples/navision/admin-center-notification-recipient-example/)
+- [Admin Center Quotas Example](https://apis.io/examples/navision/admin-center-quotas-example/)
+- [Admin Center Restore Environment Request Example](https://apis.io/examples/navision/admin-center-restore-environment-request-example/)
+- [Admin Center Restore Period Example](https://apis.io/examples/navision/admin-center-restore-period-example/)
+- [Admin Center Scheduled Upgrade Example](https://apis.io/examples/navision/admin-center-scheduled-upgrade-example/)
+- [Admin Center Support Settings Example](https://apis.io/examples/navision/admin-center-support-settings-example/)
+- [Admin Center Update Settings Example](https://apis.io/examples/navision/admin-center-update-settings-example/)
+- [Admin Center Used Storage Example](https://apis.io/examples/navision/admin-center-used-storage-example/)
+- [Automation Automation Company Create Example](https://apis.io/examples/navision/automation-automation-company-create-example/)
+- [Automation Automation Company Example](https://apis.io/examples/navision/automation-automation-company-example/)
+- [Automation Automation Company Update Example](https://apis.io/examples/navision/automation-automation-company-update-example/)
+- [Automation Company Example](https://apis.io/examples/navision/automation-company-example/)
+- [Automation Configuration Package Example](https://apis.io/examples/navision/automation-configuration-package-example/)
+- [Automation Error Response Example](https://apis.io/examples/navision/automation-error-response-example/)
+- [Automation Extension Deployment Status Example](https://apis.io/examples/navision/automation-extension-deployment-status-example/)
+- [Automation Extension Example](https://apis.io/examples/navision/automation-extension-example/)
+- …and 139 more published on APIs.io
 
-Modern RESTful API for Dynamics 365 Business Central, the cloud evolution of Dynamics NAV. Provides a comprehensive set of endpoints for managing customers, items, accounts, sales orders, and other business entities.
+#### Collections (44)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/)
-- **Base URL:** `https://api.businesscentral.dynamics.com/v2.0/{environment}/api/v2.0`
+Postman and Open Collection request collections.
 
-#### Tags
+- [Business Central Administration Center API](https://apis.io/collections/navision/open-admin-center-api/)
+- [Business Central Automation API v2.0](https://apis.io/collections/navision/open-automation-api/)
+- [Dynamics 365 Business Central API v2.0](https://apis.io/collections/navision/open-business-central-api-v2/)
+- [Business Central Administration Center Accounts API](https://apis.io/collections/navision/open-navision-accounts-api/)
+- [Business Central Administration Center Accounts App Management API](https://apis.io/collections/navision/open-navision-app-management-api/)
+- [Business Central Administration Center Accounts Available Applications API](https://apis.io/collections/navision/open-navision-available-applications-api/)
+- [Business Central Administration Center Accounts Companies API](https://apis.io/collections/navision/open-navision-companies-api/)
+- [Business Central Administration Center Accounts Configuration Packages API](https://apis.io/collections/navision/open-navision-configuration-packages-api/)
+- [Business Central Administration Center Accounts Countries/Regions API](https://apis.io/collections/navision/open-navision-countries-regions-api/)
+- [Business Central Administration Center Accounts Currency API](https://apis.io/collections/navision/open-navision-currency-api/)
+- [Business Central Administration Center Accounts Customer Payments API](https://apis.io/collections/navision/open-navision-customer-payments-api/)
+- [Business Central Administration Center Accounts Customers API](https://apis.io/collections/navision/open-navision-customers-api/)
+- [Business Central Administration Center Accounts Dimensions API](https://apis.io/collections/navision/open-navision-dimensions-api/)
+- [Business Central Administration Center Accounts Employees API](https://apis.io/collections/navision/open-navision-employees-api/)
+- [Business Central Administration Center Accounts Environment Operations API](https://apis.io/collections/navision/open-navision-environment-operations-api/)
+- [Business Central Administration Center Accounts Environment Settings API](https://apis.io/collections/navision/open-navision-environment-settings-api/)
+- [Business Central Administration Center Accounts Environments API](https://apis.io/collections/navision/open-navision-environments-api/)
+- [Business Central Administration Center Accounts Extension Deployment Status API](https://apis.io/collections/navision/open-navision-extension-deployment-status-api/)
+- [Business Central Administration Center Accounts Extension Upload API](https://apis.io/collections/navision/open-navision-extension-upload-api/)
+- [Business Central Administration Center Accounts Extensions API](https://apis.io/collections/navision/open-navision-extensions-api/)
+- [Business Central Administration Center Accounts Features API](https://apis.io/collections/navision/open-navision-features-api/)
+- [Business Central Administration Center Accounts Item Categories API](https://apis.io/collections/navision/open-navision-item-categories-api/)
+- [Business Central Administration Center Accounts Items API](https://apis.io/collections/navision/open-navision-items-api/)
+- [Business Central Administration Center Accounts Journals API](https://apis.io/collections/navision/open-navision-journals-api/)
+- [Business Central Administration Center Accounts Notifications API](https://apis.io/collections/navision/open-navision-notifications-api/)
+- …and 19 more published on APIs.io
 
-- Business Central
-- Business Data
-- Cloud ERP
-- Connect Apps
-- REST API
+#### Governance rules (2)
 
-#### Properties
+Spectral rulesets for the provider's contracts.
 
-- [Documentation](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/)
-- [API Reference](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics)
-- [Authentication](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth)
-- [Getting Started](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps)
-- [Changelog](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview)
-- [OpenAPI](openapi/business-central-api-v2.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/business-central-api-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/business-central-api-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Microsoft Dynamics NAV — jsonschema rules](https://apis.io/rules/navision/navision-jsonschema-spectral-rules/)
+- [Microsoft Dynamics NAV API Rules](https://apis.io/rules/navision/navision-spectral-rules/)
 
-### Business Central Administration Center API
+#### Security (3)
 
-REST API for programmatic administration of Business Central environments. Enables querying and managing production and sandbox environments, setting up notifications, and viewing tenant telemetry.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api)
-- **Base URL:** `https://api.businesscentral.dynamics.com/admin/v2.28`
+- [Navision Authentication](https://apis.io/security/navision/navision-authentication/)
+- [Navision Domain Security](https://apis.io/security/navision/navision-domain-security/)
+- [Navision Vulnerability Disclosure](https://apis.io/security/navision/navision-vulnerability-disclosure/)
 
-#### Tags
+#### OAuth scopes (1)
 
-- Administration
-- Cloud ERP
-- Environment Management
-- Tenant Management
+The permissions the API asks for.
 
-#### Properties
+- [Navision Scopes](https://apis.io/scopes/navision/navision-scopes/)
 
-- [Documentation](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/administration-center-api)
-- [Authentication](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication)
-- [Getting Started](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/)
-- [OpenAPI](openapi/admin-center-api.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/admin-center-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/admin-center-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (2)
 
-### Business Central Automation API
+Published plans, tiers and prices.
 
-API for automating company setup and tenant management in Business Central. Supports creating companies, installing extensions, assigning permissions, and applying RapidStart packages programmatically.
+- [Navision Plans Pricing](https://apis.io/plans/navision/navision-plans-pricing/)
+- [Navision Price Estimates](https://apis.io/plans/navision/navision-price-estimates/)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis)
-- **Base URL:** `https://api.businesscentral.dynamics.com/v2.0/{environment}/api/microsoft/automation/v2.0`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Automation
-- Extension Management
-- Tenant Management
-- User Management
+- [Navision Rate Limits](https://apis.io/rate-limits/navision/navision-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/itpro-introduction-to-automation-apis)
-- [Authentication](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication)
-- [Getting Started](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-develop-connect-apps)
-- [OpenAPI](openapi/automation-api.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/automation-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/automation-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### Business Central REST API Web Services
+- [Navision Finops](https://apis.io/finops/navision/navision-finops/)
 
-RESTful web services layer for Business Central that provides the preferred integration method. Includes built-in APIs, custom API pages and queries, and supports both on-premises and cloud deployments.
+## Where to find this API
 
-- **Human URL:** [https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/api-overview](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/api-overview)
-- **Base URL:** `https://api.businesscentral.dynamics.com/v2.0/{environment}/api`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Business Central
-- Custom APIs
-- Data Integration
-- REST API
-- Web Services
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/api-overview)
-- [API Reference](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/endpoints-apis-for-dynamics)
-- [Authentication](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/webservices/authenticate-web-services-using-oauth)
-- [Getting Started](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-get-started)
-- [Postman Collection](collections/admin-center-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/admin-center-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/automation-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/automation-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/business-central-api-v2.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/business-central-api-v2.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [LinkedIn](https://www.linkedin.com/showcase/microsoft-dynamics-navision)
-- [Portal](https://dynamics.microsoft.com)
+- [Website](https://www.microsoft.com/)
 - [Documentation](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/)
-- [Getting Started](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-get-started)
-- [Authentication](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/users-credential-types)
-- [Blog](https://www.microsoft.com/en-us/dynamics-365/blog/product/dynamics-365-business-central/)
-- [Changelog](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview)
-- [Support](https://support.microsoft.com/dynamics)
-- [Sign Up](https://learn.microsoft.com/en-us/dynamics365/business-central/trial-signup)
+- [Getting started](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-get-started)
 - [Pricing](https://www.microsoft.com/en-us/dynamics-365/products/business-central/pricing)
-- [Terms of Service](https://www.microsoft.com/en/dynamics-365/business-applications/legal)
-- [Privacy Policy](https://privacy.microsoft.com)
-- [Status Page](https://status.cloud.microsoft)
-- [GitHub Organization](https://github.com/microsoft/BCApps)
-- [GitHub Repository](https://github.com/christianbraeunlich/d365bc-api-postman)
-- [Rate Limits](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/api-reference/v2.0/dynamics-rate-limits)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [SDK](https://github.com/niclas-timm/laravel-dynamics-365-business-central)
-- [SDK](https://github.com/AgoraIO/agora-rest-client-go)
-- [C L I](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-command-line-tools)
-- [JSON Schema](json-schema/customer.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/vendor.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/item.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/sales-order.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/purchase-order.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/business-central-v2-customer-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/business-central-v2-vendor-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/business-central-v2-item-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/business-central-v2-sales-order-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/business-central-v2-purchase-order-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/admin-center-environment-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/admin-center-environment-operation-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/automation-extension-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/automation-user-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/automation-automation-company-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON-LD](json-ld/business-central-v2-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON-LD](json-ld/admin-center-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON-LD](json-ld/automation-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Vocabulary](vocabulary/navision-vocabulary.yaml)
-- [Rules](rules/navision-spectral-rules.yml)
-- [Capabilities](capabilities/business-operations.yaml)
-- [Capabilities](capabilities/platform-administration.yaml)
-- [Capabilities](capabilities/shared/business-central-v2.yaml)
-- [Capabilities](capabilities/shared/admin-center.yaml)
-- [Capabilities](capabilities/shared/automation.yaml)
+- [Support](https://support.microsoft.com/dynamics)
+- [Changelog](https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/whatsnew/overview)
+- [Blog](https://www.microsoft.com/en-us/dynamics-365/blog/product/dynamics-365-business-central/)
+- [Terms of service](https://www.microsoft.com/en/dynamics-365/business-applications/legal)
+- [Privacy policy](https://privacy.microsoft.com)
+- [GitHub](https://github.com/microsoft/BCApps)
+- [Status](https://status.cloud.microsoft)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Not rated** — this company is recorded as no longer operating, so no score is published. If it is in fact operating, say so on this repository and it will be re-profiled.
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Microsoft Dynamics NAV: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/navision/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
